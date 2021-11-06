@@ -7,7 +7,9 @@ package DAL_IServices;
 
 import DAL_Models.ENTITY_Table;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 * @author : ThongPro
@@ -21,9 +23,11 @@ public interface ITable_Service {
 
     public void update(ENTITY_Table entity);
 
-    public void delete(String IDTable);
+    public void delete(String IDTable) throws SQLException;
 
-    public ArrayList<ENTITY_Table> select();
+    public List<ENTITY_Table> select();
 
     public ENTITY_Table findById(String IDTable);
+
+    public List<ENTITY_Table> SelectBySQL(String sql, Object... args);
 }

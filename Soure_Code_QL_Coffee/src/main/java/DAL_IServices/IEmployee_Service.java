@@ -6,8 +6,10 @@
 package DAL_IServices;
 
 import DAL_Models.ENTITY_Employee;
+import DAL_Models.ENTITY_Table;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
  * @author : ThongPro
@@ -26,4 +28,6 @@ public interface IEmployee_Service {
     public ArrayList<ENTITY_Employee> select();
 
     public ENTITY_Employee findById(String UsernameEMP);
+
+    public List<ENTITY_Table> SelectBySQL(String sql, Object... args);
 }

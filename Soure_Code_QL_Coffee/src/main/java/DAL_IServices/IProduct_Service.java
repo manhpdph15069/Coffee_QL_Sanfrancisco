@@ -6,16 +6,18 @@
 package DAL_IServices;
 
 import DAL_Models.ENTITY_Product;
+import DAL_Models.ENTITY_Table;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
-* @author : ThongPro
-* @since : 11/6/2021 11:33 AM
-* @description :
-* @update :
-*
-* */
+ * @author : ThongPro
+ * @since : 11/6/2021 11:33 AM
+ * @description :
+ * @update :
+ *
+ * */
 public interface IProduct_Service {
     public void insert(ENTITY_Product entity);
 
@@ -26,4 +28,6 @@ public interface IProduct_Service {
     public ArrayList<ENTITY_Product> select();
 
     public ENTITY_Product findById(String IDProduct);
+
+    public List<ENTITY_Table> SelectBySQL(String sql, Object... args);
 }
