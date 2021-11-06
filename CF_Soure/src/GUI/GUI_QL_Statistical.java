@@ -11,17 +11,6 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.util.Date;
 
-import javax.swing.*;
-import java.util.List;
-import javafx.scene.chart.PieChart;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.gantt.Task;
-import org.jfree.data.gantt.TaskSeries;
-import org.jfree.data.gantt.TaskSeriesCollection;
-import org.jfree.data.time.SimpleTimePeriod;
 
 /**
  *

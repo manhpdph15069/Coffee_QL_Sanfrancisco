@@ -5,14 +5,10 @@
  */
 package BUS_IServices;
 
-import java.util.Date;
-import java.util.List;
-
 /**
  *
  * @author phamd
  */
-public interface IQLStatistical_Service {
-    List<Object[]> getListOfArray(String sql, String[] cols, Object... args);
-    public List<Object[]> getListByTKNgay(String ngay);
+public interface IQLOrder_Service {
+    
 }
