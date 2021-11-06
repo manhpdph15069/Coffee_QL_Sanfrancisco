@@ -6,16 +6,18 @@
 package DAL_IServices;
 
 import DAL_Models.ENTITY_Customer;
+import DAL_Models.ENTITY_Table;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
-* @author : ThongPro
-* @since : 11/6/2021 11:37 AM
-* @description :
-* @update :
-*
-* */
+ * @author : ThongPro
+ * @since : 11/6/2021 11:37 AM
+ * @description :
+ * @update :
+ *
+ * */
 public interface ICustomer_Service {
     public void insert(ENTITY_Customer entity);
 
@@ -26,4 +28,6 @@ public interface ICustomer_Service {
     public ArrayList<ENTITY_Customer> select();
 
     public ENTITY_Customer findById(String IDCust);
+
+    public List<ENTITY_Table> SelectBySQL(String sql, Object... args);
 }
