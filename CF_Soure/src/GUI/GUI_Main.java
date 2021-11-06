@@ -9,12 +9,13 @@ package GUI;
  *
  * @author phamd
  */
-public class GUI_Main extends javax.swing.JFrame {
+public class GUI_Main extends javax.swing.JDialog {
 
     /**
-     * Creates new form Main
+     * Creates new form GUI_QL_Menu
      */
-    public GUI_Main() {
+    public GUI_Main(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -27,21 +28,202 @@ public class GUI_Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jToolBar1 = new javax.swing.JToolBar();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        btnQLNV = new javax.swing.JButton();
+        btnQLOrder = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        btnQLMenu = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        btnQLBan = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
+        btnQLTK = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JToolBar.Separator();
+        btnQLVip = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        lblOclock = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mniThongTinTK = new javax.swing.JMenuItem();
+        mniDoiMK = new javax.swing.JMenuItem();
+        mniDangXuat = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jToolBar1.setRollover(true);
+        jToolBar1.add(jSeparator1);
+
+        btnQLNV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/User-Group-icon.png"))); // NOI18N
+        btnQLNV.setText("Quản lý nhân viên");
+        btnQLNV.setFocusable(false);
+        btnQLNV.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQLNV.setMaximumSize(new java.awt.Dimension(100, 30));
+        btnQLNV.setMinimumSize(new java.awt.Dimension(100, 30));
+        btnQLNV.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQLNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLNVActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnQLNV);
+
+        btnQLOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Order-history-icon.png"))); // NOI18N
+        btnQLOrder.setText("Quản lý order");
+        btnQLOrder.setFocusable(false);
+        btnQLOrder.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQLOrder.setMaximumSize(new java.awt.Dimension(100, 30));
+        btnQLOrder.setMinimumSize(new java.awt.Dimension(100, 30));
+        btnQLOrder.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQLOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLOrderActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnQLOrder);
+        jToolBar1.add(jSeparator2);
+
+        btnQLMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/drink-4-icon.png"))); // NOI18N
+        btnQLMenu.setText("Quản lý menu");
+        btnQLMenu.setFocusable(false);
+        btnQLMenu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQLMenu.setMaximumSize(new java.awt.Dimension(100, 30));
+        btnQLMenu.setMinimumSize(new java.awt.Dimension(100, 30));
+        btnQLMenu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnQLMenu);
+        jToolBar1.add(jSeparator3);
+
+        btnQLBan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/qlban-icon.png"))); // NOI18N
+        btnQLBan.setText("Quản lý Bàn");
+        btnQLBan.setFocusable(false);
+        btnQLBan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQLBan.setMaximumSize(new java.awt.Dimension(100, 30));
+        btnQLBan.setMinimumSize(new java.awt.Dimension(100, 30));
+        btnQLBan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnQLBan);
+        jToolBar1.add(jSeparator4);
+
+        btnQLTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/cash-icon.png"))); // NOI18N
+        btnQLTK.setText("Quản lý TK DT");
+        btnQLTK.setFocusable(false);
+        btnQLTK.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQLTK.setMaximumSize(new java.awt.Dimension(100, 30));
+        btnQLTK.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnQLTK);
+        jToolBar1.add(jSeparator5);
+
+        btnQLVip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/vip-icon.png"))); // NOI18N
+        btnQLVip.setText("Quản lý KH vip");
+        btnQLVip.setFocusable(false);
+        btnQLVip.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQLVip.setMaximumSize(new java.awt.Dimension(100, 30));
+        btnQLVip.setMinimumSize(new java.awt.Dimension(100, 30));
+        btnQLVip.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQLVip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLVipActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnQLVip);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Button-Info-icon.png"))); // NOI18N
+
+        lblOclock.setText("00:00:00");
+
+        jPanel1.setBackground(new java.awt.Color(0, 153, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 424, Short.MAX_VALUE)
+        );
+
+        jMenu1.setText("Tài khoản");
+
+        mniThongTinTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/man-icon.png"))); // NOI18N
+        mniThongTinTK.setText("thông tin tài khoản");
+        mniThongTinTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniThongTinTKActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mniThongTinTK);
+
+        mniDoiMK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/doimk-icon.png"))); // NOI18N
+        mniDoiMK.setText("đổi mật khẩu");
+        jMenu1.add(mniDoiMK);
+
+        mniDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Log-Out-icon.png"))); // NOI18N
+        mniDangXuat.setText("đăng xuất");
+        mniDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDangXuatActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mniDangXuat);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("thông tin");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblOclock)
+                .addGap(22, 22, 22))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblOclock))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mniThongTinTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniThongTinTKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniThongTinTKActionPerformed
+
+    private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniDangXuatActionPerformed
+
+    private void btnQLNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnQLNVActionPerformed
+
+    private void btnQLOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLOrderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnQLOrderActionPerformed
+
+    private void btnQLVipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLVipActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnQLVipActionPerformed
 
     /**
      * @param args the command line arguments
@@ -71,14 +253,42 @@ public class GUI_Main extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI_Main().setVisible(true);
+                GUI_Main dialog = new GUI_Main(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnQLBan;
+    private javax.swing.JButton btnQLMenu;
+    private javax.swing.JButton btnQLNV;
+    private javax.swing.JButton btnQLOrder;
+    private javax.swing.JButton btnQLTK;
+    private javax.swing.JButton btnQLVip;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JToolBar.Separator jSeparator5;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lblOclock;
+    private javax.swing.JMenuItem mniDangXuat;
+    private javax.swing.JMenuItem mniDoiMK;
+    private javax.swing.JMenuItem mniThongTinTK;
     // End of variables declaration//GEN-END:variables
 }
