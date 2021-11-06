@@ -5,10 +5,15 @@
  */
 package BUS_IServices;
 
+import java.util.ArrayList;
+import javax.swing.JFrame;
+
+
 /**
  *
  * @author phamd
  */
 public interface IQLOrder_Service {
-    
+    public void taoTable(JFrame that);
+    public ArrayList<Object> getkhu();
 }
