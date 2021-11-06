@@ -124,7 +124,7 @@ public class QLOrder_Service implements IQLOrder_Service {
 
     @Override
     public ArrayList<Object> getkhu() {
-
+    return null;
     }
 
 }
