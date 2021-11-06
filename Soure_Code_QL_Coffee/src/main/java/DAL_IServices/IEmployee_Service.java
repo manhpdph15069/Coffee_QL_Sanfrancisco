@@ -6,9 +6,8 @@
 package DAL_IServices;
 
 import DAL_Models.ENTITY_Employee;
-import DAL_Models.ENTITY_Table;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 /*
@@ -23,11 +22,11 @@ public interface IEmployee_Service {
 
     public void update(ENTITY_Employee entity);
 
-    public void delete(String UsernameEMP);
+    public void delete(String UsernameEMP) throws SQLException;
 
-    public ArrayList<ENTITY_Employee> select();
+    public List<ENTITY_Employee> select();
 
     public ENTITY_Employee findById(String UsernameEMP);
 
-    public List<ENTITY_Table> SelectBySQL(String sql, Object... args);
+    public List<ENTITY_Employee> SelectBySQL(String sql, Object... args);
 }

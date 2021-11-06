@@ -6,9 +6,8 @@
 package DAL_IServices;
 
 import DAL_Models.ENTITY_Customer;
-import DAL_Models.ENTITY_Table;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 /*
@@ -23,11 +22,11 @@ public interface ICustomer_Service {
 
     public void update(ENTITY_Customer entity);
 
-    public void delete(String IDCust);
+    public void delete(String IDCust) throws SQLException;
 
-    public ArrayList<ENTITY_Customer> select();
+    public List<ENTITY_Customer> select();
 
     public ENTITY_Customer findById(String IDCust);
 
-    public List<ENTITY_Table> SelectBySQL(String sql, Object... args);
+    public List<ENTITY_Customer> SelectBySQL(String sql, Object... args);
 }

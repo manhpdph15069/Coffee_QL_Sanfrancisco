@@ -8,12 +8,12 @@ package DAL_Models;
 import java.util.Date;
 
 /*
-* @author : ThongPro
-* @since : 11/5/2021 1:37 AM
-* @description : 
-* @update : 
-*
-* */
+ * @author : ThongPro
+ * @since : 11/5/2021 1:37 AM
+ * @description :
+ * @update :
+ *
+ * */
 public class ENTITY_Employee {
     private String UsernameEMP;
     private String Password;
