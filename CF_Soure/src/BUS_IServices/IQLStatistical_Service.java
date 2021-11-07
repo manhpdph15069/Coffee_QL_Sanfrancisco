@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface IQLStatistical_Service {
     List<Object[]> getListOfArray(String sql, String[] cols, Object... args);
-    public List<Object[]> getListByTKNgay(String ngay);
+    public List<Object[]> getListByTKNgay();
 }
