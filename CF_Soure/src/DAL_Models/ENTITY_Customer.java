@@ -8,49 +8,56 @@ package DAL_Models;
 import java.util.Date;
 
 /*
-* @author : ThongPro
-* @since : 11/5/2021 11:00 PM
-* @description : 
-* @update : 
-*
-* */
+ * @author : ThongPro
+ * @since : 11/5/2021 11:00 PM
+ * @description :
+ * @update :
+ *
+ * */
 public class ENTITY_Customer {
-    private String UsernameEMP;
-    private String Password;
-    private String NameEMP;
+    private String IDCust;
+    private String CusName;
+    private Date DateAdd;
+    private Date DateEnd;
     private String Phone;
-    private Date Birthday;
-    private String Address;
-    private Boolean Sex;
     private String Email;
-    private String Image;
-    private Boolean Status;
+    private float Discount;
+    private boolean Status;
+
 
     public ENTITY_Customer() {
     }
 
-    public String getUsernameEMP() {
-        return UsernameEMP;
+    public String getIDCust() {
+        return IDCust;
     }
 
-    public void setUsernameEMP(String usernameEMP) {
-        UsernameEMP = usernameEMP;
+    public void setIDCust(String IDCust) {
+        this.IDCust = IDCust;
     }
 
-    public String getPassword() {
-        return Password;
+    public String getCusName() {
+        return CusName;
     }
 
-    public void setPassword(String password) {
-        Password = password;
+    public void setCusName(String cusName) {
+        CusName = cusName;
     }
 
-    public String getNameEMP() {
-        return NameEMP;
+    public Date getDateAdd() {
+        return DateAdd;
     }
 
-    public void setNameEMP(String nameEMP) {
-        NameEMP = nameEMP;
+    public void setDateAdd(Date dateAdd) {
+        DateAdd = dateAdd;
+    }
+
+    public Date getDateEnd() {
+        return DateEnd;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        DateEnd = dateEnd;
     }
 
     public String getPhone() {
@@ -61,30 +68,6 @@ public class ENTITY_Customer {
         Phone = phone;
     }
 
-    public Date getBirthday() {
-        return Birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        Birthday = birthday;
-    }
-
-    public String getAddress() {
-        return Address;
-    }
-
-    public void setAddress(String address) {
-        Address = address;
-    }
-
-    public Boolean getSex() {
-        return Sex;
-    }
-
-    public void setSex(Boolean sex) {
-        Sex = sex;
-    }
-
     public String getEmail() {
         return Email;
     }
@@ -93,19 +76,20 @@ public class ENTITY_Customer {
         Email = email;
     }
 
-    public String getImage() {
-        return Image;
+    public float getDiscount() {
+        return Discount;
     }
 
-    public void setImage(String image) {
-        Image = image;
+    public void setDiscount(float discount) {
+        Discount = discount;
     }
 
-    public Boolean getStatus() {
+    public boolean getStatus() {
         return Status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(boolean status) {
         Status = status;
     }
+
 }

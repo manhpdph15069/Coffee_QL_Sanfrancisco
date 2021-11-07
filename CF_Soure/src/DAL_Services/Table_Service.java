@@ -7,8 +7,12 @@ package DAL_Services;
 
 import DAL_IServices.ITable_Service;
 import DAL_Models.*;
+import Utils.JDBC;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 * @author : ThongPro
@@ -18,34 +22,74 @@ import java.util.ArrayList;
 *
 * */
 public class Table_Service implements ITable_Service {
-    String INSERT_SQL = "INSERT INTO NhanVien(MaNV, MatKhau, HoTen, VaiTro) VALUES (?, ?, ?, ?)";
-    String UPDATE_SQL = "UPDATE NhanVien SET MatKhau = ?, HoTen = ?, VaiTro = ? WHERE MaNV = ?";
-    String DELETE_SQL = "DELETE FROM NhanVien WHERE MaNV = ?";
-    String SELECT_ALL_SQL = "SELECT * FROM NhanVien";
-    String SELECT_BY_ID_SQL = "SELECT * FROM NhanVien WHERE MaNV = ?";
+    String INSERT_SQL = "INSERT INTO [Table]([IDTable], [Location],[Status]=1,[IDArea]) VALUES (?, ?, ?)";
+    String UPDATE_SQL = "UPDATE [Table] SET [Location] = ?, [IDArea] = ?,[Status]=? WHERE [IDTable]=?";
+    String DELETE_SQL = "UPDATE [Table] SET [Status]=0 WHERE [IDTable] = ?";
+    String SELECT_ALL_SQL = "SELECT * FROM [Table]";
+    String SELECT_BY_ID_SQL = "SELECT * FROM [Table] WHERE [IDTable] = ?";
 
     @Override
     public void insert(ENTITY_Table entity) {
-
+        try {
+            JDBC.update(INSERT_SQL,
+                    entity.getIDTable(),
+                    entity.getLocation(),
+                    entity.getStatus(),
+                    entity.getIDArea());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void update(ENTITY_Table entity) {
-
+        try {
+            JDBC.update(UPDATE_SQL,
+                    entity.getLocation(),
+                    entity.getStatus(),
+                    entity.getIDArea(),
+                    entity.getIDTable());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void delete(String IDTable) {
-
+    public void delete(String IDTable) throws SQLException {
+        JDBC.update(DELETE_SQL, IDTable);
     }
 
     @Override
-    public ArrayList<ENTITY_Table> select() {
-        return null;
+    public List<ENTITY_Table> select() {
+        return this.SelectBySQL(SELECT_ALL_SQL);
     }
 
     @Override
     public ENTITY_Table findById(String IDTable) {
-        return null;
+        List<ENTITY_Table> list = this.SelectBySQL(SELECT_BY_ID_SQL, IDTable);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+    @Override
+    public List<ENTITY_Table> SelectBySQL(String sql, Object... args) {
+        List<ENTITY_Table> list = new ArrayList<>();
+        try {
+            ResultSet rs = JDBC.query(sql, args);
+            while (rs.next()) {
+                ENTITY_Table table = new ENTITY_Table();
+                table.setIDTable(rs.getString("IDTable"));
+                table.setLocation(rs.getInt("Location"));
+                table.setStatus(rs.getBoolean("Status"));
+                table.setIDArea(rs.getString("IDArea"));
+                list.add(table);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -55,7 +55,7 @@ public class ENTITY_Product {
         Image = image;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return Status;
     }
 
