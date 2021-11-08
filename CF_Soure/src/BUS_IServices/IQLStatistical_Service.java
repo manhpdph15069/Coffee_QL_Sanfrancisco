@@ -7,6 +7,9 @@ package BUS_IServices;
 
 import java.util.Date;
 import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -14,5 +17,8 @@ import java.util.List;
  */
 public interface IQLStatistical_Service {
     List<Object[]> getListOfArray(String sql, String[] cols, Object... args);
-    public List<Object[]> getListByTKNgay();
+    public List<Object[]> getListByTKNgay(Date ngayDate);
+    public void setDataNgay(JPanel pnlNgay,Date jdateNgay);
+        public List<Object[]> tongNgay(Date jdateNgay);
+        public void fillTong(Date jdateNgay,JLabel lblTong);
 }

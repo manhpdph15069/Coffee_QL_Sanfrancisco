@@ -7,19 +7,18 @@ package GUI;
 
 import BUS_IServices.IQLStatistical_Service;
 import BUS_Services.QLStatistical_Service;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.table.DefaultTableModel;
-import org.jfree.data.category.DefaultCategoryDataset;
+import java.util.Date;
+
 
 /**
  *
  * @author phamd
  */
 public class GUI_QL_Statistical extends javax.swing.JDialog {
+
     IQLStatistical_Service dao = null;
-    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+
     /**
      * Creates new form GUI_QL_Statistical
      */
@@ -27,32 +26,11 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         dao = new QLStatistical_Service();
-        hienthi();
+        jdateNgay.setDate(now());
+        lblTong.setText("0");
     }
-    void fillComboBox(){
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cbbNgay.getModel();
-        model.removeAllElements();
-       // List<> list = dao.selectAll();
-      //  for ( k : list) {
-       //     model.addElement(k);
-      //  }
-       // cboKhoaHoc.setSelectedIndex(0);
-    
-    }
-void hienthi(){
-    DefaultCategoryDataset  data = new DefaultCategoryDataset();
-
-    DefaultTableModel dtm =(DefaultTableModel)tbl.getModel();
-    dtm.setRowCount(0);
-           List<Object[]> list = dao.getListByTKNgay();
-        for (Object[] o : list) {
-            int so = Integer.valueOf(String.valueOf(o[0]));
-            
-                data.addValue(1, "manh","String" );
-            System.out.println(""+o[0]);
-            System.out.println(""+o[1]);
-            dtm.addRow(o);
-        }
+public Date now(){
+    return new Date();
 }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,26 +41,49 @@ void hienthi(){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl = new javax.swing.JTable();
-        cbbNgay = new javax.swing.JComboBox<>();
+        pnlNgay = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jdateNgay = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        lblTong = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        tbl.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tbl);
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 204, 204));
+        jLabel1.setText("Doanh thu ngày hôm nay");
 
-        cbbNgay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        javax.swing.GroupLayout pnlNgayLayout = new javax.swing.GroupLayout(pnlNgay);
+        pnlNgay.setLayout(pnlNgayLayout);
+        pnlNgayLayout.setHorizontalGroup(
+            pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNgayLayout.createSequentialGroup()
+                .addContainerGap(215, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(214, 214, 214))
+        );
+        pnlNgayLayout.setVerticalGroup(
+            pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNgayLayout.createSequentialGroup()
+                .addGap(213, 213, 213)
+                .addComponent(jLabel1)
+                .addContainerGap(286, Short.MAX_VALUE))
+        );
+
+        jdateNgay.setDateFormatString("yyyy-MM-dd");
+        jdateNgay.setFocusable(false);
+
+        jButton1.setText("Show");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Tổng");
+
+        lblTong.setText("jLabel3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,23 +91,43 @@ void hienthi(){
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbbNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addComponent(jdateNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cbbNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jdateNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(lblTong)))
+                .addGap(18, 18, 18)
+                .addComponent(pnlNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dao.setDataNgay(pnlNgay, jdateNgay.getDate());
+        dao.fillTong(jdateNgay.getDate(), lblTong);
+        if (lblTong.getText().equals("null")) {
+            lblTong.setText("0");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,8 +172,11 @@ void hienthi(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cbbNgay;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbl;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private com.toedter.calendar.JDateChooser jdateNgay;
+    private javax.swing.JLabel lblTong;
+    private javax.swing.JPanel pnlNgay;
     // End of variables declaration//GEN-END:variables
 }
