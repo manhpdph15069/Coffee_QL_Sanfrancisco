@@ -46,7 +46,6 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
     private void initComponents() {
 
         pnlNgay = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jdateNgay = new com.toedter.calendar.JDateChooser();
         btnNgay = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -56,25 +55,15 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 204, 204));
-        jLabel1.setText("Doanh thu ngày hôm nay");
-
         javax.swing.GroupLayout pnlNgayLayout = new javax.swing.GroupLayout(pnlNgay);
         pnlNgay.setLayout(pnlNgayLayout);
         pnlNgayLayout.setHorizontalGroup(
             pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNgayLayout.createSequentialGroup()
-                .addContainerGap(215, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(214, 214, 214))
+            .addGap(0, 243, Short.MAX_VALUE)
         );
         pnlNgayLayout.setVerticalGroup(
             pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlNgayLayout.createSequentialGroup()
-                .addGap(213, 213, 213)
-                .addComponent(jLabel1)
-                .addContainerGap(286, Short.MAX_VALUE))
+            .addGap(0, 539, Short.MAX_VALUE)
         );
 
         jdateNgay.setDateFormatString("yyyy-MM-dd");
@@ -113,19 +102,24 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jdateNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+<<<<<<< HEAD
                 .addComponent(btnNgay)
                 .addGap(18, 18, 18)
                 .addComponent(btnThang)
                 .addGap(18, 18, 18)
                 .addComponent(btnNam)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 342, Short.MAX_VALUE)
+>>>>>>> 7053d97ca261947df917ae57a130ec83a05e4fc6
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(86, 86, 86))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,10 +239,14 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private javax.swing.JButton btnNam;
     private javax.swing.JButton btnNgay;
     private javax.swing.JButton btnThang;
     private javax.swing.JLabel jLabel1;
+=======
+    private javax.swing.JButton jButton1;
+>>>>>>> 7053d97ca261947df917ae57a130ec83a05e4fc6
     private javax.swing.JLabel jLabel2;
     private com.toedter.calendar.JDateChooser jdateNgay;
     private javax.swing.JLabel lblTong;
