@@ -83,7 +83,7 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                 .addContainerGap(462, Short.MAX_VALUE))
         );
 
-        jLabel2.setText("Đồng Hồ");
+        jLabel2.setText("00:00:00");
 
         jLabel3.setText("Bàn");
 
@@ -102,7 +102,7 @@ public class GUI_QL_Order extends javax.swing.JDialog {
 
         jTextField1.setText("Tìm Kiếm");
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setText("tang 2");
 
         jLabel5.setText("Mã HĐ");
 
@@ -127,7 +127,7 @@ public class GUI_QL_Order extends javax.swing.JDialog {
 
         jLabel7.setText("Tổng tiền");
 
-        jLabel8.setText("jLabel8");
+        jLabel8.setText("100000");
 
         jButton3.setText("-");
 
@@ -155,6 +155,9 @@ public class GUI_QL_Order extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,13 +176,6 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                                     .addComponent(jLabel6)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(21, 21, 21)
-                                    .addComponent(jLabel2))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(30, 30, 30)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(71, 71, 71)
@@ -207,7 +203,10 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                         .addComponent(jButton8))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(240, 240, 240)
-                        .addComponent(jButton9)))
+                        .addComponent(jButton9))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
