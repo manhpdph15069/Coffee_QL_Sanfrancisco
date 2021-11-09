@@ -7,8 +7,9 @@ package GUI;
 
 import BUS_IServices.IQLStatistical_Service;
 import BUS_Services.QLStatistical_Service;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.List;
 
 /**
  *
@@ -16,8 +17,8 @@ import java.util.Date;
  */
 public class GUI_QL_Statistical extends javax.swing.JDialog {
 
+    SimpleDateFormat formatNam = new SimpleDateFormat("yyyy");
     IQLStatistical_Service dao = null;
-
 
     /**
      * Creates new form GUI_QL_Statistical
@@ -28,10 +29,13 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
         dao = new QLStatistical_Service();
         jdateNgay.setDate(now());
         lblTong.setText("0");
+
     }
-public Date now(){
-    return new Date();
-}
+
+    public Date now() {
+        return new Date();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,9 +48,11 @@ public Date now(){
         pnlNgay = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jdateNgay = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
+        btnNgay = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblTong = new javax.swing.JLabel();
+        btnThang = new javax.swing.JButton();
+        btnNam = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -74,16 +80,30 @@ public Date now(){
         jdateNgay.setDateFormatString("yyyy-MM-dd");
         jdateNgay.setFocusable(false);
 
-        jButton1.setText("Show");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnNgay.setText("Show Ngày");
+        btnNgay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnNgayActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Tổng");
 
         lblTong.setText("jLabel3");
+
+        btnThang.setText("Show Tháng");
+        btnThang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThangActionPerformed(evt);
+            }
+        });
+
+        btnNam.setText("Show Năm");
+        btnNam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNamActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,7 +113,11 @@ public Date now(){
                 .addContainerGap()
                 .addComponent(jdateNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btnNgay)
+                .addGap(18, 18, 18)
+                .addComponent(btnThang)
+                .addGap(18, 18, 18)
+                .addComponent(btnNam)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
@@ -110,7 +134,10 @@ public Date now(){
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jdateNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnNgay)
+                            .addComponent(btnThang)
+                            .addComponent(btnNam)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(lblTong)))
@@ -121,13 +148,59 @@ public Date now(){
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dao.setDataNgay(pnlNgay, jdateNgay.getDate());
-        dao.fillTong(jdateNgay.getDate(), lblTong);
-        if (lblTong.getText().equals("null")) {
-            lblTong.setText("0");
+    private void btnNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgayActionPerformed
+        try {
+            dao.setDataNgay(pnlNgay, jdateNgay.getDate());
+
+            float tong = 0;
+            List<Object[]> list = dao.getListByTKNgay(jdateNgay.getDate());
+            for (Object[] o : list) {
+                tong += Float.valueOf(String.valueOf(o[0]));;
+            }
+            lblTong.setText(String.valueOf(tong));
+            if (lblTong.getText().equals("null")) {
+                lblTong.setText("0");
+            }
+        } catch (Exception e) {
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnNgayActionPerformed
+
+    private void btnThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThangActionPerformed
+        try {
+            dao.setDataThang(pnlNgay, jdateNgay.getDate().getMonth() + 1);
+
+            float tong = 0;
+            int thang = Integer.valueOf(jdateNgay.getDate().getMonth() + 1);
+            List<Object[]> list = dao.getListByTKThang(thang);
+            for (Object[] o : list) {
+                tong += Float.valueOf(String.valueOf(o[0]));
+            }
+            lblTong.setText(String.valueOf(tong));
+            if (lblTong.getText().equals("null")) {
+                lblTong.setText("0");
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnThangActionPerformed
+
+    private void btnNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNamActionPerformed
+
+        try {
+            float tong = 0;
+            int nam = Integer.valueOf(jdateNgay.getDate().getYear());
+            dao.setDataThang(pnlNgay, nam);
+            List<Object[]> list = dao.getListByTKNam(nam);
+            for (Object[] o : list) {
+                tong += Float.valueOf(String.valueOf(o[0]));
+            }
+            lblTong.setText(String.valueOf(tong));
+            if (lblTong.getText().equals("null")) {
+                lblTong.setText("0");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnNamActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,7 +245,9 @@ public Date now(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnNam;
+    private javax.swing.JButton btnNgay;
+    private javax.swing.JButton btnThang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private com.toedter.calendar.JDateChooser jdateNgay;

@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_Main.java</file>
-            <file>file:/C:/Users/Admin/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_QL_Employee.java</file>
-            <file>file:/C:/Users/Admin/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_QL_Table.java</file>
-            <file>file:/C:/Users/Admin/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_QL_Statistical.java</file>
-            <file>file:/C:/Users/Admin/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_QL_Menu.java</file>
-            <file>file:/C:/Users/Admin/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_QL_Order.java</file>
+            <file>file:/C:/Users/phamd/OneDrive/Desktop/QL_Coffee/CF_Soure/src/BUS_Services/QLStatistical_Service.java</file>
+            <file>file:/C:/Users/phamd/OneDrive/Desktop/QL_Coffee/CF_Soure/src/BUS_IServices/IQLStatistical_Service.java</file>
+            <file>file:/C:/Users/phamd/OneDrive/Desktop/QL_Coffee/CF_Soure/src/GUI/GUI_QL_Statistical.java</file>
         </group>
     </open-files>
 </project-private>
