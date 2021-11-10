@@ -93,7 +93,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
     @Override
     public List<Object[]> getListByTKThang(int thang) {
         String sql = "{CALL DT_THONGKETHANG(?)}";
-        String[] cols = {"Tien", "DateOrder"};
+        String[] cols = {"Tien", "Ngay"};
         return this.getListOfArray(sql, cols, thang);
     }
 
@@ -102,31 +102,12 @@ public class QLStatistical_Service implements IQLStatistical_Service {
         List<Object[]> list = getListByTKThang(thang);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         if (list != null) {
-            float tien = 0;
-            String gio = null;
-            String gio1 = null;
-//            float so = 0;
             for (Object[] o : list) {
+                String t = String.valueOf(o[0]);
+                float tien = Float.valueOf(t);
+                String ngay = String.valueOf(formatThang.format(o[1]));
 
-                try {
-                    List<Object[]> listNgay = getListByTKNgay(formatThang.parse(String.valueOf(o[1])));
-                    for (Object[] oN : listNgay) {
-                        String s = String.valueOf(oN[0]);
-                        float so = Float.valueOf(s);
-                        gio = formatThang.format(oN[1]);
-                        // gio1 = formatThang.format(o[1]);
-
-
-                            tien += so;
-
-                            data.addValue(tien, "Số tiền", gio);
-                      
-                    }
-
-                } catch (ParseException ex) {
-                    Logger.getLogger(QLStatistical_Service.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                System.out.println("" + tien);
+                data.addValue(tien, "Số tiền", ngay);
             }
         }
         JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu ngày".toUpperCase(), "Thời gian", "Số Tiền", data,
@@ -151,15 +132,16 @@ public class QLStatistical_Service implements IQLStatistical_Service {
 
     @Override
     public void setDataNam(JPanel pnlNgay, int nam) {
+        
         List<Object[]> list = getListByTKNam(nam);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         if (list != null) {
             for (Object[] o : list) {
                 String s = String.valueOf(o[0]);
                 float so = Float.valueOf(s);
-                String gio = formatThang.format(o[1]);
-                System.out.println("" + so + gio);
-                data.addValue(so, "Số tiền", gio);
+                String thang = String.valueOf(o[1]);
+                System.out.println("" + so + thang);
+                data.addValue(so, "Số tiền", "Tháng "+thang);
             }
         }
         JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu ngày".toUpperCase(), "Thời gian", "Số Tiền", data,
