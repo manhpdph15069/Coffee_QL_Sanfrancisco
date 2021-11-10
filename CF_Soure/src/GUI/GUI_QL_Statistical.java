@@ -57,36 +57,40 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
         btnNam = new javax.swing.JButton();
         JDateNKT = new com.toedter.calendar.JDateChooser();
         btnKhoang = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        pnlNgay.setBackground(new java.awt.Color(0, 102, 255));
         pnlNgay.setPreferredSize(new java.awt.Dimension(1000, 700));
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 204));
-        jLabel1.setText("Doanh thu ngày hôm nay");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/thonhke.gif"))); // NOI18N
 
         javax.swing.GroupLayout pnlNgayLayout = new javax.swing.GroupLayout(pnlNgay);
         pnlNgay.setLayout(pnlNgayLayout);
         pnlNgayLayout.setHorizontalGroup(
             pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNgayLayout.createSequentialGroup()
-                .addGap(290, 290, 290)
-                .addComponent(jLabel1)
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addGap(213, 213, 213)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(256, Short.MAX_VALUE))
         );
         pnlNgayLayout.setVerticalGroup(
             pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNgayLayout.createSequentialGroup()
-                .addGap(220, 220, 220)
-                .addComponent(jLabel1)
-                .addContainerGap(440, Short.MAX_VALUE))
+                .addGap(251, 251, 251)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(322, Short.MAX_VALUE))
         );
 
         jDateNBD.setToolTipText("Show Ngày, Show Tháng, Show Năm");
         jDateNBD.setDateFormatString("yyyy-MM-dd");
         jDateNBD.setFocusable(false);
 
+        btnNgay.setBackground(new java.awt.Color(255, 102, 51));
+        btnNgay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/ngay.png"))); // NOI18N
         btnNgay.setText("Show Ngày");
         btnNgay.setToolTipText("Chọn ở ô date thứ nhất");
         btnNgay.addActionListener(new java.awt.event.ActionListener() {
@@ -95,10 +99,14 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 153, 0));
         jLabel2.setText("Tổng");
 
-        lblTong.setText("jLabel3");
+        lblTong.setText("00000");
 
+        btnThang.setBackground(new java.awt.Color(255, 102, 51));
+        btnThang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/thang.PNG"))); // NOI18N
         btnThang.setText("Show Tháng");
         btnThang.setToolTipText("Chọn ở ô date thứ nhất");
         btnThang.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +115,8 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
             }
         });
 
+        btnNam.setBackground(new java.awt.Color(255, 102, 51));
+        btnNam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/nam.png"))); // NOI18N
         btnNam.setText("Show Năm");
         btnNam.setToolTipText("Chọn ở ô date thứ nhất");
         btnNam.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +128,8 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
         JDateNKT.setDateFormatString("yyyy-MM-dd");
         JDateNKT.setFocusable(false);
 
+        btnKhoang.setBackground(new java.awt.Color(255, 102, 51));
+        btnKhoang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/khoang.png"))); // NOI18N
         btnKhoang.setText("Khoảng");
         btnKhoang.setToolTipText("Chọn date ở cả 2 ô");
         btnKhoang.addActionListener(new java.awt.event.ActionListener() {
@@ -126,48 +138,56 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setText(":");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDateNBD, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(JDateNKT, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnKhoang)
-                .addGap(18, 18, 18)
-                .addComponent(btnNgay)
-                .addGap(18, 18, 18)
-                .addComponent(btnThang)
-                .addGap(18, 18, 18)
-                .addComponent(btnNam)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jDateNBD, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(JDateNKT, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnKhoang)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnNgay)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnThang)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnNam)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35))
+                    .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateNBD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(lblTong)
                         .addComponent(btnNgay)
                         .addComponent(btnThang)
                         .addComponent(btnNam)
-                        .addComponent(btnKhoang))
-                    .addComponent(JDateNKT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnKhoang)
+                        .addComponent(jLabel3))
+                    .addComponent(JDateNKT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDateNBD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -291,6 +311,7 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
     private com.toedter.calendar.JDateChooser jDateNBD;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblTong;
     private javax.swing.JPanel pnlNgay;
     // End of variables declaration//GEN-END:variables
