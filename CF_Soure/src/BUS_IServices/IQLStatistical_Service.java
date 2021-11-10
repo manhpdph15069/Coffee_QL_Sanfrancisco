@@ -16,11 +16,22 @@ import javax.swing.JTextField;
  * @author phamd
  */
 public interface IQLStatistical_Service {
+
     List<Object[]> getListOfArray(String sql, String[] cols, Object... args);
+
     public List<Object[]> getListByTKNgay(Date ngayDate);
-    public void setDataNgay(JPanel pnlNgay,Date jdateNgay);
+
+    public void setDataNgay(JPanel pnlNgay, Date jdateNgay);
+
     public List<Object[]> getListByTKThang(int thang);
-     public void setDataThang(JPanel pnlNgay, int thang);
-     public List<Object[]> getListByTKNam(int nam);
-     public void setDataNam(JPanel pnlNgay, int nam);
+
+    public void setDataThang(JPanel pnlNgay, int thang);
+
+    public List<Object[]> getListByTKNam(int nam);
+
+    public void setDataNam(JPanel pnlNgay, int nam);
+
+    public List<Object[]> getListByTKKhoangList(Date ngayBD, Date ngayKT);
+
+    public void setDataKhoang(JPanel pnlNgay, Date ngayBD, Date ngayKT);
 }
