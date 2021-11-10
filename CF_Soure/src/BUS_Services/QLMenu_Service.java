@@ -6,11 +6,13 @@
 package BUS_Services;
 
 import BUS_IServices.*;
+import BUS_Models.QLSanPham;
+import java.util.List;
 
 /**
  *
  * @author phamd
  */
 public class QLMenu_Service {
-    
+    List<QLSanPham> lst;
 }

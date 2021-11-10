@@ -5,10 +5,15 @@
  */
 package BUS_Models;
 
+import DAL_Models.ENTITY_Product;
+import DAL_Models.ENTITY_ProductType;
+
 /**
  *
  * @author phamd
  */
-public class entity {
+public class QLSanPham {
+    private ENTITY_Product eNTITY_Product;
+    private ENTITY_ProductType eNTITY_ProductType;
     
 }
