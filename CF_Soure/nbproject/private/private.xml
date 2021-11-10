@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Fall%202021/duan1/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_Main.java</file>
-            <file>file:/C:/Fall%202021/duan1/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_Hello.java</file>
-            <file>file:/C:/Fall%202021/duan1/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_QL_Employee.java</file>
-            <file>file:/C:/Fall%202021/duan1/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_QL_Menu.java</file>
-            <file>file:/C:/Fall%202021/duan1/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_QL_Statistical.java</file>
-            <file>file:/C:/Fall%202021/duan1/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_QL_Order.java</file>
+            <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/DAL_Services/Order_Service.java</file>
+            <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_QL_Order.java</file>
+            <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/DAL_Models/ENTITY_Order.java</file>
+            <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_Services/QLOrder_Service.java</file>
+            <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/DAL_Models/ENTITY_Area.java</file>
         </group>
     </open-files>
 </project-private>

@@ -95,7 +95,8 @@ public class QLOrder_Service implements IQLOrder_Service {
         this.listBan = (ArrayList<ENTITY_Table>) this.qlb.SQLKhu(cbbkhu);
         ClassLoader classLoader = that.getClass().getClassLoader();
         pnlMain.removeAll();
-        pnlMain.setBounds(10, 140, 550, 530);
+        pnlMain.setBounds(10, 140, 550, 300);
+        pnlMain.setBackground(new java.awt.Color(0,102,255));
         pnlMain.setBorder(BorderFactory.createLineBorder(Color.black));
         for (ENTITY_Table ban : listBan) {
             URL imagePath = classLoader.getResource("Icon/" + ban.getLocation() + ".png");
