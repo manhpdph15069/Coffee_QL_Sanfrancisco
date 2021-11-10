@@ -30,4 +30,6 @@ public interface ITable_Service {
     public ENTITY_Table findById(String IDTable);
 
     public List<ENTITY_Table> SelectBySQL(String sql, Object... args);
+    
+    public List<ENTITY_Table> SQLKhu(int khu);
 }

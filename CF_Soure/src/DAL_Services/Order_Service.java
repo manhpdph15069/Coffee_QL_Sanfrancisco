@@ -22,7 +22,7 @@ import java.util.List;
  *
  * */
 public class Order_Service implements IOrder_Service {
-    String INSERT_SQL = "INSERT INTO [Order]( [IDOrder], [DateOrder],[TimeOder],[UsernameEMP],[IDCust],[Status]) VALUES (?,?,?,?,?)";
+    String INSERT_SQL = "INSERT INTO [Order]( [IDOrder], [DateOrder],[TimeOder],[UsernameEMP],[IDCust],[Status]) VALUES (?,?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE [Order] SET [DateOrder] = ?, [TimeOder] = ?,[UsernameEMP]=?,[IDCust]=?,[Status]=? WHERE [IDOrder] = ?";
     String DELETE_SQL = "UPDATE [Order] SET [Status]=0 WHERE [IDOrder] = ?";
     String SELECT_ALL_SQL = "SELECT * FROM [Order]";
@@ -89,7 +89,7 @@ public class Order_Service implements IOrder_Service {
                 order.setTimeOrder(rs.getDate("TimeOrder"));
                 order.setUsernameEMP(rs.getString("UsernameEMP"));
                 order.setIDCust(rs.getString("IDCust"));
-                order.setStatus(rs.getBoolean("Status"));
+                order.setStatus(rs.getInt("Status"));
                 list.add(order);
             }
             rs.getStatement().getConnection().close();

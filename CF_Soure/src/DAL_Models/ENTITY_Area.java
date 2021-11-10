@@ -12,6 +12,12 @@ public class ENTITY_Area {
     private String AreaName;
     private int MaxTable;
 
+    @Override
+    public String toString() {
+        return  AreaName;
+    }
+
+    
     public ENTITY_Area() {
     }
 

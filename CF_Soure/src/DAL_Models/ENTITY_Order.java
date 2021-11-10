@@ -21,7 +21,7 @@ public class ENTITY_Order {
     private Date TimeOrder;
     private String UsernameEMP;
     private String IDCust;
-    private Boolean Status;
+    private int Status;
 
     public ENTITY_Order() {
     }
@@ -66,11 +66,11 @@ public class ENTITY_Order {
         this.IDCust = IDCust;
     }
 
-    public Boolean getStatus() {
+    public int getStatus() {
         return Status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(int status) {
         Status = status;
     }
 }

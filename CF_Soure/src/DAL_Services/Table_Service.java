@@ -27,7 +27,7 @@ public class Table_Service implements ITable_Service {
     String DELETE_SQL = "UPDATE [Table] SET [Status]=0 WHERE [IDTable] = ?";
     String SELECT_ALL_SQL = "SELECT * FROM [Table]";
     String SELECT_BY_ID_SQL = "SELECT * FROM [Table] WHERE [IDTable] = ?";
-
+    String SQL = "SELECT * FROM [Table] WHERE [IDArea] = ? ORDER BY Location";
     @Override
     public void insert(ENTITY_Table entity) {
         try {
@@ -91,5 +91,9 @@ public class Table_Service implements ITable_Service {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<ENTITY_Table> SQLKhu(int khu) {
+        return this.SelectBySQL(SQL, khu);
     }
 }
