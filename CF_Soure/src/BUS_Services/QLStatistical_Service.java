@@ -81,7 +81,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
+        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 700));
 
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
@@ -110,11 +110,11 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 data.addValue(tien, "Số tiền", ngay);
             }
         }
-        JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu ngày".toUpperCase(), "Thời gian", "Số Tiền", data,
+        JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu tháng".toUpperCase(), "Thời gian", "Số Tiền", data,
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
+        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 700));
 
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
@@ -144,11 +144,11 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 data.addValue(so, "Số tiền", "Tháng "+thang);
             }
         }
-        JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu ngày".toUpperCase(), "Thời gian", "Số Tiền", data,
+        JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu năm".toUpperCase(), "Thời gian", "Số Tiền", data,
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
+        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 700));
 
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
@@ -156,5 +156,37 @@ public class QLStatistical_Service implements IQLStatistical_Service {
         pnlNgay.validate();
         pnlNgay.repaint();
     }
+@Override
+    public List<Object[]> getListByTKKhoangList(Date ngayBD, Date ngayKT) {
+    String sql = "{CALL DT_THONGKEKHOANG(?,?)}";
+        String[] cols = {"Tien", "Ngay"};
+        return this.getListOfArray(sql, cols, ngayBD,ngayKT); 
+    }
 
+    @Override
+    public void setDataKhoang(JPanel pnlNgay, Date ngayBD, Date ngayKT) {
+        List<Object[]> list = getListByTKKhoangList(ngayBD, ngayKT);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        if (list!=null) {
+            for (Object[] o : list) {
+                String s = String.valueOf(o[0]);
+                float so = Float.valueOf(s);
+                String ngay = formatThang.format(o[1]);
+
+                   System.out.println("" + so + ngay);
+                dataset.addValue(so, "Số tiền", ngay);
+            }
+        }
+        JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu theo khoảng".toUpperCase(), "Thời gian", "Số Tiền", dataset,
+                PlotOrientation.VERTICAL, false, true, false);
+
+        ChartPanel chartPanel = new ChartPanel(barChart);
+        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 700));
+
+        pnlNgay.removeAll();
+        pnlNgay.setLayout(new CardLayout());
+        pnlNgay.add(chartPanel);
+        pnlNgay.validate();
+        pnlNgay.repaint();
+    }
 }
