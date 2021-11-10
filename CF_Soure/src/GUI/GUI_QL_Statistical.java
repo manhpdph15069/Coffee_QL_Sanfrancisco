@@ -157,10 +157,7 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
             for (Object[] o : list) {
                 tong += Float.valueOf(String.valueOf(o[0]));;
             }
-            lblTong.setText(String.valueOf(tong));
-            if (lblTong.getText().equals("null")) {
-                lblTong.setText("0");
-            }
+            setLbl(tong);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnNgayActionPerformed
@@ -175,10 +172,7 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
             for (Object[] o : list) {
                 tong += Float.valueOf(String.valueOf(o[0]));;
             }
-            lblTong.setText(String.valueOf(tong));
-            if (lblTong.getText().equals("null")) {
-                lblTong.setText("0");
-            }
+            setLbl(tong);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnThangActionPerformed
@@ -186,21 +180,26 @@ public class GUI_QL_Statistical extends javax.swing.JDialog {
     private void btnNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNamActionPerformed
 
         try {
+            int nam = Integer.valueOf(formatNam.format(jdateNgay.getDate()));
+            System.out.println("" + nam);
+            dao.setDataNam(pnlNgay, nam);
+
             float tong = 0;
-            int nam = Integer.valueOf(jdateNgay.getDate().getYear());
-            dao.setDataThang(pnlNgay, nam);
             List<Object[]> list = dao.getListByTKNam(nam);
             for (Object[] o : list) {
                 tong += Float.valueOf(String.valueOf(o[0]));;
             }
-            lblTong.setText(String.valueOf(tong));
-            if (lblTong.getText().equals("null")) {
-                lblTong.setText("0");
-            }
+            setLbl(tong);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnNamActionPerformed
+    void setLbl(float tong) {
+        lblTong.setText(String.valueOf(tong));
+        if (lblTong.getText().equals("null")) {
+            lblTong.setText("0");
+        }
+    }
 
     /**
      * @param args the command line arguments
