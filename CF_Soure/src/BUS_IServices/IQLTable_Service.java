@@ -5,10 +5,19 @@
  */
 package BUS_IServices;
 
+import DAL_Models.ENTITY_Table;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author phamd
  */
 public interface IQLTable_Service {
-    
+
+    void fillTable(JTable tbl, String Area);
+
+    void taoIDTable(JTextField maTable);
+
+    void insertMATABLE(ENTITY_Table entity);
 }
