@@ -6,8 +6,13 @@
             <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/DAL_Services/Order_Service.java</file>
             <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI/GUI_QL_Order.java</file>
             <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/DAL_Models/ENTITY_Order.java</file>
+            <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_IServices/IQLOrder_Service.java</file>
             <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_Services/QLOrder_Service.java</file>
             <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/DAL_Models/ENTITY_Area.java</file>
+            <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_Models/QLSanPham.java</file>
+            <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_Models/SPChiTiet.java</file>
+            <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_Models/billCTT.java</file>
+            <file>file:/C:/Users/pc/Desktop/git/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_Models/LSOrder.java</file>
         </group>
     </open-files>
 </project-private>
