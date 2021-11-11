@@ -32,4 +32,5 @@ public interface ITable_Service {
     public List<ENTITY_Table> SelectBySQL(String sql, Object... args);
     
     public List<ENTITY_Table> SQLKhu(int khu);
+    public List<ENTITY_Table> findByIdArea(String IDArea);
 }
