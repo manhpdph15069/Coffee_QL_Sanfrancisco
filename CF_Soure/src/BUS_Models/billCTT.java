@@ -5,13 +5,16 @@
  */
 package BUS_Models;
 
+import java.sql.Time;
+import java.util.Date;
+
 /**
  *
  * @author Tran Van Thanh
  */
 public class billCTT {
     private String IDOrderString;
-    private String TimeOrder;
+    private java.sql.Time TimeOrder;
     private String IDProduct;
     private String ProductName;
     private String Size;
@@ -23,9 +26,9 @@ public class billCTT {
     public billCTT() {
     }
 
-    public billCTT(String IDOrderString, String TimeOrder, String IDProduct, String ProductName, String Size, int Quantity, double Price, String Note, String IDCust) {
+    public billCTT(String IDOrderString, Date TimeOrder, String IDProduct, String ProductName, String Size, int Quantity, double Price, String Note, String IDCust) {
         this.IDOrderString = IDOrderString;
-        this.TimeOrder = TimeOrder;
+        this.TimeOrder = (Time) TimeOrder;
         this.IDProduct = IDProduct;
         this.ProductName = ProductName;
         this.Size = Size;
@@ -43,12 +46,12 @@ public class billCTT {
         this.IDOrderString = IDOrderString;
     }
 
-    public String getTimeOrder() {
-        return TimeOrder;
+    public Date getTimeOrder() {
+        return (Date) TimeOrder;
     }
 
-    public void setTimeOrder(String TimeOrder) {
-        this.TimeOrder = TimeOrder;
+    public void setTimeOrder(Date TimeOrder) {
+        this.TimeOrder = (Time) TimeOrder;
     }
 
     public String getIDProduct() {

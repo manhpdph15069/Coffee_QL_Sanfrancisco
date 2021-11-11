@@ -5,6 +5,7 @@
  */
 package BUS_Models;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -13,14 +14,14 @@ import java.util.Date;
  */
 public class LSOrder {
     private String IDOrder;
-    private String TimeOder;
+    private java.sql.Time TimeOder;
     private String NameEMP =null;
     private String CusName;
     private int Status;
 
-    public LSOrder(String IDOrder, String TimeOder, String NameEMP, String CusName, int Status) {
+    public LSOrder(String IDOrder, Date TimeOder, String NameEMP, String CusName, int Status) {
         this.IDOrder = IDOrder;
-        this.TimeOder = TimeOder;
+        this.TimeOder = (Time) TimeOder;
         this.NameEMP = NameEMP;
         this.CusName = CusName;
         this.Status = Status;
@@ -37,12 +38,12 @@ public class LSOrder {
         this.IDOrder = IDOrder;
     }
 
-    public String getTimeOder() {
+    public Time getTimeOder() {
         return TimeOder;
     }
 
-    public void setTimeOder(String TimeOder) {
-        this.TimeOder = TimeOder;
+    public void setTimeOder(Date TimeOder) {
+        this.TimeOder = (Time) TimeOder;
     }
 
     public String getNameEMP() {

@@ -24,7 +24,7 @@ import javax.swing.JTextField;
  */
 public interface IQLOrder_Service {
 
-    public void taoTable(JDialog that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder,JTable tblLichSu,JPanel PanlPanelLS,JPanel Oder,JTextField txtMaHD);
+    public void taoTable(JDialog that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder,JTable tblLichSu,JPanel PanlPanelLS,JPanel Oder,JTextField txtMaHD,JTextField txtMaKH);
 
     public ArrayList<ENTITY_Area> getkhu();
 
@@ -39,7 +39,8 @@ public interface IQLOrder_Service {
     public void taoHD(JTextField txt);
 
     public void updatebn();
-
+    
+    public void thanhToan(JTextField txtMaHD);
     public void insertOr(JTextField txt);
     public void insertOderDe(ENTITY_BILL bill);
     public void lichsuOrder(JPanel PanlPanelLS, JTable tblLichSu);

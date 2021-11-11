@@ -22,7 +22,6 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -180,9 +179,11 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
+        PanCac.setForeground(new java.awt.Color(153, 255, 153));
         PanCac.setLayout(new java.awt.CardLayout());
 
         PanLichSu.setBorder(javax.swing.BorderFactory.createTitledBorder("Lịch sử Order"));
+        PanLichSu.setForeground(new java.awt.Color(102, 255, 102));
 
         lblNgay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblNgay.setText("Lịch sử Oder ngày : ");
@@ -212,13 +213,14 @@ public class GUI_QL_Order extends javax.swing.JDialog {
             .addGroup(PanLichSuLayout.createSequentialGroup()
                 .addComponent(lblNgay)
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         PanCac.add(PanLichSu, "card2");
 
         PanOrder.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách Order"));
+        PanOrder.setForeground(new java.awt.Color(153, 255, 51));
 
         jLabel6.setText("Mã KH");
 
@@ -419,6 +421,9 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         btnguowi.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnguowi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/order-icon.png"))); // NOI18N
         btnguowi.setText("Gửi Order");
+        btnguowi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnguowi.setDefaultCapable(false);
+        btnguowi.setFocusable(false);
         btnguowi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnguowiActionPerformed(evt);
@@ -490,24 +495,25 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         this.btnVaoBan.setVisible(false);
         this.PanOrder.setVisible(true);
         this.PanLichSu.setVisible(false);
-        ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
-        qlod.taoTable(this, khu.getIDArea(), btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD);
     }//GEN-LAST:event_btnVaoBanActionPerformed
-
+    private void goiTaoBan(ENTITY_Area khu) {
+        this.qlod.taoTable(this, khu.getIDArea(), this.btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD, txtMaKH);
+    }
     private void cbbKhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhuActionPerformed
         // TODO add your handling code here:
         this.btnVaoBan.setVisible(false);
         ENTITY_Area ar = (ENTITY_Area) this.cbbKhu.getSelectedItem();
         if (ar != null) {
-            this.qlod.taoTable(this, ar.getIDArea(), this.btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD);
+            goiTaoBan(ar);
         }
     }//GEN-LAST:event_cbbKhuActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
         qlod.updatebn();
+        qlod.thanhToan(txtmaHD);
         ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
-        qlod.taoTable(this, khu.getIDArea(), btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD);
+        goiTaoBan(khu);
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void txtTimKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyTyped
@@ -533,6 +539,8 @@ public class GUI_QL_Order extends javax.swing.JDialog {
             bill.setReason("");
             qlod.insertOderDe(bill);
         }
+        ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
+        goiTaoBan(khu);
     }//GEN-LAST:event_btnguowiActionPerformed
 
     private void btnLuuVSInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuVSInActionPerformed
@@ -642,7 +650,7 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         public Object getCellEditorValue() {
             if (clicked) {
                 if (table.getName().equals("SP")) {
-                    if (txtMaKH.getText().equals("")) {
+                    if (txtmaHD.getText().equals("")) {
                         dialogHelper.alert(PanSanPham, "Bố chưa vào bàn mà đòi thêm cái gì trời ?");
                     } else {
                         String n = null;

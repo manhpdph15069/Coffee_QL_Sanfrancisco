@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class dateHelper {
      public static final SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("dd/MM/yyyy");
      public static final SimpleDateFormat DATE_FORMATER2 = new SimpleDateFormat("yyyy/MM/dd");
-     public static final SimpleDateFormat Time_FORMATER = new SimpleDateFormat("hh:mm:ss a");
+     public static final SimpleDateFormat Time_FORMATER = new SimpleDateFormat("hh:mm aa");
     //chuuyển String sang Date
     /*
     @param date truyền vào date kiểu String

@@ -227,6 +227,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="PanCac">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="ff" red="99" type="rgb"/>
+            </Property>
+          </Properties>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
           <SubComponents>
@@ -236,6 +241,9 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="L&#x1ecb;ch s&#x1eed; Order"/>
                   </Border>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="ff" red="66" type="rgb"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -260,8 +268,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lblNgay" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="jScrollPane3" min="-2" pref="128" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" pref="269" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -331,6 +339,9 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Danh S&#xe1;ch Order"/>
                   </Border>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="33" green="ff" red="99" type="rgb"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -695,6 +706,11 @@
           <Image iconType="3" name="/ICON/order-icon.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="G&#x1eed;i Order"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Default Cursor"/>
+        </Property>
+        <Property name="defaultCapable" type="boolean" value="false"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnguowiActionPerformed"/>

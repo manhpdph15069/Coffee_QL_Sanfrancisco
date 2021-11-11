@@ -5,6 +5,7 @@
  */
 package DAL_Models;
 
+import Utils.dateHelper;
 import java.time.DateTimeException;
 import java.util.Date;
 
@@ -17,11 +18,11 @@ import java.util.Date;
 * */
 public class ENTITY_Order {
     private String IDOrder;
-    private Date DateOrder;
-    private Date TimeOrder;
-    private String UsernameEMP;
-    private String IDCust;
-    private int Status;
+    private Date DateOrder = dateHelper.now();
+    private Date TimeOrder = dateHelper.timeNow();
+    private String UsernameEMP="THANHNV";
+    private String IDCust = null;
+    private int Status = 1;
 
     public ENTITY_Order() {
     }
