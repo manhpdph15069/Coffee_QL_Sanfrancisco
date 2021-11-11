@@ -22,12 +22,13 @@ import java.util.List;
 *
 * */
 public class Table_Service implements ITable_Service {
-    String INSERT_SQL = "INSERT INTO [Table]([IDTable], [Location],[Status]=1,[IDArea]) VALUES (?, ?, ?)";
+    String INSERT_SQL = "INSERT INTO [Table]([IDTable], [Location],[Status],[IDArea]) VALUES (?, ?,?, ?)";
     String UPDATE_SQL = "UPDATE [Table] SET [Location] = ?, [IDArea] = ?,[Status]=? WHERE [IDTable]=?";
     String DELETE_SQL = "UPDATE [Table] SET [Status]=0 WHERE [IDTable] = ?";
     String SELECT_ALL_SQL = "SELECT * FROM [Table]";
     String SELECT_BY_ID_SQL = "SELECT * FROM [Table] WHERE [IDTable] = ?";
     String SQL = "SELECT * FROM [Table] WHERE [IDArea] = ? ORDER BY Location";
+    String SELECT_BY_ID_Area = "SELECT * FROM [Table] WHERE [IDArea] = ?";
     @Override
     public void insert(ENTITY_Table entity) {
         try {
@@ -93,7 +94,14 @@ public class Table_Service implements ITable_Service {
         }
     }
 
+        @Override
+    public List<ENTITY_Table> findByIdArea(String IDArea) {
+        return this.SelectBySQL(SELECT_BY_ID_Area, IDArea);
+
+    }
+
+    @Override
     public List<ENTITY_Table> SQLKhu(int khu) {
-        return this.SelectBySQL(SQL, khu);
+    return this.SelectBySQL(SQL, khu); 
     }
 }
