@@ -5,17 +5,37 @@
  */
 package GUI;
 
+import BUS_IServices.IQLMenu_Service;
+import BUS_IServices.IQLOrder_Service;
+import BUS_Models.SanPham;
+import BUS_Services.QLMenu_Service;
+import BUS_Services.QLOrder_Service;
+import DAL_Models.ENTITY_Product;
+import Utils.XImage;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author phamd
  */
 public class GUI_QL_Menu extends javax.swing.JFrame {
-
+     JFileChooser fileChooser =new JFileChooser();
+    private IQLMenu_Service qlsp;
+            QLMenu_Service dao=new QLMenu_Service();
     /**
      * Creates new form Main
      */
     public GUI_QL_Menu() {
         initComponents();
+        this.qlsp = (IQLMenu_Service) new QLMenu_Service();
+        loadCombo();
+        loadData();
     }
 
     /**
@@ -33,25 +53,26 @@ public class GUI_QL_Menu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        lblHinh = new javax.swing.JLabel();
+        txtTen = new javax.swing.JTextField();
+        txtGia = new javax.swing.JTextField();
+        cboLoai = new javax.swing.JComboBox<>();
+        rdoCon = new javax.swing.JRadioButton();
+        rdoHet = new javax.swing.JRadioButton();
+        btnThem = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        btnMoi = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblSanPham = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        btn1 = new javax.swing.JButton();
+        btn3 = new javax.swing.JButton();
+        btn2 = new javax.swing.JButton();
+        btn4 = new javax.swing.JButton();
+        txtTimKiem = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        cboSize = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,38 +90,43 @@ public class GUI_QL_Menu extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Loại");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/no_image.jpg"))); // NOI18N
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cafe", "Nước canh", "Nước mắm" }));
-
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Còn");
-
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Hết");
-
-        jButton1.setBackground(new java.awt.Color(255, 102, 102));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/add-item.png"))); // NOI18N
-        jButton1.setText("Thêm");
-
-        jButton2.setBackground(new java.awt.Color(255, 102, 102));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/edit_item.png"))); // NOI18N
-        jButton2.setText("Sửa ");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        lblHinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/no_image.jpg"))); // NOI18N
+        lblHinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblHinhMouseClicked(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 102, 102));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/delete_item.png"))); // NOI18N
-        jButton3.setText("Xóa");
+        cboLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cafe", "Nước canh", "Nước mắm" }));
 
-        jButton4.setBackground(new java.awt.Color(255, 102, 102));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/clear_item.png"))); // NOI18N
-        jButton4.setText("Clear");
+        buttonGroup1.add(rdoCon);
+        rdoCon.setText("Còn");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        buttonGroup1.add(rdoHet);
+        rdoHet.setText("Hết");
+
+        btnThem.setBackground(new java.awt.Color(255, 102, 102));
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/add-item.png"))); // NOI18N
+        btnThem.setText("Thêm");
+
+        btnSua.setBackground(new java.awt.Color(255, 102, 102));
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/edit_item.png"))); // NOI18N
+        btnSua.setText("Sửa ");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
+
+        btnXoa.setBackground(new java.awt.Color(255, 102, 102));
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/delete_item.png"))); // NOI18N
+        btnXoa.setText("Xóa");
+
+        btnMoi.setBackground(new java.awt.Color(255, 102, 102));
+        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/clear_item.png"))); // NOI18N
+        btnMoi.setText("Clear");
+
+        tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -108,39 +134,46 @@ public class GUI_QL_Menu extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Tên Sản Phẩm", "Size", "Giá", "Trang Thai"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblSanPham);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
         jLabel6.setText("Quản lý sản phẩm");
 
-        jButton5.setBackground(new java.awt.Color(255, 102, 102));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/first.png"))); // NOI18N
+        btn1.setBackground(new java.awt.Color(255, 102, 102));
+        btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/first.png"))); // NOI18N
 
-        jButton6.setBackground(new java.awt.Color(255, 102, 102));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/next.png"))); // NOI18N
+        btn3.setBackground(new java.awt.Color(255, 102, 102));
+        btn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/next.png"))); // NOI18N
 
-        jButton7.setBackground(new java.awt.Color(255, 102, 102));
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/back.png"))); // NOI18N
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btn2.setBackground(new java.awt.Color(255, 102, 102));
+        btn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/back.png"))); // NOI18N
+        btn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btn2ActionPerformed(evt);
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(255, 102, 102));
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/last.png"))); // NOI18N
+        btn4.setBackground(new java.awt.Color(255, 102, 102));
+        btn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/last.png"))); // NOI18N
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtTimKiemActionPerformed(evt);
+            }
+        });
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyPressed(evt);
             }
         });
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setText("Tìm kiếm");
+
+        cboSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,15 +195,17 @@ public class GUI_QL_Menu extends javax.swing.JFrame {
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel2)
                                                 .addGap(40, 40, 40)
-                                                .addComponent(jRadioButton1)))
+                                                .addComponent(rdoCon)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jRadioButton2))
+                                        .addComponent(rdoHet))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addGap(110, 110, 110)
-                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addComponent(cboLoai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGap(76, 76, 76)))
-                        .addGap(203, 203, 203)
-                        .addComponent(jLabel5)
+                        .addGap(2, 2, 2)
+                        .addComponent(cboSize, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(119, 119, 119)
+                        .addComponent(lblHinh)
                         .addGap(157, 157, 157))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,31 +220,31 @@ public class GUI_QL_Menu extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnThem)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton2)
+                                        .addComponent(btnSua)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton3)
+                                        .addComponent(btnXoa)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton4)
+                                        .addComponent(btnMoi)
                                         .addGap(72, 72, 72)
-                                        .addComponent(jButton5)
+                                        .addComponent(btn1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton7)
+                                        .addComponent(btn2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton6)
+                                        .addComponent(btn3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton8)))))))
+                                        .addComponent(btn4)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(268, 268, 268)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -220,39 +255,40 @@ public class GUI_QL_Menu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
+                            .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
+                            .addComponent(rdoCon)
+                            .addComponent(rdoHet)
+                            .addComponent(cboSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))))
                 .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton8)
+                    .addComponent(btn1)
+                    .addComponent(btn3)
+                    .addComponent(btn4)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
-                        .addComponent(jButton1)
-                        .addComponent(jButton3)
-                        .addComponent(jButton4)
-                        .addComponent(jButton7)))
+                        .addComponent(btnSua)
+                        .addComponent(btnThem)
+                        .addComponent(btnXoa)
+                        .addComponent(btnMoi)
+                        .addComponent(btn2)))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,17 +309,25 @@ public class GUI_QL_Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSuaActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btn2ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtTimKiemActionPerformed
+
+    private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
+    loadData();
+    }//GEN-LAST:event_txtTimKiemKeyPressed
+
+    private void lblHinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhMouseClicked
+        chonAnh();
+    }//GEN-LAST:event_lblHinhMouseClicked
 
     /**
      * @param args the command line arguments
@@ -328,30 +372,107 @@ public class GUI_QL_Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn1;
+    private javax.swing.JButton btn2;
+    private javax.swing.JButton btn3;
+    private javax.swing.JButton btn4;
+    private javax.swing.JButton btnMoi;
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cboLoai;
+    private javax.swing.JComboBox<String> cboSize;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel lblHinh;
+    private javax.swing.JRadioButton rdoCon;
+    private javax.swing.JRadioButton rdoHet;
+    private javax.swing.JTable tblSanPham;
+    private javax.swing.JTextField txtGia;
+    private javax.swing.JTextField txtTen;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
+
+    private void chonAnh() {
+        if (fileChooser.showOpenDialog(this)==JFileChooser.APPROVE_OPTION) {
+            File file=fileChooser.getSelectedFile();//lay ra file dc chon
+            XImage.save(file); // luu vao trong thu muc
+            ImageIcon icon=XImage.read(file.getName()); //doc file tu thu muc
+            lblHinh.setIcon(icon); //hien thi len lblhinh
+            lblHinh.setToolTipText(file.getName()); //giu ten hinh trong tooltip
+        }
+    }
+    private void loadData() {
+       DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
+        model.setRowCount(0);
+//        model.fireTableDataChanged();
+//        TableRowSorter sorter = new TableRowSorter(model);
+//        tblSanPham.setRowSorter(sorter);
+//        sanpham1 sp1 = (sanpham1) cboLoai.getSelectedItem();
+//        sorter.setRowFilter(RowFilter.regexFilter(sp1.TypeName));
+        try {
+            String keyword=txtTimKiem.getText();
+            List<SanPham> list = this.dao.selectByKeyword(keyword);
+           for (SanPham pro : list) {
+               Object[] row = {pro.getProductName(), pro.getSize(), pro.getPrice(), pro.isStatus() ? "Còn" : "Hết"};
+               model.addRow(row);
+           }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    void loadCombo(){
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoai.getModel();
+        model.removeAllElements();
+        List<SanPham> list = this.dao.selectTypeName();
+        for (SanPham sp : list) {
+            model.addElement(sp);
+        }
+        loadSize();
+    }
+    void loadSize(){
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboSize.getModel();
+        model.removeAllElements();
+        try {
+            SanPham sp=(SanPham) cboLoai.getSelectedItem();
+            List<SanPham> list =this.dao.selectSize(sp.getTypeName());
+            for (SanPham sanPham : list) {
+                model.addElement(sanPham);
+            }
+        } catch (Exception e) {
+        }
+        
 }
+    private void setForm(SanPham sp){
+        txtTen.setText(sp.getProductName());
+        txtGia.setText(String.valueOf(sp.getPrice()));
+        rdoCon.setSelected(sp.isStatus());
+        rdoHet.setSelected(!sp.isStatus());
+        cboLoai.setSelectedItem(sp.getTypeName());
+        cboSize.setSelectedItem(sp.getSize());
+        if (sp.getImage()!=null) {
+      lblHinh.setToolTipText(sp.getImage()); //lay ra ten file trong tooltip 
+      lblHinh.setIcon(XImage.read(sp.getImage())); //doc file trong tooltip va hien thi len lable
+         }else{
+          lblHinh.setIcon(XImage.read("NoImage.png"));
+      }
+    }
+    SanPham getForm(){
+        SanPham sp=new SanPham();
+        sp.setProductName(txtTen.getText());
+        sp.setPrice(Double.parseDouble(txtGia.getText()));
+        sp.setStatus(rdoCon.isSelected());
+        sp.setSize((String) cboSize.getSelectedItem());
+        sp.setTypeName((String) cboLoai.getSelectedItem());
+        sp.setImage(lblHinh.getToolTipText());
+        return sp;
+}
+}
+
