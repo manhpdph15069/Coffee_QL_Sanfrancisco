@@ -20,4 +20,6 @@ public interface IQLTable_Service {
     void taoIDTable(JTextField maTable);
 
     void insertMATABLE(ENTITY_Table entity);
+    
+    void deleteTABLE(String ma);
 }
