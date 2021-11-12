@@ -24,7 +24,7 @@ import javax.swing.JTextField;
  */
 public interface IQLOrder_Service {
 
-    public void taoTable(JDialog that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder,JTable tblLichSu,JPanel PanlPanelLS,JPanel Oder,JTextField txtMaHD,JTextField txtMaKH);
+    public void taoTable(JPanel that,JDialog theDialog, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder,JTable tblLichSu,JPanel PanlPanelLS,JPanel Oder,JTextField txtMaHD,JTextField txtMaKH,JTextField txtNameEMP,JLabel TimeOrder);
 
     public ArrayList<ENTITY_Area> getkhu();
 
@@ -33,6 +33,7 @@ public interface IQLOrder_Service {
     public void hienTableSP(JTable tblSP);
 
     public void hienTableOder(JTable tblOD);
+    public void bill(JTextField txtMaHD,JTextField txtNameEMP,JTextField txtMaKH,JLabel TimeOrder,JTable tblOrder);
 
     public void timSP(JTextField txt, JTable tbl);
 
@@ -44,4 +45,5 @@ public interface IQLOrder_Service {
     public void insertOr(JTextField txt);
     public void insertOderDe(ENTITY_BILL bill);
     public void lichsuOrder(JPanel PanlPanelLS, JTable tblLichSu);
+    public int dongC ();
 }

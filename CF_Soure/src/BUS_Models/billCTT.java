@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class billCTT {
     private String IDOrderString;
+    private String NameEMP;
     private java.sql.Time TimeOrder;
     private String IDProduct;
     private String ProductName;
@@ -26,9 +27,10 @@ public class billCTT {
     public billCTT() {
     }
 
-    public billCTT(String IDOrderString, Date TimeOrder, String IDProduct, String ProductName, String Size, int Quantity, double Price, String Note, String IDCust) {
+    public billCTT(String IDOrderString, String NameEMP, Time TimeOrder, String IDProduct, String ProductName, String Size, int Quantity, double Price, String Note, String IDCust) {
         this.IDOrderString = IDOrderString;
-        this.TimeOrder = (Time) TimeOrder;
+        this.NameEMP = NameEMP;
+        this.TimeOrder = TimeOrder;
         this.IDProduct = IDProduct;
         this.ProductName = ProductName;
         this.Size = Size;
@@ -46,12 +48,20 @@ public class billCTT {
         this.IDOrderString = IDOrderString;
     }
 
-    public Date getTimeOrder() {
-        return (Date) TimeOrder;
+    public String getNameEMP() {
+        return NameEMP;
     }
 
-    public void setTimeOrder(Date TimeOrder) {
-        this.TimeOrder = (Time) TimeOrder;
+    public void setNameEMP(String NameEMP) {
+        this.NameEMP = NameEMP;
+    }
+
+    public Time getTimeOrder() {
+        return TimeOrder;
+    }
+
+    public void setTimeOrder(Time TimeOrder) {
+        this.TimeOrder = TimeOrder;
     }
 
     public String getIDProduct() {

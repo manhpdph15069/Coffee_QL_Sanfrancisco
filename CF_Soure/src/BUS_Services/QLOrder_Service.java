@@ -25,18 +25,16 @@ import DAL_Services.Product_Service;
 import DAL_Services.Table_Service;
 import Utils.JDBC;
 import Utils.dateHelper;
-import Utils.dialogHelper;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 import java.sql.ResultSet;
-import java.sql.SQLData;
 import java.sql.SQLException;
-import java.sql.SQLType;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,11 +49,13 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -70,6 +70,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     private IArea_Service qlk;
     private IProduct_Service lqp;
     private IOrder_Service qlo;
+    private int dong;
 
     private Map<JButton, BanButtons> banButtonList = new HashMap<>();
     private JPanel pnlMain;
@@ -87,9 +88,10 @@ public class QLOrder_Service implements IQLOrder_Service {
     String SQL_chuaTT = "SELECT DISTINCT MAX(OrderDetail.IDOrder) FROM OrderDetail \n"
             + "JOIN [Order] OD ON OD.IDOrder = OrderDetail.IDOrder\n"
             + "WHERE IDTable = ? AND DateOrder = ? AND [Status] = 1";
-    String billCTT = "SELECT OrderDetail.IDOrder,TimeOder,OrderDetail.IDProduct,PR.ProductName,Size,Quantity,PR.Price,Note,OD.IDCust FROM OrderDetail\n"
+    String billCTT = "SELECT OrderDetail.IDOrder,TimeOder,OrderDetail.IDProduct,PR.ProductName,Size,Quantity,PR.Price,Note,OD.IDCust,EMP.NameEMP FROM OrderDetail\n"
             + "JOIN [Order] OD ON OD.IDOrder = OrderDetail.IDOrder\n"
             + "JOIN Product PR ON PR.IDProduct = OrderDetail.IDProduct\n"
+            + " LEFT JOIN Employee EMP ON EMP.UsernameEMP = OD.UsernameEMP\n"
             + "JOIN ProductType on PR.IDType = ProductType.IDType\n"
             + "WHERE OrderDetail.IDOrder = ? ";
     String thanhToan = "UPDATE [Order] SET [Status] = 2 WHERE IDOrder = ?";
@@ -105,13 +107,16 @@ public class QLOrder_Service implements IQLOrder_Service {
     public static final SimpleDateFormat Time_FORMATER = new SimpleDateFormat("hh:mm:ss a");
 
     @Override
-    public void taoTable(JDialog that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH) {
+    public void taoTable(JPanel that, JDialog theDialog, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder) {
         this.listBan = (ArrayList<ENTITY_Table>) this.qlb.SQLKhu(cbbkhu);
-        ClassLoader classLoader = that.getClass().getClassLoader();
+        ClassLoader classLoader = theDialog.getClass().getClassLoader();
         pnlMain.removeAll();
-        pnlMain.setBounds(10, 140, 550, 300);
-        pnlMain.setBackground(new java.awt.Color(0, 102, 255));
-        pnlMain.setBorder(BorderFactory.createLineBorder(Color.black));
+        pnlMain.setBounds(10, 140, 570, 300);
+        pnlMain.setBackground(new java.awt.Color(255, 153, 255));
+        pnlMain.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách Bàn"));
+//         JScrollPane sn = new JScrollPane();
+//         sn.setViewportView(pnlMain);
+//         pnlMain.add(sn);
         for (ENTITY_Table ban : listBan) {
             URL imagePath = classLoader.getResource("Icon/" + ban.getLocation() + ".png");
             Image imgBan = new ImageIcon(imagePath).getImage();
@@ -134,7 +139,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                         button.setHorizontalTextPosition(0);
                         button.setFont(new Font("Dialog", 8, 8));
                         String go = format.format(cTT.getTimeOrder());
-                        button.setText("Time : "+go);
+                        button.setText("Time : " + go);
                         button.setVerticalTextPosition(3);
                     }
                     break;
@@ -142,20 +147,20 @@ public class QLOrder_Service implements IQLOrder_Service {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    TableSelectedHandler(e, btnVaoBan, lblBan, that, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH);
+                    TableSelectedHandler(e, btnVaoBan, lblBan, that, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder);
                 }
             });
             pnlMain.add(button);
             BanButtons banButton = new BanButtons(button, ban.getIDTable(), cs, ban.getLocation());
             banButtonList.put(button, banButton);
         }
-        that.add(pnlMain);
+        that.add(pnlMain, new Integer(10), 0);
         // Clearing my JFrame and render again
         that.revalidate();
         that.repaint();
     }
 
-    private void TableSelectedHandler(ActionEvent e, JButton btnVaoBan, JLabel lblBan, JDialog that, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH) {
+    private void TableSelectedHandler(ActionEvent e, JButton btnVaoBan, JLabel lblBan, JPanel that, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder) {
         if (e.getSource().getClass() == JButton.class) {
             JButton selectedButton = (JButton) e.getSource();
             this.firstButton = selectedButton;
@@ -174,19 +179,8 @@ public class QLOrder_Service implements IQLOrder_Service {
                 model = (DefaultTableModel) tblOder.getModel();
                 model.setRowCount(0);
                 this.OrderCTT(txtMaHD, banButton.getIDTalbe(), dateHelper.DATE_FORMATER2.format(dateHelper.now()).trim());
-                ArrayList<billCTT> list = (ArrayList<billCTT>) this.SelectBill(billCTT, txtMaHD.getText());
-                for (billCTT cTT : list) {
-                    txtMaKH.setText(cTT.getIDCust());
-                    Object[] row = new Object[]{
-                        cTT.getIDProduct(),
-                        cTT.getProductName(),
-                        cTT.getSize(),
-                        cTT.getPrice(),
-                        cTT.getQuantity(),
-                        cTT.getNote(), "Xóa"
-                    };
-                    model.addRow(row);
-                }
+                this.bill(txtMaHD, txtNameEMP, txtMaKH, TimeOrder, tblOder);
+                this.dong = tblOder.getRowCount();
                 btnVaoBan.setVisible(false);
                 PanlPanelLS.setVisible(false);
                 Oder.setVisible(true);
@@ -198,7 +192,7 @@ public class QLOrder_Service implements IQLOrder_Service {
         PanlPanelLS.setVisible(true);
         model = (DefaultTableModel) tblLichSu.getModel();
         model.setRowCount(0);
-        this.model.setColumnIdentifiers(new Object[]{"IDOrder", "TimeOder", "Name Nhân viên", "NameKH", "Trạng Thái"});
+        this.model.setColumnIdentifiers(new Object[]{"IDOrder", "TimeOder", "Name NV", "NameKH", "Trạng Thái"});
         ArrayList<LSOrder> list = this.LichSu(SQL_liSu, banButton.getIDTalbe().trim(), dateHelper.DATE_FORMATER2.format(dateHelper.now()).trim());
         for (LSOrder lSOrder : list) {
             Object[] row = new Object[]{
@@ -286,6 +280,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                 table.setTimeOrder(rs.getTime("TimeOder"));
                 table.setPrice(rs.getInt("Price"));
                 table.setQuantity(rs.getInt("Quantity"));
+                table.setNameEMP(rs.getString("NameEMP"));
                 list.add(table);
             }
             rs.getStatement().getConnection().close();
@@ -310,7 +305,11 @@ public class QLOrder_Service implements IQLOrder_Service {
     public void hienTableSP(JTable tbl) {
         this.model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
-        this.model.setColumnIdentifiers(new Object[]{"IDSP", "Loại", "Tên SP", "Size", "Giá", "Trạng Thái", ""});
+        this.model.setColumnIdentifiers(new Object[]{"IDSP", "Loại", "Tên SP", "Size", "Giá", ""});
+        TableColumnModel columnModel = tbl.getColumnModel();        
+        columnModel.getColumn(3).setMaxWidth(40);
+        columnModel.getColumn(0).setMaxWidth(40);
+        columnModel.getColumn(5).setMaxWidth(60);
         try {
             ArrayList<SPChiTiet> list = this.select();
             for (SPChiTiet cd : list) {
@@ -320,7 +319,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                     cd.getProductName(),
                     cd.getSize(),
                     cd.getPrice(),
-                    cd.isStatus() ? "Còn" : "Hết",
+                    //                    cd.isStatus() ? "Còn" : "Hết",
                     "Thêm"
                 };
                 model.addRow(row);
@@ -334,7 +333,12 @@ public class QLOrder_Service implements IQLOrder_Service {
     public void hienTableOder(JTable tblOD) {
         this.model = (DefaultTableModel) tblOD.getModel();
         this.model.setRowCount(0);
-        this.model.setColumnIdentifiers(new Object[]{"IDSP", "Tên SP", "Size", "Giá", "Số lượng", "Ghi chú", ""});
+        this.model.setColumnIdentifiers(new Object[]{"IDSP", "Tên SP", "Size", "Giá", "SL", "Ghi chú", ""});
+        TableColumnModel columnModel = tblOD.getColumnModel();
+        columnModel.getColumn(4).setMaxWidth(30);
+        columnModel.getColumn(2).setMaxWidth(40);
+        columnModel.getColumn(0).setMaxWidth(40);
+        columnModel.getColumn(6).setMaxWidth(60);
     }
 
     @Override
@@ -420,6 +424,32 @@ public class QLOrder_Service implements IQLOrder_Service {
             JDBC.update(thanhToan, txtMaHD.getText());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public int dongC() {
+        return dong;
+    }
+
+    @Override
+    public void bill(JTextField txtMaHD, JTextField txtNameEMP, JTextField txtMaKH, JLabel TimeOrder, JTable tblOrder) {
+        model = (DefaultTableModel) tblOrder.getModel();
+        model.setRowCount(0);        
+        ArrayList<billCTT> list = (ArrayList<billCTT>) this.SelectBill(billCTT, txtMaHD.getText());        
+        for (billCTT cTT : list) {
+            txtMaKH.setText(cTT.getIDCust());
+            txtNameEMP.setText(cTT.getNameEMP() == null ? "Admin" : cTT.getNameEMP());
+            TimeOrder.setText(dateHelper.Time_FORMATER.format(cTT.getTimeOrder()));
+            Object[] row = new Object[]{
+                cTT.getIDProduct(),
+                cTT.getProductName(),
+                cTT.getSize(),
+                cTT.getPrice(),
+                cTT.getQuantity(),
+                cTT.getNote(), "Xóa"
+            };
+            model.addRow(row);
         }
     }
 
