@@ -580,12 +580,14 @@ public class GUI_QL_Order extends javax.swing.JDialog {
 
     private void btnxemlichsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxemlichsuActionPerformed
         // TODO add your handling code here:
+        CardLayout card = (CardLayout) PanCac.getLayout();
+        card.show(PanCac, "card2");
         qlod.lichsuOrder(PanLichSu, tblLichSu);
     }//GEN-LAST:event_btnxemlichsuActionPerformed
 
     private void btnguowiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguowiActionPerformed
         // TODO add your handling code here:        
-        if (this.txtNameEMP.equals("")) {
+        if (this.txtNameEMP.getText().equals("")) {
             qlod.insertOr(txtmaHD);
         }
         for (int i = qlod.dongC(); i < this.modell.getRowCount(); i++) {
@@ -608,8 +610,8 @@ public class GUI_QL_Order extends javax.swing.JDialog {
 
     private void tblLichSuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLichSuMouseClicked
         // TODO add your handling code here:
-        txtmaHD.setText(tblLichSu.getValueAt(tblLichSu.getSelectedRow(), 0).toString());
         if (evt.getClickCount() == 2) {
+            txtmaHD.setText(tblLichSu.getValueAt(tblLichSu.getSelectedRow(), 0).toString());
             qlod.bill(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder);
             CardLayout card = (CardLayout) PanCac.getLayout();
             card.show(PanCac, "card3");
