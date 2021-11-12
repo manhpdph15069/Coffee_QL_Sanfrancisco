@@ -19,6 +19,8 @@ public class GUI_QL_Table extends javax.swing.JDialog {
 
     IQLTable_Service dao;
     ITable_Service tdao;
+    int row = -1;
+    Table_Service ban = new Table_Service();
 
     /**
      * Creates new form GUI_QL_Ban
@@ -28,8 +30,8 @@ public class GUI_QL_Table extends javax.swing.JDialog {
         initComponents();
         dao = new QLTable_Service();
         cbbKhuActionPerformed(null);
-
         txtMaBan.setEditable(false);
+        dao.taoIDTable(txtMaBan);
     }
 
     /**
@@ -42,11 +44,12 @@ public class GUI_QL_Table extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -68,34 +71,39 @@ public class GUI_QL_Table extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
 
-        jButton1.setBackground(new java.awt.Color(255, 102, 102));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/add-item.png"))); // NOI18N
-        jButton1.setText("Thêm");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnThem.setBackground(new java.awt.Color(255, 102, 102));
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/add-item.png"))); // NOI18N
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnThemActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 102, 102));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/clear_item.png"))); // NOI18N
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setBackground(new java.awt.Color(255, 102, 102));
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/clear_item.png"))); // NOI18N
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnClearActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 102, 102));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/delete_item.png"))); // NOI18N
-        jButton3.setText("Xóa");
-
-        jButton4.setBackground(new java.awt.Color(255, 102, 102));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/edit_item.png"))); // NOI18N
-        jButton4.setText("Sửa");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnXoa.setBackground(new java.awt.Color(255, 102, 102));
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/delete_item.png"))); // NOI18N
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnXoaActionPerformed(evt);
+            }
+        });
+
+        btnSua.setBackground(new java.awt.Color(255, 102, 102));
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/edit_item.png"))); // NOI18N
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
             }
         });
 
@@ -122,6 +130,11 @@ public class GUI_QL_Table extends javax.swing.JDialog {
                 "Mã Bàn", "Khu", "Vị Trí", "Tình Trạng"
             }
         ));
+        tblTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblTable);
 
         cbbKhu.setEditable(true);
@@ -151,9 +164,11 @@ public class GUI_QL_Table extends javax.swing.JDialog {
         jButton8.setBackground(new java.awt.Color(255, 102, 102));
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/last.png"))); // NOI18N
 
+        buttonGroup1.add(rdoDung);
         rdoDung.setText("Dừng");
         rdoDung.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        buttonGroup1.add(rdoHD);
         rdoHD.setText("Hoạt động");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -197,13 +212,13 @@ public class GUI_QL_Table extends javax.swing.JDialog {
                         .addComponent(jButton8))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(89, 89, 89)
-                        .addComponent(jButton1)
+                        .addComponent(btnThem)
                         .addGap(21, 21, 21)
-                        .addComponent(jButton4)
+                        .addComponent(btnSua)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(btnXoa)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
+                        .addComponent(btnClear)))
                 .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -237,10 +252,10 @@ public class GUI_QL_Table extends javax.swing.JDialog {
                         .addComponent(cbbKhu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
+                    .addComponent(btnThem)
+                    .addComponent(btnSua)
+                    .addComponent(btnXoa)
+                    .addComponent(btnClear))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -268,7 +283,7 @@ public class GUI_QL_Table extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         try {
             ENTITY_Table tbl = getModel();
             dao.insertMATABLE(tbl);
@@ -276,24 +291,42 @@ public class GUI_QL_Table extends javax.swing.JDialog {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnThemActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        xoaform();
+    }//GEN-LAST:event_btnClearActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     private void cbbKhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhuActionPerformed
         dao.fillTable(tblTable, cbbKhu.getSelectedItem().toString());
-        dao.taoIDTable(txtMaBan);
     }//GEN-LAST:event_cbbKhuActionPerformed
 
     private void txtViTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtViTriActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtViTriActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        try {
+            dao.deleteTABLE(txtMaBan.getText());
+            dao.fillTable(tblTable, cbbKhu.getSelectedItem().toString());
+            xoaform();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void tblTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMouseClicked
+        if (evt.getClickCount() == 1) {
+            this.row = tblTable.getSelectedRow();
+            if (this.row >= 0) {
+                this.edit();
+            }
+        }
+    }//GEN-LAST:event_tblTableMouseClicked
     ENTITY_Table getModel() {
         ENTITY_Table tbl = new ENTITY_Table();
         tbl.setIDTable(txtMaBan.getText());
@@ -301,6 +334,33 @@ public class GUI_QL_Table extends javax.swing.JDialog {
         tbl.setLocation(Integer.valueOf(txtViTri.getText()));
         tbl.setStatus(rdoHD.isSelected() ? true : false);
         return tbl;
+    }
+
+    void xoaform() {
+        this.txtViTri.setText("");
+        this.rdoHD.setSelected(true);
+        this.cbbKhu.setSelectedIndex(1);
+    }
+
+    void edit() {
+        try {
+            String maTB = (String) tblTable.getValueAt(this.row, 0);
+            ENTITY_Table ban = this.ban.findById(maTB);
+            this.setform(ban);
+        } catch (Exception e) {
+        }
+    }
+
+    void setform(ENTITY_Table tb) {
+        String maTB = (String) tblTable.getValueAt(this.row, 0);
+        txtMaBan.setText(maTB);
+        txtViTri.setText(String.valueOf(tb.getLocation()));
+        cbbKhu.setSelectedItem(tb.getIDArea());
+        if (tb.getStatus()) {
+            rdoHD.setSelected(true);
+        } else {
+            rdoDung.setSelected(true);
+        }
     }
 
     /**
@@ -347,12 +407,13 @@ public class GUI_QL_Table extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cbbKhu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;

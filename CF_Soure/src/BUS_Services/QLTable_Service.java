@@ -10,7 +10,10 @@ import DAL_Models.ENTITY_Table;
 import DAL_Services.Table_Service;
 import Utils.JDBC;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -65,5 +68,13 @@ public class QLTable_Service implements IQLTable_Service{
     public void insertMATABLE(ENTITY_Table entity) {
         dao.insert(entity);
     }
-    
+
+    @Override
+    public void deleteTABLE(String ma) {
+       try {
+           dao.delete(ma);
+       } catch (SQLException ex) {
+           Logger.getLogger(QLTable_Service.class.getName()).log(Level.SEVERE, null, ex);
+       }
+    }
 }
