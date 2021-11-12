@@ -121,9 +121,9 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         btnLuuVSIn = new javax.swing.JButton();
         btnTachHD = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTienTra = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtTienThua = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
@@ -350,6 +350,15 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(255, 0, 51));
         jLabel4.setText("Tiền khách trả");
 
+        txtTienTra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTienTraKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTienTraKeyTyped(evt);
+            }
+        });
+
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 51, 51));
         jLabel8.setText("Tiền thừa");
@@ -401,8 +410,8 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                                             .addComponent(jLabel8))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField1)
-                                            .addComponent(jTextField2))))
+                                            .addComponent(txtTienTra)
+                                            .addComponent(txtTienThua))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(3, 3, 3)
@@ -446,11 +455,11 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTienTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(btnThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -548,7 +557,6 @@ public class GUI_QL_Order extends javax.swing.JDialog {
     private void btnVaoBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaoBanActionPerformed
         // TODO add your handling code here:
         qlod.taoHD(txtmaHD);
-        qlod.updatebn();
         this.btnVaoBan.setVisible(false);
         this.PanOrder.setVisible(true);
         this.PanLichSu.setVisible(false);
@@ -586,8 +594,9 @@ public class GUI_QL_Order extends javax.swing.JDialog {
     }//GEN-LAST:event_btnxemlichsuActionPerformed
 
     private void btnguowiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguowiActionPerformed
-        // TODO add your handling code here:        
-        if (this.txtNameEMP.getText().equals("")) {
+        // TODO add your handling code here:  
+        int e = 0;
+        if (this.txtNameEMP.getText().equals("") && this.modell.getRowCount() - qlod.dongC() != 0) {
             qlod.insertOr(txtmaHD);
         }
         for (int i = qlod.dongC(); i < this.modell.getRowCount(); i++) {
@@ -599,6 +608,10 @@ public class GUI_QL_Order extends javax.swing.JDialog {
             bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 4).toString()));
             bill.setReason("");
             qlod.insertOderDe(bill);
+            e++;
+        }
+        if (e > 0) {
+            qlod.updatebn();
         }
         ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
         goiTaoBan(khu);
@@ -617,10 +630,26 @@ public class GUI_QL_Order extends javax.swing.JDialog {
             card.show(PanCac, "card3");
         }
     }//GEN-LAST:event_tblLichSuMouseClicked
-    public void Total() {
+
+    private void txtTienTraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienTraKeyTyped
+        // TODO add your handling code here:
+        Total();
+    }//GEN-LAST:event_txtTienTraKeyTyped
+
+    private void txtTienTraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienTraKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyChar() == '\n') {
+            Total();
+            double tra = Double.parseDouble(txtTienTra.getText());
+            double tong = Total();
+            txtTienTra.setText(tra + "VNĐ");
+            txtTienThua.setText(tra  - tong+ "VNĐ");
+        }
+
+    }//GEN-LAST:event_txtTienTraKeyPressed
+    public double Total() {
         double total = 0;
-        int line = this.tblOrder.getRowCount();
-        System.out.println(line);
+        int line = this.tblOrder.getRowCount();        
         for (int i = 0; i < line; i++) {
             double gia = Double.valueOf(this.tblOrder.getValueAt(i, 3).toString());
             int SL = Integer.valueOf(this.tblOrder.getValueAt(i, 4).toString());
@@ -628,6 +657,7 @@ public class GUI_QL_Order extends javax.swing.JDialog {
             total += thanhtien;
         }
         this.txtTong.setText(total + "VNĐ");
+        return total;
     }
 
     /**
@@ -791,8 +821,6 @@ public class GUI_QL_Order extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblBan;
     private javax.swing.JLabel lblNgay;
     private javax.swing.JLabel lblTime;
@@ -801,6 +829,8 @@ public class GUI_QL_Order extends javax.swing.JDialog {
     private javax.swing.JTable tblSanPham;
     private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtNameEMP;
+    private javax.swing.JTextField txtTienThua;
+    private javax.swing.JTextField txtTienTra;
     private javax.swing.JTextField txtTim;
     private javax.swing.JTextField txtTong;
     private javax.swing.JTextField txtmaHD;

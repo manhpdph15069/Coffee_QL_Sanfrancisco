@@ -361,8 +361,7 @@ public class QLOrder_Service implements IQLOrder_Service {
             } else {
                 long id = Long.parseLong(rs.getString(1).substring(2, rs.getString(1).length()));
                 id++;
-                txt.setText("OD" + String.format("%03d", id));
-                System.out.println("he");
+                txt.setText("OD" + String.format("%03d", id));                
             }
         } catch (Exception ex) {
             ex.printStackTrace();
