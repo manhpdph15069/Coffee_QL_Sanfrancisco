@@ -6,6 +6,7 @@
 package BUS_IServices;
 
 import DAL_Models.ENTITY_Table;
+import java.util.List;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -22,4 +23,5 @@ public interface IQLTable_Service {
     void insertMATABLE(ENTITY_Table entity);
     
     void deleteTABLE(String ma);
+     public  List<ENTITY_Table> selectIDArea();
 }
