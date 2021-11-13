@@ -43,6 +43,7 @@ public class QLTable_Service implements IQLTable_Service{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
     }
 
     @Override
@@ -76,5 +77,9 @@ public class QLTable_Service implements IQLTable_Service{
        } catch (SQLException ex) {
            Logger.getLogger(QLTable_Service.class.getName()).log(Level.SEVERE, null, ex);
        }
+    }
+    @Override
+    public  List<ENTITY_Table> selectIDArea(){       
+        return dao.selectIDArea();
     }
 }
