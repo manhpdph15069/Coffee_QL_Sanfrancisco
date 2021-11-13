@@ -14,14 +14,28 @@ import Utils.dialogHelper;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -68,6 +82,9 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         this.tblOrder.setName("Oder");
         this.qlod.hienTableSP(this.tblSanPham);
         this.txtmaHD.setEditable(false);
+        this.txtNameEMP.setEditable(false);
+        this.txtTong.setEditable(false);
+        this.txtTienThua.setEditable(false);
         tblSanPham.getColumnModel().getColumn(5).setCellRenderer(new ClientsTableButtonRenderer());
         tblSanPham.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRenderer(new JCheckBox()));
         tblSanPham.setPreferredScrollableViewportSize(tblSanPham.getPreferredSize());
@@ -77,6 +94,9 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         CardLayout card = (CardLayout) PanCac.getLayout();
         card.show(PanCac, "card2");
         this.lblNgay.setText(this.lblNgay.getText() + dateHelper.DATE_FORMATER.format(dateHelper.now()));
+        tblOrder.setRowHeight(30);
+        tblSanPham.setRowHeight(30);
+        tblSanPham.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.RED));        
     }
 
     /**
@@ -88,9 +108,14 @@ public class GUI_QL_Order extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pmnOder = new javax.swing.JPopupMenu();
+        mnHuymon = new javax.swing.JMenuItem();
+        pmmBtn = new javax.swing.JPopupMenu();
+        mnChuyenBan = new javax.swing.JMenuItem();
+        mnGopBan = new javax.swing.JMenuItem();
+        mnXoaBan = new javax.swing.JMenuItem();
         Fom = new javax.swing.JPanel();
         btnxemlichsu = new javax.swing.JButton();
-        btnguowi = new javax.swing.JButton();
         btnVaoBan = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cbbKhu = new javax.swing.JComboBox<>();
@@ -129,6 +154,34 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         lblTime = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtNameEMP = new javax.swing.JTextField();
+        btnguowi = new javax.swing.JButton();
+
+        mnHuymon.setText("Hủy món");
+        mnHuymon.setToolTipText("");
+        mnHuymon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnHuymonMouseClicked(evt);
+            }
+        });
+        pmnOder.add(mnHuymon);
+
+        mnChuyenBan.setBackground(new java.awt.Color(255, 204, 102));
+        mnChuyenBan.setText("Chuyển bàn");
+        mnChuyenBan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnChuyenBanActionPerformed(evt);
+            }
+        });
+        pmmBtn.add(mnChuyenBan);
+
+        mnGopBan.setBackground(new java.awt.Color(255, 204, 102));
+        mnGopBan.setText("Gộp bàn");
+        mnGopBan.setToolTipText("");
+        pmmBtn.add(mnGopBan);
+
+        mnXoaBan.setBackground(new java.awt.Color(255, 204, 102));
+        mnXoaBan.setText("Xóa bàn");
+        pmmBtn.add(mnXoaBan);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(153, 255, 51));
@@ -143,19 +196,6 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         btnxemlichsu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnxemlichsuActionPerformed(evt);
-            }
-        });
-
-        btnguowi.setBackground(new java.awt.Color(255, 102, 51));
-        btnguowi.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnguowi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/order-icon.png"))); // NOI18N
-        btnguowi.setText("Gửi Order");
-        btnguowi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnguowi.setDefaultCapable(false);
-        btnguowi.setFocusable(false);
-        btnguowi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnguowiActionPerformed(evt);
             }
         });
 
@@ -202,7 +242,7 @@ public class GUI_QL_Order extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane2.setViewportView(tblSanPham);
@@ -287,7 +327,7 @@ public class GUI_QL_Order extends javax.swing.JDialog {
             .addGroup(PanLichSuLayout.createSequentialGroup()
                 .addComponent(lblNgay)
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -310,9 +350,22 @@ public class GUI_QL_Order extends javax.swing.JDialog {
 
             },
             new String [] {
-                "IDOrder", "TimeOrder", "Name NV", "Status"
+                "IDOrder", "TimeOrder", "Name NV", "Status", "Title 5", "Title 6", "Title 7"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblOrderMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblOrder);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -374,16 +427,29 @@ public class GUI_QL_Order extends javax.swing.JDialog {
 
         jLabel12.setText("Nhân viên Order :");
 
+        btnguowi.setBackground(new java.awt.Color(255, 102, 51));
+        btnguowi.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnguowi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/order-icon.png"))); // NOI18N
+        btnguowi.setText("Gửi Order");
+        btnguowi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnguowi.setDefaultCapable(false);
+        btnguowi.setFocusable(false);
+        btnguowi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnguowiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanOrderLayout = new javax.swing.GroupLayout(PanOrder);
         PanOrder.setLayout(PanOrderLayout);
         PanOrderLayout.setHorizontalGroup(
             PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanOrderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanOrderLayout.createSequentialGroup()
-                        .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanOrderLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
@@ -392,12 +458,10 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtmaHD, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(61, 61, 61)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel10))
+                                .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanOrderLayout.createSequentialGroup()
                                 .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(PanOrderLayout.createSequentialGroup()
@@ -413,20 +477,27 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                                             .addComponent(txtTienTra)
                                             .addComponent(txtTienThua))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(3, 3, 3)
+                                .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnguowi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnTachHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnLuuVSIn))))
-                        .addGap(18, 18, 18)
                         .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnThanhToan)
-                            .addComponent(lblTime)))
+                            .addGroup(PanOrderLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(btnThanhToan))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanOrderLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblTime))))
                     .addGroup(PanOrderLayout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNameEMP, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         PanOrderLayout.setVerticalGroup(
             PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,7 +539,9 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                                 .addComponent(btnLuuVSIn)
                                 .addComponent(jButton1))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnTachHD))))
+                            .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnTachHD)
+                                .addComponent(btnguowi)))))
                 .addContainerGap())
         );
 
@@ -507,14 +580,12 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                         .addComponent(cbbKhu, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(FomLayout.createSequentialGroup()
                         .addComponent(btnVaoBan)
-                        .addGap(12, 12, 12)
-                        .addComponent(btnguowi)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnxemlichsu))
                     .addGroup(FomLayout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -532,10 +603,9 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(FomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnVaoBan)
-                            .addComponent(btnguowi)
                             .addComponent(btnxemlichsu)))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -562,7 +632,7 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         this.PanLichSu.setVisible(false);
     }//GEN-LAST:event_btnVaoBanActionPerformed
     private void goiTaoBan(ENTITY_Area khu) {
-        this.qlod.taoTable(Fom, this, khu.getIDArea(), this.btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime);
+        this.qlod.taoTable(Fom, this, khu.getIDArea(), this.btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime,pmmBtn,txtTong);
     }
     private void cbbKhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhuActionPerformed
         // TODO add your handling code here:
@@ -619,6 +689,40 @@ public class GUI_QL_Order extends javax.swing.JDialog {
 
     private void btnLuuVSInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuVSInActionPerformed
         // TODO add your handling code here:
+        try {            
+            try (Writer b = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("History.txt"), "UTF8"))) {
+                b.write("\t\t\t\tSanfrancisco Coffee\r\n\r\n");
+                b.write("\t\tĐịa chỉ: Tổ 4, P.Cự Khối, Q.Long Biên, Hà Nội\r\n");
+                b.write("\t\tSĐT: 091 323 40 38\r\n");
+                b.write("\t\tMã hóa đơn :"+txtmaHD.getText()+"\r\n");
+                b.write("\t\tThời gian: " + lblTime.getText().trim() + " "+dateHelper.DATE_FORMATER.format(dateHelper.now())+"\r\n\r\n");
+                b.write("\t\tNhân viên :"+txtNameEMP.getText()+"\r\n");             
+                b.write("\t-------------------------------------------------------------------------------\r\n");
+                b.write("\tMã SP\tSố lượng(ly)\tĐơn giá         Thời gian\tThành tiền(VNĐ)\r\n");
+                b.write("\t-------------------------------------------------------------------------------\r\n");
+                int line = tblOrder.getRowCount();
+                for (int i = 0; i < line; i++) {
+                    String n1 = (String) tblOrder.getValueAt(i, 0);
+                    String n2 = (String) tblOrder.getValueAt(i, 1);
+                    int n3 = (int) tblOrder.getValueAt(i, 2);
+                    String n4 = (String) tblOrder.getValueAt(i, 3);
+                    String n5 = (String) tblOrder.getValueAt(i, 4);
+                    String n6 = (String) tblOrder.getValueAt(i, 7);
+                    b.write("\t" + n1 + "\t" + n2 + "\t" + n3 + "\t\t" + n4 + "          " + n5 + "\t" + n6 + "\r\n");
+                }
+                b.write("\t-------------------------------------------------------------------------------\r\n");
+                b.write("\tTổng tiền: " + txtTong.getText());
+            }
+        } catch (HeadlessException | IOException e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        //Mở file txt
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            runtime.exec("notepad History.txt");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
     }//GEN-LAST:event_btnLuuVSInActionPerformed
 
     private void tblLichSuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLichSuMouseClicked
@@ -643,13 +747,38 @@ public class GUI_QL_Order extends javax.swing.JDialog {
             double tra = Double.parseDouble(txtTienTra.getText());
             double tong = Total();
             txtTienTra.setText(tra + "VNĐ");
-            txtTienThua.setText(tra  - tong+ "VNĐ");
+            txtTienThua.setText(tra - tong + "VNĐ");
         }
 
     }//GEN-LAST:event_txtTienTraKeyPressed
+    
+    private void tblOrderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseReleased
+        // TODO add your handling code here:        
+        int r = tblOrder.rowAtPoint(evt.getPoint());
+        if (r >= 0 && r < tblOrder.getRowCount()) {
+            tblOrder.setRowSelectionInterval(r, r);
+        } else {
+            tblOrder.clearSelection();
+        }
+        int rowindex = tblOrder.getSelectedRow();
+        if (rowindex < 0||rowindex>=qlod.dongC())
+            return;
+        if (evt.isPopupTrigger() && evt.getComponent() instanceof JTable ) {   
+            pmnOder.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_tblOrderMouseReleased
+
+    private void mnHuymonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnHuymonMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_mnHuymonMouseClicked
+
+    private void mnChuyenBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnChuyenBanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnChuyenBanActionPerformed
     public double Total() {
         double total = 0;
-        int line = this.tblOrder.getRowCount();        
+        int line = this.tblOrder.getRowCount();
         for (int i = 0; i < line; i++) {
             double gia = Double.valueOf(this.tblOrder.getValueAt(i, 3).toString());
             int SL = Integer.valueOf(this.tblOrder.getValueAt(i, 4).toString());
@@ -711,7 +840,22 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             setForeground(Color.black);
             setBackground(UIManager.getColor("Button.background"));
-            setText((value == null) ? "" : value.toString());
+//            setText((value == null) ? "" : value.toString());           
+            setPreferredSize(new Dimension(40, 40));
+            String s = value.toString();                       
+            ClassLoader classLoader = this.getClass().getClassLoader();
+            if (s.equals("Thêm")) {
+                URL imagePath = classLoader.getResource("Icon/" + "add-cart" + ".png");
+                Image imgBan = new ImageIcon(imagePath).getImage();
+                Icon iconBan = new ImageIcon(imgBan.getScaledInstance(20, 20, imgBan.SCALE_SMOOTH));
+                setIcon(iconBan);
+            }
+            if (s.equals("Xóa")) {
+                URL imagePath = classLoader.getResource("Icon/" + "Button-Close-icon" + ".png");
+                Image imgBan = new ImageIcon(imagePath).getImage();
+                Icon iconBan = new ImageIcon(imgBan.getScaledInstance(20, 20, imgBan.SCALE_SMOOTH));
+                setIcon(iconBan);
+            }
             return this;
         }
     }
@@ -743,7 +887,7 @@ public class GUI_QL_Order extends javax.swing.JDialog {
             button.setForeground(Color.black);
             button.setBackground(UIManager.getColor("Button.background"));
             label = (value == null) ? "" : value.toString();
-            button.setText(label);
+//            button.setText(label);
             clicked = true;
             return button;
         }
@@ -787,8 +931,8 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         protected void fireEditingStopped() {
             try {
                 super.fireEditingStopped();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                
             }
         }
     }
@@ -824,6 +968,12 @@ public class GUI_QL_Order extends javax.swing.JDialog {
     private javax.swing.JLabel lblBan;
     private javax.swing.JLabel lblNgay;
     private javax.swing.JLabel lblTime;
+    private javax.swing.JMenuItem mnChuyenBan;
+    private javax.swing.JMenuItem mnGopBan;
+    private javax.swing.JMenuItem mnHuymon;
+    private javax.swing.JMenuItem mnXoaBan;
+    private javax.swing.JPopupMenu pmmBtn;
+    private javax.swing.JPopupMenu pmnOder;
     private javax.swing.JTable tblLichSu;
     private javax.swing.JTable tblOrder;
     private javax.swing.JTable tblSanPham;

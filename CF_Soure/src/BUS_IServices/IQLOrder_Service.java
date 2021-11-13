@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -24,7 +25,7 @@ import javax.swing.JTextField;
  */
 public interface IQLOrder_Service {
 
-    public void taoTable(JPanel that,JDialog theDialog, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder,JTable tblLichSu,JPanel PanlPanelLS,JPanel Oder,JTextField txtMaHD,JTextField txtMaKH,JTextField txtNameEMP,JLabel TimeOrder);
+    public void taoTable(JPanel that, JDialog theDialog, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JPopupMenu pmmBtn,JTextField txtTong);
 
     public ArrayList<ENTITY_Area> getkhu();
 
@@ -33,17 +34,23 @@ public interface IQLOrder_Service {
     public void hienTableSP(JTable tblSP);
 
     public void hienTableOder(JTable tblOD);
-    public void bill(JTextField txtMaHD,JTextField txtNameEMP,JTextField txtMaKH,JLabel TimeOrder,JTable tblOrder);
+
+    public void bill(JTextField txtMaHD, JTextField txtNameEMP, JTextField txtMaKH, JLabel TimeOrder, JTable tblOrder);
 
     public void timSP(JTextField txt, JTable tbl);
 
     public void taoHD(JTextField txt);
 
     public void updatebn();
-    
+
     public void thanhToan(JTextField txtMaHD);
+
     public void insertOr(JTextField txt);
+
     public void insertOderDe(ENTITY_BILL bill);
+
     public void lichsuOrder(JPanel PanlPanelLS, JTable tblLichSu);
-    public int dongC ();
+
+    public int dongC();
+    public double tongTien(JTextField txttong,JTable tblOder);
 }
