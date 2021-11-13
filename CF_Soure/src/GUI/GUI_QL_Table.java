@@ -10,6 +10,8 @@ import BUS_Services.QLTable_Service;
 import DAL_IServices.ITable_Service;
 import DAL_Models.ENTITY_Table;
 import DAL_Services.Table_Service;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -18,7 +20,6 @@ import DAL_Services.Table_Service;
 public class GUI_QL_Table extends javax.swing.JDialog {
 
     IQLTable_Service dao;
-    ITable_Service tdao;
     int row = -1;
     Table_Service ban = new Table_Service();
 
@@ -29,9 +30,10 @@ public class GUI_QL_Table extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         dao = new QLTable_Service();
-        cbbKhuActionPerformed(null);
+
         txtMaBan.setEditable(false);
         dao.taoIDTable(txtMaBan);
+        fillComboBoxKhu();
     }
 
     /**
@@ -138,7 +140,6 @@ public class GUI_QL_Table extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tblTable);
 
         cbbKhu.setEditable(true);
-        cbbKhu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
         cbbKhu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cbbKhu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,9 +303,21 @@ public class GUI_QL_Table extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void cbbKhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhuActionPerformed
-        dao.fillTable(tblTable, cbbKhu.getSelectedItem().toString());
+        if (cbbKhu != null) {
+            dao.fillTable(tblTable, cbbKhu.getSelectedItem().toString());
+
+        }
+
     }//GEN-LAST:event_cbbKhuActionPerformed
 
+    private void fillComboBoxKhu() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) this.cbbKhu.getModel();
+        model.removeAllElements();
+        List<ENTITY_Table> list = dao.selectIDArea();
+        for (ENTITY_Table cd : list) {
+            model.addElement(cd.getIDArea());
+        }
+    }
     private void txtViTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtViTriActionPerformed
 
     }//GEN-LAST:event_txtViTriActionPerformed
