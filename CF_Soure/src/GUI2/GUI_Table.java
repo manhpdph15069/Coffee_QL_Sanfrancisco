@@ -5,17 +5,33 @@
  */
 package GUI2;
 
+import BUS_IServices.IQLTable_Service;
+import BUS_Services.QLTable_Service;
+import DAL_Models.ENTITY_Table;
+import DAL_Services.Table_Service;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author notak
  */
 public class GUI_Table extends javax.swing.JPanel {
 
+    IQLTable_Service dao;
+    int row = -1;
+    Table_Service ban = new Table_Service();
+
     /**
      * Creates new form GUI_Table
      */
     public GUI_Table() {
         initComponents();
+        dao = new QLTable_Service();
+        txtMaBan.setEditable(false);
+        dao.taoIDTable(txtMaBan);
+      //  fillComboBoxKhu();
+        cbbKhuActionPerformed(null);
     }
 
     /**
@@ -27,6 +43,7 @@ public class GUI_Table extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         btnThem = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
@@ -144,9 +161,11 @@ public class GUI_Table extends javax.swing.JPanel {
         jButton8.setBackground(new java.awt.Color(255, 102, 102));
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/last.png"))); // NOI18N
 
+        buttonGroup1.add(rdoDung);
         rdoDung.setText("Dừng");
         rdoDung.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        buttonGroup1.add(rdoHD);
         rdoHD.setText("Hoạt động");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -260,15 +279,27 @@ public class GUI_Table extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        
+        try {
+            ENTITY_Table tbl = getModel();
+            dao.insertMATABLE(tbl);
+            cbbKhuActionPerformed(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-       
+        xoaform();
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-       
+        try {
+            dao.deleteTABLE(txtMaBan.getText());
+            dao.fillTable(tblTable, cbbKhu.getSelectedItem().toString());
+            xoaform();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -276,13 +307,27 @@ public class GUI_Table extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void tblTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMouseClicked
-       
+        if (evt.getClickCount() == 1) {
+            this.row = tblTable.getSelectedRow();
+            if (this.row >= 0) {
+                this.edit();
+            }
+        }
     }//GEN-LAST:event_tblTableMouseClicked
 
     private void cbbKhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhuActionPerformed
-      
+        if (cbbKhu != null) {
+            dao.fillTable(tblTable, cbbKhu.getSelectedItem().toString());
+        }
     }//GEN-LAST:event_cbbKhuActionPerformed
-
+    private void fillComboBoxKhu() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) this.cbbKhu.getModel();
+        model.removeAllElements();
+        List<ENTITY_Table> list = dao.selectIDArea();
+        for (ENTITY_Table cd : list) {
+            model.addElement(cd.getIDArea());
+        }
+    }
     private void txtViTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtViTriActionPerformed
 
     }//GEN-LAST:event_txtViTriActionPerformed
@@ -293,6 +338,7 @@ public class GUI_Table extends javax.swing.JPanel {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbbKhu;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -311,4 +357,40 @@ public class GUI_Table extends javax.swing.JPanel {
     private javax.swing.JTextField txtMaBan;
     private javax.swing.JTextField txtViTri;
     // End of variables declaration//GEN-END:variables
+    ENTITY_Table getModel() {
+        ENTITY_Table tbl = new ENTITY_Table();
+        tbl.setIDTable(txtMaBan.getText());
+        tbl.setIDArea(cbbKhu.getSelectedItem().toString());
+        tbl.setLocation(Integer.valueOf(txtViTri.getText()));
+        tbl.setStatus(rdoHD.isSelected() ? 0 : 1);
+        return tbl;
+    }
+
+    void xoaform() {
+        this.txtViTri.setText("");
+        this.rdoHD.setSelected(true);
+        this.cbbKhu.setSelectedIndex(0);
+        dao.taoIDTable(txtMaBan);
+    }
+
+    void edit() {
+        try {
+            String maTB = (String) tblTable.getValueAt(this.row, 0);
+            ENTITY_Table ban = this.ban.findById(maTB);
+            this.setform(ban);
+        } catch (Exception e) {
+        }
+    }
+
+    void setform(ENTITY_Table tb) {
+        String maTB = (String) tblTable.getValueAt(this.row, 0);
+        txtMaBan.setText(maTB);
+        txtViTri.setText(String.valueOf(tb.getLocation()));
+        cbbKhu.setSelectedItem(tb.getIDArea());
+        if (tb.getStatus() == 0) {
+            rdoHD.setSelected(true);
+        } else {
+            rdoDung.setSelected(true);
+        }
+    }
 }
