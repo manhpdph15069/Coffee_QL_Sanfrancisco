@@ -28,6 +28,7 @@ public class GUI_Login extends javax.swing.JDialog {
     public GUI_Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
