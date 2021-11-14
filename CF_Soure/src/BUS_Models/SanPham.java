@@ -10,8 +10,9 @@ package BUS_Models;
  * @author PC
  */
 public class SanPham {
+    private int IDType;
     private String IDProduct,ProductName;
-    private double Price;
+    private float Price;
     private String Image;
     private boolean Status;
     private String TypeName;
@@ -20,7 +21,7 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(String IDProduct, String ProductName, double Price, String Image, boolean Status, String TypeName, String Size) {
+    public SanPham(String IDProduct, String ProductName, float Price, String Image, boolean Status, String TypeName, String Size) {
         this.IDProduct = IDProduct;
         this.ProductName = ProductName;
         this.Price = Price;
@@ -29,6 +30,15 @@ public class SanPham {
         this.TypeName = TypeName;
         this.Size = Size;
     }
+
+    public int getIDType() {
+        return IDType;
+    }
+
+    public void setIDType(int IDType) {
+        this.IDType = IDType;
+    }
+    
 
     public String getIDProduct() {
         return IDProduct;
@@ -50,7 +60,7 @@ public class SanPham {
         return Price;
     }
 
-    public void setPrice(double Price) {
+    public void setPrice(float Price) {
         this.Price = Price;
     }
 
@@ -86,11 +96,8 @@ public class SanPham {
         this.Size = Size;
     }
 
-
     @Override
     public String toString() {
         return TypeName;
     }
-    
-    
 }

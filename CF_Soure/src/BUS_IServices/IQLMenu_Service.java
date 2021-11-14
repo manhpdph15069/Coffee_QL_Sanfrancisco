@@ -8,6 +8,7 @@ package BUS_IServices;
 import BUS_Models.SanPham;
 import DAL_Models.ENTITY_Product;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
@@ -15,9 +16,8 @@ import javax.swing.JTextField;
  * @author phamd
  */
 public interface IQLMenu_Service {
-    public ArrayList<ENTITY_Product> getSanPham();
     
-    public void taoID(JTextField txt);
+    public void taoID(JLabel lbl);
 
     public void updateSP(SanPham pro);
 

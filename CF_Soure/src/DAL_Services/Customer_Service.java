@@ -22,7 +22,7 @@ import java.util.List;
  *
  * */
 public class Customer_Service implements ICustomer_Service {
-    String INSERT_SQL = "INSERT INTO [Customer]([IDCust], [CusName], [DateAdd], [DateEnd],[Phone],[Email],[Discount],[Status]) VALUES (?, ?, ?, ?,?,?,?,?)";
+    String INSERT_SQL = "INSERT INTO [Customer]([IDCust], [CusName], [DateAdd], [DateEnd],[Phone],[Email],[Discount],[Status]) VALUES (?, ?, ?, ?,?,?,?,1)";
     String UPDATE_SQL = "UPDATE [Customer] SET [CusName]= ?, [DateAdd] = ?,[DateEnd]=?,[Phone]=?,[Email]=?,[Discount]=?,[Status]=1 WHERE [IDCust]= ?";
     String DELETE_SQL = "UPDATE [Customer] SET [Status]=0 WHERE [IDCust]= ?";
     String SELECT_ALL_SQL = "SELECT * FROM [Customer] Where [Status]=1";
@@ -38,8 +38,7 @@ public class Customer_Service implements ICustomer_Service {
                     entity.getDateEnd(),
                     entity.getPhone(),
                     entity.getEmail(),
-                    entity.getDiscount(),
-                    entity.getStatus());
+                    entity.getDiscount());
         } catch (Exception e) {
             e.printStackTrace();
         }

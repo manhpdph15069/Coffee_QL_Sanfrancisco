@@ -36,8 +36,7 @@ public class GUI_QL_Menu extends javax.swing.JFrame {
     public GUI_QL_Menu() {
         initComponents();
         this.qlsp = (IQLMenu_Service) new QLMenu_Service();
-        loadCombo();
-        loadData();
+
     }
 
     /**
@@ -329,21 +328,15 @@ public class GUI_QL_Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTimKiemActionPerformed
 
     private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
-        loadData();
+
     }//GEN-LAST:event_txtTimKiemKeyPressed
 
     private void lblHinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhMouseClicked
-        chonAnh();
+    
     }//GEN-LAST:event_lblHinhMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        try {
-            SanPham sp = getForm();
-            dao.insert(sp);
-            loadData();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -411,84 +404,6 @@ public class GUI_QL_Menu extends javax.swing.JFrame {
     private javax.swing.JTextField txtTen;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
-
-    private void chonAnh() {
-        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();//lay ra file dc chon
-            XImage.save(file); // luu vao trong thu muc
-            ImageIcon icon = XImage.read(file.getName()); //doc file tu thu muc
-            lblHinh.setIcon(icon); //hien thi len lblhinh
-            lblHinh.setToolTipText(file.getName()); //giu ten hinh trong tooltip
-        }
-    }
-
-    private void loadData() {
-        DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
-        model.setRowCount(0);
-//        model.fireTableDataChanged();
-//        TableRowSorter sorter = new TableRowSorter(model);
-//        tblSanPham.setRowSorter(sorter);
-//        sanpham1 sp1 = (sanpham1) cboLoai.getSelectedItem();
-//        sorter.setRowFilter(RowFilter.regexFilter(sp1.TypeName));
-        try {
-            String keyword = txtTimKiem.getText();
-            List<SanPham> list = this.dao.selectByKeyword(keyword);
-            for (SanPham pro : list) {
-                Object[] row = {pro.getProductName(), pro.getSize(), pro.getPrice(), pro.isStatus() ? "Còn" : "Hết"};
-                model.addRow(row);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    void loadCombo() {
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoai.getModel();
-        model.removeAllElements();
-        List<SanPham> list = this.dao.selectTypeName();
-        for (SanPham sp : list) {
-            model.addElement(sp);
-        }
-        loadSize();
-    }
-
-    void loadSize() {
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cboSize.getModel();
-        model.removeAllElements();
-        try {
-            SanPham sp = (SanPham) cboLoai.getSelectedItem();
-            List<SanPham> list = this.dao.selectSize(sp.getTypeName());
-            for (SanPham sanPham : list) {
-                model.addElement(sanPham);
-            }
-        } catch (Exception e) {
-        }
-
-    }
-
-    private void setForm(SanPham sp) {
-        txtTen.setText(sp.getProductName());
-        txtGia.setText(String.valueOf(sp.getPrice()));
-        rdoCon.setSelected(sp.isStatus());
-        rdoHet.setSelected(!sp.isStatus());
-        cboLoai.setSelectedItem(sp.getTypeName());
-        cboSize.setSelectedItem(sp.getSize());
-        if (sp.getImage() != null) {
-            lblHinh.setToolTipText(sp.getImage()); //lay ra ten file trong tooltip 
-            lblHinh.setIcon(XImage.read(sp.getImage())); //doc file trong tooltip va hien thi len lable
-        } else {
-            lblHinh.setIcon(XImage.read("NoImage.png"));
-        }
-    }
-
-    SanPham getForm() {
-        SanPham sp = new SanPham();
-        sp.setProductName(txtTen.getText());
-        sp.setPrice(Double.parseDouble(txtGia.getText()));
-        sp.setStatus(rdoCon.isSelected());
-        sp.setSize((String) cboSize.getSelectedItem());
-        sp.setTypeName((String) cboLoai.getSelectedItem());
-        sp.setImage(lblHinh.getToolTipText());
-        return sp;
-    }
 }
+
+

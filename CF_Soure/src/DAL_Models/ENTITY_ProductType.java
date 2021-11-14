@@ -38,4 +38,13 @@ public class ENTITY_ProductType {
     public void setSize(String size) {
         Size = size;
     }
+
+    @Override
+    public String toString() {
+        return TypeName;
+    }
+
+   
+  
+    
 }

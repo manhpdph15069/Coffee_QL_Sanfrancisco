@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
  */
 public class XImage {
     public static Image getAppIcon(){ //Lấy ảnh làm icon 
-        URL url =  XImage.class.getResource("");
+        URL url =  XImage.class.getResource("File anh o day....");
        return new ImageIcon(url).getImage();
     }
     public static void save(File src){ 
@@ -39,6 +39,6 @@ public class XImage {
     }
     public static ImageIcon read(String fileName){
         File path = new File("logos",fileName);
-        return new ImageIcon(path.getAbsolutePath());
+        return new ImageIcon(new ImageIcon(path.getAbsolutePath()).getImage().getScaledInstance(180, 180,Image.SCALE_DEFAULT));
     }
 }

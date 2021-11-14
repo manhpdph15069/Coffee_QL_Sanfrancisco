@@ -139,6 +139,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
         btnQLMenu.setMaximumSize(new java.awt.Dimension(100, 30));
         btnQLMenu.setMinimumSize(new java.awt.Dimension(100, 30));
         btnQLMenu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQLMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLMenuActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnQLMenu);
         jToolBar1.add(jSeparator3);
 
@@ -276,6 +281,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
             new GUI_Login(this, true).setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void btnQLMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLMenuActionPerformed
+       GUI2.GUI_Menu table=new GUI2.GUI_Menu();
+        goiPan(table);
+    }//GEN-LAST:event_btnQLMenuActionPerformed
     
     public void goiPan(JPanel nel) {
         nel.setVisible(true);
