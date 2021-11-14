@@ -103,7 +103,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         tblOrder.setPreferredScrollableViewportSize(tblOrder.getPreferredSize());
         TableColumnModel tcm = tblOrder.getColumnModel();
         TableColumn tc = tcm.getColumn(4);
-        tc.setCellEditor(new GUI.GUI_QL_Order.SpinnerEditor());
+        tc.setCellEditor(new GUI2.GUI_QL_Order.SpinnerEditor());
         this.card = (CardLayout) PanCac.getLayout();
         card.show(PanCac, "card4");
         this.lblNgay.setText(this.lblNgay.getText() + dateHelper.DATE_FORMATER.format(dateHelper.now()));
@@ -121,10 +121,6 @@ public class GUI_QL_Order extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pmmBtn = new javax.swing.JPopupMenu();
-        mnChuyenBan = new javax.swing.JMenuItem();
-        mnGopBan = new javax.swing.JMenuItem();
-        mnXoaBan = new javax.swing.JMenuItem();
         pmnOder = new javax.swing.JPopupMenu();
         mnHuymon = new javax.swing.JMenuItem();
         jPanel2 = new javax.swing.JPanel();
@@ -170,29 +166,11 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         btnVaoBan = new javax.swing.JButton();
         btnxemlichsu = new javax.swing.JButton();
 
-        mnChuyenBan.setBackground(new java.awt.Color(255, 204, 102));
-        mnChuyenBan.setText("Chuyển bàn");
-        mnChuyenBan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnChuyenBanActionPerformed(evt);
-            }
-        });
-        pmmBtn.add(mnChuyenBan);
-
-        mnGopBan.setBackground(new java.awt.Color(255, 204, 102));
-        mnGopBan.setText("Gộp bàn");
-        mnGopBan.setToolTipText("");
-        pmmBtn.add(mnGopBan);
-
-        mnXoaBan.setBackground(new java.awt.Color(255, 204, 102));
-        mnXoaBan.setText("Xóa bàn");
-        pmmBtn.add(mnXoaBan);
-
         mnHuymon.setText("Hủy món");
         mnHuymon.setToolTipText("");
-        mnHuymon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mnHuymonMouseClicked(evt);
+        mnHuymon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnHuymonActionPerformed(evt);
             }
         });
         pmnOder.add(mnHuymon);
@@ -651,7 +629,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         qlod.timSP(txtTim, tblSanPham);
     }//GEN-LAST:event_txtTimKeyTyped
     private void goiTaoBan(ENTITY_Area khu) {
-        this.qlod.taoTable(this, khu.getIDArea(), this.btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, pmmBtn, txtTong, PanCac);
+        this.qlod.taoTable(this, khu.getIDArea(), this.btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, txtTong, PanCac);
     }
     private void tblLichSuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLichSuMouseClicked
         // TODO add your handling code here:
@@ -690,6 +668,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 
     private void btnLuuVSInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuVSInActionPerformed
         // TODO add your handling code here:
+
         try {
             try (Writer b = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("History//" + txtmaHD.getText().trim() + ".txt"), "UTF8"))) {
                 b.write("\t\t\t\t\t\tSanfrancisco Coffee\r\n\r\n");
@@ -711,7 +690,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                     int n5 = Integer.valueOf(tblOrder.getValueAt(i, 4).toString());//SL
                     tongSl += n5;
                     //                    String n6 = (String) tblOrder.getValueAt(i, 7);
-                    b.write("\t" + n1 + "\t" + n2 + "\t\t\t" + n3 + "\t" + n4 + "\t\t\t" + n5 + "\t" + "\r\n");
+                    b.write("\t" + n1 + "\t" + n2 + "\t\t\t\t" + n3 + "\t\t" + n4 + "\t\t\t\t\t" + n5 + "\t" + "\r\n");
                 }
                 b.write("\t-------------------------------------------------------------------------------\r\n");
                 String tt = txtTienTra.getText().substring(0, txtTienTra.getText().lastIndexOf("VNĐ"));
@@ -728,6 +707,29 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         } catch (HeadlessException | IOException e) {
             e.printStackTrace();
         }
+        String hd = "\t\t\t\t\t\tSanfrancisco Coffee\r\n\r\n\""
+                + "\t\t\t\tĐịa chỉ: Tổ 4, P.Cự Khối, Q.Long Biên, Hà Nội\r\n"
+                + "\t\t\t\tSĐT: 091 323 40 38\r\n"
+                + "\t\t\t\tMã hóa đơn :" + txtmaHD.getText() + "\r\n"
+                + "\t\t\t\tThời gian: " + lblTime.getText().trim() + " " + dateHelper.DATE_FORMATER.format(dateHelper.now()) + "\r\n"
+                + "\t\t\t\tNhân viên :" + txtNameEMP.getText() + "\r\n"
+                + "\t-------------------------------------------------------------------------------\r\n"
+                + "\tMã SP\tTên sản phẩm\t\t\tSize\tGiá tiền (VNĐ)\t\t\t SL\t \r\n"
+                + "\t-------------------------------------------------------------------------------\r\n";
+        int line = tblOrder.getRowCount();
+        int tongSl = 0;
+        for (int i = 0; i < line; i++) {
+            String n1 = tblOrder.getValueAt(i, 0).toString();//IDSP
+            String n2 = tblOrder.getValueAt(i, 1).toString();//Tên SP
+            String n3 = tblOrder.getValueAt(i, 2) == null ? "Ly" : tblOrder.getValueAt(i, 2).toString();//Size
+            double n4 = Double.parseDouble(tblOrder.getValueAt(i, 3).toString());//Giá
+            int n5 = Integer.valueOf(tblOrder.getValueAt(i, 4).toString());//SL
+            tongSl += n5;
+            //                    String n6 = (String) tblOrder.getValueAt(i, 7);
+            hd = hd + "\t" + n1 + "\t" + n2 + "\t\t\t" + n3 + "\t" + n4 + "\t\t\t" + n5 + "\t" + "\r\n";
+        }
+        GUI2.GUI_QL_BILL bill = new GUI2.GUI_QL_BILL(null, true, hd);
+        bill.setVisible(true);
         //Mở file txt
         Runtime runtime = Runtime.getRuntime();
         try {
@@ -758,12 +760,11 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         int e = 0;
         for (int i = 0; i < qlod.dongC(); i++) {
             ENTITY_BILL bill = new ENTITY_BILL();
-            bill.setIDOrder(this.txtmaHD.getText());      
+            bill.setIDOrder(this.txtmaHD.getText());
             bill.setIDProduct(this.tblOrder.getValueAt(i, 0).toString());
             bill.setNote(this.tblOrder.getValueAt(i, 5).toString());
-            bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 4).toString()));            
+            bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 4).toString()));
             qlod.updateOderDe(bill);
-            System.out.println("ok");
         }
         for (int i = qlod.dongC(); i < this.modell.getRowCount(); i++) {
             ENTITY_BILL bill = new ENTITY_BILL();
@@ -773,6 +774,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             bill.setNote(this.tblOrder.getValueAt(i, 5).toString());
             bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 4).toString()));
             bill.setReason("");
+            bill.setStatus(false);
             qlod.insertOderDe(bill);
             e++;
         }
@@ -810,13 +812,10 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         qlod.lichsuOrder(PanLichSu, tblLichSu);
     }//GEN-LAST:event_btnxemlichsuActionPerformed
 
-    private void mnChuyenBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnChuyenBanActionPerformed
+    private void mnHuymonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnHuymonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mnChuyenBanActionPerformed
-
-    private void mnHuymonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnHuymonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnHuymonMouseClicked
+        dialogHelper.prompt(null,"Mày lại Order nhầm đúng không ?\nGhi lý do vào đây :)");
+    }//GEN-LAST:event_mnHuymonActionPerformed
     public double Total() {
         double total = 0;
         int line = this.tblOrder.getRowCount();
@@ -932,6 +931,94 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         }
     }
 
+    public static class SpinnerEditor extends DefaultCellEditor {
+
+        JSpinner spinner;
+        JSpinner.DefaultEditor editor;
+        JTextField textField;
+        boolean valueSet;
+
+        // Initializes the spinner.
+        public SpinnerEditor() {
+            super(new JTextField());
+            spinner = new javax.swing.JSpinner();
+            spinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 200, 1));
+//            spinner = new JSpinner();
+            editor = ((JSpinner.DefaultEditor) spinner.getEditor());
+            textField = editor.getTextField();
+            textField.addFocusListener(new FocusListener() {
+                public void focusGained(FocusEvent fe) {
+//                    System.err.println("Got focus");
+                    //textField.setSelectionStart(0);
+                    //textField.setSelectionEnd(1);
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            if (valueSet) {
+                                textField.setCaretPosition(1);
+
+                            }
+                        }
+                    });
+                }
+
+                public void focusLost(FocusEvent fe) {
+                }
+            });
+            textField.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    stopCellEditing();
+                }
+            });
+        }
+
+        // Prepares the spinner component and returns it.
+        public Component getTableCellEditorComponent(
+                JTable table, Object value, boolean isSelected, int row, int column
+        ) {
+            if (!valueSet) {
+                spinner.setValue(value);
+
+            }
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    textField.requestFocus();
+                }
+            });
+            return spinner;
+        }
+
+        public boolean isCellEditable(EventObject eo) {
+            if (eo instanceof KeyEvent) {
+                KeyEvent ke = (KeyEvent) eo;
+                textField.setText(String.valueOf(ke.getKeyChar()));
+//                textField.select(1,1);
+//                textField.setCaretPosition(1);
+//                textField.moveCaretPosition(1);
+                valueSet = true;
+            } else {
+                valueSet = false;
+            }
+            return true;
+        }
+
+        // Returns the spinners current value.
+        public Object getCellEditorValue() {
+            return spinner.getValue();
+        }
+
+        public boolean stopCellEditing() {
+//            System.err.println("Stopping edit");
+            try {
+                editor.commitEdit();
+                spinner.commitEdit();
+            } catch (java.text.ParseException e) {
+                JOptionPane.showMessageDialog(null,
+                        "Invalid value, discarding.");
+            }
+            return super.stopCellEditing();
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanCac;
     private javax.swing.JPanel PanLichSu;
@@ -964,12 +1051,8 @@ public class GUI_QL_Order extends javax.swing.JPanel {
     private javax.swing.JLabel lblBan;
     private javax.swing.JLabel lblNgay;
     private javax.swing.JLabel lblTime;
-    private javax.swing.JMenuItem mnChuyenBan;
-    private javax.swing.JMenuItem mnGopBan;
     private javax.swing.JMenuItem mnHuymon;
-    private javax.swing.JMenuItem mnXoaBan;
     private javax.swing.JPanel panChao;
-    private javax.swing.JPopupMenu pmmBtn;
     private javax.swing.JPopupMenu pmnOder;
     private javax.swing.JTable tblLichSu;
     private javax.swing.JTable tblOrder;

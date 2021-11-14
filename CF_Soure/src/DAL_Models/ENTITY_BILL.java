@@ -20,7 +20,7 @@ public class ENTITY_BILL {
     private int Quantity;
     private String Note;
     private String Reason;
-    private int Status;
+    private boolean Status;
 
     public ENTITY_BILL() {
     }
@@ -73,11 +73,11 @@ public class ENTITY_BILL {
         Reason = reason;
     }
 
-    public int getStatus() {
+    public boolean getStatus() {
         return Status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(boolean status) {
         Status = status;
     }
 }
