@@ -23,13 +23,13 @@ import java.util.List;
 * */
 public class Table_Service implements ITable_Service {
     String INSERT_SQL = "INSERT INTO [Table]([IDTable], [Location],[Status],[IDArea]) VALUES (?, ?,?, ?)";
-    String UPDATE_SQL = "UPDATE [Table] SET [Location] = ?, [IDArea] = ?,[Status]=? WHERE [IDTable]=?";
-    String DELETE_SQL = "UPDATE [Table] SET [Status]=0 WHERE [IDTable] = ?";
-    String SELECT_ALL_SQL = "SELECT DISTINCT * FROM [Table]";
-    String Select_IDArea ="SELECT DISTINCT IDArea FROM [Table]";
-    String SELECT_BY_ID_SQL = "SELECT * FROM [Table] WHERE [IDTable] = ?";
+    String UPDATE_SQL = "UPDATE [Table] SET [Location] = ?,[IDArea]=? WHERE [IDTable]=?";
+    String DELETE_SQL = "UPDATE [Table] SET [Status]=1 WHERE [IDTable] = ?";
+    String SELECT_ALL_SQL = "SELECT DISTINCT * FROM [Table] where [Status]=0";
+    String Select_IDArea ="SELECT [AreaName] FROM [Area]";
+    String SELECT_BY_ID_SQL = "SELECT * FROM [Table] WHERE [IDTable] = ? and [Status]=0";
     String SQL = "SELECT * FROM [Table] WHERE [IDArea] = ? ORDER BY Location";
-    String SELECT_BY_ID_Area = "SELECT * FROM [Table] WHERE [IDArea] = ?";
+    String SELECT_BY_ID_Area = "SELECT * FROM [Table] WHERE [IDArea] = ? and [Status]=0";
     @Override
     public void insert(ENTITY_Table entity) {
         try {
@@ -48,8 +48,8 @@ public class Table_Service implements ITable_Service {
         try {
             JDBC.update(UPDATE_SQL,
                     entity.getLocation(),
-                    entity.getStatus(),
-                    entity.getIDArea(),
+                  //  entity.getStatus(),
+                   entity.getIDArea(),
                     entity.getIDTable());
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,16 +66,16 @@ public class Table_Service implements ITable_Service {
         return this.SelectBySQL(SELECT_ALL_SQL);
     }
     @Override
-    public List<ENTITY_Table> selectIDArea() {
+    public List<ENTITY_Area> selectIDArea() {
         return this.SelectBySQLIDArea(Select_IDArea);
     }
-     public List<ENTITY_Table> SelectBySQLIDArea(String sql, Object... args) {
-        List<ENTITY_Table> list = new ArrayList<>();
+     public List<ENTITY_Area> SelectBySQLIDArea(String sql, Object... args) {
+        List<ENTITY_Area> list = new ArrayList<>();
         try {
             ResultSet rs = JDBC.query(sql, args);
             while (rs.next()) {
-                ENTITY_Table table = new ENTITY_Table();
-                table.setIDArea(rs.getString("IDArea"));
+                ENTITY_Area table = new ENTITY_Area();
+                table.setIDArea(rs.getInt(1));
                 list.add(table);
             }
             rs.getStatement().getConnection().close();

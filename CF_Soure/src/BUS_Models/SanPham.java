@@ -86,6 +86,7 @@ public class SanPham {
         this.Size = Size;
     }
 
+
     @Override
     public String toString() {
         return TypeName;

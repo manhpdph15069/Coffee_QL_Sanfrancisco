@@ -89,7 +89,7 @@ public class Employee_Service implements IEmployee_Service {
               employee.setPassword(rs.getString("Password"));
               employee.setNameEMP(rs.getString("NameEMP"));
               employee.setPhone(rs.getString("Phone"));
-              employee.setBirthday(rs.getDate("Brithday"));
+              employee.setBirthday(rs.getDate(5));
               employee.setAddress(rs.getString("Address"));
               employee.setSex(rs.getBoolean("Sex"));
               employee.setEmail(rs.getString("Email"));

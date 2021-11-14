@@ -6,6 +6,7 @@
 package BUS_Services;
 
 import BUS_IServices.*;
+import DAL_Models.ENTITY_Area;
 import DAL_Models.ENTITY_Table;
 import DAL_Services.Table_Service;
 import Utils.JDBC;
@@ -16,55 +17,53 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author phamd
  */
-public class QLTable_Service implements IQLTable_Service{
+public class QLTable_Service implements IQLTable_Service {
 
-   Table_Service dao = new Table_Service();
+    Table_Service dao = new Table_Service();
+
     @Override
-    public void fillTable(JTable tbl,String IDArea) {
+    public void fillTable(JTable tbl) {
         try {
-            String tt =null;
-            DefaultTableModel d = (DefaultTableModel)tbl.getModel();
+            DefaultTableModel d = (DefaultTableModel) tbl.getModel();
             d.setRowCount(0);
-            List<ENTITY_Table> list = (List<ENTITY_Table>) dao.findByIdArea(IDArea);
+            List<ENTITY_Table> list = (List<ENTITY_Table>) dao.select();
             for (ENTITY_Table t : list) {
-                if (t.getStatus()==0) {
-                    tt ="Hoạt động";
-                }else{
-                    tt="Dừng";
-                }
+
                 Object[] row = new Object[]{
                     t.getIDTable(),
-                   "Khu "+ t.getIDArea(),
+                    "Khu " + t.getIDArea(),
                     t.getLocation(),
-                    tt
+                    "Hoạt động"
                 };
                 d.addRow(row);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
 
     @Override
     public void taoIDTable(JTextField maTable) {
         try {
-            String sql ="Select MAX([IDTable]) from [Table]";
+            String sql = "Select MAX([IDTable]) from [Table]";
             ResultSet rs = JDBC.query(sql);
             rs.next();
             rs.getString(1);
-            if (rs.getString(1)==null) {
+            if (rs.getString(1) == null) {
                 maTable.setText("TB001");
-            }else{
-                long id =Long.parseLong(rs.getString(1).substring(2,rs.getString(1).length()));
+            } else {
+                long id = Long.parseLong(rs.getString(1).substring(2, rs.getString(1).length()));
                 id++;
-                maTable.setText("TB"+ String.format("%03d", id));
+                maTable.setText("TB" + String.format("%03d", id));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,15 +76,31 @@ public class QLTable_Service implements IQLTable_Service{
     }
 
     @Override
-    public void deleteTABLE(String ma) {
-       try {
-           dao.delete(ma);
-       } catch (SQLException ex) {
-           Logger.getLogger(QLTable_Service.class.getName()).log(Level.SEVERE, null, ex);
-       }
+    public void updatetTABLE(ENTITY_Table entity) {
+        dao.update(entity);
     }
+
     @Override
-    public  List<ENTITY_Table> selectIDArea(){       
+    public void deleteTABLE(String ma) {
+        try {
+            dao.delete(ma);
+        } catch (SQLException ex) {
+            Logger.getLogger(QLTable_Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public List<ENTITY_Area> selectIDArea() {
         return dao.selectIDArea();
+    }
+
+    @Override
+    public void fillTableByID(JTable tbl, JTextField id) {
+        DefaultTableModel m = (DefaultTableModel) tbl.getModel();
+        m.fireTableDataChanged();
+        TableRowSorter sorter = new TableRowSorter(m);
+        tbl.setRowSorter(sorter);
+        sorter.setRowFilter(RowFilter.regexFilter(id.getText()));
+
     }
 }

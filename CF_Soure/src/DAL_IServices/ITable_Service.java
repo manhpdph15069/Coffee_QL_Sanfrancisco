@@ -5,6 +5,7 @@
  */
 package DAL_IServices;
 
+import DAL_Models.ENTITY_Area;
 import DAL_Models.ENTITY_Table;
 import java.sql.SQLException;
 
@@ -33,5 +34,5 @@ public interface ITable_Service {
     
     public List<ENTITY_Table> SQLKhu(int khu);
     public List<ENTITY_Table> findByIdArea(String IDArea);
-     public List<ENTITY_Table> selectIDArea();
+     public List<ENTITY_Area> selectIDArea();
 }

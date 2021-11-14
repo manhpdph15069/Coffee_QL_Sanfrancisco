@@ -28,7 +28,7 @@ public class QLMenu_Service implements IQLMenu_Service {
             + "Join ProductType on Product.IDType = ProductType.IDType";
     String SELECT_BY_TypeName = "Select DISTINCT TypeName from ProductType";
     String SELECT_BY_Size = "Select DISTINCT TypeName ,Size  from ProductType where TypeName = ?";
-    String them="INSERT INTO [Product]([IDProduct], [ProductName], [Price], [Image],[Status]=1,[IDType]) VALUES (?, ?, ?, ?,?)";
+    String them="INSERT INTO [Product]([IDProduct], [ProductName], [Price], [Image],[Status],[IDType]) VALUES (?,?, ?, ?, ?,?)";
     public QLMenu_Service() {
         this.ips = new Product_Service();
     }
@@ -69,7 +69,13 @@ public class QLMenu_Service implements IQLMenu_Service {
     @Override
     public void insert(SanPham pro) {
         try {
-            JDBC.update(them,pro.getTypeName(),pro.getSize());
+            JDBC.update(them,
+                    pro.getIDProduct(),
+                    pro.getProductName(),
+                    pro.getPrice(),
+                    pro.getImage(),
+                    pro.isStatus(),
+                    pro.getTypeName());
         } catch (Exception e) {
             e.printStackTrace();
         }

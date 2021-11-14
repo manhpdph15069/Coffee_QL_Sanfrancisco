@@ -15,5 +15,6 @@ import DAL_Models.ENTITY_ProductType;
 public class QLSanPham {
     private ENTITY_Product eNTITY_Product;
     private ENTITY_ProductType eNTITY_ProductType;
-    
+    private String test;
+            
 }
