@@ -25,8 +25,8 @@ public class Customer_Service implements ICustomer_Service {
     String INSERT_SQL = "INSERT INTO [Customer]([IDCust], [CusName], [DateAdd], [DateEnd],[Phone],[Email],[Discount],[Status]) VALUES (?, ?, ?, ?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE [Customer] SET [CusName]= ?, [DateAdd] = ?,[DateEnd]=?,[Phone]=?,[Email]=?,[Discount]=?,[Status]=1 WHERE [IDCust]= ?";
     String DELETE_SQL = "UPDATE [Customer] SET [Status]=0 WHERE [IDCust]= ?";
-    String SELECT_ALL_SQL = "SELECT * FROM [Customer]";
-    String SELECT_BY_ID_SQL = "SELECT * FROM [Customer] WHERE [IDCust] = ?";
+    String SELECT_ALL_SQL = "SELECT * FROM [Customer] Where [Status]=1";
+    String SELECT_BY_ID_SQL = "SELECT * FROM [Customer] WHERE [IDCust] = ? and [Status]=1";
 
     @Override
     public void insert(ENTITY_Customer entity) {
