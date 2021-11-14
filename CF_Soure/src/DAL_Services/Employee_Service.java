@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Employee_Service implements IEmployee_Service {
-    String INSERT_SQL = "INSERT INTO [Employee]([UsernameEMP], [Password], [NameEMP],[Phone],[Birthday],[Address],[Sex],[Email],[Image],[Status]=?) VALUES (?, ?, ?, ?,?,?,?,?,?,?)";
+    String INSERT_SQL = "INSERT INTO [Employee]([UsernameEMP], [Password], [NameEMP],[Phone],[Birthday],[Address],[Sex],[Email],[Image],[Status]) VALUES (?, ?, ?, ?,?,?,?,?,?,1)";
     String UPDATE_SQL = "UPDATE [Employee] SET [Password]= ?, [NameEMP] = ?,[Phone]=?,[Birthday]=?,[Address]=?,[Sex]=?,[Email]=?,[Image]=? WHERE [UsernameEMP]= ?";
     String DELETE_SQL = "UPDATE [Employee] SET [Status]=0 WHERE [UsernameEMP]= ?";
     String SELECT_ALL_SQL = "SELECT * FROM [Employee]";
@@ -33,8 +33,8 @@ public class Employee_Service implements IEmployee_Service {
                     entity.getAddress(),
                     entity.getSex(),
                     entity.getEmail(),
-                    entity.getImage(),
-                    entity.getStatus());
+                    entity.getImage()
+                    );
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -31,7 +31,7 @@ public class GUI_Table extends javax.swing.JPanel {
         dao = new QLTable_Service();
         txtMaBan.setEditable(false);
         dao.taoIDTable(txtMaBan);
-       fillComboBoxKhu();
+        fillComboBoxKhu();
       
         dao.fillTable(tblTable);
     }

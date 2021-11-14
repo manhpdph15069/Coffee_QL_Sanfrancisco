@@ -273,7 +273,7 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
 
         lblID.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblID.setForeground(new java.awt.Color(255, 0, 0));
-        lblID.setText("jLabel3");
+        lblID.setText("00000");
 
         txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

@@ -5,10 +5,17 @@
  */
 package BUS_IServices;
 
+import DAL_Models.ENTITY_Employee;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+
 /**
  *
  * @author phamd
  */
 public interface IQLEmployee_Service {
+    void insertMAEMPLOYEE(ENTITY_Employee entity);
+    void fillTable(JTable tbl);
+    public void chonAnh(JLabel lbl);
     
 }
