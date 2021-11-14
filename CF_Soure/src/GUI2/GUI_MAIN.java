@@ -5,6 +5,9 @@
  */
 package GUI2;
 
+import GUI.GUI_Login;
+import GUI.GUI_ResetPassword;
+import Utils.ThongBao;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -146,6 +149,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
         btnQLBan.setMaximumSize(new java.awt.Dimension(100, 30));
         btnQLBan.setMinimumSize(new java.awt.Dimension(100, 30));
         btnQLBan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQLBan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLBanActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnQLBan);
         jToolBar1.add(jSeparator4);
 
@@ -198,6 +206,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Log-Out-icon.png"))); // NOI18N
         jMenuItem3.setText("Đăng Xuất");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
@@ -227,6 +240,8 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
     private void btnQLNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNVActionPerformed
         // TODO add your handling code here:
+        GUI2.GUI_Employee_NhanVien nel = new GUI2.GUI_Employee_NhanVien();
+        goiPan(nel);
     }//GEN-LAST:event_btnQLNVActionPerformed
 
     private void btnQLOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLOrderActionPerformed
@@ -236,10 +251,13 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
     private void btnQLVipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLVipActionPerformed
         // TODO add your handling code here:
+        GUI2.GUI_Customer_KhachHang kh = new GUI2.GUI_Customer_KhachHang();
+        goiPan(kh);
     }//GEN-LAST:event_btnQLVipActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
+        new GUI_ResetPassword(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void btnQLTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLTKActionPerformed
@@ -247,6 +265,17 @@ public class GUI_MAIN extends javax.swing.JFrame {
         GUI2.GUI_Statistical_ThongKe nel = new GUI2.GUI_Statistical_ThongKe();
         goiPan(nel);
     }//GEN-LAST:event_btnQLTKActionPerformed
+
+    private void btnQLBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLBanActionPerformed
+        GUI2.GUI_Table table = new GUI2.GUI_Table();
+        goiPan(table);
+    }//GEN-LAST:event_btnQLBanActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        if (ThongBao.comfirm(this, "Bạn chắc chắn muốn đăng xuất")) {
+            new GUI_Login(this, true).setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
     
     public void goiPan(JPanel nel) {
         nel.setVisible(true);
