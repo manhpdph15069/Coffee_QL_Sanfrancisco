@@ -17,6 +17,7 @@ public class GUI_ResetPassword extends javax.swing.JDialog {
     public GUI_ResetPassword(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
