@@ -35,6 +35,7 @@ public class GUI_Menu extends javax.swing.JPanel {
         dao.loadComboTypeName(cboLoai);
         dao.taoID(lblID);
         lblType.setVisible(false);
+        this.clear();
 //        dao.taoIDType(lblType);
     }
 
@@ -476,6 +477,7 @@ private void setForm(SanPham sp) {
         SanPham sp = new SanPham();
         this.setForm(sp);
         cboLoai.setSelectedIndex(0);
+        lblHinh.setIcon(XImage.read("no_image.jpg"));
         dao.taoID(lblID);
         this.row = -1;
     }
