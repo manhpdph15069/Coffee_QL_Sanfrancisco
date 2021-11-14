@@ -25,7 +25,7 @@ import javax.swing.JTextField;
  */
 public interface IQLOrder_Service {
 
-    public void taoTable(JPanel that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JPopupMenu pmmBtn,JTextField txtTong,JPanel PanCac);
+    public void taoTable(JPanel that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder,JTextField txtTong,JPanel PanCac);
 
     public ArrayList<ENTITY_Area> getkhu();
 

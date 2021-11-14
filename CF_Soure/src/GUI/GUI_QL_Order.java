@@ -671,7 +671,7 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         qlod.insertOr(txtmaHD);
     }//GEN-LAST:event_btnVaoBanActionPerformed
     private void goiTaoBan(ENTITY_Area khu) {
-        this.qlod.taoTable(Fom, khu.getIDArea(), this.btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, pmmBtn, txtTong,PanCac);
+        this.qlod.taoTable(Fom, khu.getIDArea(), this.btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, txtTong,PanCac);
     }
     private void cbbKhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhuActionPerformed
         // TODO add your handling code here:
