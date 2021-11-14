@@ -28,15 +28,21 @@ public class QLTable_Service implements IQLTable_Service{
     @Override
     public void fillTable(JTable tbl,String IDArea) {
         try {
+            String tt =null;
             DefaultTableModel d = (DefaultTableModel)tbl.getModel();
             d.setRowCount(0);
             List<ENTITY_Table> list = (List<ENTITY_Table>) dao.findByIdArea(IDArea);
             for (ENTITY_Table t : list) {
+                if (t.getStatus()==0) {
+                    tt ="Hoạt động";
+                }else{
+                    tt="Dừng";
+                }
                 Object[] row = new Object[]{
                     t.getIDTable(),
                    "Khu "+ t.getIDArea(),
                     t.getLocation(),
-                    t.getStatus()?"Hoạt động":"Dừng"
+                    tt
                 };
                 d.addRow(row);
             }
