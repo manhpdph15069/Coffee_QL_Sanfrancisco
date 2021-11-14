@@ -15,7 +15,7 @@ package DAL_Models;
 public class ENTITY_Table {
 private String IDTable;
 private int Location;
-private Boolean Status;
+private int Status;
 private String IDArea;
 
     public ENTITY_Table() {
@@ -37,11 +37,11 @@ private String IDArea;
         Location = location;
     }
 
-    public Boolean getStatus() {
+    public int getStatus() {
         return Status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(int status) {
         Status = status;
     }
 

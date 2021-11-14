@@ -6,6 +6,7 @@
 package GUI2;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -154,6 +155,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
         btnQLTK.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnQLTK.setMaximumSize(new java.awt.Dimension(100, 30));
         btnQLTK.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQLTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLTKActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnQLTK);
         jToolBar1.add(jSeparator5);
 
@@ -224,10 +230,8 @@ public class GUI_MAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLNVActionPerformed
 
     private void btnQLOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLOrderActionPerformed
-            GUI2.GUI_QL_Order nel=new GUI2.GUI_QL_Order();
-          nel.setVisible(true);           
-          this.Fromch.removeAll();
-          this.Fromch.add(nel);
+        GUI2.GUI_QL_Order nel = new GUI2.GUI_QL_Order();
+        goiPan(nel);
     }//GEN-LAST:event_btnQLOrderActionPerformed
 
     private void btnQLVipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLVipActionPerformed
@@ -237,6 +241,19 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void btnQLTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLTKActionPerformed
+        // TODO add your handling code here:
+        GUI2.GUI_Statistical_ThongKe nel = new GUI2.GUI_Statistical_ThongKe();
+        goiPan(nel);
+    }//GEN-LAST:event_btnQLTKActionPerformed
+    
+    public void goiPan(JPanel nel) {
+        nel.setVisible(true);
+        this.Fromch.removeAll();
+        this.Fromch.add(nel);
+        revalidate();
+    }
 
     /**
      * @param args the command line arguments

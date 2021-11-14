@@ -604,21 +604,24 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel2)
-                        .addGap(26, 26, 26)
-                        .addComponent(cbbKhu, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVaoBan)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnxemlichsu))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel2)
+                                .addGap(26, 26, 26)
+                                .addComponent(cbbKhu, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnVaoBan)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnxemlichsu)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(49, 49, 49)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -629,8 +632,9 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
                         .addComponent(jLabel1)
-                        .addGap(19, 19, 19)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(cbbKhu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -752,6 +756,15 @@ public class GUI_QL_Order extends javax.swing.JPanel {
     private void btnguowiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguowiActionPerformed
         // TODO add your handling code here:
         int e = 0;
+        for (int i = 0; i < qlod.dongC(); i++) {
+            ENTITY_BILL bill = new ENTITY_BILL();
+            bill.setIDOrder(this.txtmaHD.getText());      
+            bill.setIDProduct(this.tblOrder.getValueAt(i, 0).toString());
+            bill.setNote(this.tblOrder.getValueAt(i, 5).toString());
+            bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 4).toString()));            
+            qlod.updateOderDe(bill);
+            System.out.println("ok");
+        }
         for (int i = qlod.dongC(); i < this.modell.getRowCount(); i++) {
             ENTITY_BILL bill = new ENTITY_BILL();
             bill.setIDOrder(this.txtmaHD.getText());

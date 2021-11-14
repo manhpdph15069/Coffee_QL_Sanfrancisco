@@ -102,7 +102,7 @@ public class Table_Service implements ITable_Service {
                 ENTITY_Table table = new ENTITY_Table();
                 table.setIDTable(rs.getString("IDTable"));
                 table.setLocation(rs.getInt("Location"));
-                table.setStatus(rs.getBoolean("Status"));
+                table.setStatus(rs.getInt("Status"));
                 table.setIDArea(rs.getString("IDArea"));
                 list.add(table);
             }

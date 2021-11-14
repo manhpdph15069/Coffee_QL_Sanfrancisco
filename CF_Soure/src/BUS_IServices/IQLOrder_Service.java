@@ -49,6 +49,7 @@ public interface IQLOrder_Service {
     public void insertOr(JTextField txt);
 
     public void insertOderDe(ENTITY_BILL bill);
+    public void updateOderDe(ENTITY_BILL bill);
 
     public void lichsuOrder(JPanel PanlPanelLS, JTable tblLichSu);
 
