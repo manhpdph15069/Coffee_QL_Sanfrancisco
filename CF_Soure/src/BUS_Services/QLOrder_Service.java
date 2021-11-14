@@ -25,6 +25,7 @@ import DAL_Services.Product_Service;
 import DAL_Services.Table_Service;
 import Utils.JDBC;
 import Utils.dateHelper;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -76,7 +77,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     private IOrder_Service qlo;
     private int dong;
 
-    private Map<JButton, BanButtons> banButtonList = new HashMap<>();
+    private Map<JButton, BanButtons> banButtonList = new HashMap<>();    
     private JPanel pnlMain;
     private ArrayList<ENTITY_Table> listBan;
     private JButton firstButton;
@@ -91,7 +92,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     String InsertOderDe = "INSERT INTO OrderDetail(IDOrder,IDProduct,IDTable,Quantity,Note) VALUES (?,?,?,?,?) ";
     String SQL_chuaTT = "SELECT DISTINCT MAX(OrderDetail.IDOrder) FROM OrderDetail \n"
             + "JOIN [Order] OD ON OD.IDOrder = OrderDetail.IDOrder\n"
-            + "WHERE IDTable = ? AND DateOrder = ? AND [Status] = 1";
+            + "WHERE IDTable = ? AND DateOrder = ? AND OD.[Status] = 1";
     String billCTT = "SELECT OrderDetail.IDOrder,TimeOder,OrderDetail.IDProduct,PR.ProductName,Size,Quantity,PR.Price,Note,OD.IDCust,EMP.NameEMP FROM OrderDetail\n"
             + "JOIN [Order] OD ON OD.IDOrder = OrderDetail.IDOrder\n"
             + "JOIN Product PR ON PR.IDProduct = OrderDetail.IDProduct\n"
@@ -111,11 +112,11 @@ public class QLOrder_Service implements IQLOrder_Service {
     public static final SimpleDateFormat Time_FORMATER = new SimpleDateFormat("hh:mm:ss a");
 
     @Override
-    public void taoTable(JPanel that, JDialog theDialog, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JPopupMenu pmmBtn,JTextField txtTong) {
+    public void taoTable(JPanel that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JPopupMenu pmmBtn,JTextField txtTong,JPanel PanCac) {
         this.listBan = (ArrayList<ENTITY_Table>) this.qlb.SQLKhu(cbbkhu);
-        ClassLoader classLoader = theDialog.getClass().getClassLoader();
+        ClassLoader classLoader = that.getClass().getClassLoader();
         pnlMain.removeAll();
-        pnlMain.setBounds(10, 140, 570, 300);
+        pnlMain.setBounds(10, 140, 450, 500);
         pnlMain.setBackground(new java.awt.Color(255, 153, 255));
         pnlMain.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách Bàn"));
 
@@ -152,7 +153,7 @@ public class QLOrder_Service implements IQLOrder_Service {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    TableSelectedHandler(e, btnVaoBan, lblBan, that, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder,txtTong);
+                    TableSelectedHandler(e, btnVaoBan, lblBan, that, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder,txtTong,PanCac);
                 }
             });
             button.addMouseListener(new MouseAdapter() {
@@ -166,7 +167,6 @@ public class QLOrder_Service implements IQLOrder_Service {
                         if (e.isPopupTrigger()) {
                             pmmBtn.show(e.getComponent(), e.getX(), e.getY());
                             b.setSelected(true);
-//                            numberDesk = DAOBAN.selectById(Integer.parseInt(b.getText()));
                         }
                     }
                 }
@@ -181,7 +181,7 @@ public class QLOrder_Service implements IQLOrder_Service {
         that.repaint();
     }
 
-    private void TableSelectedHandler(ActionEvent e, JButton btnVaoBan, JLabel lblBan, JPanel that, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder,JTextField txtTong) {
+    private void TableSelectedHandler(ActionEvent e, JButton btnVaoBan, JLabel lblBan, JPanel that, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder,JTextField txtTong,JPanel PanCac) {
         if (e.getSource().getClass() == JButton.class) {
             JButton selectedButton = (JButton) e.getSource();
             this.firstButton = selectedButton;
@@ -190,12 +190,15 @@ public class QLOrder_Service implements IQLOrder_Service {
             model = (DefaultTableModel) tblOder.getModel();
             if (banButton.getStatus() == 0) {//------------------------------Bàn không có khách
                 btnVaoBan.setVisible(true);
-                Oder.setVisible(false);
+//                Oder.setVisible(false);
+                CardLayout card = (CardLayout) PanCac.getLayout();
+                card.show(PanCac, "card2");
                 model.getDataVector().removeAllElements();
                 model.fireTableDataChanged();
                 that.revalidate();
                 LichSu(PanlPanelLS, tblLichSu, banButton);
                 txtMaHD.setText("");
+                this.dong = 0;
             } else {//-----------------------------------------Bàn có khách
                 model = (DefaultTableModel) tblOder.getModel();
                 model.setRowCount(0);
@@ -203,8 +206,10 @@ public class QLOrder_Service implements IQLOrder_Service {
                 this.bill(txtMaHD, txtNameEMP, txtMaKH, TimeOrder, tblOder);
                 this.dong = tblOder.getRowCount();
                 btnVaoBan.setVisible(false);
-                PanlPanelLS.setVisible(false);
-                Oder.setVisible(true);
+                CardLayout card = (CardLayout) PanCac.getLayout();
+                card.show(PanCac, "card3");
+//                PanlPanelLS.setVisible(false);
+//                Oder.setVisible(true);
                 this.tongTien(txtTong, tblOder);
             }
         }
@@ -357,9 +362,11 @@ public class QLOrder_Service implements IQLOrder_Service {
         this.model.setRowCount(0);
         this.model.setColumnIdentifiers(new Object[]{"IDSP", "Tên SP", "Size", "Giá", "SL", "Ghi chú", ""});
         TableColumnModel columnModel = tblOD.getColumnModel();
-        columnModel.getColumn(4).setMaxWidth(30);
+        columnModel.getColumn(4).setMaxWidth(60);
+        columnModel.getColumn(4).setMinWidth(60);
         columnModel.getColumn(2).setMaxWidth(40);
         columnModel.getColumn(0).setMaxWidth(40);
+        columnModel.getColumn(0).setMinWidth(40);
         columnModel.getColumn(6).setMaxWidth(60);
     }
 
@@ -394,7 +401,7 @@ public class QLOrder_Service implements IQLOrder_Service {
         try {
             ResultSet rs = JDBC.query(SQL_chuaTT, IDTable, DateNow);
             rs.next();
-            String s = rs.getString(1);
+            String s = rs.getString(1);            
             txt.setText(s);
             return s;
         } catch (Exception ex) {
@@ -404,14 +411,13 @@ public class QLOrder_Service implements IQLOrder_Service {
     }
 
     @Override
-    public void updatebn() {
-        String sql = "UPDATE [Table] SET [Status] = ? WHERE IDTable = ?";
+    public void updatebnGuoi() {
+        String sql = "UPDATE [Table] SET [Status] = 1 WHERE IDTable = ?";
         JButton selectedButton = firstButton;
-        BanButtons banButton = banButtonList.get(selectedButton);
-        int n = banButton.getStatus() == 0 ? 1 : 0;
+        BanButtons banButton = banButtonList.get(selectedButton);       
         try {
-            JDBC.update(sql, n, banButton.getIDTalbe());
-            firstButton = null;
+            JDBC.update(sql, banButton.getIDTalbe());
+//            firstButton = null;
         } catch (SQLException ex) {
             Logger.getLogger(QLOrder_Service.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -443,6 +449,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     public void thanhToan(JTextField txtMaHD) {
         try {
             JDBC.update(thanhToan, txtMaHD.getText());
+            System.out.println("TT");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -486,6 +493,19 @@ public class QLOrder_Service implements IQLOrder_Service {
         }
         txttong.setText(total + "VNĐ");
         return total;
+    }
+
+    @Override
+    public void updatebnThanhToan() {
+        String sql = "UPDATE [Table] SET [Status] = 0 WHERE IDTable = ?";
+        JButton selectedButton = firstButton;
+        BanButtons banButton = banButtonList.get(selectedButton);       
+        try {
+            JDBC.update(sql, banButton.getIDTalbe());
+//            firstButton = null;
+        } catch (SQLException ex) {
+            Logger.getLogger(QLOrder_Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

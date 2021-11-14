@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package GUI2;
 
 import BUS_IServices.IQLOrder_Service;
 import BUS_Services.QLOrder_Service;
@@ -41,6 +41,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -53,9 +54,9 @@ import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author phamd
+ * @author Tran Van Thanh
  */
-public class GUI_QL_Order extends javax.swing.JDialog {
+public class GUI_QL_Order extends javax.swing.JPanel {
 
     private IQLOrder_Service qlod;
     private NumberFormat n = new DecimalFormat("#,###");
@@ -65,14 +66,13 @@ public class GUI_QL_Order extends javax.swing.JDialog {
     /**
      * Creates new form GUI_QL_Order
      */
-    public GUI_QL_Order(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public GUI_QL_Order() {
         initComponents();
         init();
     }
 
     private void init() {
-        this.setSize(1400, 1000);
+        this.setSize(1200, 700);
         this.qlod = (IQLOrder_Service) new QLOrder_Service();
         DefaultComboBoxModel model = (DefaultComboBoxModel) cbbKhu.getModel(); //kết nối cbo với model
         this.modell = (DefaultTableModel) this.tblOrder.getModel();
@@ -95,15 +95,15 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         this.txtNameEMP.setEditable(false);
         this.txtTong.setEditable(false);
         this.txtTienThua.setEditable(false);
-        tblSanPham.getColumnModel().getColumn(5).setCellRenderer(new ClientsTableButtonRenderer());
-        tblSanPham.getColumnModel().getColumn(5).setCellEditor(new ClientsTableRenderer(new JCheckBox()));
+        tblSanPham.getColumnModel().getColumn(5).setCellRenderer(new GUI2.GUI_QL_Order.ClientsTableButtonRenderer());
+        tblSanPham.getColumnModel().getColumn(5).setCellEditor(new GUI2.GUI_QL_Order.ClientsTableRenderer(new JCheckBox()));
         tblSanPham.setPreferredScrollableViewportSize(tblSanPham.getPreferredSize());
-        tblOrder.getColumnModel().getColumn(6).setCellRenderer(new ClientsTableButtonRenderer());
-        tblOrder.getColumnModel().getColumn(6).setCellEditor(new ClientsTableRenderer(new JCheckBox()));
+        tblOrder.getColumnModel().getColumn(6).setCellRenderer(new GUI2.GUI_QL_Order.ClientsTableButtonRenderer());
+        tblOrder.getColumnModel().getColumn(6).setCellEditor(new GUI2.GUI_QL_Order.ClientsTableRenderer(new JCheckBox()));
         tblOrder.setPreferredScrollableViewportSize(tblOrder.getPreferredSize());
         TableColumnModel tcm = tblOrder.getColumnModel();
         TableColumn tc = tcm.getColumn(4);
-        tc.setCellEditor(new SpinnerEditor());
+        tc.setCellEditor(new GUI.GUI_QL_Order.SpinnerEditor());
         this.card = (CardLayout) PanCac.getLayout();
         card.show(PanCac, "card4");
         this.lblNgay.setText(this.lblNgay.getText() + dateHelper.DATE_FORMATER.format(dateHelper.now()));
@@ -121,18 +121,12 @@ public class GUI_QL_Order extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pmnOder = new javax.swing.JPopupMenu();
-        mnHuymon = new javax.swing.JMenuItem();
         pmmBtn = new javax.swing.JPopupMenu();
         mnChuyenBan = new javax.swing.JMenuItem();
         mnGopBan = new javax.swing.JMenuItem();
         mnXoaBan = new javax.swing.JMenuItem();
-        Fom = new javax.swing.JPanel();
-        btnxemlichsu = new javax.swing.JButton();
-        btnVaoBan = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        cbbKhu = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        pmnOder = new javax.swing.JPopupMenu();
+        mnHuymon = new javax.swing.JMenuItem();
         jPanel2 = new javax.swing.JPanel();
         PanSanPham = new javax.swing.JPanel();
         txtTim = new javax.swing.JTextField();
@@ -140,12 +134,6 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
         PanCac = new javax.swing.JPanel();
-        panChao = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        PanLichSu = new javax.swing.JPanel();
-        lblNgay = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblLichSu = new javax.swing.JTable();
         PanOrder = new javax.swing.JPanel();
         txtMaKH = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -170,15 +158,17 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         txtNameEMP = new javax.swing.JTextField();
         btnguowi = new javax.swing.JButton();
-
-        mnHuymon.setText("Hủy món");
-        mnHuymon.setToolTipText("");
-        mnHuymon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mnHuymonMouseClicked(evt);
-            }
-        });
-        pmnOder.add(mnHuymon);
+        panChao = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        PanLichSu = new javax.swing.JPanel();
+        lblNgay = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblLichSu = new javax.swing.JTable();
+        cbbKhu = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        btnVaoBan = new javax.swing.JButton();
+        btnxemlichsu = new javax.swing.JButton();
 
         mnChuyenBan.setBackground(new java.awt.Color(255, 204, 102));
         mnChuyenBan.setText("Chuyển bàn");
@@ -198,44 +188,16 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         mnXoaBan.setText("Xóa bàn");
         pmmBtn.add(mnXoaBan);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setBackground(new java.awt.Color(153, 255, 51));
-
-        Fom.setBackground(new java.awt.Color(153, 255, 255));
-        Fom.setPreferredSize(new java.awt.Dimension(1300, 613));
-
-        btnxemlichsu.setBackground(new java.awt.Color(255, 102, 51));
-        btnxemlichsu.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnxemlichsu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/lichsu.png"))); // NOI18N
-        btnxemlichsu.setText("lịch sử Order");
-        btnxemlichsu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnxemlichsuActionPerformed(evt);
+        mnHuymon.setText("Hủy món");
+        mnHuymon.setToolTipText("");
+        mnHuymon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnHuymonMouseClicked(evt);
             }
         });
+        pmnOder.add(mnHuymon);
 
-        btnVaoBan.setBackground(new java.awt.Color(0, 255, 0));
-        btnVaoBan.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnVaoBan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/vaoban.png"))); // NOI18N
-        btnVaoBan.setText("Vào bàn");
-        btnVaoBan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVaoBanActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Khu vực");
-
-        cbbKhu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbbKhu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbKhuActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Chào mừng bạn đến với SanFasico");
+        setBackground(new java.awt.Color(153, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 255));
 
@@ -287,89 +249,11 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         PanCac.setForeground(new java.awt.Color(153, 255, 153));
         PanCac.setLayout(new java.awt.CardLayout());
-
-        panChao.setBackground(new java.awt.Color(0, 153, 255));
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/vuongchimto.png"))); // NOI18N
-
-        javax.swing.GroupLayout panChaoLayout = new javax.swing.GroupLayout(panChao);
-        panChao.setLayout(panChaoLayout);
-        panChaoLayout.setHorizontalGroup(
-            panChaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panChaoLayout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
-                .addComponent(jLabel13)
-                .addGap(32, 32, 32))
-        );
-        panChaoLayout.setVerticalGroup(
-            panChaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panChaoLayout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 53, Short.MAX_VALUE))
-        );
-
-        PanCac.add(panChao, "card4");
-
-        PanLichSu.setBackground(new java.awt.Color(255, 204, 204));
-        PanLichSu.setBorder(javax.swing.BorderFactory.createTitledBorder("Lịch sử Order"));
-        PanLichSu.setForeground(new java.awt.Color(102, 255, 102));
-
-        lblNgay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblNgay.setText("Lịch sử Oder ngày : ");
-
-        tblLichSu.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "IDOrder", "TimeOrder", "Name NV", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblLichSu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblLichSuMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(tblLichSu);
-
-        javax.swing.GroupLayout PanLichSuLayout = new javax.swing.GroupLayout(PanLichSu);
-        PanLichSu.setLayout(PanLichSuLayout);
-        PanLichSuLayout.setHorizontalGroup(
-            PanLichSuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanLichSuLayout.createSequentialGroup()
-                .addGroup(PanLichSuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanLichSuLayout.createSequentialGroup()
-                        .addGap(263, 263, 263)
-                        .addComponent(lblNgay))
-                    .addGroup(PanLichSuLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        PanLichSuLayout.setVerticalGroup(
-            PanLichSuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanLichSuLayout.createSequentialGroup()
-                .addComponent(lblNgay)
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        PanCac.add(PanLichSu, "card2");
 
         PanOrder.setBackground(new java.awt.Color(255, 255, 153));
         PanOrder.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách Order"));
@@ -585,6 +469,84 @@ public class GUI_QL_Order extends javax.swing.JDialog {
 
         PanCac.add(PanOrder, "card3");
 
+        panChao.setBackground(new java.awt.Color(0, 153, 255));
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/vuongchimto.png"))); // NOI18N
+
+        javax.swing.GroupLayout panChaoLayout = new javax.swing.GroupLayout(panChao);
+        panChao.setLayout(panChaoLayout);
+        panChaoLayout.setHorizontalGroup(
+            panChaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panChaoLayout.createSequentialGroup()
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addGap(32, 32, 32))
+        );
+        panChaoLayout.setVerticalGroup(
+            panChaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panChaoLayout.createSequentialGroup()
+                .addGap(159, 159, 159)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 53, Short.MAX_VALUE))
+        );
+
+        PanCac.add(panChao, "card4");
+
+        PanLichSu.setBackground(new java.awt.Color(255, 204, 204));
+        PanLichSu.setBorder(javax.swing.BorderFactory.createTitledBorder("Lịch sử Order"));
+        PanLichSu.setForeground(new java.awt.Color(102, 255, 102));
+
+        lblNgay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblNgay.setText("Lịch sử Oder ngày : ");
+
+        tblLichSu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "IDOrder", "TimeOrder", "Name NV", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblLichSu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblLichSuMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblLichSu);
+
+        javax.swing.GroupLayout PanLichSuLayout = new javax.swing.GroupLayout(PanLichSu);
+        PanLichSu.setLayout(PanLichSuLayout);
+        PanLichSuLayout.setHorizontalGroup(
+            PanLichSuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanLichSuLayout.createSequentialGroup()
+                .addGroup(PanLichSuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanLichSuLayout.createSequentialGroup()
+                        .addGap(263, 263, 263)
+                        .addComponent(lblNgay))
+                    .addGroup(PanLichSuLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        PanLichSuLayout.setVerticalGroup(
+            PanLichSuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanLichSuLayout.createSequentialGroup()
+                .addComponent(lblNgay)
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        PanCac.add(PanLichSu, "card2");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -592,95 +554,127 @@ public class GUI_QL_Order extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanSanPham, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(PanCac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(PanCac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PanSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanCac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PanCac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout FomLayout = new javax.swing.GroupLayout(Fom);
-        Fom.setLayout(FomLayout);
-        FomLayout.setHorizontalGroup(
-            FomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FomLayout.createSequentialGroup()
+        cbbKhu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbKhu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbKhuActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Khu vực");
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Chào mừng bạn đến với SanFasico");
+
+        btnVaoBan.setBackground(new java.awt.Color(0, 255, 0));
+        btnVaoBan.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnVaoBan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/vaoban.png"))); // NOI18N
+        btnVaoBan.setText("Vào bàn");
+        btnVaoBan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVaoBanActionPerformed(evt);
+            }
+        });
+
+        btnxemlichsu.setBackground(new java.awt.Color(255, 102, 51));
+        btnxemlichsu.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnxemlichsu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/lichsu.png"))); // NOI18N
+        btnxemlichsu.setText("lịch sử Order");
+        btnxemlichsu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnxemlichsuActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(FomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(FomLayout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jLabel2)
                         .addGap(26, 26, 26)
                         .addComponent(cbbKhu, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(FomLayout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVaoBan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnxemlichsu))
-                    .addGroup(FomLayout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
-        );
-        FomLayout.setVerticalGroup(
-            FomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FomLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(FomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(FomLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(19, 19, 19)
-                        .addGroup(FomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(cbbKhu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(FomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnVaoBan)
-                            .addComponent(btnxemlichsu))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fom, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(cbbKhu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnVaoBan)
+                            .addComponent(btnxemlichsu))))
+                .addContainerGap())
         );
-
-        Fom.getAccessibleContext().setAccessibleDescription("");
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVaoBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaoBanActionPerformed
+    private void txtTimKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyTyped
         // TODO add your handling code here:
-        qlod.taoHD(txtmaHD);
-        this.btnVaoBan.setVisible(false);
-        this.PanOrder.setVisible(true);
-        this.PanLichSu.setVisible(false);
-        qlod.insertOr(txtmaHD);
-    }//GEN-LAST:event_btnVaoBanActionPerformed
+        qlod.timSP(txtTim, tblSanPham);
+    }//GEN-LAST:event_txtTimKeyTyped
     private void goiTaoBan(ENTITY_Area khu) {
-        this.qlod.taoTable(Fom, khu.getIDArea(), this.btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, pmmBtn, txtTong,PanCac);
+        this.qlod.taoTable(this, khu.getIDArea(), this.btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, pmmBtn, txtTong, PanCac);
     }
-    private void cbbKhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhuActionPerformed
+    private void tblLichSuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLichSuMouseClicked
         // TODO add your handling code here:
-        this.btnVaoBan.setVisible(false);
-        ENTITY_Area ar = (ENTITY_Area) this.cbbKhu.getSelectedItem();
-        if (ar != null) {
-            goiTaoBan(ar);
+        if (evt.getClickCount() == 2) {
+            txtmaHD.setText(tblLichSu.getValueAt(tblLichSu.getSelectedRow(), 0).toString());
+            qlod.bill(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder);
+            CardLayout card = (CardLayout) PanCac.getLayout();
+            card.show(PanCac, "card3");
         }
-    }//GEN-LAST:event_cbbKhuActionPerformed
+    }//GEN-LAST:event_tblLichSuMouseClicked
+
+    private void tblOrderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseReleased
+        // TODO add your handling code here:
+        int r = tblOrder.rowAtPoint(evt.getPoint());
+        if (r >= 0 && r < tblOrder.getRowCount()) {
+            tblOrder.setRowSelectionInterval(r, r);
+        } else {
+            tblOrder.clearSelection();
+        }
+        int rowindex = tblOrder.getSelectedRow();
+        if (rowindex < 0 || rowindex >= qlod.dongC()) {
+            return;
+        }
+        if (evt.isPopupTrigger() && evt.getComponent() instanceof JTable) {
+            pmnOder.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_tblOrderMouseReleased
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
@@ -689,41 +683,6 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
         goiTaoBan(khu);
     }//GEN-LAST:event_btnThanhToanActionPerformed
-
-    private void txtTimKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyTyped
-        // TODO add your handling code here:
-        qlod.timSP(txtTim, tblSanPham);
-    }//GEN-LAST:event_txtTimKeyTyped
-
-    private void btnxemlichsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxemlichsuActionPerformed
-        // TODO add your handling code here:
-        CardLayout card = (CardLayout) PanCac.getLayout();
-        card.show(PanCac, "card2");
-        qlod.lichsuOrder(PanLichSu, tblLichSu);
-    }//GEN-LAST:event_btnxemlichsuActionPerformed
-
-    private void btnguowiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguowiActionPerformed
-        // TODO add your handling code here:          
-        int e = 0;
-        for (int i = qlod.dongC(); i < this.modell.getRowCount(); i++) {
-            ENTITY_BILL bill = new ENTITY_BILL();
-            bill.setIDOrder(this.txtmaHD.getText());
-            bill.setIDProduct(this.tblOrder.getValueAt(i, 0).toString());
-            bill.setIDTable(this.lblBan.getText());
-            bill.setNote(this.tblOrder.getValueAt(i, 5).toString());
-            bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 4).toString()));
-            bill.setReason("");
-            qlod.insertOderDe(bill);
-            e++;
-        }
-        if (e > 0) {
-            qlod.updatebnGuoi();
-            dialogHelper.alert(PanCac, "gưởi thành công");
-        }
-        card.show(PanCac, "card4");
-        ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
-        goiTaoBan(khu);        
-    }//GEN-LAST:event_btnguowiActionPerformed
 
     private void btnLuuVSInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuVSInActionPerformed
         // TODO add your handling code here:
@@ -747,7 +706,7 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                     double n4 = Double.parseDouble(tblOrder.getValueAt(i, 3).toString());//Giá
                     int n5 = Integer.valueOf(tblOrder.getValueAt(i, 4).toString());//SL
                     tongSl += n5;
-//                    String n6 = (String) tblOrder.getValueAt(i, 7);
+                    //                    String n6 = (String) tblOrder.getValueAt(i, 7);
                     b.write("\t" + n1 + "\t" + n2 + "\t\t\t" + n3 + "\t" + n4 + "\t\t\t" + n5 + "\t" + "\r\n");
                 }
                 b.write("\t-------------------------------------------------------------------------------\r\n");
@@ -763,31 +722,16 @@ public class GUI_QL_Order extends javax.swing.JDialog {
                 b.write("\t-----------------------CẢM ƠN QUÝ KHÁCH--------------------------\r\n");
             }
         } catch (HeadlessException | IOException e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            e.printStackTrace();
         }
         //Mở file txt
         Runtime runtime = Runtime.getRuntime();
         try {
             runtime.exec("notepad History//" + txtmaHD.getText().trim() + ".txt");
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnLuuVSInActionPerformed
-
-    private void tblLichSuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLichSuMouseClicked
-        // TODO add your handling code here:
-        if (evt.getClickCount() == 2) {
-            txtmaHD.setText(tblLichSu.getValueAt(tblLichSu.getSelectedRow(), 0).toString());
-            qlod.bill(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder);
-            CardLayout card = (CardLayout) PanCac.getLayout();
-            card.show(PanCac, "card3");
-        }
-    }//GEN-LAST:event_tblLichSuMouseClicked
-
-    private void txtTienTraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienTraKeyTyped
-        // TODO add your handling code here:
-        Total();
-    }//GEN-LAST:event_txtTienTraKeyTyped
 
     private void txtTienTraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienTraKeyPressed
         // TODO add your handling code here:
@@ -798,34 +742,68 @@ public class GUI_QL_Order extends javax.swing.JDialog {
             txtTienTra.setText(tra + "VNĐ");
             txtTienThua.setText(tra - tong + "VNĐ");
         }
-
     }//GEN-LAST:event_txtTienTraKeyPressed
 
-    private void tblOrderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseReleased
-        // TODO add your handling code here:        
-        int r = tblOrder.rowAtPoint(evt.getPoint());
-        if (r >= 0 && r < tblOrder.getRowCount()) {
-            tblOrder.setRowSelectionInterval(r, r);
-        } else {
-            tblOrder.clearSelection();
-        }
-        int rowindex = tblOrder.getSelectedRow();
-        if (rowindex < 0 || rowindex >= qlod.dongC()) {
-            return;
-        }
-        if (evt.isPopupTrigger() && evt.getComponent() instanceof JTable) {
-            pmnOder.show(evt.getComponent(), evt.getX(), evt.getY());
-        }
-    }//GEN-LAST:event_tblOrderMouseReleased
-
-    private void mnHuymonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnHuymonMouseClicked
+    private void txtTienTraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienTraKeyTyped
         // TODO add your handling code here:
+        Total();
+    }//GEN-LAST:event_txtTienTraKeyTyped
 
-    }//GEN-LAST:event_mnHuymonMouseClicked
+    private void btnguowiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguowiActionPerformed
+        // TODO add your handling code here:
+        int e = 0;
+        for (int i = qlod.dongC(); i < this.modell.getRowCount(); i++) {
+            ENTITY_BILL bill = new ENTITY_BILL();
+            bill.setIDOrder(this.txtmaHD.getText());
+            bill.setIDProduct(this.tblOrder.getValueAt(i, 0).toString());
+            bill.setIDTable(this.lblBan.getText());
+            bill.setNote(this.tblOrder.getValueAt(i, 5).toString());
+            bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 4).toString()));
+            bill.setReason("");
+            qlod.insertOderDe(bill);
+            e++;
+        }
+        if (e > 0) {
+            qlod.updatebnGuoi();
+            dialogHelper.alert(PanCac, "gưởi thành công");
+        }
+        card.show(PanCac, "card4");
+        ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
+        goiTaoBan(khu);
+    }//GEN-LAST:event_btnguowiActionPerformed
+
+    private void cbbKhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhuActionPerformed
+        // TODO add your handling code here:
+        this.btnVaoBan.setVisible(false);
+        ENTITY_Area ar = (ENTITY_Area) this.cbbKhu.getSelectedItem();
+        if (ar != null) {
+            goiTaoBan(ar);
+        }
+    }//GEN-LAST:event_cbbKhuActionPerformed
+
+    private void btnVaoBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaoBanActionPerformed
+        // TODO add your handling code here:
+        qlod.taoHD(txtmaHD);
+        this.btnVaoBan.setVisible(false);
+        this.PanOrder.setVisible(true);
+        this.PanLichSu.setVisible(false);
+        qlod.insertOr(txtmaHD);
+    }//GEN-LAST:event_btnVaoBanActionPerformed
+
+    private void btnxemlichsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxemlichsuActionPerformed
+        // TODO add your handling code here:
+        CardLayout card = (CardLayout) PanCac.getLayout();
+        card.show(PanCac, "card2");
+        qlod.lichsuOrder(PanLichSu, tblLichSu);
+    }//GEN-LAST:event_btnxemlichsuActionPerformed
 
     private void mnChuyenBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnChuyenBanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mnChuyenBanActionPerformed
+
+    private void mnHuymonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnHuymonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnHuymonMouseClicked
     public double Total() {
         double total = 0;
         int line = this.tblOrder.getRowCount();
@@ -837,48 +815,6 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         }
         this.txtTong.setText(total + "VNĐ");
         return total;
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI_QL_Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI_QL_Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI_QL_Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI_QL_Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                GUI_QL_Order dialog = new GUI_QL_Order(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     class ClientsTableButtonRenderer extends JButton implements TableCellRenderer {
@@ -983,96 +919,7 @@ public class GUI_QL_Order extends javax.swing.JDialog {
         }
     }
 
-    public static class SpinnerEditor extends DefaultCellEditor {
-
-        JSpinner spinner;
-        JSpinner.DefaultEditor editor;
-        JTextField textField;
-        boolean valueSet;
-
-        // Initializes the spinner.
-        public SpinnerEditor() {
-            super(new JTextField());
-            spinner = new javax.swing.JSpinner();
-            spinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 200, 1));
-//            spinner = new JSpinner();
-            editor = ((JSpinner.DefaultEditor) spinner.getEditor());
-            textField = editor.getTextField();
-            textField.addFocusListener(new FocusListener() {
-                public void focusGained(FocusEvent fe) {
-                    System.err.println("Got focus");
-                    //textField.setSelectionStart(0);
-                    //textField.setSelectionEnd(1);
-                    SwingUtilities.invokeLater(new Runnable() {
-                        public void run() {
-                            if (valueSet) {
-                                textField.setCaretPosition(1);
-
-                            }
-                        }
-                    });
-                }
-
-                public void focusLost(FocusEvent fe) {
-                }
-            });
-            textField.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent ae) {
-                    stopCellEditing();
-                }
-            });
-        }
-
-        // Prepares the spinner component and returns it.
-        public Component getTableCellEditorComponent(
-                JTable table, Object value, boolean isSelected, int row, int column
-        ) {
-            if (!valueSet) {
-                spinner.setValue(value);
-
-            }
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    textField.requestFocus();
-                }
-            });
-            return spinner;
-        }
-
-        public boolean isCellEditable(EventObject eo) {
-            if (eo instanceof KeyEvent) {
-                KeyEvent ke = (KeyEvent) eo;
-                textField.setText(String.valueOf(ke.getKeyChar()));
-//                textField.select(1,1);
-//                textField.setCaretPosition(1);
-//                textField.moveCaretPosition(1);
-                valueSet = true;
-            } else {
-                valueSet = false;
-            }
-            return true;
-        }
-
-        // Returns the spinners current value.
-        public Object getCellEditorValue() {
-            return spinner.getValue();
-        }
-
-        public boolean stopCellEditing() {
-            System.err.println("Stopping edit");
-            try {
-                editor.commitEdit();
-                spinner.commitEdit();
-            } catch (java.text.ParseException e) {
-                JOptionPane.showMessageDialog(null,
-                        "Invalid value, discarding.");
-            }
-            return super.stopCellEditing();
-        }
-    }
-    //------------------------------------------------------------------------------------Tạo SL tăng giảm 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Fom;
     private javax.swing.JPanel PanCac;
     private javax.swing.JPanel PanLichSu;
     private javax.swing.JPanel PanOrder;
