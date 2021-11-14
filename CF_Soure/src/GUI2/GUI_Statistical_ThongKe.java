@@ -5,17 +5,34 @@
  */
 package GUI2;
 
+import BUS_IServices.IQLStatistical_Service;
+import BUS_Services.QLStatistical_Service;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 /**
  *
  * @author notak
  */
 public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
 
+    SimpleDateFormat formatNam = new SimpleDateFormat("yyyy");
+    IQLStatistical_Service dao = null;
+
     /**
      * Creates new form GUI_Statistical_ThongKe
      */
     public GUI_Statistical_ThongKe() {
         initComponents();
+        dao = new QLStatistical_Service();
+        jDateNBD.setDate(now());
+        JDateNKT.setDate(now());
+        lblTong.setText("0");
+    }
+
+    public Date now() {
+        return new Date();
     }
 
     /**
@@ -217,22 +234,70 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKhoangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoangActionPerformed
-        
+        try {
+            dao.setDataKhoang(pnlNgay, jDateNBD.getDate(), JDateNKT.getDate());
+            float tong = 0;
+            List<Object[]> list = dao.getListByTKKhoangList(jDateNBD.getDate(), JDateNKT.getDate());
+            for (Object[] o : list) {
+                tong += Float.valueOf(String.valueOf(o[0]));;
+            }
+            setLbl(tong);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnKhoangActionPerformed
 
     private void btnNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgayActionPerformed
-        
+        try {
+            dao.setDataNgay(pnlNgay, jDateNBD.getDate());
+
+            float tong = 0;
+            List<Object[]> list = dao.getListByTKNgay(jDateNBD.getDate());
+            for (Object[] o : list) {
+                tong += Float.valueOf(String.valueOf(o[0]));;
+            }
+            setLbl(tong);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_btnNgayActionPerformed
 
     private void btnThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThangActionPerformed
-        
+        try {
+            dao.setDataThang(pnlNgay, jDateNBD.getDate().getMonth() + 1);
+
+            float tong = 0;
+            int thang = Integer.valueOf(jDateNBD.getDate().getMonth() + 1);
+            List<Object[]> list = dao.getListByTKThang(thang);
+            for (Object[] o : list) {
+                tong += Float.valueOf(String.valueOf(o[0]));;
+            }
+            setLbl(tong);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_btnThangActionPerformed
 
     private void btnNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNamActionPerformed
+        try {
+            int nam = Integer.valueOf(formatNam.format(jDateNBD.getDate()));
+            System.out.println("" + nam);
+            dao.setDataNam(pnlNgay, nam);
 
-        
+            float tong = 0;
+            List<Object[]> list = dao.getListByTKNam(nam);
+            for (Object[] o : list) {
+                tong += Float.valueOf(String.valueOf(o[0]));;
+            }
+            setLbl(tong);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnNamActionPerformed
-
+    void setLbl(float tong) {
+        lblTong.setText(String.valueOf(tong));
+        if (lblTong.getText().equals("null")) {
+            lblTong.setText("0");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDateNKT;
