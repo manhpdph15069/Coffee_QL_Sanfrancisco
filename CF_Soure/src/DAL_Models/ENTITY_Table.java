@@ -16,7 +16,7 @@ public class ENTITY_Table {
 private String IDTable;
 private int Location;
 private int Status;
-private String IDArea;
+private int IDArea;
 
     public ENTITY_Table() {
     }
@@ -45,11 +45,11 @@ private String IDArea;
         Status = status;
     }
 
-    public String getIDArea() {
+    public int getIDArea() {
         return IDArea;
     }
 
-    public void setIDArea(String IDArea) {
+    public void setIDArea(int IDArea) {
         this.IDArea = IDArea;
     }
 }

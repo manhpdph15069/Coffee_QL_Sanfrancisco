@@ -346,7 +346,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void btnQLMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLMenuActionPerformed
-       GUI2.GUI_Menu table=new GUI2.GUI_Menu();
+        GUI2.GUI_Menu table = new GUI2.GUI_Menu();
         goiPan(table);
     }//GEN-LAST:event_btnQLMenuActionPerformed
 
@@ -361,7 +361,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private void btnQLVip3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLVip3ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnQLVip3ActionPerformed
-    
+
     public void goiPan(JPanel nel) {
         nel.setVisible(true);
         this.Fromch.removeAll();

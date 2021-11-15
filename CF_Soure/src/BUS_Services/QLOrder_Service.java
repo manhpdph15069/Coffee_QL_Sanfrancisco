@@ -70,14 +70,17 @@ import javax.swing.table.TableRowSorter;
  */
 public class QLOrder_Service implements IQLOrder_Service {
 
-    private final int ICON_WIDTH = 40;
-    private final int ICON_HEIGHT = 40;
+    private final int ICON_WIDTH = 60;
+    private final int ICON_HEIGHT = 60;
     private ITable_Service qlb;
     private IArea_Service qlk;
     private IProduct_Service lqp;
     private IOrder_Service qlo;
+    private IQLTable_Service daoban;
+    
     private int dong;
     private int listBa;
+    private int khu;
 
     private Map<JButton, BanButtons> banButtonList = new HashMap<>();
     private JPanel pnlMain;
@@ -113,11 +116,12 @@ public class QLOrder_Service implements IQLOrder_Service {
     String thanhToan = "UPDATE [Order] SET [Status] = 2 WHERE IDOrder = ?";
     String chuenBan = "UPDATE OrderDetail SET IDTable = ? WHERE IDOrder = ?";
 
-    public QLOrder_Service() {
+    public QLOrder_Service(JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac) {
         this.qlb = new Table_Service();
         this.qlk = new Area_Service();
         this.qlo = new Order_Service();
         this.lqp = new Product_Service();
+        this.daoban = new QLTable_Service();
         this.listBan = new ArrayList<ENTITY_Table>();
         this.pnlMain = new JPanel();
         pmmBtn = new javax.swing.JPopupMenu();
@@ -151,7 +155,7 @@ public class QLOrder_Service implements IQLOrder_Service {
             }
         });
         pmmBtn.add(mnGopBan);
-        //----------------------------------------------------------------------------------------------------------------------Bàn ảo đang lỗi
+        //----------------------------------------------------------------------------------------------------------------------Tạo bàn -----------------------------------------------------------
         mnTaoBanAo.setBackground(new java.awt.Color(255, 204, 102));
         mnTaoBanAo.setText("Tạo bàn ảo");
         mnTaoBanAo.setToolTipText("");
@@ -162,33 +166,46 @@ public class QLOrder_Service implements IQLOrder_Service {
 
             private void mnTaoBanAoActionPerformed(ActionEvent evt) {
                 if (evt.getSource().getClass() == JMenuItem.class) {
-                    dialogHelper.alert(null, "Bàn ảo thôi nhá Pro");
-                    ClassLoader classLoader = this.getClass().getClassLoader();
-                    URL imagePath = classLoader.getResource("Icon/" + (listBa + 1) + ".png");
-                    Image imgBan = new ImageIcon(imagePath).getImage();
-                    Icon iconBan = new ImageIcon(imgBan.getScaledInstance(ICON_WIDTH, ICON_HEIGHT, imgBan.SCALE_SMOOTH));
-                    JButton button = new JButton();
-                    button.setIcon(iconBan);
-                    button.setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
-                    button.setPreferredSize(new Dimension(100, 70));
-                    BanButtons banButton = new BanButtons(button, null, 0, listBa + 1);
-                    banButtonList.put(button, banButton);
-                    pnlMain.revalidate();
-                    pnlMain.repaint();
+                    //==============Tạo mã bàn tự sinh=========//
+                    String IDTable= "";
+                    try {
+                        String sql = "Select MAX([IDTable]) from [Table]";
+                        ResultSet rs = JDBC.query(sql);
+                        rs.next();
+                        rs.getString(1);
+                        if (rs.getString(1) == null) {
+                            IDTable="TB001";
+                        } else {
+                            long id = Long.parseLong(rs.getString(1).substring(2, rs.getString(1).length()));
+                            id++;
+                            IDTable="TB" + String.format("%03d", id);
+                        }
+                        //=====================================
+                        ENTITY_Table tbl =new ENTITY_Table();
+                        tbl.setIDArea(khu);
+                        tbl.setIDTable(IDTable);
+                        tbl.setStatus(0);
+                        tbl.setLocation(listBa+1);
+                        daoban.insertMATABLE(tbl);  
+                        taoTable(that,khu,btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
         pmmBanAo.add(mnTaoBanAo);
-        //---------------------------------------------------------------------------------------------------------------------Bàn ảo đang lỗi
+        //---------------------------------------------------------------------------------------------------------------------Tạo bàn ---------------------------------------------------------
     }
 
     @Override
-    public void taoTable(JPanel that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac) {
+    public void taoTable(JPanel that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac) {       
         this.listBan = (ArrayList<ENTITY_Table>) this.qlb.SQLKhu(cbbkhu);
+        this.khu = cbbkhu;
         this.listBa = listBan.size();
         ClassLoader classLoader = that.getClass().getClassLoader();
         pnlMain.removeAll();
-        pnlMain.setBounds(10, 140, 450, 500);
+        pnlMain.setBounds(10, 200, 850, 800);
         pnlMain.setBackground(new java.awt.Color(255, 153, 255));
         pnlMain.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách Bàn"));
 //         JScrollPane sn = new JScrollPane();
@@ -201,7 +218,7 @@ public class QLOrder_Service implements IQLOrder_Service {
             JButton button = new JButton();
             button.setIcon(iconBan);
             button.setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));
-            button.setPreferredSize(new Dimension(100, 70));
+            button.setPreferredSize(new Dimension(150, 100));
             int cs = ban.getStatus();
             switch (cs) {
                 case 0:
@@ -214,7 +231,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                     ArrayList<billCTT> list = (ArrayList<billCTT>) this.SelectBill(billCTT, s);
                     for (billCTT cTT : list) {
                         button.setHorizontalTextPosition(0);
-                        button.setFont(new Font("Dialog", 8, 8));
+                        button.setFont(new Font("Dialog", 8, 16));
                         String go = format.format(cTT.getTimeOrder());
                         button.setText("Time : " + go);
                         button.setVerticalTextPosition(3);
