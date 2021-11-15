@@ -42,7 +42,7 @@ public interface IQLOrder_Service {
     public void taoHD(JTextField txt);
 
     public void updatebnGuoi();
-    public void updatebnThanhToan();
+    public void updatebnThanhToan(JTextField txtMaHD);
 
     public void thanhToan(JTextField txtMaHD);
 
