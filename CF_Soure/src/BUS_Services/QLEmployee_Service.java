@@ -41,10 +41,10 @@ public class QLEmployee_Service implements IQLEmployee_Service{
                 e.getPhone(),
                 e.getBirthday(),
                 e.getAddress(),
-                e.getSex(),
+                e.getSex()?"Nam":"Nữ",
                 e.getEmail(),
                 e.getUsernameEMP(),
-                e.getPassword()
+                "******"
                 };
                 d.addRow(row);
             }
