@@ -68,23 +68,23 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 204));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/thonhke.gif"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/doanh_thu.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlNgayLayout = new javax.swing.GroupLayout(pnlNgay);
         pnlNgay.setLayout(pnlNgayLayout);
         pnlNgayLayout.setHorizontalGroup(
             pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNgayLayout.createSequentialGroup()
-                .addGap(242, 242, 242)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlNgayLayout.setVerticalGroup(
             pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNgayLayout.createSequentialGroup()
-                .addGap(208, 208, 208)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(303, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(jLabel1)
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(204, 0, 255));

@@ -63,5 +63,13 @@ public class QLEmployee_Service implements IQLEmployee_Service{
             lbl.setToolTipText(file.getName()); //giu ten hinh trong tooltip
         }
     }
-    
+
+    @Override
+    public void deleteEmployee(String UN) {
+        try {
+            dao.delete(UN);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

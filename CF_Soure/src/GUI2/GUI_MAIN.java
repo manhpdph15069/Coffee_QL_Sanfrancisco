@@ -9,6 +9,7 @@ import GUI.GUI_Login;
 import GUI.GUI_ResetPassword;
 import Utils.ThongBao;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -358,7 +359,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLVip2ActionPerformed
 
     private void btnQLVip3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLVip3ActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btnQLVip3ActionPerformed
     
     public void goiPan(JPanel nel) {

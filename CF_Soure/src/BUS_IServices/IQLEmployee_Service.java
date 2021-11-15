@@ -15,6 +15,7 @@ import javax.swing.JTable;
  */
 public interface IQLEmployee_Service {
     void insertMAEMPLOYEE(ENTITY_Employee entity);
+    void deleteEmployee(String UN);
     void fillTable(JTable tbl);
     public void chonAnh(JLabel lbl);
     

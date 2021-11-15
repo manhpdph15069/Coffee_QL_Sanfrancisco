@@ -338,7 +338,7 @@ public class GUI_Table extends javax.swing.JPanel {
         model.removeAllElements();
         List<ENTITY_Area> list = dao.selectIDArea();
 
-            
+ 
         for (ENTITY_Area cd : list) {
             model.addElement(cd.getIDArea());
         }

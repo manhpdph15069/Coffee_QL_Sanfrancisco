@@ -9,6 +9,7 @@ import BUS_IServices.IQLEmployee_Service;
 import BUS_Services.QLEmployee_Service;
 import DAL_Models.ENTITY_Employee;
 import DAL_Services.Employee_Service;
+import java.util.Date;
 
 /**
  *
@@ -17,6 +18,7 @@ import DAL_Services.Employee_Service;
 public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     IQLEmployee_Service dao;
     Employee_Service nv = new Employee_Service();
+    int row = -1;
     public GUI_Employee_NhanVien() {
         initComponents();
         dao = (IQLEmployee_Service) new QLEmployee_Service();
@@ -35,6 +37,40 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     tbl.setSex(rdoNam.isSelected() ? true : false);
     tbl.setImage(lblAnh.getToolTipText());
     return tbl;
+    }
+    void resetForm(){
+    this.txtHoTen.setText("");
+    this.txtSDT.setText("");
+    this.txtNgaySinh.setDate(now());
+    this.txtDiaChi.setText("");
+    this.txtEmail.setText("");
+    this.txtUserName.setText("");
+    this.txtPassWord.setText("");
+    }
+    public Date now() {
+        return new Date();
+    }
+    void edit(){
+        try {
+            String maNV = (String) tblEmployee.getValueAt(row, 0);
+            ENTITY_Employee nv = this.nv.findById(maNV);
+            this.setform(nv);
+        } catch (Exception e) {
+        }
+    }
+    void setform(ENTITY_Employee nv){
+        try {
+            String manv = (String) tblEmployee.getValueAt(this.row, 0);
+    txtHoTen.setText(nv.getNameEMP());
+    txtSDT.setText(nv.getPhone());
+    txtNgaySinh.setDate(nv.getBirthday());
+    txtDiaChi.setText(nv.getAddress());
+    txtEmail.setText(nv.getEmail());
+    txtUserName.setText(manv);
+    txtPassWord.setText(nv.getPassword());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -106,10 +142,20 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         btnXoa.setBackground(new java.awt.Color(255, 102, 102));
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/remove-icon.png"))); // NOI18N
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnClear.setBackground(new java.awt.Color(255, 102, 102));
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/clear.png"))); // NOI18N
         btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         lblAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/no_image.jpg"))); // NOI18N
         lblAnh.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -144,15 +190,17 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
 
         tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Họ tên", "Số ĐT", "Ngày Sinh", "Địa Chỉ", "Giới Tính", "Email", "UserName ", "Mật Khẩu"
             }
         ));
+        tblEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmployeeMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblEmployee);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -160,33 +208,13 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnThem)
-                .addGap(32, 32, 32)
-                .addComponent(btnSua)
-                .addGap(18, 18, 18)
-                .addComponent(btnXoa)
-                .addGap(26, 26, 26)
-                .addComponent(btnClear)
-                .addGap(286, 286, 286)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8)
-                .addGap(142, 142, 142))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(257, 257, 257))
+                        .addGap(257, 1206, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -194,7 +222,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
                                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                                         .addComponent(txtPassWord, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,6 +249,28 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(btnThem)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSua)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnXoa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnClear)
+                .addGap(294, 294, 294)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6)
+                .addGap(134, 134, 134)
+                .addComponent(jButton7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(258, 258, 258))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,22 +315,18 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnThem)
-                            .addComponent(btnSua)
-                            .addComponent(btnXoa)
-                            .addComponent(btnClear))
-                        .addGap(153, 153, 153))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton7)
-                            .addComponent(jButton8)
-                            .addComponent(jButton6))
-                        .addGap(67, 67, 67))))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnClear)
+                        .addComponent(btnXoa)
+                        .addComponent(btnSua)
+                        .addComponent(btnThem))
+                    .addComponent(jButton6)
+                    .addComponent(jButton7)
+                    .addComponent(jButton8))
+                .addGap(114, 114, 114))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -312,6 +358,29 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     dao.chonAnh(lblAnh);
     }//GEN-LAST:event_lblAnhMouseClicked
 
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        resetForm();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        try {
+            this.row = tblEmployee.getSelectedRow();
+            dao.deleteEmployee(txtUserName.getText());
+            dao.fillTable(tblEmployee);
+            resetForm();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void tblEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmployeeMouseClicked
+        if (evt.getClickCount()==1) {
+            this.row = tblEmployee.getSelectedRow();
+            if (this.row >=0) {
+                this.edit();
+            }
+        }
+    }//GEN-LAST:event_tblEmployeeMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
