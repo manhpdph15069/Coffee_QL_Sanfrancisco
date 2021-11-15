@@ -34,4 +34,15 @@ public interface IQLStatistical_Service {
     public List<Object[]> getListByTKKhoangList(Date ngayBD, Date ngayKT);
 
     public void setDataKhoang(JPanel pnlNgay, Date ngayBD, Date ngayKT);
+
+    public List<Object[]> getListTongMonvaHDNgay(Date date);
+
+    public void setTongMonNgay(JLabel lblTM, JLabel lblHD, Date ngay);
+
+    public List<Object[]> getListTongMonvaHDThang(int date);
+
+    public void setTongMonThang(JLabel lblTM, JLabel lblHD, int nam);
+    public List<Object[]> getListTongMonvaHDNam(int date);
+
+    public void setTongMonNam(JLabel lblTM, JLabel lblHD, int nam);
 }
