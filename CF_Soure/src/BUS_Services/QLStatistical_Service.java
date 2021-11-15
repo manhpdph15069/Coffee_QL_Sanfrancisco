@@ -32,7 +32,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class QLStatistical_Service implements IQLStatistical_Service {
 
-    SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
+    SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss aa");
     SimpleDateFormat formatThang = new SimpleDateFormat("dd-MM-yyyy");
     SimpleDateFormat formatNam = new SimpleDateFormat("yyyy");
 
@@ -58,9 +58,8 @@ public class QLStatistical_Service implements IQLStatistical_Service {
 
     @Override
     public List<Object[]> getListTongMonvaHDNgay(Date date) {
-        String sql = "Select  Sum(oo.Quantity) as tongM,count(o.IDOrder) as tongHD FROm OrderDetail oo join dbo.[Order] o on oo.IDOrder = o.IDOrder\n"
-                + "where o.DateOrder =?";
-        String[] cols = {"tongM", "tongHD"};
+        String sql = "{CALL getTongMvaTongHD(?)}";
+        String[] cols = {"tongM", "TongHD"};
         return this.getListOfArray(sql, cols, date);
     }
 
@@ -79,9 +78,8 @@ public class QLStatistical_Service implements IQLStatistical_Service {
 
     @Override
     public List<Object[]> getListTongMonvaHDThang(int date) {
-        String sql = "Select  Sum(oo.Quantity) as tongM,count(o.IDOrder) as tongHD FROm OrderDetail oo join dbo.[Order] o on oo.IDOrder = o.IDOrder\n"
-                + "where MONTH(o.DateOrder) =?";
-        String[] cols = {"tongM", "tongHD"};
+        String sql = "{CALL getTongMvaTongHDThang(?)}";
+        String[] cols = {"tongM", "TongHD"};
         return this.getListOfArray(sql, cols, date);
     }
 
@@ -99,9 +97,8 @@ public class QLStatistical_Service implements IQLStatistical_Service {
     }
     @Override
     public List<Object[]> getListTongMonvaHDNam(int date) {
-  String sql = "Select  Sum(oo.Quantity) as tongM,count(o.IDOrder) as tongHD FROm OrderDetail oo join dbo.[Order] o on oo.IDOrder = o.IDOrder\n" +
-"where Year(o.DateOrder) =?";
-        String[] cols = {"tongM", "tongHD"};
+        String sql = "{CALL getTongMvaTongHDNam(?)}";
+        String[] cols = {"tongM", "TongHD"};
         return this.getListOfArray(sql, cols, date);
     }
 
@@ -134,7 +131,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 String s = String.valueOf(o[0]);
                 float so = Float.valueOf(s);
                 String gio = format.format(o[1]);
-                // System.out.println("" + so + gio);
+                System.out.println("" + so + gio);
                 data.addValue(so, "Số tiền", gio);
             }
         }
