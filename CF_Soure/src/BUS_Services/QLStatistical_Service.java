@@ -57,6 +57,67 @@ public class QLStatistical_Service implements IQLStatistical_Service {
     }
 
     @Override
+    public List<Object[]> getListTongMonvaHDNgay(Date date) {
+        String sql = "Select  Sum(oo.Quantity) as tongM,count(o.IDOrder) as tongHD FROm OrderDetail oo join dbo.[Order] o on oo.IDOrder = o.IDOrder\n"
+                + "where o.DateOrder =?";
+        String[] cols = {"tongM", "tongHD"};
+        return this.getListOfArray(sql, cols, date);
+    }
+
+    @Override
+    public void setTongMonNgay(JLabel lblTM, JLabel lblHD, Date ngay) {
+        List<Object[]> list = getListTongMonvaHDNgay(ngay);
+        if (list != null) {
+            for (Object[] o : list) {
+                System.out.println("" + o[0] + o[1]);
+                lblTM.setText(String.valueOf(o[0]));
+                lblHD.setText(String.valueOf(o[1]));
+
+            }
+        }
+    }
+
+    @Override
+    public List<Object[]> getListTongMonvaHDThang(int date) {
+        String sql = "Select  Sum(oo.Quantity) as tongM,count(o.IDOrder) as tongHD FROm OrderDetail oo join dbo.[Order] o on oo.IDOrder = o.IDOrder\n"
+                + "where MONTH(o.DateOrder) =?";
+        String[] cols = {"tongM", "tongHD"};
+        return this.getListOfArray(sql, cols, date);
+    }
+
+    @Override
+    public void setTongMonThang(JLabel lblTM, JLabel lblHD, int thang) {
+        List<Object[]> list = getListTongMonvaHDThang(thang);
+        if (list != null) {
+            for (Object[] o : list) {
+                System.out.println("" + o[0] + o[1]);
+                lblTM.setText(String.valueOf(o[0]));
+                lblHD.setText(String.valueOf(o[1]));
+
+            }
+        }
+    }
+    @Override
+    public List<Object[]> getListTongMonvaHDNam(int date) {
+  String sql = "Select  Sum(oo.Quantity) as tongM,count(o.IDOrder) as tongHD FROm OrderDetail oo join dbo.[Order] o on oo.IDOrder = o.IDOrder\n" +
+"where Year(o.DateOrder) =?";
+        String[] cols = {"tongM", "tongHD"};
+        return this.getListOfArray(sql, cols, date);
+    }
+
+    @Override
+    public void setTongMonNam(JLabel lblTM, JLabel lblHD, int nam) {
+   List<Object[]> list = getListTongMonvaHDNam(nam);
+        if (list != null) {
+            for (Object[] o : list) {
+                System.out.println("" + o[0] + o[1]);
+                lblTM.setText(String.valueOf(o[0]));
+                lblHD.setText(String.valueOf(o[1]));
+
+            }
+        }
+    }
+    @Override
     public List<Object[]> getListByTKNgay(Date ngay) {
         String sql = "{CALL DT_THONGKENGAY(?)}";
         String[] cols = {"Tien", "TimeOder"};
@@ -73,7 +134,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 String s = String.valueOf(o[0]);
                 float so = Float.valueOf(s);
                 String gio = format.format(o[1]);
-                System.out.println("" + so + gio);
+                // System.out.println("" + so + gio);
                 data.addValue(so, "Số tiền", gio);
             }
         }
@@ -132,7 +193,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
 
     @Override
     public void setDataNam(JPanel pnlNgay, int nam) {
-        
+
         List<Object[]> list = getListByTKNam(nam);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         if (list != null) {
@@ -140,8 +201,8 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 String s = String.valueOf(o[0]);
                 float so = Float.valueOf(s);
                 String thang = String.valueOf(o[1]);
-                System.out.println("" + so + thang);
-                data.addValue(so, "Số tiền", "Tháng "+thang);
+                //  System.out.println("" + so + thang);
+                data.addValue(so, "Số tiền", "Tháng " + thang);
             }
         }
         JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu năm".toUpperCase(), "Thời gian", "Số Tiền", data,
@@ -156,24 +217,25 @@ public class QLStatistical_Service implements IQLStatistical_Service {
         pnlNgay.validate();
         pnlNgay.repaint();
     }
-@Override
+
+    @Override
     public List<Object[]> getListByTKKhoangList(Date ngayBD, Date ngayKT) {
-    String sql = "{CALL DT_THONGKEKHOANG(?,?)}";
+        String sql = "{CALL DT_THONGKEKHOANG(?,?)}";
         String[] cols = {"Tien", "Ngay"};
-        return this.getListOfArray(sql, cols, ngayBD,ngayKT); 
+        return this.getListOfArray(sql, cols, ngayBD, ngayKT);
     }
 
     @Override
     public void setDataKhoang(JPanel pnlNgay, Date ngayBD, Date ngayKT) {
         List<Object[]> list = getListByTKKhoangList(ngayBD, ngayKT);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        if (list!=null) {
+        if (list != null) {
             for (Object[] o : list) {
                 String s = String.valueOf(o[0]);
                 float so = Float.valueOf(s);
                 String ngay = formatThang.format(o[1]);
 
-                   System.out.println("" + so + ngay);
+                //   System.out.println("" + so + ngay);
                 dataset.addValue(so, "Số tiền", ngay);
             }
         }
@@ -189,4 +251,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
         pnlNgay.validate();
         pnlNgay.repaint();
     }
+
+
+
 }
