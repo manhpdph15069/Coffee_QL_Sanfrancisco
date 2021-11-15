@@ -169,12 +169,14 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(51, 153, 0));
         jLabel7.setText("Tổng:");
 
+        lblTM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTM.setText("00000");
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 153, 0));
         jLabel9.setText("Tổng BILL:");
 
+        lblHD.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblHD.setText("00000");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -219,7 +221,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(82, Short.MAX_VALUE))))
+                        .addContainerGap(72, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,6 +287,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
     private void btnNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgayActionPerformed
         try {
             dao.setDataNgay(pnlNgay, jDateNBD.getDate());
+            dao.setTongMonNgay(lblTM, lblHD, jDateNBD.getDate());
 
             float tong = 0;
             List<Object[]> list = dao.getListByTKNgay(jDateNBD.getDate());
@@ -292,7 +295,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                 tong += Float.valueOf(String.valueOf(o[0]));;
             }
             setLbl(tong);
-            dao.setTongMonNgay(lblTM, lblHD, jDateNBD.getDate());
 
         } catch (Exception e) {
         }
@@ -301,6 +303,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
     private void btnThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThangActionPerformed
         try {
             dao.setDataThang(pnlNgay, jDateNBD.getDate().getMonth() + 1);
+            dao.setTongMonThang(lblTM, lblHD,(jDateNBD.getDate().getMonth()+1));
 
             float tong = 0;
             int thang = Integer.valueOf(jDateNBD.getDate().getMonth() + 1);
@@ -310,7 +313,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
             }
             setLbl(tong);
            // System.out.println(""+jDateNBD.getDate().getMonth()+1);
-            dao.setTongMonThang(lblTM, lblHD,(jDateNBD.getDate().getMonth()+1));
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnThangActionPerformed
@@ -320,6 +322,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
             int nam = Integer.valueOf(formatNam.format(jDateNBD.getDate()));
             System.out.println("" + nam);
             dao.setDataNam(pnlNgay, nam);
+            dao.setTongMonNam(lblTM, lblHD, nam);
 
             float tong = 0;
             List<Object[]> list = dao.getListByTKNam(nam);
@@ -327,7 +330,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                 tong += Float.valueOf(String.valueOf(o[0]));;
             }
             setLbl(tong);
-            dao.setTongMonNam(lblTM, lblHD, nam);
         } catch (Exception e) {
             e.printStackTrace();
         }
