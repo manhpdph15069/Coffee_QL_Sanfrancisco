@@ -7,18 +7,26 @@ package GUI2;
 
 import BUS_IServices.IQLTable_Service;
 import BUS_Services.QLTable_Service;
+import DAL_IServices.ITable_Service;
 import DAL_Models.ENTITY_Area;
 import DAL_Models.ENTITY_Table;
 import DAL_Services.Table_Service;
+import Utils.ThongBao;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 /**
  *
  * @author notak
  */
 public class GUI_Table extends javax.swing.JPanel {
-
+    //ITable_Service tbdao;
+    JPopupMenu menu = new JPopupMenu("Popup");
     IQLTable_Service dao;
     int row = -1;
     Table_Service ban = new Table_Service();
@@ -28,11 +36,12 @@ public class GUI_Table extends javax.swing.JPanel {
      */
     public GUI_Table() {
         initComponents();
+      //  tbdao =new Table_Service();
         dao = new QLTable_Service();
         txtMaBan.setEditable(false);
         dao.taoIDTable(txtMaBan);
         fillComboBoxKhu();
-      
+
         dao.fillTable(tblTable);
     }
 
@@ -68,6 +77,11 @@ public class GUI_Table extends javax.swing.JPanel {
         txtTimKiem = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         btnThem.setBackground(new java.awt.Color(255, 102, 102));
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/add-item.png"))); // NOI18N
@@ -127,10 +141,24 @@ public class GUI_Table extends javax.swing.JPanel {
             new String [] {
                 "Mã Bàn", "Khu", "Vị Trí", "Tình Trạng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblTableMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblTableMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblTableMouseReleased(evt);
             }
         });
         jScrollPane1.setViewportView(tblTable);
@@ -293,6 +321,7 @@ public class GUI_Table extends javax.swing.JPanel {
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         xoaform();
+        dao.fillTable(tblTable);
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -301,7 +330,7 @@ public class GUI_Table extends javax.swing.JPanel {
             dao.deleteTABLE(txtMaBan.getText());
             dao.fillTable(tblTable);
             xoaform();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -319,12 +348,14 @@ public class GUI_Table extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void tblTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMouseClicked
-        if (evt.getClickCount() == 1) {
+        if (evt.getClickCount() == 2) {
             this.row = tblTable.getSelectedRow();
             if (this.row >= 0) {
                 this.edit();
+                // dao.fillTableIDArea(tblTable, cbbKhu);
             }
         }
+        Test();
     }//GEN-LAST:event_tblTableMouseClicked
 
     private void cbbKhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhuActionPerformed
@@ -338,11 +369,9 @@ public class GUI_Table extends javax.swing.JPanel {
         model.removeAllElements();
         List<ENTITY_Area> list = dao.selectIDArea();
 
- 
         for (ENTITY_Area cd : list) {
             model.addElement(cd.getIDArea());
         }
-        
 
     }
     private void txtViTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtViTriActionPerformed
@@ -351,9 +380,45 @@ public class GUI_Table extends javax.swing.JPanel {
 
     private void txtTimKiemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyTyped
         dao.fillTableByID(tblTable, txtTimKiem);
-        
+
     }//GEN-LAST:event_txtTimKiemKeyTyped
 
+    private void tblTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMouseReleased
+        // TODO add your handling code here:
+        if (evt.isPopupTrigger()) {
+            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_tblTableMouseReleased
+
+    private void tblTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMousePressed
+        // TODO add your handling code here:
+        if (evt.isPopupTrigger()) {
+            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_tblTableMousePressed
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+
+    }//GEN-LAST:event_jPanel1MouseClicked
+    public void Test() {
+        menu.removeAll();
+      //  List<ENTITY_Area> area = tbdao.selectIDArea();
+        
+        JMenuItem item = new JMenuItem("Lọc Khu");
+        item.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String cbb = JOptionPane.showInputDialog("NHập khu đi ku:");
+                                       
+                dao.fillTableIDArea(tblTable, cbb);
+                         
+            }
+        });
+
+        menu.add(item);
+
+    }
+
+    // pack();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
@@ -382,7 +447,7 @@ public class GUI_Table extends javax.swing.JPanel {
         ENTITY_Table tbl = new ENTITY_Table();
         tbl.setIDTable(txtMaBan.getText());
         tbl.setIDArea(Integer.valueOf(cbbKhu.getSelectedItem().toString()));
-        tbl.setLocation(Integer.valueOf(txtViTri.getText()));      
+        tbl.setLocation(Integer.valueOf(txtViTri.getText()));
         return tbl;
     }
 
