@@ -19,12 +19,13 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
 
     IQLEmployee_Service dao;
     Employee_Service nv = new Employee_Service();
-    int row = -1;
+    int row = 0;
 
     public GUI_Employee_NhanVien() {
         initComponents();
         dao = (IQLEmployee_Service) new QLEmployee_Service();
         dao.fillTable(tblEmployee);
+        resetForm();
     }
 
     ENTITY_Employee getModel() {
@@ -50,7 +51,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         this.txtUserName.setText("");
         this.txtPassWord.setText("");
         this.rdoNam.setSelected(true);
-                this.txtUserName.setEditable(true);
+        this.txtUserName.setEditable(true);
         this.txtPassWord.setEditable(true);
     }
 
@@ -91,6 +92,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -187,8 +189,10 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(255, 102, 102));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/first.png"))); // NOI18N
 
+        buttonGroup1.add(rdoNu);
         rdoNu.setText("Nữ");
 
+        buttonGroup1.add(rdoNam);
         rdoNam.setText("Nam");
 
         jButton6.setBackground(new java.awt.Color(255, 102, 102));
@@ -215,7 +219,15 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
             new String [] {
                 "Họ tên", "Số ĐT", "Ngày Sinh", "Địa Chỉ", "Giới Tính", "Email", "UserName ", "Mật Khẩu"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblEmployeeMouseClicked(evt);
@@ -363,7 +375,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
             ENTITY_Employee tbl = getModel();
             dao.insertMAEMPLOYEE(tbl);
             dao.fillTable(tblEmployee);
-
+            resetForm();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -380,7 +392,8 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         try {
             this.row = tblEmployee.getSelectedRow();
-            dao.deleteEmployee(txtUserName.getText());
+            String ma = (String) tblEmployee.getValueAt(row, 6);
+            dao.deleteEmployee(ma);
             dao.fillTable(tblEmployee);
             resetForm();
         } catch (Exception e) {
@@ -389,7 +402,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tblEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmployeeMouseClicked
-        if (evt.getClickCount() == 1) {
+        if (evt.getClickCount() == 2) {
             this.row = tblEmployee.getSelectedRow();
             if (this.row >= 0) {
                 this.edit();
@@ -401,6 +414,23 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        try {
+            ENTITY_Employee tbl = new ENTITY_Employee();
+            tbl.setNameEMP(txtHoTen.getText());
+            tbl.setPhone(txtSDT.getText());
+            tbl.setBirthday(txtNgaySinh.getDate());
+            tbl.setAddress(txtDiaChi.getText());
+            tbl.setSex(rdoNam.isSelected() ? true : false);
+            tbl.setEmail(txtEmail.getText());
+            tbl.setImage(lblAnh.getToolTipText());
+            String ma = (String) tblEmployee.getValueAt(row, 6);
+            tbl.setUsernameEMP(ma);
+            dao.updateMAEMPLOYEE(tbl);
+            dao.fillTable(tblEmployee);
+            resetForm();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -408,6 +438,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
