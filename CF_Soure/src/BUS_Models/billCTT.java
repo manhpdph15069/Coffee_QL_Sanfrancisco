@@ -23,11 +23,12 @@ public class billCTT {
     private double Price;
     private String Note;
     private String IDCust;
+    private boolean Status = false;
 
     public billCTT() {
     }
 
-    public billCTT(String IDOrderString, String NameEMP, Time TimeOrder, String IDProduct, String ProductName, String Size, int Quantity, double Price, String Note, String IDCust) {
+    public billCTT(String IDOrderString, String NameEMP, Time TimeOrder, String IDProduct, String ProductName, String Size, int Quantity, double Price, String Note, String IDCust,boolean Status) {
         this.IDOrderString = IDOrderString;
         this.NameEMP = NameEMP;
         this.TimeOrder = TimeOrder;
@@ -38,6 +39,15 @@ public class billCTT {
         this.Price = Price;
         this.Note = Note;
         this.IDCust = IDCust;
+        this.Status = Status;
+    }
+
+    public void setStatus(boolean Status) {
+        this.Status = Status;
+    }
+
+    public boolean isStatus() {
+        return Status;
     }
 
     public String getIDOrderString() {

@@ -25,7 +25,7 @@ import javax.swing.JTextField;
  */
 public interface IQLOrder_Service {
 
-    public void taoTable(JPanel that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder,JTextField txtTong,JPanel PanCac);
+    public void taoTable(JPanel that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac);
 
     public ArrayList<ENTITY_Area> getkhu();
 
@@ -42,6 +42,7 @@ public interface IQLOrder_Service {
     public void taoHD(JTextField txt);
 
     public void updatebnGuoi();
+
     public void updatebnThanhToan(JTextField txtMaHD);
 
     public void thanhToan(JTextField txtMaHD);
@@ -49,10 +50,19 @@ public interface IQLOrder_Service {
     public void insertOr(JTextField txt);
 
     public void insertOderDe(ENTITY_BILL bill);
+
     public void updateOderDe(ENTITY_BILL bill);
 
     public void lichsuOrder(JPanel PanlPanelLS, JTable tblLichSu);
 
     public int dongC();
-    public double tongTien(JTextField txttong,JTable tblOder);
+
+    public double tongTien(JTextField txttong, JTable tblOder);
+    
+    public void huyMon(JTextField txtMaHD,String Reason,String IDProduct);
+    
+    public String OrderCTT(JTextField txt, String IDTable);
+    
+    public void huyDon(String txtMaHD,String Reason);
+        
 }
