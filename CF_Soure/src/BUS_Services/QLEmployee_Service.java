@@ -72,4 +72,9 @@ public class QLEmployee_Service implements IQLEmployee_Service{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void updateMAEMPLOYEE(ENTITY_Employee entity) {
+        dao.update(entity);
+    }
 }
