@@ -24,7 +24,7 @@ import java.util.List;
 public class Table_Service implements ITable_Service {
     String INSERT_SQL = "INSERT INTO [Table]([IDTable], [Location],[Status],[IDArea]) VALUES (?, ?,?, ?)";
     String UPDATE_SQL = "UPDATE [Table] SET [Location] = ?,[IDArea]=? WHERE [IDTable]=?";
-    String DELETE_SQL = "UPDATE [Table] SET [Status]=1 WHERE [IDTable] = ?";
+    String DELETE_SQL = "UPDATE [Table] SET [Status]=2 WHERE [IDTable] = ?";
     String SELECT_ALL_SQL = "SELECT DISTINCT * FROM [Table] where [Status]=0";
     String Select_IDArea ="SELECT [AreaName] FROM [Area]";
     String SELECT_BY_ID_SQL = "SELECT * FROM [Table] WHERE [IDTable] = ? and [Status]=0";
@@ -36,7 +36,7 @@ public class Table_Service implements ITable_Service {
             JDBC.update(INSERT_SQL,
                     entity.getIDTable(),
                     entity.getLocation(),
-                    entity.getStatus(),
+                    0,
                     entity.getIDArea());
         } catch (Exception e) {
             e.printStackTrace();
