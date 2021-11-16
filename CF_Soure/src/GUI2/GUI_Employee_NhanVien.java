@@ -9,6 +9,7 @@ import BUS_IServices.IQLEmployee_Service;
 import BUS_Services.QLEmployee_Service;
 import DAL_Models.ENTITY_Employee;
 import DAL_Services.Employee_Service;
+import Utils.XImage;
 import java.util.Date;
 
 /**
@@ -53,6 +54,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         this.rdoNam.setSelected(true);
         this.txtUserName.setEditable(true);
         this.txtPassWord.setEditable(true);
+        this.lblAnh.setIcon(XImage.read("no_image.jpg"));
     }
 
     public Date now() {
@@ -63,6 +65,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         try {
             String maNV = (String) tblEmployee.getValueAt(row, 6);
             ENTITY_Employee nv = this.nv.findById(maNV);
+            
             this.setform(nv);
         } catch (Exception e) {
         }
@@ -82,6 +85,12 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
                 rdoNam.setSelected(true);
             } else {
                 rdoNu.setSelected(true);
+            }
+            if (nv.getImage()!=null) {
+                lblAnh.setToolTipText(nv.getImage());
+                lblAnh.setIcon(XImage.read(nv.getImage()));
+            }else{
+                lblAnh.setIcon(XImage.read("no_image.jpg"));
             }
         } catch (Exception e) {
             e.printStackTrace();
