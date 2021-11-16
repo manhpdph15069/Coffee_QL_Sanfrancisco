@@ -10,11 +10,18 @@ import DAL_Models.ENTITY_Area;
 import DAL_Models.ENTITY_Table;
 import DAL_Services.Table_Service;
 import Utils.JDBC;
+import Utils.ThongBao;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
@@ -27,6 +34,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class QLTable_Service implements IQLTable_Service {
 
+    JPopupMenu menu = new JPopupMenu("Popup");
     Table_Service dao = new Table_Service();
 
     @Override
@@ -102,5 +110,28 @@ public class QLTable_Service implements IQLTable_Service {
         tbl.setRowSorter(sorter);
         sorter.setRowFilter(RowFilter.regexFilter(id.getText()));
 
+    }
+
+    @Override
+    public void fillTableIDArea(JTable tbl, String cbb) {
+        try {
+            DefaultTableModel d = (DefaultTableModel) tbl.getModel();
+            d.setRowCount(0);
+            List<ENTITY_Table> list = (List<ENTITY_Table>) dao.findByIdArea(cbb);
+
+            for (ENTITY_Table t : list) {
+
+                Object[] row = new Object[]{
+                    t.getIDTable(),
+                    "Khu " + t.getIDArea(),
+                    t.getLocation(),
+                    "Hoạt động"
+                };
+                d.addRow(row);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
