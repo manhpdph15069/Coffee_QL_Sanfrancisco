@@ -57,7 +57,6 @@ public class GUI_MAIN extends javax.swing.JFrame {
         btnQLVip2 = new javax.swing.JButton();
         jSeparator10 = new javax.swing.JToolBar.Separator();
         btnQLVip3 = new javax.swing.JButton();
-        btnQLVip1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -87,7 +86,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
         From.setLayout(FromLayout);
         FromLayout.setHorizontalGroup(
             FromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fromch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Fromch, javax.swing.GroupLayout.DEFAULT_SIZE, 1932, Short.MAX_VALUE)
             .addGroup(FromLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
@@ -230,19 +229,6 @@ public class GUI_MAIN extends javax.swing.JFrame {
         });
         jToolBar1.add(btnQLVip3);
 
-        btnQLVip1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/vip-icon.png"))); // NOI18N
-        btnQLVip1.setText("Quản lý KH vip");
-        btnQLVip1.setFocusable(false);
-        btnQLVip1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnQLVip1.setMaximumSize(new java.awt.Dimension(100, 30));
-        btnQLVip1.setMinimumSize(new java.awt.Dimension(100, 30));
-        btnQLVip1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnQLVip1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQLVip1ActionPerformed(evt);
-            }
-        });
-
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jMenu1.setText("Tài Khoản");
@@ -286,21 +272,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(From, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 971, Short.MAX_VALUE)
-                    .addComponent(btnQLVip1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 971, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(From, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 516, Short.MAX_VALUE)
-                    .addComponent(btnQLVip1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 517, Short.MAX_VALUE)))
         );
 
         pack();
@@ -350,12 +326,9 @@ public class GUI_MAIN extends javax.swing.JFrame {
         goiPan(table);
     }//GEN-LAST:event_btnQLMenuActionPerformed
 
-    private void btnQLVip1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLVip1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnQLVip1ActionPerformed
-
     private void btnQLVip2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLVip2ActionPerformed
-        // TODO add your handling code here:
+        GUI2.GUI_MAIN table = new GUI2.GUI_MAIN();
+        table.setVisible(true);
     }//GEN-LAST:event_btnQLVip2ActionPerformed
 
     private void btnQLVip3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLVip3ActionPerformed
@@ -413,7 +386,6 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private javax.swing.JButton btnQLOrder;
     private javax.swing.JButton btnQLTK;
     private javax.swing.JButton btnQLVip;
-    private javax.swing.JButton btnQLVip1;
     private javax.swing.JButton btnQLVip2;
     private javax.swing.JButton btnQLVip3;
     private javax.swing.JLabel jLabel1;
