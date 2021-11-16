@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Employee_Service implements IEmployee_Service {
-    String INSERT_SQL = "INSERT INTO [Employee]([UsernameEMP], [Password], [NameEMP],[Phone],[Birthday],[Address],[Sex],[Email],[Image],[Status]) VALUES (?, ?, ?, ?,?,?,?,?,?,1)";
-    String UPDATE_SQL = "UPDATE [Employee] SET [Password]= ?, [NameEMP] = ?,[Phone]=?,[Birthday]=?,[Address]=?,[Sex]=?,[Email]=?,[Image]=? WHERE [UsernameEMP]= ?";
-    String DELETE_SQL = "UPDATE [Employee] SET [Status]=0 WHERE [UsernameEMP]= ?";
-    String SELECT_ALL_SQL = "SELECT * FROM [Employee]";
-    String SELECT_BY_ID_SQL = "SELECT * FROM [Employee] WHERE [UsernameEMP] = ?";
+    String INSERT_SQL = "INSERT INTO [Employee]([UsernameEMP], [Password], [NameEMP],[Phone],[Birthday],[Address],[Sex],[Email],[Image],[Status]) VALUES (?, ?, ?, ?,?,?,?,?,?,0)";
+    String UPDATE_SQL = "UPDATE [Employee] SET [NameEMP] = ?,[Phone]=?,[Birthday]=?,[Address]=?,[Sex]=?,[Email]=?,[Image]=? WHERE [UsernameEMP]= ?";
+    String DELETE_SQL = "UPDATE [Employee] SET [Status]=1 WHERE [UsernameEMP]= ? ";
+    String SELECT_ALL_SQL = "SELECT * FROM [Employee] where [Status]=0";
+    String SELECT_BY_ID_SQL = "SELECT * FROM [Employee] WHERE [UsernameEMP] = ? and [Status]=0";
 
     @Override
     public void insert(ENTITY_Employee entity) {
@@ -44,7 +44,6 @@ public class Employee_Service implements IEmployee_Service {
     public void update(ENTITY_Employee entity) {
         try {
             JDBC.update(UPDATE_SQL,
-                    entity.getPassword(),
                     entity.getNameEMP(),
                     entity.getPhone(),
                     entity.getBirthday(),
@@ -52,7 +51,6 @@ public class Employee_Service implements IEmployee_Service {
                     entity.getSex(),
                     entity.getEmail(),
                     entity.getImage(),
-                    entity.getStatus(),
                     entity.getUsernameEMP());
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,7 +92,7 @@ public class Employee_Service implements IEmployee_Service {
               employee.setSex(rs.getBoolean("Sex"));
               employee.setEmail(rs.getString("Email"));
               employee.setImage(rs.getString("Image"));
-              employee.setStatus(rs.getBoolean(rs.getByte("Status")));
+           //   employee.setStatus(rs.getBoolean(rs.getByte("Status")));
                 list.add(employee);
             }
             rs.getStatement().getConnection().close();
