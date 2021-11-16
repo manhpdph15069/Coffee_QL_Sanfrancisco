@@ -782,10 +782,10 @@ public class QLOrder_Service implements IQLOrder_Service {
     }
 
     @Override
-    public void huyMon(JTextField txtMaHD, String Reason, String IDProduct) {
-        String sql = "UPDATE OrderDetail SET [Status] = 1, Reason = ? WHERE IDOrder = ? and IDProduct = ?";
+    public void huyMon(JTextField txtMaHD, String Reason, String IDProduct,String Note) {
+        String sql = "UPDATE OrderDetail SET [Status] = 1, Reason = ? WHERE IDOrder = ? and IDProduct = ? and Note = ?";
         try {
-            JDBC.update(sql, Reason, txtMaHD.getText(), IDProduct);
+            JDBC.update(sql, Reason, txtMaHD.getText(), IDProduct,Note);
         } catch (SQLException e) {
             e.printStackTrace();
         }

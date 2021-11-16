@@ -59,7 +59,7 @@ public interface IQLOrder_Service {
 
     public double tongTien(JTextField txttong, JTable tblOder);
     
-    public void huyMon(JTextField txtMaHD,String Reason,String IDProduct);
+    public void huyMon(JTextField txtMaHD,String Reason,String IDProduct,String Note);
     
     public String OrderCTT(JTextField txt, String IDTable);
     

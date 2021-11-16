@@ -843,15 +843,16 @@ public class GUI_QL_Order extends javax.swing.JPanel {
     private void mnHuymonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnHuymonActionPerformed
         // TODO add your handling code here:
         String sl = dialogHelper.prompt(null, "Mày lại Order nhầm đúng không ?\nGhi lý do vào đây :)");
-        qlod.huyMon(txtmaHD, sl, tblOrder.getValueAt(this.row, 0).toString());
+        qlod.huyMon(txtmaHD, sl, tblOrder.getValueAt(this.row, 0).toString(),tblOrder.getValueAt(this.row, 5).toString());
         qlod.bill(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder);
     }//GEN-LAST:event_mnHuymonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
-        JDialogHuyDon dl = new JDialogHuyDon(this, true, this, btnVaoBan, lblBan, tblOrder, tblLichSu, PanSanPham, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, txtTong, PanCac, khu.getIDArea());
+        JDialogHuyDon dl = new JDialogHuyDon(null, true, this, btnVaoBan, lblBan, tblOrder, tblLichSu, PanSanPham, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, txtTong, PanCac, khu.getIDArea());
         dl.setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void mnTachMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTachMonActionPerformed

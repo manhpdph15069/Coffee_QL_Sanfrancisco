@@ -220,10 +220,11 @@ public class JDialogHuyDon extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        System.out.println("Ma HD "+txtMaHD.getText());
         this.ql.huyDon(txtMaHD.getText(), lydo);
-        String sql = "UPDATE [Table] SET [Status] = 0 WHERE IDTable = ?";
-         System.out.println(lblBan.getText());
+        String sql = "UPDATE [Table] SET [Status] = 0 WHERE IDTable = ?";         
         if (ql.OrderCTT(txtMaHD, lblBan.getText()) != null) {// Kiểm tra còn đơn nào chưa thanh toán không
+            this.dispose();
             return;
         }
         try {
