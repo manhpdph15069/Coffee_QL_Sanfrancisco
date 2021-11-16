@@ -65,4 +65,5 @@ public interface IQLOrder_Service {
     
     public void huyDon(String txtMaHD,String Reason);
         
+    public void tachHDon(String txtMaHDCu,String txtMaHDMoi,String IDProduct,String Note,String IDTable);
 }

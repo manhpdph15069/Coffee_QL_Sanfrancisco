@@ -615,7 +615,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     public void hienTableOder(JTable tblOD) {
         this.model = (DefaultTableModel) tblOD.getModel();
         this.model.setRowCount(0);
-        this.model.setColumnIdentifiers(new Object[]{"IDSP", "Tên SP", "Size", "Giá", "SL", "Ghi chú", "Hủy", ""});
+        this.model.setColumnIdentifiers(new Object[]{"IDSP", "Tên SP", "Size", "Giá", "SL", "Ghi chú", "Hủy", "","Khác"});
         TableColumnModel columnModel = tblOD.getColumnModel();
         columnModel.getColumn(4).setMaxWidth(60);
         columnModel.getColumn(4).setMinWidth(60);
@@ -624,6 +624,8 @@ public class QLOrder_Service implements IQLOrder_Service {
         columnModel.getColumn(0).setMinWidth(40);
         columnModel.getColumn(6).setMaxWidth(60);
         columnModel.getColumn(7).setMaxWidth(60);
+        columnModel.getColumn(8).setMaxWidth(50);
+        columnModel.getColumn(8).setMinWidth(50);
     }
 
     @Override
@@ -730,7 +732,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                 cTT.getSize(),
                 cTT.getPrice(),
                 cTT.getQuantity(),
-                cTT.getNote(), cTT.isStatus() ? "Hủy" : "", "Xóa"
+                cTT.getNote(), cTT.isStatus() ? "Hủy" : "", "Xóa",false
             };
             model.addRow(row);
         }
@@ -770,9 +772,9 @@ public class QLOrder_Service implements IQLOrder_Service {
 
     @Override
     public void updateOderDe(ENTITY_BILL bill) {
-        String sql = "UPDATE OrderDetail SET Note = ?,Quantity=? WHERE IDOrder = ? AND IDProduct = ?";
+        String sql = "UPDATE OrderDetail SET Note = ?,Quantity=? WHERE IDOrder = ? AND IDProduct = ? AND Note = ?";
         try {
-            JDBC.update(sql, bill.getNote(), bill.getQuantity(), bill.getIDOrder(), bill.getIDProduct());
+            JDBC.update(sql, bill.getNote(), bill.getQuantity(), bill.getIDOrder(), bill.getIDProduct(),bill.getNote());
         } catch (SQLException ex) {
             ex.printStackTrace();
             Logger.getLogger(QLOrder_Service.class.getName()).log(Level.SEVERE, null, ex);
@@ -784,7 +786,7 @@ public class QLOrder_Service implements IQLOrder_Service {
         String sql = "UPDATE OrderDetail SET [Status] = 1, Reason = ? WHERE IDOrder = ? and IDProduct = ?";
         try {
             JDBC.update(sql, Reason, txtMaHD.getText(), IDProduct);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -793,7 +795,7 @@ public class QLOrder_Service implements IQLOrder_Service {
         String sql = "UPDATE [Table] SET [Status] = 2 WHERE IDTable = ?";
         try {
             JDBC.update(sql, IDTable);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -802,7 +804,7 @@ public class QLOrder_Service implements IQLOrder_Service {
         String sql = "UPDATE [Table] SET [Status] = 0 WHERE IDTable = ?";
         try {
             JDBC.update(sql, IDTable);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -812,7 +814,17 @@ public class QLOrder_Service implements IQLOrder_Service {
         String sql = "UPDATE [Order] SET [Status] = 3,Reason =? WHERE IDOrder = ?";
         try {
             JDBC.update(sql, Reason, txtMaHD);
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void tachHDon(String txtMaHDCu, String txtMaHDMoi, String IDProduct, String Note,String IDTable) {
+        String sql ="UPDATE OrderDetail SET IDOrder = ?,IDTable = ? WHERE IDProduct = ? AND Note = ? AND IDOrder = ?";
+        try {
+            JDBC.update(sql, txtMaHDMoi,IDTable,IDProduct,Note,txtMaHDCu);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
