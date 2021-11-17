@@ -11,6 +11,7 @@ import DAL_IServices.ITable_Service;
 import DAL_Models.ENTITY_Area;
 import DAL_Models.ENTITY_Table;
 import DAL_Services.Table_Service;
+import Utils.Check;
 import Utils.ThongBao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -332,42 +333,55 @@ public class GUI_Table extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        try {
+        if (Check.checkNullText(txtViTri)) {
+            insert();
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
+void insert(){
+            try {
             ENTITY_Table tbl = getModel();
             dao.insertMATABLE(tbl);
             dao.fillTable(tblTable);
+            ThongBao.alert(this, "Thêm thành công");
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnThemActionPerformed
-
+}
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         xoaform();
         dao.fillTable(tblTable);
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        try {
+        delete();
+    }//GEN-LAST:event_btnXoaActionPerformed
+void delete(){
+            try {
             this.row = tblTable.getSelectedRow();
             dao.deleteTABLE(txtMaBan.getText());
             dao.fillTable(tblTable);
             xoaform();
+            ThongBao.alert(this, "Xóa thành công");
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnXoaActionPerformed
-
+}
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        try {
+        if (Check.checkNullText(txtViTri)) {
+            update();
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
+void update(){
+            try {
             ENTITY_Table tbl = getModel();
             dao.updatetTABLE(tbl);
             dao.fillTable(tblTable);
             xoaform();
+            ThongBao.alert(this, "Cập nhập thành công");
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnSuaActionPerformed
-
+}
     private void tblTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMouseClicked
         if (evt.getClickCount() == 2) {
             this.row = tblTable.getSelectedRow();

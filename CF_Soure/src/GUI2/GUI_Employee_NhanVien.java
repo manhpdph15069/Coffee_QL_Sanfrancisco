@@ -9,8 +9,15 @@ import BUS_IServices.IQLEmployee_Service;
 import BUS_Services.QLEmployee_Service;
 import DAL_Models.ENTITY_Employee;
 import DAL_Services.Employee_Service;
+import Utils.Auth;
+import Utils.Check;
+import Utils.ThongBao;
 import Utils.XImage;
+import static java.awt.Color.pink;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import javax.swing.JTextField;
 
 /**
  *
@@ -27,6 +34,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         dao = (IQLEmployee_Service) new QLEmployee_Service();
         dao.fillTable(tblEmployee);
         resetForm();
+
     }
 
     ENTITY_Employee getModel() {
@@ -65,7 +73,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         try {
             String maNV = (String) tblEmployee.getValueAt(row, 6);
             ENTITY_Employee nv = this.nv.findById(maNV);
-            
+
             this.setform(nv);
         } catch (Exception e) {
         }
@@ -73,7 +81,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
 
     void setform(ENTITY_Employee nv) {
         try {
-            String manv = (String) tblEmployee.getValueAt(this.row, 0);
+            String manv = (String) tblEmployee.getValueAt(this.row, 6);
             txtHoTen.setText(nv.getNameEMP());
             txtSDT.setText(nv.getPhone());
             txtNgaySinh.setDate(nv.getBirthday());
@@ -86,10 +94,10 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
             } else {
                 rdoNu.setSelected(true);
             }
-            if (nv.getImage()!=null) {
+            if (nv.getImage() != null) {
                 lblAnh.setToolTipText(nv.getImage());
                 lblAnh.setIcon(XImage.read(nv.getImage()));
-            }else{
+            } else {
                 lblAnh.setIcon(XImage.read("no_image.jpg"));
             }
         } catch (Exception e) {
@@ -461,16 +469,60 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        if (Check.checkNullText(txtSDT)
+                && Check.checkNullText(txtDiaChi)
+                && Check.checkNullText(txtEmail)
+                && Check.checkNullText(txtHoTen)
+                && Check.checkNullText(txtUserName)
+                && Check.checkNullPass(txtPassWord)) {
+            if (Check.checkName(txtHoTen)
+                    && Check.checkPass(txtPassWord)
+                    && Check.checkEmail(txtEmail)
+                    && Check.checkSDT(txtSDT) //          && Check.checkDate(txtNgaySinh)
+                    ) {
+                try {
+                    if (themtrung(txtUserName) == 1) {
+                        return;
+                    }
+                    insert();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
+    void insert() {
         try {
             ENTITY_Employee tbl = getModel();
             dao.insertMAEMPLOYEE(tbl);
             dao.fillTable(tblEmployee);
             resetForm();
+            ThongBao.alert(this, "Thêm Mới thành công");
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnThemActionPerformed
+    }
 
+    public int themtrung(JTextField t) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        if (nv.selectByID(t.getText()) != null) {
+            ENTITY_Employee nv = getModel();
+            this.nv.checkTrung(nv);
+            dao.fillTable(tblEmployee);
+            resetForm();
+            ThongBao.alert(this, "Thêm thành công");
+            return 1;
+        } else {
+            if (nv.findById(t.getText()) == null) {
+                return 2;
+            } else {
+                t.setBackground(pink);
+                ThongBao.alert(this, "Mã đã bị tồn tại.");
+                return 3;
+            }
+        }
+    }
     private void lblAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhMouseClicked
         dao.chonAnh(lblAnh);
     }//GEN-LAST:event_lblAnhMouseClicked
@@ -480,17 +532,23 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+//        if (Auth.isAdmin()) {
+
+        delete();
+//        }
+    }//GEN-LAST:event_btnXoaActionPerformed
+    void delete() {
         try {
             this.row = tblEmployee.getSelectedRow();
             String ma = (String) tblEmployee.getValueAt(row, 6);
             dao.deleteEmployee(ma);
             dao.fillTable(tblEmployee);
             resetForm();
+            ThongBao.alert(this, "Xóa thành công");
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnXoaActionPerformed
-
+    }
     private void tblEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmployeeMouseClicked
         if (evt.getClickCount() == 2) {
             this.row = tblEmployee.getSelectedRow();
@@ -504,6 +562,15 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+
+        if (Check.checkNullText(txtHoTen)
+                && Check.checkEmail(txtEmail)
+                && Check.checkNullText(txtEmail)
+                && Check.checkName(txtHoTen)) {
+            update();
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
+    void update() {
         try {
             ENTITY_Employee tbl = new ENTITY_Employee();
             tbl.setNameEMP(txtHoTen.getText());
@@ -518,11 +585,11 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
             dao.updateMAEMPLOYEE(tbl);
             dao.fillTable(tblEmployee);
             resetForm();
+            ThongBao.alert(this, "Cập nhập thành công");
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnSuaActionPerformed
-
+    }
     private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserNameActionPerformed
