@@ -12,7 +12,6 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/JDialogHuyDon.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/Utils/JDBC.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/JDialog_LoaiSP.java</file>
@@ -30,18 +29,6 @@
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/DAL_Services/Customer_Service.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_Services/QLTable_Service.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_IServices/IQLTable_Service.java</file>
-=======
-            <file>file:/C:/Users/phamd/OneDrive/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_Customer_KhachHang.java</file>
-            <file>file:/C:/Users/phamd/OneDrive/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_Menu.java</file>
-            <file>file:/C:/Users/phamd/OneDrive/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_Services/QLMenu_Service.java</file>
-            <file>file:/C:/Users/phamd/OneDrive/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_Services/QLTable_Service.java</file>
-            <file>file:/C:/Users/phamd/OneDrive/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_IServices/IQLTable_Service.java</file>
-            <file>file:/C:/Users/phamd/OneDrive/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/DAL_Services/Table_Service.java</file>
-            <file>file:/C:/Users/phamd/OneDrive/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_MAIN.java</file>
-            <file>file:/C:/Users/phamd/OneDrive/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_Employee_NhanVien.java</file>
-            <file>file:/C:/Users/phamd/OneDrive/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_QL_Order.java</file>
-            <file>file:/C:/Users/phamd/OneDrive/Desktop/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_Table.java</file>
->>>>>>> 0b6fc653cc386f42177a6be3d6b0681afc5b8954
         </group>
     </open-files>
 </project-private>

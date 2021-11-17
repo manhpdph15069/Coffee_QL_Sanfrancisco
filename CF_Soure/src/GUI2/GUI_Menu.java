@@ -41,6 +41,7 @@ public class GUI_Menu extends javax.swing.JPanel {
 //        dao.select();
         tblSanPham.getColumnModel().getColumn(0).setMinWidth(0);
         tblSanPham.getColumnModel().getColumn(0).setMaxWidth(0);
+        lblType.setVisible(false);
         init();
 //        dao.taoIDType(lblType);
     }
@@ -50,7 +51,6 @@ public class GUI_Menu extends javax.swing.JPanel {
         dao.selectTypeName();
         dao.loadComboTypeName(cboLoai);
         dao.taoID(lblID);
-        lblType.setVisible(false);
         this.clear();
     }
 
@@ -110,6 +110,17 @@ public class GUI_Menu extends javax.swing.JPanel {
         });
 
         cboLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cafe", "Nước canh", "Nước mắm" }));
+        cboLoai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cboLoaiMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cboLoaiMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                cboLoaiMouseReleased(evt);
+            }
+        });
         cboLoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboLoaiActionPerformed(evt);
@@ -488,13 +499,31 @@ public class GUI_Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_tblSanPhamMouseReleased
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        GUI2.JDialog_LoaiSP table = new GUI2.JDialog_LoaiSP(null, true);
+        GUI2.JDialog_LoaiSP table = new GUI2.JDialog_LoaiSP(null, true, cboLoai);
         table.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
 
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void cboLoaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLoaiMouseClicked
+        this.row=tblSanPham.getSelectedRow();
+        this.row=-1;
+        Refresh();
+    }//GEN-LAST:event_cboLoaiMouseClicked
+
+    private void cboLoaiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLoaiMousePressed
+        if (evt.isPopupTrigger()) {
+            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_cboLoaiMousePressed
+
+    private void cboLoaiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLoaiMouseReleased
+        if (evt.isPopupTrigger()) {
+            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_cboLoaiMouseReleased
 
     private void setForm(SanPham sp) {
         lblID.setText(sp.getIDProduct());
@@ -552,6 +581,18 @@ public class GUI_Menu extends javax.swing.JPanel {
             }
         });
         menu.add(item2);
+    }
+
+    public void Refresh() {
+        menu.removeAll();
+        //  List<ENTITY_Area> area = tbdao.selectIDArea();
+        JMenuItem item = new JMenuItem("Refresh");
+        item.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                init();
+            }
+        });
+        menu.add(item);
     }
 
     void edit() {

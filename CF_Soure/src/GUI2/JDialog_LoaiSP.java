@@ -5,12 +5,14 @@
  */
 package GUI2;
 
+import BUS_Services.QLMenu_Service;
 import DAL_Models.ENTITY_ProductType;
 import DAL_Services.ProductType_Service;
 import Utils.JDBC;
 import Utils.dialogHelper;
 import java.sql.ResultSet;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,11 +23,12 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
 
     int row = -1;
     ProductType_Service dao = new ProductType_Service();
+    QLMenu_Service dao1=new QLMenu_Service();
 
     /**
      * Creates new form JDialog_LoaiSP
      */
-    public JDialog_LoaiSP(java.awt.Frame parent, boolean modal) {
+    public JDialog_LoaiSP(java.awt.Frame parent, boolean modal, JComboBox cbo) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -33,6 +36,8 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
         tblType.getColumnModel().getColumn(0).setMinWidth(0);
         tblType.getColumnModel().getColumn(0).setMaxWidth(0);
         init();
+        dao1.selectTypeName();
+        dao1.loadComboTypeName(cbo);
     }
 
     /**
@@ -321,10 +326,10 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
         ENTITY_ProductType type = this.getForm();
         try {
             dao.insert(type);
-            dialogHelper.alert(this, "A! Thành Công Rồi");
             filltoTable();
             clearForm();
             taoID();
+            dialogHelper.alert(this, "A! Thành Công Rồi");
         } catch (Exception e) {
             dialogHelper.alert(this, "Đã được đíu đâu mà thêm");
             e.printStackTrace();
@@ -335,10 +340,10 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
         ENTITY_ProductType type = this.getForm();
         try {
             dao.update(type);
-            dialogHelper.alert(this, "A! Thành Công Rồi");
             filltoTable();
             clearForm();
             taoID();
+            dialogHelper.alert(this, "A! Thành Công Rồi");
         } catch (Exception e) {
             dialogHelper.alert(this, "Đã được đíu đâu mà Sua");
             e.printStackTrace();
@@ -350,10 +355,10 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
         dialogHelper.confirm(this, "Mày Thích Xóa Không?");
         try {
             dao.delete(ID);
-            dialogHelper.alert(this, "Xoá CMM");
             filltoTable();
             clearForm();
             taoID();
+            dialogHelper.alert(this, "Xoá CMM");
         } catch (Exception e) {
             dialogHelper.alert(this, "Bố éo cho Xóa");
             e.printStackTrace();
@@ -362,7 +367,7 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
 
     void edit() {
         try {
-            int ID =(int) tblType.getValueAt(this.row, 0); //lay giá trị hàng hiện tại & cột 0
+            int ID = (int) tblType.getValueAt(this.row, 0); //lay giá trị hàng hiện tại & cột 0
             ENTITY_ProductType cus = dao.findById(String.valueOf(ID)); //lay thong tin sp tuong ung trong csdl
             if (cus != null) {
                 this.setForm(cus);
