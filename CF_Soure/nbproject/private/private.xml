@@ -12,23 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/JDialogHuyDon.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/Utils/JDBC.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/JDialog_LoaiSP.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_MAIN.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_Services/QLStatistical_Service.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/JDialog_Xemchitiet.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_Table.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_Menu.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/JDialogTaoBan.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/DAL_Models/ENTITY_Customer.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_Services/QLMenu_Service.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/Utils/dialogHelper.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_Services/QLEmployee_Service.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_Customer_KhachHang.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/DAL_Services/Customer_Service.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_Services/QLTable_Service.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Cafeeeee/Coffee_QL_Sanfrancisco/CF_Soure/src/BUS_IServices/IQLTable_Service.java</file>
+            <file>file:/C:/Fall%202021/duan1/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_QL_Order.java</file>
+            <file>file:/C:/Fall%202021/duan1/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_Customer_KhachHang.java</file>
+            <file>file:/C:/Fall%202021/duan1/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_Statistical_ThongKe.java</file>
+            <file>file:/C:/Fall%202021/duan1/Coffee_QL_Sanfrancisco/CF_Soure/src/GUI2/GUI_MAIN.java</file>
         </group>
     </open-files>
 </project-private>

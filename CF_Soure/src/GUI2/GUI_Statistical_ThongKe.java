@@ -148,7 +148,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                     .addContainerGap(409, Short.MAX_VALUE)))
         );
 
-        jPanel1.setBackground(new java.awt.Color(102, 0, 102));
+        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
 
         JDateNKT.setDateFormatString("yyyy-MM-dd");
         JDateNKT.setFocusable(false);
