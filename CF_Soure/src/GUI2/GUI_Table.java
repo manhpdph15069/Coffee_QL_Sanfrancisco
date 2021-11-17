@@ -415,7 +415,7 @@ public class GUI_Table extends javax.swing.JPanel {
         });
 
         menu.add(item);
-
+        
     }
 
     // pack();

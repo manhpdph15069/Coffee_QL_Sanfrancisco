@@ -21,7 +21,7 @@ public class ENTITY_Customer {
     private Date DateEnd;
     private String Phone;
     private String Email;
-    private float Discount;
+    private int Discount;
     private boolean Status;
 
 
@@ -76,11 +76,11 @@ public class ENTITY_Customer {
         Email = email;
     }
 
-    public float getDiscount() {
+    public int getDiscount() {
         return Discount;
     }
 
-    public void setDiscount(float discount) {
+    public void setDiscount(int discount) {
         Discount = discount;
     }
 

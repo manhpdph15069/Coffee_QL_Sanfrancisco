@@ -92,7 +92,7 @@ public class Product_Service implements IProduct_Service {
                 product.setPrice(rs.getFloat("Price"));
                 product.setImage(rs.getString("Image"));
                 product.setStatus(rs.getBoolean("Status"));
-                product.setIDType(rs.getString("IDType"));
+                product.setIDType(rs.getInt("IDType"));
             }
             rs.getStatement().getConnection().close();
             return list;

@@ -16,6 +16,7 @@ public class dialogHelper {
 
     /**
      * Hiển thị thông báo cho người dùng
+     *
      * @param parent là cửa sổ chứa thông báo
      * @param message là thông báo
      */
@@ -26,6 +27,7 @@ public class dialogHelper {
 
     /**
      * Hiển thị thông báo và yêu cầu người dùng xác nhận
+     *
      * @param parent là cửa sổ chứa thông báo
      * @param message là câu hỏi yes/no
      * @return là kết quả nhận được true/false
@@ -39,6 +41,7 @@ public class dialogHelper {
 
     /**
      * Hiển thị thông báo yêu cầu nhập dữ liệu
+     *
      * @param parent là cửa sổ chứa thông báo
      * @param message là thông báo nhắc nhở nhập
      * @return là kết quả nhận được từ người sử dụng nhập vào

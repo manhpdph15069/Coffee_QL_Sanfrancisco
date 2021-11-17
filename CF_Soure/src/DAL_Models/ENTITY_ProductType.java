@@ -44,7 +44,4 @@ public class ENTITY_ProductType {
         return TypeName;
     }
 
-   
-  
-    
 }

@@ -95,6 +95,14 @@ public class QLMenu_Service implements IQLMenu_Service {
             e.printStackTrace();
         }
     }
+        public void khoiphuc(String IDProduct) {
+        String sql = "UPDATE [Product] SET [Status]=1 WHERE [IDProduct] = ?";
+        try {
+            JDBC.update(sql, IDProduct);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public ArrayList<SanPham> select() {
         return (ArrayList<SanPham>) this.SelectBySQL(sql_all);
@@ -232,7 +240,7 @@ public class QLMenu_Service implements IQLMenu_Service {
         try {
             List<SanPham> list = this.select();
             for (SanPham pro : list) {
-                Object[] row = {pro.getIDProduct(),pro.getProductName(), pro.getSize(), pro.getPrice(), pro.isStatus() ? "Còn" : "Hết"};
+                Object[] row = {pro.getIDProduct(),pro.getProductName(), pro.getSize(), pro.getPrice(), pro.isStatus() ? "Đang sử dụng" : "Không sử dụng"};
                 model.addRow(row);
             }
         } catch (Exception e) {

@@ -18,7 +18,7 @@ public class ENTITY_Product {
     private float Price;
     private String Image;
     private boolean Status;
-    private String IDType;
+    private int IDType;
 
     public ENTITY_Product() {
     }
@@ -63,11 +63,11 @@ public class ENTITY_Product {
         Status = status;
     }
 
-    public String getIDType() {
+    public int getIDType() {
         return IDType;
     }
 
-    public void setIDType(String IDType) {
+    public void setIDType(int IDType) {
         this.IDType = IDType;
     }
 }

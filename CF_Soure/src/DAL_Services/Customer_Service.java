@@ -54,7 +54,6 @@ public class Customer_Service implements ICustomer_Service {
                     entity.getPhone(),
                     entity.getEmail(),
                     entity.getDiscount(),
-                    entity.getStatus(),
                     entity.getIDCust());
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,7 +92,7 @@ public class Customer_Service implements ICustomer_Service {
                 customer.setDateEnd(rs.getDate("DateEnd"));
                 customer.setPhone(rs.getString("Phone"));
                 customer.setEmail(rs.getString("Email"));
-                customer.setDiscount(rs.getFloat("Discount"));
+                customer.setDiscount(rs.getInt("Discount"));
                 customer.setStatus(rs.getBoolean("Status"));
                 list.add(customer);
             }

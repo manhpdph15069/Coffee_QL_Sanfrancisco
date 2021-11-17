@@ -64,7 +64,7 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
         kh.setDateEnd(txtNgayHetHan.getDate());
         kh.setPhone(txtSDT.getText());
         kh.setEmail(txtEmail.getText());
-        kh.setDiscount(Float.valueOf(txtGiamGia.getText()));
+        kh.setDiscount(Integer.valueOf(txtGiamGia.getText()));
         return kh;
     }
 
@@ -450,7 +450,7 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
 
         if (evt.getClickCount()==2) {
             this.row=tblKhachHang.getSelectedRow();
-            if (this.row>0) {
+            if (this.row>=0) {
                 this.edit();
             }      
         }
