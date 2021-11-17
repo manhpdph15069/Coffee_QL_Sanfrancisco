@@ -19,10 +19,12 @@ import javax.swing.JFileChooser;
  */
 public class GUI_Menu extends javax.swing.JPanel {
 
+    int index = 0;
     int row = -1;
     JFileChooser fileChooser = new JFileChooser();
     private IQLMenu_Service qlsp;
     QLMenu_Service dao = new QLMenu_Service();
+
     /**
      * Creates new form GUI_Menu
      */
@@ -36,10 +38,11 @@ public class GUI_Menu extends javax.swing.JPanel {
         dao.taoID(lblID);
         lblType.setVisible(false);
         this.clear();
+        tblSanPham.getColumnModel().getColumn(0).setMinWidth(0);
+        tblSanPham.getColumnModel().getColumn(0).setMaxWidth(0);
+
 //        dao.taoIDType(lblType);
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -140,17 +143,17 @@ public class GUI_Menu extends javax.swing.JPanel {
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Tên Sản Phẩm", "Size", "Giá"
+                "ID SP", "Tên Sản Phẩm", "Size", "Giá", "Trạng Thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -274,7 +277,7 @@ public class GUI_Menu extends javax.swing.JPanel {
                                             .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(199, 199, 199)
                                 .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,7 +322,7 @@ public class GUI_Menu extends javax.swing.JPanel {
                     .addComponent(btn3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btn2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btn1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -332,11 +335,16 @@ public class GUI_Menu extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -349,7 +357,6 @@ public class GUI_Menu extends javax.swing.JPanel {
         ENTITY_ProductType sp = (ENTITY_ProductType) cboLoai.getSelectedItem();
         if (sp != null) {
             dao.loadComboSize(cboSize, String.valueOf(sp.getTypeName()), lblType);
-
         }
     }//GEN-LAST:event_cboLoaiActionPerformed
 
@@ -423,21 +430,20 @@ public class GUI_Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemKeyPressed
 
     private void cboSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSizeActionPerformed
-        dao.loadlbl(lblType,"L");
+        dao.loadlbl(lblType, "L");
     }//GEN-LAST:event_cboSizeActionPerformed
 
-private void setForm(SanPham sp) {
+    private void setForm(SanPham sp) {
         lblID.setText(sp.getIDProduct());
         txtTen.setText(sp.getProductName());
         txtGia.setText(String.valueOf(sp.getPrice()));
         cboLoai.getModel().setSelectedItem(sp.getTypeName());
-        cboSize.setSelectedItem(sp.getSize());
+        cboSize.getModel().setSelectedItem(sp.getSize());
         if (sp.getImage() != null) {
             lblHinh.setToolTipText(sp.getImage()); //lay ra ten file trong tooltip 
             lblHinh.setIcon(XImage.read(sp.getImage())); //doc file trong tooltip va hien thi len lable
         } else {
             lblHinh.setIcon(XImage.read("no_image.jpg"));
-
         }
         lblType.setText(String.valueOf(sp.getIDType()));
 //       cboLoai.setToolTipText(String.valueOf(sp.getIDType()));
@@ -464,6 +470,7 @@ private void setForm(SanPham sp) {
             }
         } catch (Exception e) {
             dialogHelper.alert(this, "Lỗi");
+            e.printStackTrace();
         }
 
     }
@@ -505,5 +512,3 @@ private void setForm(SanPham sp) {
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
-
-

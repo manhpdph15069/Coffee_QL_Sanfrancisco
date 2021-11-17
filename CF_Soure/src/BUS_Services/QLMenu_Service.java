@@ -232,7 +232,7 @@ public class QLMenu_Service implements IQLMenu_Service {
         try {
             List<SanPham> list = this.select();
             for (SanPham pro : list) {
-                Object[] row = {pro.getProductName(), pro.getSize(), pro.getPrice(), pro.isStatus() ? "Còn" : "Hết"};
+                Object[] row = {pro.getIDProduct(),pro.getProductName(), pro.getSize(), pro.getPrice(), pro.isStatus() ? "Còn" : "Hết"};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -295,7 +295,7 @@ public class QLMenu_Service implements IQLMenu_Service {
     // Tim Theo ID(de lay du lieu hien thi len form)
 
     public SanPham findById(String IDProduct) {
-        String sql = "Select * from Product join ProductType on Product.IDType =ProductType.IDType where IDProduct=?";
+        String sql = "Select IDProduct,ProductName,Price,Image,Status,TypeName,Size from Product join ProductType on Product.IDType =ProductType.IDType where IDProduct=?";
         List<SanPham> list = this.SelectBySQL(sql, IDProduct);
         if (list.isEmpty()) {
             return null;

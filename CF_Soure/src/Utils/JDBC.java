@@ -17,7 +17,7 @@ import java.sql.*;
 public class JDBC {
     public static String url = "jdbc:sqlserver://localhost:1433;databaseName=Coffee"; // đường dẫn
     public static String username = "sa"; // user sql
-    public static String password = "1"; //pass sql
+    public static String password = "123"; //pass sql
     //câu lệnh sql statement (có đối số hoặc không)
     // args mảng đối số của câu lệnh sql (có hoặc không)
     public static PreparedStatement preparedStatement(String sql, Object... args) throws SQLException {
@@ -51,13 +51,6 @@ public class JDBC {
         }
     }
 
-    void a(){
-        String INSERT_SQL = "INSERT INTO [Table]([IDTable], [Location],[Status]=1,[IDArea]) VALUES (?, ?, ?)";
-        String UPDATE_SQL = "UPDATE [Table] SET [Location] = ?, [IDArea] = ? WHERE [IDTable] = ?";
-        String DELETE_SQL = "UPDATE [Table] SET [Status]=0 WHERE [IDTable] = ?";
-        String SELECT_ALL_SQL = "SELECT * FROM [Table]";
-        String SELECT_BY_ID_SQL = "SELECT * FROM [Table] WHERE [IDTable] = ?";
-    }
 
     // Dùng để truy vấn dữ liệu
     //ResultSet được trả về khi truy vấn dữ liệu
