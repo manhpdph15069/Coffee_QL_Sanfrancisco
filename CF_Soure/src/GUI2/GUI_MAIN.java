@@ -5,8 +5,8 @@
  */
 package GUI2;
 
-import GUI.GUI_Login;
-import GUI.GUI_ResetPassword;
+import GUI_Dialog.GUI_Login;
+import GUI_Dialog.GUI_ResetPassword;
 import Utils.ThongBao;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
