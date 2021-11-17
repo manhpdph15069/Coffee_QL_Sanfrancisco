@@ -124,6 +124,7 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
             filltoTable();
             dialogHelper.alert(this, "A! Thành Công Rồi");
             clearForm();
+            taoID();
         } catch (Exception e) {
             dialogHelper.alert(this, "Đã được đíu đâu mà Sua");
             e.printStackTrace();
@@ -137,6 +138,8 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
             dao.delete(IDCust);
             filltoTable();
             dialogHelper.alert(this, "Xoá CMM");
+            clearForm();
+            taoID();
         } catch (Exception e) {
             dialogHelper.alert(this, "Bố éo cho Xóa");
             e.printStackTrace();

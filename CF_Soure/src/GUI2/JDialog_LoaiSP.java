@@ -29,8 +29,9 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-//        tblType.getColumnModel().getColumn(0).setMinWidth(0);
-//        tblType.getColumnModel().getColumn(0).setMaxWidth(0);
+        lblID.setVisible(false);
+        tblType.getColumnModel().getColumn(0).setMinWidth(0);
+        tblType.getColumnModel().getColumn(0).setMaxWidth(0);
         init();
     }
 
@@ -337,6 +338,7 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
             dialogHelper.alert(this, "A! Thành Công Rồi");
             filltoTable();
             clearForm();
+            taoID();
         } catch (Exception e) {
             dialogHelper.alert(this, "Đã được đíu đâu mà Sua");
             e.printStackTrace();
@@ -350,6 +352,8 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
             dao.delete(ID);
             dialogHelper.alert(this, "Xoá CMM");
             filltoTable();
+            clearForm();
+            taoID();
         } catch (Exception e) {
             dialogHelper.alert(this, "Bố éo cho Xóa");
             e.printStackTrace();

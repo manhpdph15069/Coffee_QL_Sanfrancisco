@@ -404,6 +404,7 @@ public class GUI_Menu extends javax.swing.JPanel {
             dao.fillToTable(tblSanPham);
             dialogHelper.alert(this, "A! Thành Công Rồi");
             clear();
+            dao.taoID(lblID);
         } catch (Exception e) {
             dialogHelper.alert(this, "Đã được đíu đâu mà thêm");
             e.printStackTrace();
@@ -417,6 +418,7 @@ public class GUI_Menu extends javax.swing.JPanel {
             dao.fillToTable(tblSanPham);
             clear();
             dialogHelper.alert(this, "A! Thành Công Rồi");
+            dao.taoID(lblID);
         } catch (Exception e) {
             dialogHelper.alert(this, "Bố Đíu cho Sửa đấy");
             e.printStackTrace();
@@ -430,6 +432,8 @@ public class GUI_Menu extends javax.swing.JPanel {
             dao.delete(IDProduct);
             dao.fillToTable(tblSanPham);
             dialogHelper.alert(this, "Xoá CMM");
+            clear();
+            dao.taoID(lblID);
         } catch (Exception e) {
             dialogHelper.alert(this, "Bố éo cho Xóa");
             e.printStackTrace();
