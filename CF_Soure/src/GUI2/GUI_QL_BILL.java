@@ -5,8 +5,6 @@
  */
 package GUI2;
 
-import GUI.*;
-
 /**
  *
  * @author phamd

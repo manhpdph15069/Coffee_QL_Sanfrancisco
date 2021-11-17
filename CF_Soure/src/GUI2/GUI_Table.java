@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -25,6 +26,7 @@ import javax.swing.JPopupMenu;
  * @author notak
  */
 public class GUI_Table extends javax.swing.JPanel {
+
     //ITable_Service tbdao;
     JPopupMenu menu = new JPopupMenu("Popup");
     IQLTable_Service dao;
@@ -36,7 +38,7 @@ public class GUI_Table extends javax.swing.JPanel {
      */
     public GUI_Table() {
         initComponents();
-      //  tbdao =new Table_Service();
+        //  tbdao =new Table_Service();
         dao = new QLTable_Service();
         txtMaBan.setEditable(false);
         dao.taoIDTable(txtMaBan);
@@ -70,10 +72,10 @@ public class GUI_Table extends javax.swing.JPanel {
         txtMaBan = new javax.swing.JTextField();
         cbbKhu = new javax.swing.JComboBox<>();
         txtViTri = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        btnFist = new javax.swing.JButton();
+        btnprev = new javax.swing.JButton();
+        btnNext = new javax.swing.JButton();
+        btnLast = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
@@ -178,17 +180,37 @@ public class GUI_Table extends javax.swing.JPanel {
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(255, 102, 102));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/first.png"))); // NOI18N
+        btnFist.setBackground(new java.awt.Color(255, 102, 102));
+        btnFist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/first.png"))); // NOI18N
+        btnFist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFistActionPerformed(evt);
+            }
+        });
 
-        jButton6.setBackground(new java.awt.Color(255, 102, 102));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/back.png"))); // NOI18N
+        btnprev.setBackground(new java.awt.Color(255, 102, 102));
+        btnprev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/back.png"))); // NOI18N
+        btnprev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnprevActionPerformed(evt);
+            }
+        });
 
-        jButton7.setBackground(new java.awt.Color(255, 102, 102));
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/last.png"))); // NOI18N
+        btnNext.setBackground(new java.awt.Color(255, 102, 102));
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/last.png"))); // NOI18N
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
-        jButton8.setBackground(new java.awt.Color(255, 102, 102));
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/last.png"))); // NOI18N
+        btnLast.setBackground(new java.awt.Color(255, 102, 102));
+        btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/last.png"))); // NOI18N
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
 
         txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -229,13 +251,13 @@ public class GUI_Table extends javax.swing.JPanel {
                                 .addGap(79, 79, 79))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(152, 152, 152)
-                        .addComponent(jButton5)
+                        .addComponent(btnFist)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6)
+                        .addComponent(btnprev)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton7)
+                        .addComponent(btnNext)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton8))
+                        .addComponent(btnLast))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(btnThem)
@@ -288,10 +310,10 @@ public class GUI_Table extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton6)
-                    .addComponent(jButton5)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8))
+                    .addComponent(btnprev)
+                    .addComponent(btnFist)
+                    .addComponent(btnNext)
+                    .addComponent(btnLast))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -330,7 +352,6 @@ public class GUI_Table extends javax.swing.JPanel {
             dao.deleteTABLE(txtMaBan.getText());
             dao.fillTable(tblTable);
             xoaform();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -392,45 +413,63 @@ public class GUI_Table extends javax.swing.JPanel {
 
     private void tblTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMousePressed
         // TODO add your handling code here:
-        if (evt.isPopupTrigger()) {
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
-        }
+//        if (evt.isPopupTrigger()) {
+//            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+//        }
     }//GEN-LAST:event_tblTableMousePressed
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
 
     }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void btnFistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFistActionPerformed
+        // TODO add your handling code here:
+        first();
+    }//GEN-LAST:event_btnFistActionPerformed
+
+    private void btnprevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnprevActionPerformed
+        // TODO add your handling code here:
+        prev();
+    }//GEN-LAST:event_btnprevActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        next();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        // TODO add your handling code here:
+        last();
+    }//GEN-LAST:event_btnLastActionPerformed
     public void Test() {
         menu.removeAll();
-      //  List<ENTITY_Area> area = tbdao.selectIDArea();
-        
+
         JMenuItem item = new JMenuItem("Lọc Khu");
         item.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String cbb = JOptionPane.showInputDialog("NHập khu đi ku:");
-                                       
                 dao.fillTableIDArea(tblTable, cbb);
-                         
+
             }
         });
 
         menu.add(item);
-        
+
     }
 
     // pack();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnFist;
+    private javax.swing.JButton btnLast;
+    private javax.swing.JButton btnNext;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JButton btnprev;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbbKhu;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -463,6 +502,7 @@ public class GUI_Table extends javax.swing.JPanel {
             String maTB = (String) tblTable.getValueAt(this.row, 0);
             ENTITY_Table ban = this.ban.findById(maTB);
             this.setform(ban);
+            updateStatus();
         } catch (Exception e) {
         }
     }
@@ -472,5 +512,44 @@ public class GUI_Table extends javax.swing.JPanel {
         txtMaBan.setText(maTB);
         txtViTri.setText(String.valueOf(tb.getLocation()));
         cbbKhu.setSelectedItem(tb.getIDArea());
+
+    }
+     void first() {
+        this.row = 0;
+        this.edit();
+    }
+
+    void prev() {
+        if (this.row > 0) {
+            this.row--;
+            this.edit();
+        }
+    }
+
+    void next() {
+        if (this.row < tblTable.getRowCount() - 1) {
+            this.row++;
+            this.edit();
+        }
+    }
+
+    void last() {
+        this.row = tblTable.getRowCount() - 1;
+        this.edit();
+    }
+    void updateStatus() {
+        boolean edit = (this.row >= 0);
+        boolean first = (this.row == 0);
+        boolean last = (this.row == tblTable.getRowCount() - 1);
+        //Trạng thái form
+     
+       // btnThem.setEnabled(edit);
+        btnSua.setEnabled(edit);
+        btnXoa.setEnabled(edit);
+        //trạng thái điều hướng
+        btnFist.setEnabled(edit && !first);
+        btnprev.setEnabled(edit && !first);
+        btnNext.setEnabled(edit && !last);
+        btnLast.setEnabled(edit && !last);
     }
 }

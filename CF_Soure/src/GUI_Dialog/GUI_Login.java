@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package GUI_Dialog;
 
 import DAL_Models.ENTITY_ADMIN;
 import DAL_Models.ENTITY_Employee;
