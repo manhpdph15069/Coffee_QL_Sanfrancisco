@@ -79,14 +79,14 @@ public class GUI_MAIN extends javax.swing.JFrame {
         Fromch.setBackground(new java.awt.Color(0, 51, 204));
         Fromch.setLayout(new javax.swing.BoxLayout(Fromch, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/main.gif"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/cafe_main.gif"))); // NOI18N
         Fromch.add(jLabel2);
 
         javax.swing.GroupLayout FromLayout = new javax.swing.GroupLayout(From);
         From.setLayout(FromLayout);
         FromLayout.setHorizontalGroup(
             FromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fromch, javax.swing.GroupLayout.DEFAULT_SIZE, 1932, Short.MAX_VALUE)
+            .addComponent(Fromch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(FromLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
