@@ -425,9 +425,13 @@ public class GUI_Menu extends javax.swing.JPanel {
 
     private void cboLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLoaiActionPerformed
 
-        ENTITY_ProductType sp = (ENTITY_ProductType) cboLoai.getSelectedItem();
-        if (sp != null) {
-            dao.loadComboSize(cboSize, String.valueOf(sp.getTypeName()), lblType);
+        if (cboLoai.getSelectedItem() != null) {
+            ENTITY_ProductType sp = (ENTITY_ProductType) cboLoai.getSelectedItem();
+            lblType.setText("" + sp.getIDType());
+            System.out.println("----" + sp.getIDType());
+            if (sp != null) {
+                dao.loadComboSize(cboSize, String.valueOf(sp.getTypeName()), lblType);
+            }
         }
     }//GEN-LAST:event_cboLoaiActionPerformed
 
@@ -506,7 +510,13 @@ public class GUI_Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemKeyPressed
 
     private void cboSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSizeActionPerformed
-        dao.loadlbl(lblType, "L");
+//        dao.loadlbl(lblType, "L");
+        if (cboSize.getSelectedItem() != null) {
+            if (!cboSize.getSelectedItem().toString().equals("ly")) {
+                SanPham sp = (SanPham) cboSize.getSelectedItem();
+                lblType.setText("" + sp.getIDType());
+            }
+        }
     }//GEN-LAST:event_cboSizeActionPerformed
 
     private void tblSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMousePressed
@@ -531,8 +541,8 @@ public class GUI_Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void cboLoaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLoaiMouseClicked
-        this.row=tblSanPham.getSelectedRow();
-        this.row=-1;
+        this.row = tblSanPham.getSelectedRow();
+        this.row = -1;
         Refresh();
     }//GEN-LAST:event_cboLoaiMouseClicked
 

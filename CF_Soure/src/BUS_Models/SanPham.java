@@ -98,6 +98,6 @@ public class SanPham {
 
     @Override
     public String toString() {
-        return TypeName;
+        return Size;
     }
 }

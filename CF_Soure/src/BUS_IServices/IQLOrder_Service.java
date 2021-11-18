@@ -36,6 +36,8 @@ public interface IQLOrder_Service {
     public void hienTableOder(JTable tblOD);
 
     public void bill(JTextField txtMaHD, JTextField txtNameEMP, JTextField txtMaKH, JLabel TimeOrder, JTable tblOrder);
+    
+    public void billTable(JTextField txtMaHD, JTextField txtNameEMP, JTextField txtMaKH, JLabel TimeOrder, JTable tblOrder,String IDTable);
 
     public void timSP(JTextField txt, JTable tbl);
 

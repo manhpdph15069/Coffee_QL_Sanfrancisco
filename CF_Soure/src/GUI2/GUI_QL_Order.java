@@ -100,11 +100,11 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         tblSanPham.getColumnModel().getColumn(5).setCellRenderer(new GUI2.GUI_QL_Order.ClientsTableButtonRenderer());
         tblSanPham.getColumnModel().getColumn(5).setCellEditor(new GUI2.GUI_QL_Order.ClientsTableRenderer(new JCheckBox()));
         tblSanPham.setPreferredScrollableViewportSize(tblSanPham.getPreferredSize());
-        tblOrder.getColumnModel().getColumn(7).setCellRenderer(new GUI2.GUI_QL_Order.ClientsTableButtonRenderer());
-        tblOrder.getColumnModel().getColumn(7).setCellEditor(new GUI2.GUI_QL_Order.ClientsTableRenderer(new JCheckBox()));
+        tblOrder.getColumnModel().getColumn(8).setCellRenderer(new GUI2.GUI_QL_Order.ClientsTableButtonRenderer());
+        tblOrder.getColumnModel().getColumn(8).setCellEditor(new GUI2.GUI_QL_Order.ClientsTableRenderer(new JCheckBox()));
         tblOrder.setPreferredScrollableViewportSize(tblOrder.getPreferredSize());
         TableColumnModel tcm = tblOrder.getColumnModel();
-        TableColumn tc = tcm.getColumn(4);
+        TableColumn tc = tcm.getColumn(5);
         tc.setCellEditor(new GUI2.GUI_QL_Order.SpinnerEditor());
         this.card = (CardLayout) PanCac.getLayout();
         card.show(PanCac, "card4");
@@ -367,21 +367,21 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, "", null, null, null, null,  new Boolean(false)},
-                {null, null, null, "", null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, "", null, null, null, null,  new Boolean(false)},
+                {null, null, null, null, "", null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "IDSP", "Tên SP", "Size", "Giá", "SL", "Ghi Chú", "Hủy", "Bỏ", "Khác"
+                "IDOrder", "IDSP", "Tên SP", "Size", "Giá", "SL", "Ghi Chú", "Hủy", "Bỏ", "Khác"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true, true, true
+                true, false, false, false, false, true, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -541,7 +541,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             panChaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panChaoLayout.createSequentialGroup()
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panChaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)))
@@ -559,7 +559,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PanCac, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
+                .addComponent(PanCac, javax.swing.GroupLayout.PREFERRED_SIZE, 607, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -718,8 +718,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
     }//GEN-LAST:event_tblLichSuMouseClicked
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        // TODO add your handling code here:
-        System.out.println();
+        // TODO add your handling code here:        
         qlod.xoaNhom(lblBan.getToolTipText());
         qlod.thanhToan(txtmaHD);
         qlod.updatebnThanhToan(txtmaHD);
@@ -748,11 +747,11 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 int line = tblOrder.getRowCount();
                 int tongSl = 0;
                 for (int i = 0; i < line; i++) {
-                    String n1 = tblOrder.getValueAt(i, 0).toString();//IDSP
-                    String n2 = tblOrder.getValueAt(i, 1).toString();//Tên SP
-                    String n3 = tblOrder.getValueAt(i, 2) == null ? "Ly" : tblOrder.getValueAt(i, 2).toString();//Size
-                    double n4 = Double.parseDouble(tblOrder.getValueAt(i, 3).toString());//Giá
-                    int n5 = Integer.valueOf(tblOrder.getValueAt(i, 4).toString());//SL
+                    String n1 = tblOrder.getValueAt(i, 1).toString();//IDSP
+                    String n2 = tblOrder.getValueAt(i, 2).toString();//Tên SP
+                    String n3 = tblOrder.getValueAt(i, 3) == null ? "Ly" : tblOrder.getValueAt(i, 3).toString();//Size
+                    double n4 = Double.parseDouble(tblOrder.getValueAt(i, 4).toString());//Giá
+                    int n5 = Integer.valueOf(tblOrder.getValueAt(i, 5).toString());//SL
                     tongSl += n5;
                     //                    String n6 = (String) tblOrder.getValueAt(i, 7);
                     b.write("\t" + n1 + "\t" + n2 + "\t\t\t\t" + n3 + "\t\t" + n4 + "\t\t\t\t\t" + n5 + "\t" + "\r\n");
@@ -784,11 +783,11 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         int line = tblOrder.getRowCount();
         int tongSl = 0;
         for (int i = 0; i < line; i++) {
-            String n1 = tblOrder.getValueAt(i, 0).toString();//IDSP
-            String n2 = tblOrder.getValueAt(i, 1).toString();//Tên SP
-            String n3 = tblOrder.getValueAt(i, 2) == null ? "Ly" : tblOrder.getValueAt(i, 2).toString();//Size
-            double n4 = Double.parseDouble(tblOrder.getValueAt(i, 3).toString());//Giá
-            int n5 = Integer.valueOf(tblOrder.getValueAt(i, 4).toString());//SL
+            String n1 = tblOrder.getValueAt(i, 1).toString();//IDSP
+            String n2 = tblOrder.getValueAt(i, 2).toString();//Tên SP
+            String n3 = tblOrder.getValueAt(i, 3) == null ? "Ly" : tblOrder.getValueAt(i, 3).toString();//Size
+            double n4 = Double.parseDouble(tblOrder.getValueAt(i, 4).toString());//Giá
+            int n5 = Integer.valueOf(tblOrder.getValueAt(i, 5).toString());//SL
             tongSl += n5;
             //                    String n6 = (String) tblOrder.getValueAt(i, 7);
             hd = hd + "\t" + n1 + "\t" + n2 + "\t\t\t" + n3 + "\t" + n4 + "\t\t\t" + n5 + "\t" + "\r\n";
@@ -836,18 +835,18 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         for (int i = 0; i < qlod.dongC(); i++) {
             ENTITY_BILL bill = new ENTITY_BILL();
             bill.setIDOrder(this.txtmaHD.getText());
-            bill.setIDProduct(this.tblOrder.getValueAt(i, 0).toString());
-            bill.setNote(this.tblOrder.getValueAt(i, 5).toString());
-            bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 4).toString()));
+            bill.setIDProduct(this.tblOrder.getValueAt(i, 1).toString());
+            bill.setNote(this.tblOrder.getValueAt(i, 6).toString());
+            bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 5).toString()));
             qlod.updateOderDe(bill);
         }
         for (int i = qlod.dongC(); i < this.modell.getRowCount(); i++) {
             ENTITY_BILL bill = new ENTITY_BILL();
             bill.setIDOrder(this.txtmaHD.getText());
-            bill.setIDProduct(this.tblOrder.getValueAt(i, 0).toString());
+            bill.setIDProduct(this.tblOrder.getValueAt(i, 1).toString());
             bill.setIDTable(this.lblBan.getText());
-            bill.setNote(this.tblOrder.getValueAt(i, 5).toString());
-            bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 4).toString()));
+            bill.setNote(this.tblOrder.getValueAt(i, 6).toString());
+            bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 5).toString()));
             bill.setReason("");
             bill.setStatus(false);
             qlod.insertOderDe(bill);
@@ -890,7 +889,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
     private void mnHuymonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnHuymonActionPerformed
         // TODO add your handling code here:
         String sl = dialogHelper.prompt(null, "Mày lại Order nhầm đúng không ?\nGhi lý do vào đây :)");
-        qlod.huyMon(txtmaHD, sl, tblOrder.getValueAt(this.row, 0).toString(), tblOrder.getValueAt(this.row, 5).toString());
+        qlod.huyMon(txtmaHD, sl, tblOrder.getValueAt(this.row, 1).toString(), tblOrder.getValueAt(this.row, 6).toString());
         qlod.bill(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder);
     }//GEN-LAST:event_mnHuymonActionPerformed
 
@@ -906,15 +905,15 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         // TODO add your handling code here:
         String slTach = dialogHelper.prompt(this, "Nhập số lượng muốn tách ra đi cu :)");
         int slTc = Integer.valueOf(slTach);
-        int slcu = Integer.valueOf(this.tblOrder.getValueAt(row, 4).toString());
+        int slcu = Integer.valueOf(this.tblOrder.getValueAt(row, 5).toString());
         if (slcu - slTc <= 0) {
             dialogHelper.alert(this, "Có mỗi " + slcu + " Mà đòi tách ra " + slTach + " à :)");
             return;
         }
         ENTITY_BILL bill = new ENTITY_BILL();//Cập nhập món cũ
         bill.setIDOrder(this.txtmaHD.getText());
-        bill.setIDProduct(this.tblOrder.getValueAt(row, 0).toString());
-        bill.setNote(this.tblOrder.getValueAt(row, 5).toString());
+        bill.setIDProduct(this.tblOrder.getValueAt(row, 1).toString());
+        bill.setNote(this.tblOrder.getValueAt(row, 6).toString());
         bill.setQuantity(slTc);
         bill.setReason("");
         bill.setStatus(false);
@@ -922,7 +921,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         ENTITY_BILL bill1 = new ENTITY_BILL();
         bill1.setIDOrder(this.txtmaHD.getText());
         bill1.setIDProduct(this.tblOrder.getValueAt(row, 0).toString());
-        bill1.setNote(this.tblOrder.getValueAt(row, 5).toString() + "T " + (slcu - slTc));
+        bill1.setNote(this.tblOrder.getValueAt(row, 6).toString() + "T " + (slcu - slTc));
         bill1.setQuantity(Integer.valueOf(slcu - slTc));
         bill1.setReason("");
         bill1.setStatus(false);
@@ -938,14 +937,14 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         this.qlod.taoHD(txt);
         this.qlod.insertOr(txt);
         for (int i = 0; i < this.tblOrder.getRowCount(); i++) {
-            Boolean isDelete = (Boolean) tblOrder.getValueAt(i, 8);
+            Boolean isDelete = (Boolean) tblOrder.getValueAt(i, 9);
             if (isDelete) {
                 a++;
                 ENTITY_BILL bill1 = new ENTITY_BILL();
                 bill1.setIDOrder(txt.getText());
-                bill1.setIDProduct(this.tblOrder.getValueAt(i, 0).toString());
-                bill1.setNote(this.tblOrder.getValueAt(i, 5).toString());
-                bill1.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 4).toString()));
+                bill1.setIDProduct(this.tblOrder.getValueAt(i, 1).toString());
+                bill1.setNote(this.tblOrder.getValueAt(i, 6).toString());
+                bill1.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 5).toString()));
                 bill1.setReason("");
                 this.qlod.tachHDon(this.txtmaHD.getText(), txt.getText(), bill1.getIDProduct(), bill1.getNote(), lblBan.getText());
             }
@@ -982,8 +981,8 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         int line = this.tblOrder.getRowCount();
         for (int i = 0; i < line; i++) {
             if (this.tblOrder.getValueAt(i, 6).toString().equals("")) {
-                double gia = Double.valueOf(this.tblOrder.getValueAt(i, 3).toString());
-                int SL = Integer.valueOf(this.tblOrder.getValueAt(i, 4).toString());
+                double gia = Double.valueOf(this.tblOrder.getValueAt(i, 4).toString());
+                int SL = Integer.valueOf(this.tblOrder.getValueAt(i, 5).toString());
                 double thanhtien = gia * SL;
                 total += thanhtien;
             }
@@ -1075,6 +1074,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                         dialogHelper.alert(PanSanPham, "Bố chưa vào bàn mà đòi thêm cái gì trời ?");
                     } else {
                         Object[] row = {
+                            txtmaHD.getText(),
                             tblSanPham.getValueAt(this.row, 0),
                             tblSanPham.getValueAt(this.row, 2),
                             tblSanPham.getValueAt(this.row, 3),

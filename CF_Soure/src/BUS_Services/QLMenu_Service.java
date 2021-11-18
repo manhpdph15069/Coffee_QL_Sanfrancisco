@@ -95,7 +95,8 @@ public class QLMenu_Service implements IQLMenu_Service {
             e.printStackTrace();
         }
     }
-        public void khoiphuc(String IDProduct) {
+
+    public void khoiphuc(String IDProduct) {
         String sql = "UPDATE [Product] SET [Status]=1 WHERE [IDProduct] = ?";
         try {
             JDBC.update(sql, IDProduct);
@@ -166,12 +167,12 @@ public class QLMenu_Service implements IQLMenu_Service {
         }
     }
 
-    public List<ENTITY_ProductType> SelectBySize(String sql, Object... args) {
-        List<ENTITY_ProductType> list = new ArrayList<>();
+    public List<SanPham> SelectBySize(String sql, Object... args) {
+        List<SanPham> list = new ArrayList<>();
         try {
             ResultSet rs = JDBC.query(sql, args);
             while (rs.next()) {
-                ENTITY_ProductType table = new ENTITY_ProductType();
+                SanPham table = new SanPham();
                 table.setIDType(rs.getInt("IDType"));
                 table.setSize(rs.getString("Size"));
                 list.add(table);
@@ -210,8 +211,10 @@ public class QLMenu_Service implements IQLMenu_Service {
         }
     }
 
-    public List<ENTITY_ProductType> selectSize(String type) {
+    public List<SanPham> selectSize(String type) {
         try {
+            List<SanPham> list = this.SelectBySize(SELECT_BY_Size, type);
+            System.out.println("list :" + list.size());
             return this.SelectBySize(SELECT_BY_Size, type);
         } catch (Exception e) {
             e.printStackTrace();
@@ -221,7 +224,7 @@ public class QLMenu_Service implements IQLMenu_Service {
 
     public List<SanPham> selectIDType(String type) {
         try {
-            return this.SelectID(SELECT_BY_Lbl,type);
+            return this.SelectID(SELECT_BY_Lbl, type);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -240,7 +243,7 @@ public class QLMenu_Service implements IQLMenu_Service {
         try {
             List<SanPham> list = this.select();
             for (SanPham pro : list) {
-                Object[] row = {pro.getIDProduct(),pro.getProductName(), pro.getSize(), pro.getPrice(), pro.isStatus() ? "Đang sử dụng" : "Không sử dụng"};
+                Object[] row = {pro.getIDProduct(), pro.getProductName(), pro.getSize(), pro.getPrice(), pro.isStatus() ? "Đang sử dụng" : "Không sử dụng"};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -252,8 +255,12 @@ public class QLMenu_Service implements IQLMenu_Service {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cbo.getModel();
         model.removeAllElements();
         try {
-            List<ENTITY_ProductType> list = this.selectTypeName();
+            List<ENTITY_ProductType> list = this.selectTypeName();            
             for (ENTITY_ProductType sp : list) {
+                List<SanPham> lista = this.SelectBySize(SELECT_BY_Size, sp.getTypeName());
+                for (SanPham sanPham : lista) {
+                    sp.setIDType(sanPham.getIDType());
+                }
                 model.addElement(sp);
             }
         } catch (Exception e) {
@@ -262,12 +269,17 @@ public class QLMenu_Service implements IQLMenu_Service {
     }
 
     public void loadComboSize(JComboBox cbo, String type, JLabel lbl) {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cbo.getModel();
+        model.removeAllElements();
         try {
             cbo.removeAllItems();
-            List<ENTITY_ProductType> list = this.selectSize(type);
-            for (ENTITY_ProductType sp : list) {
-                cbo.addItem(sp.getSize());
-                lbl.setText(String.valueOf(sp.getIDType()));
+            List<SanPham> list = this.selectSize(type);
+            for (SanPham sp : list) {
+                if (list.size() == 1) {
+                    cbo.addItem("ly");
+                } else {                    
+                    model.addElement(sp);
+                }                
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -275,10 +287,10 @@ public class QLMenu_Service implements IQLMenu_Service {
     }
 
     public void loadlbl(JLabel lbl, String type) {
-            List<SanPham> list = this.selectIDType(type);
-            for (SanPham sp : list) {
-                lbl.setText(String.valueOf(sp.getIDType()));
-    }
+        List<SanPham> list = this.selectIDType(type);
+        for (SanPham sp : list) {
+            lbl.setText(String.valueOf(sp.getIDType()));
+        }
     }
     JFileChooser fileChooser = new JFileChooser();
 

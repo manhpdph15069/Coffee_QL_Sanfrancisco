@@ -42,7 +42,6 @@ public class GUI_AddNhom extends javax.swing.JDialog {
      * Creates new form GUI_AddNhom
      */
     public GUI_AddNhom(JPanel parent, boolean moda, ENTITY_Table tbl, JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac) {
-//        super(parent, modal);
         initComponents();
         finCbbNhom();
         this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac);
