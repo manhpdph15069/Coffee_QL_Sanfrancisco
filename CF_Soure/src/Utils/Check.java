@@ -95,22 +95,12 @@ public class Check {
     }
 
     //định dạng dd/MM/yyyy (hoặc d/M/yyyy nếu là số 0 đứng trước)
-    public static boolean checkDate(JDateChooser txt) {
-        txt.setBackground(white);
-        String id = String.valueOf(txt.getDate());
-//        String rgx = "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$";
-//        if (id.matches(rgx)) {
-//            return true;
-//        } else {
-//            txt.setBackground(pink);
-//            ThongBao.alert(txt.getRootPane(), txt.getName() + " không đúng định dạng Date.");
-//            return false;
-//        }
-        if (isValidDate(id)) {
+    public static boolean checkDate(String txt) {
+        String rgx = "\\d{1,2}/\\d{1,2}/\\d{4}";
+        if (txt.matches(rgx)) {
             return true;
         } else {
-            txt.setBackground(pink);
-            ThongBao.alert(txt.getRootPane(), txt.getName() + " không đúng định dạng dd/MM/yyyy");
+            dialogHelper.alert(null, " không đúng định dạng Date.");
             return false;
         }
     } 
