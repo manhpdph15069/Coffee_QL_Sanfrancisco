@@ -13,6 +13,8 @@ import DAL_Models.ENTITY_Table;
 import DAL_Services.Table_Service;
 import Utils.Check;
 import Utils.ThongBao;
+import static java.awt.Color.pink;
+import static java.awt.Color.white;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -21,6 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
 
 /**
  *
@@ -28,7 +31,7 @@ import javax.swing.JPopupMenu;
  */
 public class GUI_Table extends javax.swing.JPanel {
 
-    //ITable_Service tbdao;
+    Table_Service tbdao;
     JPopupMenu menu = new JPopupMenu("Popup");
     IQLTable_Service dao;
     int row = -1;
@@ -39,7 +42,7 @@ public class GUI_Table extends javax.swing.JPanel {
      */
     public GUI_Table() {
         initComponents();
-        //  tbdao =new Table_Service();
+        tbdao = new Table_Service();
         dao = new QLTable_Service();
         txtMaBan.setEditable(false);
         dao.taoIDTable(txtMaBan);
@@ -333,20 +336,51 @@ public class GUI_Table extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if (Check.checkNullText(txtViTri)) {
-            insert();
+        List<ENTITY_Table> list = tbdao.select();
+        int tb = 0;
+        if (checkTrungMa(txtMaBan)) {
+            
+        for (ENTITY_Table t : list) {
+
+            if (t.getLocation() != (Integer.parseInt(txtViTri.getText()))) {
+                tb = 1;
+            } else {
+
+                tb = 2;
+
+            }
         }
+        if (tb == 1) {
+            insert();
+        } else {
+            tbdao.update_trung(Integer.valueOf(txtViTri.getText()));
+            ThongBao.alert(this, "Vị trí đã toàn tại");
+        }
+        }
+
     }//GEN-LAST:event_btnThemActionPerformed
-void insert(){
-            try {
+    void insert() {
+        try {
             ENTITY_Table tbl = getModel();
             dao.insertMATABLE(tbl);
             dao.fillTable(tblTable);
+            xoaform();
             ThongBao.alert(this, "Thêm thành công");
         } catch (Exception e) {
             e.printStackTrace();
         }
-}
+    }
+
+    public boolean checkTrungMa(JTextField txt) {
+        txt.setBackground(white);
+        if (tbdao.findById(txt.getText()) == null) {
+            return true;
+        } else {
+            txt.setBackground(pink);
+            ThongBao.alert(this, txt.getName() + " đã bị tồn tại.");
+            return false;
+        }
+    }
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         xoaform();
         dao.fillTable(tblTable);
@@ -355,8 +389,8 @@ void insert(){
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         delete();
     }//GEN-LAST:event_btnXoaActionPerformed
-void delete(){
-            try {
+    void delete() {
+        try {
             this.row = tblTable.getSelectedRow();
             dao.deleteTABLE(txtMaBan.getText());
             dao.fillTable(tblTable);
@@ -365,14 +399,14 @@ void delete(){
         } catch (Exception e) {
             e.printStackTrace();
         }
-}
+    }
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         if (Check.checkNullText(txtViTri)) {
             update();
         }
     }//GEN-LAST:event_btnSuaActionPerformed
-void update(){
-            try {
+    void update() {
+        try {
             ENTITY_Table tbl = getModel();
             dao.updatetTABLE(tbl);
             dao.fillTable(tblTable);
@@ -381,7 +415,7 @@ void update(){
         } catch (Exception e) {
             e.printStackTrace();
         }
-}
+    }
     private void tblTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMouseClicked
         if (evt.getClickCount() == 2) {
             this.row = tblTable.getSelectedRow();
@@ -528,7 +562,8 @@ void update(){
         cbbKhu.setSelectedItem(tb.getIDArea());
 
     }
-     void first() {
+
+    void first() {
         this.row = 0;
         this.edit();
     }
@@ -551,13 +586,14 @@ void update(){
         this.row = tblTable.getRowCount() - 1;
         this.edit();
     }
+
     void updateStatus() {
         boolean edit = (this.row >= 0);
         boolean first = (this.row == 0);
         boolean last = (this.row == tblTable.getRowCount() - 1);
         //Trạng thái form
-     
-       // btnThem.setEnabled(edit);
+
+        // btnThem.setEnabled(edit);
         btnSua.setEnabled(edit);
         btnXoa.setEnabled(edit);
         //trạng thái điều hướng

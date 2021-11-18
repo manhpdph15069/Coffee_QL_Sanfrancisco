@@ -39,7 +39,8 @@ public class Employee_Service implements IEmployee_Service {
                     entity.getSex(),
                     entity.getEmail(),
                     entity.getImage(),
-                    maHoa(entity.getPassword()),
+                    entity.getPassword(),
+                    //maHoa(entity.getPassword()),
                     entity.getUsernameEMP());
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,7 +52,8 @@ public class Employee_Service implements IEmployee_Service {
         try {
             JDBC.update(INSERT_SQL,
                     entity.getUsernameEMP(),
-                    maHoa(entity.getPassword()),
+                   // maHoa(entity.getPassword()),
+                     entity.getPassword(),
                     entity.getNameEMP(),
                     entity.getPhone(),
                     entity.getBirthday(),
@@ -133,16 +135,16 @@ public class Employee_Service implements IEmployee_Service {
         }
     }
     
-             public String maHoa(String srcText) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        String enrText;
-
-        MessageDigest mh = MessageDigest.getInstance("MD5");//Lớp thực hiện mã hóa
-        byte[] srcTextBytes = srcText.getBytes("UTF-8");
-        byte[] enrTextBytes = mh.digest(srcTextBytes);
-
-        BigInteger bigInt = new BigInteger(1, enrTextBytes);//byte mã hóa đc chuyển sang chuổi số hệ 16 nhờ lớp
-        enrText = bigInt.toString(16);
-
-        return enrText;
-    }
+//             public String maHoa(String srcText) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+//        String enrText;
+//
+//        MessageDigest mh = MessageDigest.getInstance("MD5");//Lớp thực hiện mã hóa
+//        byte[] srcTextBytes = srcText.getBytes("UTF-8");
+//        byte[] enrTextBytes = mh.digest(srcTextBytes);
+//
+//        BigInteger bigInt = new BigInteger(1, enrTextBytes);//byte mã hóa đc chuyển sang chuổi số hệ 16 nhờ lớp
+//        enrText = bigInt.toString(16);
+//
+//        return enrText;
+//    }
 }

@@ -16,6 +16,7 @@ import Utils.XImage;
 import static java.awt.Color.pink;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JTextField;
 
@@ -24,6 +25,7 @@ import javax.swing.JTextField;
  * @author notak
  */
 public class GUI_Employee_NhanVien extends javax.swing.JPanel {
+    //  SimpleDateFormat fomat = 
 
     IQLEmployee_Service dao;
     Employee_Service nv = new Employee_Service();
@@ -478,8 +480,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
             if (Check.checkName(txtHoTen)
                     && Check.checkPass(txtPassWord)
                     && Check.checkEmail(txtEmail)
-                    && Check.checkSDT(txtSDT) //          && Check.checkDate(txtNgaySinh)
-                    ) {
+                    && Check.checkSDT(txtSDT)) {
                 try {
                     if (themtrung(txtUserName) == 1) {
                         return;
@@ -490,7 +491,6 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
                 }
 
             }
-
         }
     }//GEN-LAST:event_btnThemActionPerformed
     void insert() {
