@@ -104,6 +104,7 @@ public class Table_Service implements ITable_Service {
                 table.setLocation(rs.getInt("Location"));
                 table.setStatus(rs.getInt("Status"));
                 table.setIDArea(rs.getInt("IDArea"));
+                table.setTableGroup(rs.getString("TableGroup"));
                 list.add(table);
             }
             rs.getStatement().getConnection().close();

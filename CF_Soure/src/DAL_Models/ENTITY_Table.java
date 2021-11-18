@@ -17,10 +17,19 @@ private String IDTable;
 private int Location;
 private int Status;
 private int IDArea;
+private String TableGroup;
 
     public ENTITY_Table() {
     }
 
+    public String getTableGroup() {
+        return TableGroup;
+    }
+
+    public void setTableGroup(String TableGroup) {
+        this.TableGroup = TableGroup;
+    }
+    
     public String getIDTable() {
         return IDTable;
     }

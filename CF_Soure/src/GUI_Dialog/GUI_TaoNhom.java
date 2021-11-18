@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI2;
+package GUI_Dialog;
 
 import BUS_IServices.IQLOrder_Service;
-import BUS_IServices.IQLTable_Service;
 import BUS_Services.QLOrder_Service;
 import BUS_Services.QLTable_Service;
 import DAL_Models.ENTITY_Table;
+import Utils.JDBC;
+import java.sql.ResultSet;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,10 +21,8 @@ import javax.swing.JTextField;
  *
  * @author Tran Van Thanh
  */
-public class JDialogTaoBan extends javax.swing.JDialog {
+public class GUI_TaoNhom extends javax.swing.JDialog {
 
-    private ENTITY_Table ban;
-    private IQLTable_Service daoban;    
     private IQLOrder_Service ql;
     private JPanel that;
     private JButton btnVaoBan;
@@ -38,13 +37,15 @@ public class JDialogTaoBan extends javax.swing.JDialog {
     private JLabel TimeOrder;
     private JTextField txtTong;
     private JPanel PanCac;
+    private ENTITY_Table ban;
+
     /**
-     * Creates new form JDialogTaoBan
+     * Creates new form GUI_TaoNhom
      */
-    public JDialogTaoBan(JPanel parent, boolean moda, ENTITY_Table tbl,JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac) {
+    public GUI_TaoNhom(JPanel parent, boolean moda, ENTITY_Table tbl,JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac) {
 //        super(parent, modal);
         initComponents();
-        this.daoban = new QLTable_Service();
+        finCbbNhom();         
         this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac);
         this.ban = tbl;
         this.that = that;
@@ -59,11 +60,34 @@ public class JDialogTaoBan extends javax.swing.JDialog {
         this.txtNameEMP = txtNameEMP;
         this.TimeOrder = TimeOrder;
         this.txtTong = txtTong;
-        this.PanCac = PanCac;                
+        this.PanCac = PanCac;     
         this.setLocationRelativeTo(null);
     }
 
- 
+    public void finCbbNhom() {
+        String sql = "SELECT TableGroup FROM [Table]";
+        this.cbbTenNhom.removeAllItems();
+        this.cbbTenNhom.addItem("Nhóm 1");
+        this.cbbTenNhom.addItem("Nhóm 2");
+        this.cbbTenNhom.addItem("Nhóm 3");
+        this.cbbTenNhom.addItem("Nhóm 4");
+        this.cbbTenNhom.addItem("Nhóm 5");
+        this.cbbTenNhom.addItem("Nhóm 6");
+        this.cbbTenNhom.addItem("Nhóm 7");
+        this.cbbTenNhom.addItem("Nhóm 8");
+        this.cbbTenNhom.addItem("Nhóm 9");
+        this.cbbTenNhom.addItem("Nhóm 10");
+        try {
+            ResultSet rs = JDBC.query(sql);
+            while (rs.next()) {
+                if (rs.getString("TableGroup") != null) {
+                    this.cbbTenNhom.removeItem(rs.getString("TableGroup"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,15 +100,18 @@ public class JDialogTaoBan extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        txtviTri = new javax.swing.JTextField();
+        cbbTenNhom = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
 
-        jLabel1.setText("Vị trí bàn :");
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setText("Tạo nhóm");
+
+        jLabel2.setText("Tên nhóm :");
 
         jButton1.setText("Xác nhận");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -93,31 +120,38 @@ public class JDialogTaoBan extends javax.swing.JDialog {
             }
         });
 
+        cbbTenNhom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtviTri, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(156, 156, 156))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(cbbTenNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtviTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addComponent(cbbTenNhom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addComponent(jButton1)
-                .addGap(30, 30, 30))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,11 +170,9 @@ public class JDialogTaoBan extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ban.setLocation(Integer.valueOf(txtviTri.getText()));
-        daoban.insertMATABLE(ban);
-        ql.taoTable(that, ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac);
-        this.dispose();        
-        
+        this.ql.taoNhom(this.cbbTenNhom.getSelectedItem().toString(),ban.getIDTable());        
+        this.ql.taoTable(that,ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -160,20 +192,20 @@ public class JDialogTaoBan extends javax.swing.JDialog {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(JDialogTaoBan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(GUI_TaoNhom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(JDialogTaoBan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(GUI_TaoNhom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(JDialogTaoBan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(GUI_TaoNhom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(JDialogTaoBan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(GUI_TaoNhom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the dialog */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                JDialogTaoBan dialog = new JDialogTaoBan(new javax.swing.JFrame(), true);
+//                GUI_TaoNhom dialog = new GUI_TaoNhom(new javax.swing.JFrame(), true);
 //                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 //                    @Override
 //                    public void windowClosing(java.awt.event.WindowEvent e) {
@@ -186,9 +218,10 @@ public class JDialogTaoBan extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbbTenNhom;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtviTri;
     // End of variables declaration//GEN-END:variables
 }
