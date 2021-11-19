@@ -401,7 +401,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                         button.setBackground(Color.magenta);
                         break;
                     case "Nhóm 5":
-                        button.setBackground(Color.lightGray);
+                        button.setBackground(Color.lightGray);                        
                         break;
                     case "Nhóm 6":
                         button.setBackground(Color.cyan);
@@ -463,7 +463,7 @@ public class QLOrder_Service implements IQLOrder_Service {
             JButton selectedButton = (JButton) e.getSource();
             this.firstButton = selectedButton;
             BanButtons banButton = banButtonList.get(selectedButton);
-            this.GroupBan = banButton.getTableGroup();
+            this.GroupBan = banButton.getTableGroup();            
             lblBan.setToolTipText(banButton.getTableGroup());
             lblBan.setText(String.valueOf(banButton.getIDTalbe()));
             model = (DefaultTableModel) tblOder.getModel();

@@ -711,7 +711,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             txtmaHD.setText(tblLichSu.getValueAt(tblLichSu.getSelectedRow(), 0).toString());
-            qlod.bill(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder);
+            qlod.billTable(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder,lblBan.getText());
             CardLayout card = (CardLayout) PanCac.getLayout();
             card.show(PanCac, "card3");
         }
@@ -920,14 +920,15 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         qlod.updateOderDe(bill);
         ENTITY_BILL bill1 = new ENTITY_BILL();
         bill1.setIDOrder(this.txtmaHD.getText());
-        bill1.setIDProduct(this.tblOrder.getValueAt(row, 0).toString());
+        bill1.setIDProduct(this.tblOrder.getValueAt(row, 1).toString());
         bill1.setNote(this.tblOrder.getValueAt(row, 6).toString() + "T " + (slcu - slTc));
         bill1.setQuantity(Integer.valueOf(slcu - slTc));
         bill1.setReason("");
+        bill1.setIDTable(lblBan.getText());
         bill1.setStatus(false);
         bill.setIDTable(lblBan.getText());
         qlod.insertOderDe(bill1);
-        qlod.bill(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder);
+        qlod.billTable(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder,lblBan.getText());
     }//GEN-LAST:event_mnTachMonActionPerformed
 
     private void btnTachHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTachHDActionPerformed
@@ -949,7 +950,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 this.qlod.tachHDon(this.txtmaHD.getText(), txt.getText(), bill1.getIDProduct(), bill1.getNote(), lblBan.getText());
             }
         }
-        this.qlod.bill(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder);
+        this.qlod.billTable(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder,lblBan.getText());
 
 
     }//GEN-LAST:event_btnTachHDActionPerformed
