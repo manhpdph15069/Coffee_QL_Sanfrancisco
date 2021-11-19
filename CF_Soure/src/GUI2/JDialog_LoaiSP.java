@@ -23,7 +23,8 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
 
     int row = -1;
     ProductType_Service dao = new ProductType_Service();
-    QLMenu_Service dao1=new QLMenu_Service();
+    QLMenu_Service dao1 = new QLMenu_Service();
+    private JComboBox cbb = null;
 
     /**
      * Creates new form JDialog_LoaiSP
@@ -36,8 +37,7 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
         tblType.getColumnModel().getColumn(0).setMinWidth(0);
         tblType.getColumnModel().getColumn(0).setMaxWidth(0);
         init();
-        dao1.selectTypeName();
-        dao1.loadComboTypeName(cbo);
+        this.cbb = cbo;
     }
 
     /**
@@ -197,14 +197,17 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         insert();
+        dao1.loadComboTypeName(cbb);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         update();
+        dao1.loadComboTypeName(cbb);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         delete();
+        dao1.loadComboTypeName(cbb);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
