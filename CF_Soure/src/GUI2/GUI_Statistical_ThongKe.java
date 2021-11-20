@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+
 /**
  *
  * @author notak
@@ -18,6 +19,7 @@ import java.util.List;
 public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
 
     SimpleDateFormat formatNam = new SimpleDateFormat("yyyy");
+    SimpleDateFormat format= new SimpleDateFormat("hh");
     IQLStatistical_Service dao = null;
 
     /**
@@ -75,6 +77,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         lblTM = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         lblHD = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText(":");
@@ -105,10 +108,13 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
             .addGroup(pnlNgayLayout.createSequentialGroup()
                 .addGroup(pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlNgayLayout.createSequentialGroup()
-                        .addGroup(pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel8))
-                        .addGap(36, 36, 36)
+                        .addGroup(pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlNgayLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(36, 36, 36))
+                            .addGroup(pnlNgayLayout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(24, 24, 24)))
                         .addGroup(pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)))
@@ -126,7 +132,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
             .addGroup(pnlNgayLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addGap(329, 329, 329))
             .addGroup(pnlNgayLayout.createSequentialGroup()
@@ -134,14 +140,14 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                     .addGroup(pnlNgayLayout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8))
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel13))
                     .addGroup(pnlNgayLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)))
-                .addGap(9, 9, 9)
-                .addComponent(jLabel13)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 153));
@@ -226,6 +232,13 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         lblHD.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblHD.setText("00000");
 
+        jButton1.setText("Gửi báo cáo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -268,6 +281,8 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -290,7 +305,8 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                                     .addComponent(jLabel7)
                                     .addComponent(lblTM)
                                     .addComponent(jLabel9)
-                                    .addComponent(lblHD)))
+                                    .addComponent(lblHD)
+                                    .addComponent(jButton1)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jDateNBD, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -313,13 +329,15 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 1139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 1046, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKhoangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoangActionPerformed
         try {
             dao.setDataKhoang(pnlNgay, jDateNBD.getDate(), JDateNKT.getDate());
+            dao.setTongMonKhoang(lblTM, lblHD, jDateNBD.getDate(), JDateNKT.getDate());
             float tong = 0;
             List<Object[]> list = dao.getListByTKKhoangList(jDateNBD.getDate(), JDateNKT.getDate());
             for (Object[] o : list) {
@@ -350,7 +368,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
     private void btnThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThangActionPerformed
         try {
             dao.setDataThang(pnlNgay, jDateNBD.getDate().getMonth() + 1);
-            dao.setTongMonThang(lblTM, lblHD,(jDateNBD.getDate().getMonth()+1));
+            dao.setTongMonThang(lblTM, lblHD, (jDateNBD.getDate().getMonth() + 1));
 
             float tong = 0;
             int thang = Integer.valueOf(jDateNBD.getDate().getMonth() + 1);
@@ -359,7 +377,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                 tong += Float.valueOf(String.valueOf(o[0]));;
             }
             setLbl(tong);
-           // System.out.println(""+jDateNBD.getDate().getMonth()+1);
+            // System.out.println(""+jDateNBD.getDate().getMonth()+1);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnThangActionPerformed
@@ -381,6 +399,20 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnNamActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            
+      //  dao.guiBCN(Integer.valueOf(formatNam.format(jDateNBD.getDate())));
+    dao.guiBCNgay(jDateNBD.getDate());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+         
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    
+
     void setLbl(float tong) {
         lblTong.setText(String.valueOf(tong));
         if (lblTong.getText().equals("null") || lblHD.getText().equals("null") || lblTM.getText().equals("null")) {
@@ -396,6 +428,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
     private javax.swing.JButton btnNam;
     private javax.swing.JButton btnNgay;
     private javax.swing.JButton btnThang;
+    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateNBD;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
