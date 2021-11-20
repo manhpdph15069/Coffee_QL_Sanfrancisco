@@ -235,8 +235,6 @@ void dangNhap(){
                 this.dispose();
             ThongBao.alert(this, "Đăng nhập thành công");
             }
-        }else if(!pass.equals(nv.getPassword())) {
-           tb++;
         }else{
             Auth.user = nv;
             this.dispose();
