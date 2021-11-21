@@ -169,7 +169,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 700));
+        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 400));
 
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
@@ -187,7 +187,8 @@ public class QLStatistical_Service implements IQLStatistical_Service {
 
     @Override
     public void setDataThang(JPanel pnlNgay, int thang) {
-        List<Object[]> list = getListByTKThang(thang);
+        try {
+            List<Object[]> list = getListByTKThang(thang);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         if (list != null) {
             for (Object[] o : list) {
@@ -202,13 +203,16 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 700));
+        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 400));
 
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
         pnlNgay.add(chartPanel);
         pnlNgay.validate();
         pnlNgay.repaint();
+        } catch (Exception e) {
+          //  e.printStackTrace();
+        }
     }
 
     @Override
@@ -236,7 +240,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 700));
+        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 400));
 
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
@@ -270,7 +274,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 700));
+        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 400));
 
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());

@@ -134,7 +134,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel11)
-                .addGap(329, 329, 329))
+                .addGap(285, 285, 285))
             .addGroup(pnlNgayLayout.createSequentialGroup()
                 .addGroup(pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlNgayLayout.createSequentialGroup()
@@ -147,7 +147,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 153));
@@ -329,8 +329,8 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 1046, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 901, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -367,18 +367,21 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
 
     private void btnThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThangActionPerformed
         try {
-            dao.setDataThang(pnlNgay, jDateNBD.getDate().getMonth() + 1);
-            dao.setTongMonThang(lblTM, lblHD, (jDateNBD.getDate().getMonth() + 1));
+            int thang = Integer.valueOf(jDateNBD.getDate().getMonth() + 1);
+            System.out.println(""+thang);
+            dao.setDataThang(pnlNgay, thang);
+            dao.setTongMonThang(lblTM, lblHD, thang);
 
             float tong = 0;
-            int thang = Integer.valueOf(jDateNBD.getDate().getMonth() + 1);
             List<Object[]> list = dao.getListByTKThang(thang);
+                
             for (Object[] o : list) {
                 tong += Float.valueOf(String.valueOf(o[0]));;
             }
             setLbl(tong);
-            // System.out.println(""+jDateNBD.getDate().getMonth()+1);
+
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnThangActionPerformed
 
