@@ -116,7 +116,7 @@ public class QLOrder_Service implements IQLOrder_Service {
             + "JOIN ProductType on PR.IDType = ProductType.IDType\n"
             + "WHERE OrderDetail.IDOrder = ? ";
     String thanhToan = "UPDATE [Order] SET [Status] = 2 WHERE IDOrder = ?";
-    String chuenBan = "UPDATE OrderDetail SET IDTable = ? WHERE IDOrder = ?";
+    String chuenBan = "UPDATE OrderDetail SET IDTable = ?,Note = ? WHERE IDOrder = ?";
 
     public QLOrder_Service(JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac) {
         this.qlb = new Table_Service();
@@ -510,7 +510,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                 }
                 BanButtons ban = banButtonList.get(ButtonChuyen);
 //                dialogHelper.alert(null, "Chuyển từ bàn :" + ban.getIDTalbe() + "Đến" + banButton.getIDTalbe());
-                chuenBan(banButton.getIDTalbe(), IDOrderCu);
+                chuenBan(banButton.getIDTalbe(),"Chuyển từ bàn :" + ban.getIDTalbe() + "Đến" + banButton.getIDTalbe(), IDOrderCu);
                 updatebnGuoi();
                 String sql = "UPDATE [Table] SET [Status] = 0 WHERE IDTable = ?";
                 try {
@@ -531,10 +531,10 @@ public class QLOrder_Service implements IQLOrder_Service {
                 }
                 BanButtons ban = banButtonList.get(ButtonGop);
                 if (dialogHelper.confirm(null, "Bạn có muốn gộp hóa đơn vào luôn không")) {
-                    chuenBan(banButton.getIDTalbe(), IDOrderCu);
+                    chuenBan(banButton.getIDTalbe(),"Chuyển từ bàn :" + ban.getIDTalbe() + "Đến" + banButton.getIDTalbe(), IDOrderCu);
                     gopBanvsHD(banButton.getIDTalbe(), IDOrderCu, IDOrderMoi);
                 } else {
-                    chuenBan(banButton.getIDTalbe(), IDOrderCu);
+                    chuenBan(banButton.getIDTalbe(),"Chuyển từ bàn :" + ban.getIDTalbe() + "Đến" + banButton.getIDTalbe(), IDOrderCu);
                 }
 
                 String sql = "UPDATE [Table] SET [Status] = 0 WHERE IDTable = ?";
@@ -549,9 +549,9 @@ public class QLOrder_Service implements IQLOrder_Service {
         }
     }
 
-    public void chuenBan(String IDTable, String IDOder) {
+    public void chuenBan(String IDTable,String Note, String IDOder) {
         try {
-            JDBC.update(chuenBan, IDTable, IDOder);
+            JDBC.update(chuenBan, IDTable,Note, IDOder);
         } catch (Exception e) {
             e.printStackTrace();
         }
