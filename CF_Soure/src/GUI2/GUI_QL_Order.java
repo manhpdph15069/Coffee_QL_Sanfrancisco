@@ -31,7 +31,6 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.EventObject;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
@@ -41,7 +40,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -57,7 +55,7 @@ import javax.swing.table.TableColumnModel;
  * @author Tran Van Thanh
  */
 public class GUI_QL_Order extends javax.swing.JPanel {
-    
+
     private IQLOrder_Service qlod;
     private NumberFormat n = new DecimalFormat("#,###");
     private DefaultTableModel modell;
@@ -72,7 +70,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         initComponents();
         init();
     }
-    
+
     private void init() {
         this.setSize(1200, 700);
         this.qlod = (IQLOrder_Service) new QLOrder_Service(this, this.btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, txtTong, PanCac);
@@ -730,7 +728,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
     private void btnLuuVSInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuVSInActionPerformed
         XuatTxt();
     }//GEN-LAST:event_btnLuuVSInActionPerformed
-    
+
     public void XuatTxt() throws NumberFormatException {
         // TODO add your handling code here:        
         try {
@@ -747,14 +745,18 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 int line = tblOrder.getRowCount();
                 int tongSl = 0;
                 for (int i = 0; i < line; i++) {
-                    String n1 = tblOrder.getValueAt(i, 1).toString();//IDSP
-                    String n2 = tblOrder.getValueAt(i, 2).toString();//Tên SP
-                    String n3 = tblOrder.getValueAt(i, 3) == null ? "Ly" : tblOrder.getValueAt(i, 3).toString();//Size
-                    double n4 = Double.parseDouble(tblOrder.getValueAt(i, 4).toString());//Giá
-                    int n5 = Integer.valueOf(tblOrder.getValueAt(i, 5).toString());//SL
-                    tongSl += n5;
-                    //                    String n6 = (String) tblOrder.getValueAt(i, 7);
-                    b.write("\t" + n1 + "\t" + n2 + "\t\t\t\t" + n3 + "\t\t" + n4 + "\t\t\t\t\t" + n5 + "\t" + "\r\n");
+                    if (tblOrder.getValueAt(i, 0).toString().equals(txtmaHD.getText())) {
+                        if (tblOrder.getValueAt(i, 7).toString().equals("")) {
+                            String n1 = tblOrder.getValueAt(i, 1).toString();//IDSP
+                            String n2 = tblOrder.getValueAt(i, 2).toString();//Tên SP
+                            String n3 = tblOrder.getValueAt(i, 3) == null ? "Ly" : tblOrder.getValueAt(i, 3).toString();//Size
+                            double n4 = Double.parseDouble(tblOrder.getValueAt(i, 4).toString());//Giá
+                            int n5 = Integer.valueOf(tblOrder.getValueAt(i, 5).toString());//SL
+                            tongSl += n5;
+                            //                    String n6 = (String) tblOrder.getValueAt(i, 7);
+                            b.write("\t" + n1 + "\t" + n2 + "\t\t\t\t" + n3 + "\t\t" + n4 + "\t\t\t\t\t" + n5 + "\t" + "\r\n");
+                        }
+                    }
                 }
                 b.write("\t-------------------------------------------------------------------------------\r\n");
                 String tt = txtTienTra.getText().substring(0, txtTienTra.getText().lastIndexOf("VNĐ"));
@@ -783,14 +785,18 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         int line = tblOrder.getRowCount();
         int tongSl = 0;
         for (int i = 0; i < line; i++) {
-            String n1 = tblOrder.getValueAt(i, 1).toString();//IDSP
-            String n2 = tblOrder.getValueAt(i, 2).toString();//Tên SP
-            String n3 = tblOrder.getValueAt(i, 3) == null ? "Ly" : tblOrder.getValueAt(i, 3).toString();//Size
-            double n4 = Double.parseDouble(tblOrder.getValueAt(i, 4).toString());//Giá
-            int n5 = Integer.valueOf(tblOrder.getValueAt(i, 5).toString());//SL
-            tongSl += n5;
-            //                    String n6 = (String) tblOrder.getValueAt(i, 7);
-            hd = hd + "\t" + n1 + "\t" + n2 + "\t\t\t" + n3 + "\t" + n4 + "\t\t\t" + n5 + "\t" + "\r\n";
+            if (tblOrder.getValueAt(i, 0).toString().equals(txtmaHD.getText())) {
+                if (tblOrder.getValueAt(i, 7).toString().equals("")) {
+                    String n1 = tblOrder.getValueAt(i, 1).toString();//IDSP
+                    String n2 = tblOrder.getValueAt(i, 2).toString();//Tên SP
+                    String n3 = tblOrder.getValueAt(i, 3) == null ? "Ly" : tblOrder.getValueAt(i, 3).toString();//Size
+                    double n4 = Double.parseDouble(tblOrder.getValueAt(i, 4).toString());//Giá
+                    int n5 = Integer.valueOf(tblOrder.getValueAt(i, 5).toString());//SL
+                    tongSl += n5;
+                    //                    String n6 = (String) tblOrder.getValueAt(i, 7);
+                    hd = hd + "\t" + n1 + "\t" + n2 + "\t\t\t" + n3 + "\t" + n4 + "\t\t\t" + n5 + "\t" + "\r\n";
+                }
+            }
         }
         String tt = txtTienTra.getText().substring(0, txtTienTra.getText().lastIndexOf("VNĐ"));
         double x = Double.parseDouble(tt);
@@ -801,7 +807,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 + "\tTiền trả lại:\t\t\t" + n.format(Double.parseDouble(txtTienThua.getText().substring(0, txtTienThua.getText().lastIndexOf("VNĐ")))) + "VNĐ\r\n"
                 + "\t-----------------------------------------------------------------\r\n"
                 + "\tMật khẩu Wifi: Mua 2 ly tà tư rồi cho\r\n"
-                + "\t-----------------------CẢM ƠN QUÝ KHÁCH--------------------------\r\n";        
+                + "\t-----------------------CẢM ƠN QUÝ KHÁCH--------------------------\r\n";
         GUI2.GUI_QL_BILL bill = new GUI2.GUI_QL_BILL(null, true, hd);
         bill.setVisible(true);
         //Mở file txt
@@ -951,7 +957,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             }
         }
         this.qlod.billTable(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder, lblBan.getText());
-        
+
 
     }//GEN-LAST:event_btnTachHDActionPerformed
 
@@ -990,18 +996,18 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                     double thanhtien = gia * SL;
                     total += thanhtien;
                 }
-            }            
+            }
         }
         this.txtTong.setText(total + "VNĐ");
         return total;
     }
-    
+
     class ClientsTableButtonRenderer extends JButton implements TableCellRenderer {
-        
+
         public ClientsTableButtonRenderer() {
             setOpaque(true);
         }
-        
+
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             setForeground(Color.black);
             setBackground(UIManager.getColor("Button.background"));
@@ -1024,15 +1030,15 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             return this;
         }
     }
-    
+
     public class ClientsTableRenderer extends DefaultCellEditor {
-        
+
         private JButton button;
         private String label;
         private boolean clicked;
         private int row, col;
         private JTable table;
-        
+
         public ClientsTableRenderer(JCheckBox checkBox) {
             super(checkBox);
             button = new JButton();
@@ -1044,7 +1050,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 }
             });
         }
-        
+
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.table = table;
             this.row = row;
@@ -1070,7 +1076,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             }
             return button;
         }
-        
+
         public Object getCellEditorValue() {
             if (clicked) {
                 if (table.getName().equals("SP")) {
@@ -1098,23 +1104,23 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             clicked = false;
             return new String(label);
         }
-        
+
         public boolean stopCellEditing() {
             clicked = false;
             return super.stopCellEditing();
         }
-        
+
         protected void fireEditingStopped() {
             try {
                 super.fireEditingStopped();
             } catch (ArrayIndexOutOfBoundsException e) {
-                
+
             }
         }
     }
-    
+
     public static class SpinnerEditor extends DefaultCellEditor {
-        
+
         JSpinner spinner;
         JSpinner.DefaultEditor editor;
         JTextField textField;
@@ -1137,12 +1143,12 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                         public void run() {
                             if (valueSet) {
                                 textField.setCaretPosition(1);
-                                
+
                             }
                         }
                     });
                 }
-                
+
                 public void focusLost(FocusEvent fe) {
                 }
             });
@@ -1159,7 +1165,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         ) {
             if (!valueSet) {
                 spinner.setValue(value);
-                
+
             }
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
@@ -1168,7 +1174,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             });
             return spinner;
         }
-        
+
         public boolean isCellEditable(EventObject eo) {
             if (eo instanceof KeyEvent) {
                 KeyEvent ke = (KeyEvent) eo;
@@ -1187,7 +1193,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         public Object getCellEditorValue() {
             return spinner.getValue();
         }
-        
+
         public boolean stopCellEditing() {
 //            System.err.println("Stopping edit");
             try {
@@ -1255,26 +1261,26 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 }
 
 class SpinnerEditor extends DefaultCellEditor {
-    
+
     private JSpinner spinner;
-    
+
     public SpinnerEditor() {
         super(new JTextField());
         spinner = new javax.swing.JSpinner();
         spinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 200, 1));
 //        spinner.setBorder( null );
     }
-    
+
     public Component getTableCellEditorComponent(
             JTable table, Object value, boolean isSelected, int row, int column) {
-        
+
         if (Integer.valueOf(value.toString()) < 0) {
             value = 0;
         }
         spinner.setValue(value);
         return spinner;
     }
-    
+
     public Object getCellEditorValue() {
         return spinner.getValue();
     }

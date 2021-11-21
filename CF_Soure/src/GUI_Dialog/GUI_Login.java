@@ -20,8 +20,10 @@ import javax.swing.JOptionPane;
  * @author phamd
  */
 public class GUI_Login extends javax.swing.JDialog {
-        Employee_Service dao = new Employee_Service();
-        Admin ad = new Admin();
+
+    Employee_Service dao = new Employee_Service();
+    Admin ad = new Admin();
+
     /**
      * Creates new form GUI_Login
      */
@@ -185,9 +187,9 @@ public class GUI_Login extends javax.swing.JDialog {
     }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "Bạn Muốn kết thúc ứng dụng?")==0) {
-        System.exit(0);
-            
+        if (JOptionPane.showConfirmDialog(this, "Bạn Muốn kết thúc ứng dụng?") == 0) {
+            System.exit(0);
+
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -196,16 +198,16 @@ public class GUI_Login extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLogin1ActionPerformed
 
     private void btnLogin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin2ActionPerformed
-       txtUsername.setBackground(white);
+        txtUsername.setBackground(white);
         txtPassword.setBackground(white);
-        if(txtUsername.getText().trim().length()>0){
-            if(txtPassword.getPassword().length>0){
+        if (txtUsername.getText().trim().length() > 0) {
+            if (txtPassword.getPassword().length > 0) {
                 dangNhap();
-            }else{
+            } else {
                 txtPassword.setBackground(pink);
                 ThongBao.alert(this, "Không được để trống tên mật khẩu");
             }
-        }else{
+        } else {
             txtUsername.setBackground(pink);
             ThongBao.alert(this, "Không được để trống tên đăng nhập");
         }
@@ -217,37 +219,41 @@ public class GUI_Login extends javax.swing.JDialog {
         rs.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblForgetpassMouseClicked
-void dangNhap(){
-    try {
-        int tb =0;
-        String user = txtUsername.getText();
-        String pass = new String(txtPassword.getPassword());
-        ENTITY_ADMIN ad = this.ad.findById(user);
-        ENTITY_Employee nv = dao.findById(user);
-      
-        if (nv==null) {
-            if (ad==null) {
-                tb++;
-            }else if (!pass.equals(ad.getPassword())) {
-                tb++;
-            }else{
-                Auth.admin =ad;
-                this.dispose();
-            ThongBao.alert(this, "Đăng nhập thành công");
+    void dangNhap() {
+        try {
+            int tb = 0;
+            String user = txtUsername.getText();
+            String pass = new String(txtPassword.getPassword());
+            ENTITY_ADMIN ad = this.ad.findById(user);
+            ENTITY_Employee nv = dao.findById(user);
+
+            if (nv == null) {
+                if (ad == null) {
+                    tb++;
+                } else if (!pass.equals(ad.getPassword())) {
+                    tb++;
+                } else {
+                    Auth.admin = ad;
+                    ThongBao.alert(this, "Đăng nhập thành công");
+                    this.dispose();
+                }
+            } else {
+                Auth.user = nv;                
+                if (!pass.equals(nv.getPassword())) {
+                    tb++;
+                } else {
+                    ThongBao.alert(this, "Đăng nhập thành công");
+                    this.dispose();
+                }
             }
-        }else{
-            Auth.user = nv;
-            this.dispose();
-            ThongBao.alert(this, "Đăng nhập thành công");
+            if (tb > 0) {
+                ThongBao.alert(this, "Tài khoản hoặc mật khẩu không chính xác");                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        
-        if (tb>0) {
-            ThongBao.alert(this, "Tài khoản hoặc mật khẩu không chính xác");
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
+
     /**
      * @param args the command line arguments
      */
