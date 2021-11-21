@@ -196,7 +196,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         PanCac.setForeground(new java.awt.Color(153, 255, 153));
         PanCac.setLayout(new java.awt.CardLayout());
 
-        PanLichSu.setBackground(new java.awt.Color(255, 204, 204));
+        PanLichSu.setBackground(new java.awt.Color(0, 153, 204));
         PanLichSu.setBorder(javax.swing.BorderFactory.createTitledBorder("Lịch sử Order"));
         PanLichSu.setForeground(new java.awt.Color(102, 255, 102));
 
@@ -251,7 +251,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 
         PanCac.add(PanLichSu, "card2");
 
-        PanOrder.setBackground(new java.awt.Color(255, 204, 102));
+        PanOrder.setBackground(new java.awt.Color(0, 102, 204));
         PanOrder.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách Order"));
         PanOrder.setForeground(new java.awt.Color(153, 255, 51));
 
@@ -557,7 +557,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PanCac, javax.swing.GroupLayout.PREFERRED_SIZE, 607, Short.MAX_VALUE)
+                .addComponent(PanCac, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -596,7 +596,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             }
         });
 
-        PanSanPham.setBackground(new java.awt.Color(255, 102, 102));
+        PanSanPham.setBackground(new java.awt.Color(51, 153, 255));
         PanSanPham.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách sản phẩm"));
 
         txtTim.addKeyListener(new java.awt.event.KeyAdapter() {

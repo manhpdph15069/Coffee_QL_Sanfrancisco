@@ -132,7 +132,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
             .addGroup(pnlNgayLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addGap(329, 329, 329))
             .addGroup(pnlNgayLayout.createSequentialGroup()
