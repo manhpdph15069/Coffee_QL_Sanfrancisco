@@ -52,7 +52,7 @@ public class QLMenu_Service implements IQLMenu_Service {
             } else {
                 long id = Long.parseLong(rs.getString(1).substring(2, rs.getString(1).length()));
                 id++;
-                lbl.setText("SP" + String.format("%3d", id).trim());
+                lbl.setText("SP" + String.format("%02d", id).trim());
             }
         } catch (Exception ex) {
             ex.printStackTrace();
