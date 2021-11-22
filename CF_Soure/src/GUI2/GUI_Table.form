@@ -179,11 +179,9 @@
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="btnLast" pref="46" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnFist" pref="46" max="32767" attributes="0"/>
-                          <Component id="btnprev" max="32767" attributes="0"/>
-                          <Component id="btnNext" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btnFist" pref="46" max="32767" attributes="0"/>
+                      <Component id="btnprev" max="32767" attributes="0"/>
+                      <Component id="btnNext" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>

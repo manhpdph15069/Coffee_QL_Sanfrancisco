@@ -25,16 +25,18 @@ public class Table_Service implements ITable_Service {
     String INSERT_SQL = "INSERT INTO [Table]([IDTable], [Location],[Status],[IDArea]) VALUES (?, ?,?, ?)";
     String UPDATE_SQL = "UPDATE [Table] SET [Location] = ?,[IDArea]=? WHERE [IDTable]=?";
     String DELETE_SQL = "UPDATE [Table] SET [Status]=2 WHERE [IDTable] = ?";
-    String UPDATE_Trung = "UPDATE [Table] SET [Status]=0 WHERE [Location] = ? and [Status]=2";
+    String UPDATE_Trung = "UPDATE [Table] SET [IDArea]=?, [Status]=0 WHERE [Location] = ? and [Status]=2";
     String SELECT_ALL_SQL = "SELECT DISTINCT * FROM [Table] where [Status]=0";
     String Select_IDArea ="SELECT [AreaName] FROM [Area]";
     String SELECT_BY_ID_SQL = "SELECT * FROM [Table] WHERE [IDTable] = ? and [Status]=0";
     String SQL = "SELECT * FROM [Table] WHERE [IDArea] = ? ORDER BY Location";
     String SELECT_BY_ID_Area = "SELECT * FROM [Table] WHERE [IDArea] = ? and [Status]=0";
+    String select_ViTri = "select * from [Table] where  [Location] = ?";
+    String select_CheckTrung = "select * from [Table] where  [Location] = ? and [Status]=0";
    
-    public void update_trung(int id){
+    public void update_trung(String idKhu,int id){
         try {
-            JDBC.update(UPDATE_Trung, id);
+            JDBC.update(UPDATE_Trung,idKhu, id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,6 +76,13 @@ public class Table_Service implements ITable_Service {
     @Override
     public List<ENTITY_Table> select() {
         return this.SelectBySQL(SELECT_ALL_SQL);
+    }
+    @Override
+    public List<ENTITY_Table> select_viTri(int viTri) {
+        return this.SelectBySQL(select_ViTri,viTri);
+    }
+    public List<ENTITY_Table> select_CheckTrung(int viTri) {
+        return this.SelectBySQL(select_CheckTrung,viTri);
     }
     @Override
     public List<ENTITY_Area> selectIDArea() {

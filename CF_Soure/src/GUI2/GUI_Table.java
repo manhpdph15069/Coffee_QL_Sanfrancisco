@@ -368,39 +368,37 @@ public class GUI_Table extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        List<ENTITY_Table> list = tbdao.select();
-        int tb = 0;
-        if (checkTrungMa(txtMaBan)) {
-            
-        for (ENTITY_Table t : list) {
-
-            if (t.getLocation() != (Integer.parseInt(txtViTri.getText()))) {
-                tb = 1;
-            } else {
-
-                tb = 2;
-
-            }
-        }
-        if (tb == 1) {
+        int vt = (Integer.parseInt(txtViTri.getText()));
+        List<ENTITY_Table> list = tbdao.select_viTri(vt);
+        if (list.size() == 0) {
             insert();
         } else {
-            tbdao.update_trung(Integer.valueOf(txtViTri.getText()));
-            ThongBao.alert(this, "Vị trí đã toàn tại");
+            List<ENTITY_Table> ct = tbdao.select_CheckTrung(vt);
+            if (ct.size()==0) {
+                
+            tbdao.update_trung(cbbKhu.getSelectedItem().toString(), vt);
+            load();
+            }else{
+                        ThongBao.alert(this, "Vị trí đã tồn tại");
+            }
         }
-        }
+
 
     }//GEN-LAST:event_btnThemActionPerformed
     void insert() {
         try {
             ENTITY_Table tbl = getModel();
             dao.insertMATABLE(tbl);
-            dao.fillTable(tblTable);
-            xoaform();
-            ThongBao.alert(this, "Thêm thành công");
+            load();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    void load() {
+        dao.fillTable(tblTable);
+        xoaform();
+        ThongBao.alert(this, "Thêm thành công");
     }
 
     public boolean checkTrungMa(JTextField txt) {
@@ -424,10 +422,13 @@ public class GUI_Table extends javax.swing.JPanel {
     void delete() {
         try {
             this.row = tblTable.getSelectedRow();
+            if (this.row!=0) {
+                
             dao.deleteTABLE(txtMaBan.getText());
             dao.fillTable(tblTable);
             xoaform();
             ThongBao.alert(this, "Xóa thành công");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

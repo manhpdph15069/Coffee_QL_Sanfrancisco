@@ -17,7 +17,7 @@ import java.sql.*;
 public class JDBC {
     public static String url = "jdbc:sqlserver://localhost:1433;databaseName=Coffee"; // đường dẫn
     public static String username = "sa"; // user sql
-    public static String password = "123"; //pass sql
+    public static String password = "1"; //pass sql
     //câu lệnh sql statement (có đối số hoặc không)
     // args mảng đối số của câu lệnh sql (có hoặc không)
     public static PreparedStatement preparedStatement(String sql, Object... args) throws SQLException {
