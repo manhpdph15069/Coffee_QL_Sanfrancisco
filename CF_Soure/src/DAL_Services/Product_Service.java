@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class Product_Service implements IProduct_Service {
 
-    String INSERT_SQL = "INSERT INTO [Product]([IDProduct], [ProductName], [Price], [Image],[Status]=1,[IDType]) VALUES (?, ?, ?, ?,?)";
+    String INSERT_SQL = "INSERT INTO [Product]([IDProduct], [ProductName], [Price], [Image],[Status],[IDType]) VALUES (?, ?, ?, ?,0,?)";
     String UPDATE_SQL = "UPDATE [Product] SET [ProductName] = ?, [Price] = ?, [Image] = ?,[IDType]=? WHERE [IDProduct] = ?";
     String DELETE_SQL = "UPDATE [Product] SET [Status]=0 WHERE [IDProduct] = ?";
     String SELECT_ALL_SQL = "SELECT * FROM [Product]";
@@ -35,8 +35,8 @@ public class Product_Service implements IProduct_Service {
                     entity.getProductName(),
                     entity.getPrice(),
                     entity.getImage(),
-                    entity.getIDType(),
-                    entity.getStatus());
+                    entity.getStatus(),
+                    entity.getIDType());
         } catch (Exception e) {
             e.printStackTrace();
         }
