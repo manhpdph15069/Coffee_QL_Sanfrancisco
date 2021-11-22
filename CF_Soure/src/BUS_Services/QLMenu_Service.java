@@ -229,8 +229,11 @@ public class QLMenu_Service implements IQLMenu_Service {
             List<SanPham> list = this.selectSize(type);
             for (SanPham sp : list) {
                 if (list.size() ==1) {
-                    model.addElement(sp);
+                    if (sp.getSize()==null) {
                     cbo.addItem("Trống");
+                    }else{
+                        model.addElement(sp);
+                    }
                 } else {
                     model.addElement(sp);
                 }

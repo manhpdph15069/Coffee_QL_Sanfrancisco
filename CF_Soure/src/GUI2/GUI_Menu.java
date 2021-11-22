@@ -668,6 +668,7 @@ public class GUI_Menu extends javax.swing.JPanel {
         SanPham sp = new SanPham();
         this.setForm(sp);
         cboLoai.setSelectedIndex(0);
+        lblHinh.setToolTipText(sp.getImage());
         lblHinh.setIcon(XImage.read("no_image.jpg"));
         dao.taoID(lblID);
         this.row = -1;
