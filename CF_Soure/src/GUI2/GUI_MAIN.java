@@ -48,7 +48,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
         btnKhachHang = new rojerusan.RSButtonIconD();
         btnHome = new rojerusan.RSButtonIconD();
         btnThoat = new rojerusan.RSButtonIconD();
-        btnGiamgia = new javax.swing.JButton();
+        rSButtonIconD1 = new rojerusan.RSButtonIconD();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -171,11 +171,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
             }
         });
 
-        btnGiamgia.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        btnGiamgia.setText("Khuyến Mại");
-        btnGiamgia.addActionListener(new java.awt.event.ActionListener() {
+        rSButtonIconD1.setText("Khuyến Mại");
+        rSButtonIconD1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        rSButtonIconD1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGiamgiaActionPerformed(evt);
+                rSButtonIconD1ActionPerformed(evt);
             }
         });
 
@@ -191,7 +191,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
             .addComponent(btnKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnThoat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnGiamgia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rSButtonIconD1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,13 +207,13 @@ public class GUI_MAIN extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rSButtonIconD1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBan, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGiamgia, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -359,10 +359,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1MouseClicked
 
-    private void btnGiamgiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiamgiaActionPerformed
-         GUI2.GUI_Promotions table = new GUI2.GUI_Promotions();
+    private void rSButtonIconD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD1ActionPerformed
+        // TODO add your handling code here:
+        GUI2.GUI_Promotions table = new GUI2.GUI_Promotions();
         goiPan(table);
-    }//GEN-LAST:event_btnGiamgiaActionPerformed
+    }//GEN-LAST:event_rSButtonIconD1ActionPerformed
     
     public void goiPan(JPanel nel) {
         nel.setVisible(true);
@@ -410,7 +411,6 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private javax.swing.JPanel From;
     private javax.swing.JPanel Fromch;
     private rojerusan.RSButtonIconD btnBan;
-    private javax.swing.JButton btnGiamgia;
     private rojerusan.RSButtonIconD btnHome;
     private rojerusan.RSButtonIconD btnKhachHang;
     private rojerusan.RSButtonIconD btnNhanVien;
@@ -430,5 +430,6 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
+    private rojerusan.RSButtonIconD rSButtonIconD1;
     // End of variables declaration//GEN-END:variables
 }

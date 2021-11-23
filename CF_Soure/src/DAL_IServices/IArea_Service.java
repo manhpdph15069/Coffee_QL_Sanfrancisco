@@ -14,7 +14,7 @@ import java.util.List;
  * @author PC
  */
 public interface IArea_Service {
-        public void insert(ENTITY_Area entity);
+        public void insert(String entity);
 
     public void update(ENTITY_Area entity);
 
@@ -22,7 +22,7 @@ public interface IArea_Service {
 
     public List<ENTITY_Area> select();
 
-    public ENTITY_Area findById(String IDTable);
+    public List<ENTITY_Area> findById(String IDTable);
 
     public List<ENTITY_Area> SelectBySQL(String sql, Object... args);
 }
