@@ -5,6 +5,7 @@
  */
 package BUS_Services;
 
+import DAL_Models.ENTITY_Product;
 import Utils.JDBC;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -20,6 +21,22 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QLHoaDOn_Service {
 
+     public List<ENTITY_Product> SelectBySQL(String sql, Object... args) {
+        List<ENTITY_Product> list = new ArrayList<>();
+        try {
+            ResultSet rs = JDBC.query(sql, args);
+            while (rs.next()) {
+                ENTITY_Product customer = new ENTITY_Product();
+                customer.setProductName(rs.getString(1));
+
+                list.add(customer);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     public List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
         try {
             List<Object[]> list = new ArrayList<>();
@@ -44,27 +61,31 @@ public class QLHoaDOn_Service {
         String[] cols = {"IDHD", "UsernameEMP", "DateOrder", "TimeOder", "Reason", "TongTien", "Status"};
         return this.getListOfArray(sql, cols);
     }
-    public List<Object[]> getListDoUong(String idHD) {
-        String sql = "{CALL getDoUong(?)}";
-        String[] cols = {"ProductName"};
-        return this.getListOfArray(sql, cols,idHD);
+    public List<ENTITY_Product> getListDoUong(String idHD) {
+        String sql = "select ProductName from Product p join OrderDetail od on p.IDProduct=od.IDProduct where od.IDOrder=?";
+        return SelectBySQL(sql, idHD);
     }
 
     public void fillTable(JTable tbl) {
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
                 String tt = null;
-                String doUong =null;
+                String doUong="";
         List<Object[]> list = getListHoaDon();
         if (list != null) {
             for (Object[] o : list) {
+        List<ENTITY_Product> listdoUong = getListDoUong(String.valueOf(o[0]));
+        doUong="";
+                for (ENTITY_Product odu : listdoUong) {
+                        doUong = doUong+ odu.getProductName()+",";
+                }
+                
                 int ma = Integer.valueOf(String.valueOf(o[6]));
                 if (ma==1) {
-                    tt="Đã thanh toán";
-                }else if (ma==2) {
                     tt="Chưa thanh toán";
-                }else if (ma==3) {
-                    
+                }else if (ma==2) {
+                    tt="Đã thanh toán";
+                }else if (ma==3) {                  
                     tt="Đã hủy";
                 }
 
@@ -79,7 +100,6 @@ public class QLHoaDOn_Service {
                     o[5],
                     tt                  
                 };
-                System.out.println(doUong);
                 model.addRow(row);
                 
             }
