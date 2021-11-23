@@ -9,8 +9,12 @@ import BUS_IServices.IQLMenu_Service;
 import BUS_Models.SanPham;
 import BUS_Services.QLMenu_Service;
 import DAL_Models.ENTITY_ProductType;
+import Utils.Check;
+import Utils.ThongBao;
 import Utils.XImage;
 import Utils.dialogHelper;
+import static java.awt.Color.pink;
+import static java.awt.Color.white;
 import java.awt.Menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +23,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -332,10 +337,10 @@ public class GUI_Menu extends javax.swing.JPanel {
                                                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(284, 284, 284))))
                                     .addGap(34, 34, 34)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnMoi)
-                                        .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                                        .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                                        .addComponent(btnMoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(75, 75, 75)
                                 .addComponent(lblID)))
@@ -451,36 +456,47 @@ public class GUI_Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_cboLoaiActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        SanPham sp = this.getForm();
-        try {
-            dao.insert(sp);
-            dao.fillToTable(tblSanPham);
-            dialogHelper.alert(this, "A! Thành Công Rồi");
-            clear();
-            dao.taoID(lblID);
-        } catch (Exception e) {
-            dialogHelper.alert(this, "Đã được đíu đâu mà thêm");
-            e.printStackTrace();
+        if (Check.checkNullText(txtTen)
+                && Check.checkNullText(txtGia)) {
+            if (Check.checkName(txtTen)) {
+                SanPham sp = this.getForm();
+                try {
+                    dao.insert(sp);
+                    dao.fillToTable(tblSanPham);
+                    dialogHelper.alert(this, "A! Thành Công Rồi");
+                    clear();
+                    dao.taoID(lblID);
+                } catch (Exception e) {
+                    dialogHelper.alert(this, "Đã được đíu đâu mà thêm");
+                    e.printStackTrace();
+                }
+
+            }
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        SanPham sp = getForm();
-        try {
-            dao.updateSP(sp);
-            dao.fillToTable(tblSanPham);
-            clear();
-            dialogHelper.alert(this, "A! Thành Công Rồi");
-            dao.taoID(lblID);
-        } catch (Exception e) {
-            dialogHelper.alert(this, "Bố Đíu cho Sửa đấy");
-            e.printStackTrace();
+        if (Check.checkNullText(txtTen)
+                && Check.checkNullText(txtGia)) {
+            if (Check.checkName(txtTen)) {
+                SanPham sp = getForm();
+                try {
+                    dao.updateSP(sp);
+                    dao.fillToTable(tblSanPham);
+                    clear();
+                    dialogHelper.alert(this, "A! Thành Công Rồi");
+                    dao.taoID(lblID);
+                } catch (Exception e) {
+                    dialogHelper.alert(this, "Bố Đíu cho Sửa đấy");
+                    e.printStackTrace();
+                }
+            }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         String IDProduct = lblID.getText();
-        SanPham sp =dao.findById(IDProduct);
+        SanPham sp = dao.findById(IDProduct);
         dialogHelper.confirm(this, "Mày Thích Xóa Không?");
         try {
             if (sp.isStatus() == false) {

@@ -7,6 +7,7 @@ package GUI2;
 
 import DAL_Models.ENTITY_Promotion;
 import DAL_Services.Promotion_Service;
+import Utils.Check;
 import Utils.dateHelper;
 import Utils.dialogHelper;
 import java.awt.event.ActionEvent;
@@ -51,10 +52,10 @@ public class GUI_Promotions extends javax.swing.JPanel {
                 Object[] row = {
                     pro.getIDPro(),
                     pro.getName(),
-                    pro.getDiscountPromo()+"%",
+                    pro.getDiscountPromo() + "%",
                     dateHelper.dateToString(pro.getStartPromo(), "dd/MM/yyyy"),
                     dateHelper.dateToString(pro.getEndPromo(), "dd/MM/yyyy"),
-                    pro.getStatus()?"Đang diễn ra" :"Đã kết thúc"};
+                    pro.getStatus() ? "Đang diễn ra" : "Đã kết thúc"};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -444,12 +445,22 @@ public class GUI_Promotions extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        insert();
+        if (Check.checkNullText(txtName)
+                && Check.checkNullText(txtChietKhau)) {
+            if (Check.checkName(txtName)) {
+                insert();
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        update();
+        if (Check.checkNullText(txtName)
+                && Check.checkNullText(txtChietKhau)) {
+            if (Check.checkName(txtName)) {
+                update();
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
