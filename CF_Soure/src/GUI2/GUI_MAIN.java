@@ -49,6 +49,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
         btnHome = new rojerusan.RSButtonIconD();
         btnThoat = new rojerusan.RSButtonIconD();
         rSButtonIconD1 = new rojerusan.RSButtonIconD();
+        rSButtonIconD2 = new rojerusan.RSButtonIconD();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -179,6 +180,14 @@ public class GUI_MAIN extends javax.swing.JFrame {
             }
         });
 
+        rSButtonIconD2.setText("Hóa Đơn");
+        rSButtonIconD2.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        rSButtonIconD2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconD2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -192,13 +201,16 @@ public class GUI_MAIN extends javax.swing.JFrame {
             .addComponent(btnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnThoat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(rSButtonIconD1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rSButtonIconD2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
+                .addContainerGap()
                 .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rSButtonIconD2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,7 +226,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
                 .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(146, 146, 146))
         );
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -364,6 +376,12 @@ public class GUI_MAIN extends javax.swing.JFrame {
         GUI2.GUI_Promotions table = new GUI2.GUI_Promotions();
         goiPan(table);
     }//GEN-LAST:event_rSButtonIconD1ActionPerformed
+
+    private void rSButtonIconD2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD2ActionPerformed
+        // TODO add your handling code here:
+        GUI2.GUI_HoaDon t = new GUI_HoaDon();
+        goiPan(t);
+    }//GEN-LAST:event_rSButtonIconD2ActionPerformed
     
     public void goiPan(JPanel nel) {
         nel.setVisible(true);
@@ -431,5 +449,6 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
     private rojerusan.RSButtonIconD rSButtonIconD1;
+    private rojerusan.RSButtonIconD rSButtonIconD2;
     // End of variables declaration//GEN-END:variables
 }

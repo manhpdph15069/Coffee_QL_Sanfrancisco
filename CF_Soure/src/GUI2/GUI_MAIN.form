@@ -195,14 +195,17 @@
               <Component id="btnHome" alignment="0" max="32767" attributes="0"/>
               <Component id="btnThoat" alignment="0" max="32767" attributes="0"/>
               <Component id="rSButtonIconD1" alignment="0" max="32767" attributes="0"/>
+              <Component id="rSButtonIconD2" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnOrder" min="-2" pref="80" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="rSButtonIconD2" min="-2" pref="80" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnThongKe" min="-2" pref="80" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnKhachHang" min="-2" pref="80" max="-2" attributes="0"/>
@@ -218,7 +221,7 @@
                   <Component id="btnHome" min="-2" pref="80" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnThoat" min="-2" pref="80" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -334,6 +337,17 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonIconD1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="rojerusan.RSButtonIconD" name="rSButtonIconD2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="H&#xf3;a &#x110;&#x1a1;n"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="24" style="1"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonIconD2ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
