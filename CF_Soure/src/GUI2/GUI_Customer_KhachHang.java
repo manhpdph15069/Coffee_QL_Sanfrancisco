@@ -7,10 +7,12 @@ package GUI2;
 
 import DAL_Models.ENTITY_Customer;
 import DAL_Services.Customer_Service;
+import Utils.Check;
 import Utils.JDBC;
 import Utils.dateHelper;
 import Utils.dialogHelper;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +23,7 @@ import javax.swing.table.TableRowSorter;
  * @author notak
  */
 public class GUI_Customer_KhachHang extends javax.swing.JPanel {
-
+    SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
     Customer_Service dao = new Customer_Service();
     int row = -1;
 
@@ -466,11 +468,30 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        insert();
+        if (Check.checkNullText(txtSDT)
+                &&Check.checkNullText(txtEmail)
+                &&Check.checkNullText(txtGiamGia)
+                &&Check.checkNullText(txtNgayMo)
+                &&Check.checkNullText(txtTenKH)) {
+            if (Check.checkEmail(txtEmail)
+                    &&Check.checkSDT(txtSDT)
+                    &&Check.checkDate(format.format(txtNgayMo.getText()))) {
+            insert();               
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        update();
+               if (Check.checkNullText(txtSDT)
+                &&Check.checkNullText(txtEmail)
+                &&Check.checkNullText(txtGiamGia)
+                &&Check.checkNullText(txtNgayMo)
+                &&Check.checkNullText(txtTenKH)) {
+            if (Check.checkEmail(txtEmail)
+                    &&Check.checkSDT(txtSDT)) {
+            update();               
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
