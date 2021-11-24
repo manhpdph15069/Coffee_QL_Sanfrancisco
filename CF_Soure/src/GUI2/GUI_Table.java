@@ -522,7 +522,7 @@ public class GUI_Table extends javax.swing.JPanel {
         List<ENTITY_Area> list = dao.selectIDArea();
 
         for (ENTITY_Area cd : list) {
-            model.addElement(cd.getIDArea());
+            model.addElement(cd.getAreaName());
         }
 
     }

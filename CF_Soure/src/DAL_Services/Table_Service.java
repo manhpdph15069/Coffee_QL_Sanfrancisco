@@ -94,7 +94,7 @@ public class Table_Service implements ITable_Service {
             ResultSet rs = JDBC.query(sql, args);
             while (rs.next()) {
                 ENTITY_Area table = new ENTITY_Area();
-                table.setIDArea(rs.getInt(1));
+                table.setAreaName(rs.getString(1));
                 list.add(table);
             }
             rs.getStatement().getConnection().close();
