@@ -82,7 +82,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText(":");
 
-        pnlNgay.setBackground(new java.awt.Color(0, 102, 255));
+        pnlNgay.setBackground(new java.awt.Color(0, 153, 153));
         pnlNgay.setPreferredSize(new java.awt.Dimension(1000, 700));
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
@@ -121,22 +121,24 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                     .addGroup(pnlNgayLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel13)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                 .addGroup(pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                    .addGroup(pnlNgayLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11))
+                    .addGroup(pnlNgayLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel14)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         pnlNgayLayout.setVerticalGroup(
             pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNgayLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11)
-                .addGap(285, 285, 285))
-            .addGroup(pnlNgayLayout.createSequentialGroup()
                 .addGroup(pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlNgayLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel14)
+                        .addGap(116, 116, 116)
+                        .addComponent(jLabel11))
                     .addGroup(pnlNgayLayout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -147,10 +149,10 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(255, 0, 51));
 
         JDateNKT.setDateFormatString("yyyy-MM-dd");
         JDateNKT.setFocusable(false);
@@ -159,7 +161,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         jDateNBD.setDateFormatString("yyyy-MM-dd");
         jDateNBD.setFocusable(false);
 
-        btnKhoang.setBackground(new java.awt.Color(255, 102, 51));
+        btnKhoang.setBackground(new java.awt.Color(0, 102, 51));
         btnKhoang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/khoang.png"))); // NOI18N
         btnKhoang.setText("Khoảng");
         btnKhoang.setToolTipText("Chọn date ở cả 2 ô");
@@ -169,7 +171,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
             }
         });
 
-        btnNgay.setBackground(new java.awt.Color(255, 102, 51));
+        btnNgay.setBackground(new java.awt.Color(0, 102, 51));
         btnNgay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/ngay.png"))); // NOI18N
         btnNgay.setText("Show Ngày");
         btnNgay.setToolTipText("Chọn ở ô date thứ nhất");
@@ -179,7 +181,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
             }
         });
 
-        btnThang.setBackground(new java.awt.Color(255, 102, 51));
+        btnThang.setBackground(new java.awt.Color(0, 102, 51));
         btnThang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/thang.PNG"))); // NOI18N
         btnThang.setText("Show Tháng");
         btnThang.setToolTipText("Chọn ở ô date thứ nhất");
@@ -189,7 +191,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
             }
         });
 
-        btnNam.setBackground(new java.awt.Color(255, 102, 51));
+        btnNam.setBackground(new java.awt.Color(0, 102, 51));
         btnNam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/nam.png"))); // NOI18N
         btnNam.setText("Show Năm");
         btnNam.setToolTipText("Chọn ở ô date thứ nhất");
@@ -200,7 +202,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 153, 0));
+        jLabel2.setForeground(new java.awt.Color(0, 102, 51));
         jLabel2.setText("Tổng món:");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -211,22 +213,22 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
 
         jLabel5.setBackground(new java.awt.Color(51, 102, 0));
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 102, 0));
+        jLabel5.setForeground(new java.awt.Color(0, 102, 51));
         jLabel5.setText("Từ Ngày");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(51, 102, 0));
+        jLabel6.setForeground(new java.awt.Color(0, 102, 51));
         jLabel6.setText("Đến Ngày");
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(51, 153, 0));
+        jLabel7.setForeground(new java.awt.Color(0, 102, 51));
         jLabel7.setText("Tổng:");
 
         lblTM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTM.setText("00000");
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(51, 153, 0));
+        jLabel9.setForeground(new java.awt.Color(0, 102, 51));
         jLabel9.setText("Tổng BILL:");
 
         lblHD.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -321,16 +323,17 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 1700, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 1649, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 901, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

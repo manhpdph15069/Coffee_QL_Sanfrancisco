@@ -22,7 +22,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
      */
     public GUI_MAIN() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);    //cho toàn màn hình 
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);    //cho toàn màn hình 
     }
 
     /**
@@ -70,6 +70,8 @@ public class GUI_MAIN extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Button-Info-icon.png"))); // NOI18N
 
         Fromch.setBackground(new java.awt.Color(0, 51, 204));
+        Fromch.setMaximumSize(new java.awt.Dimension(1800, 1000));
+        Fromch.setMinimumSize(new java.awt.Dimension(1800, 1000));
         Fromch.setLayout(new javax.swing.BoxLayout(Fromch, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/cafe_main.gif"))); // NOI18N
@@ -96,15 +98,15 @@ public class GUI_MAIN extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(FromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1)))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 0, 0));
+        jPanel3.setBackground(new java.awt.Color(102, 153, 255));
 
-        btnOrder.setBackground(new java.awt.Color(51, 255, 255));
-        btnOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Order-history-icon.png"))); // NOI18N
+        btnOrder.setBackground(new java.awt.Color(0, 102, 51));
+        btnOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/santa-icon.png"))); // NOI18N
         btnOrder.setText("Bán Hàng");
+        btnOrder.setColorHover(new java.awt.Color(255, 0, 51));
         btnOrder.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         btnOrder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -117,7 +119,10 @@ public class GUI_MAIN extends javax.swing.JFrame {
             }
         });
 
+        btnBan.setBackground(new java.awt.Color(0, 102, 51));
+        btnBan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/candykane-icon.png"))); // NOI18N
         btnBan.setText("Bàn");
+        btnBan.setColorHover(new java.awt.Color(255, 0, 51));
         btnBan.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         btnBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +130,10 @@ public class GUI_MAIN extends javax.swing.JFrame {
             }
         });
 
+        btnThongKe.setBackground(new java.awt.Color(0, 102, 51));
+        btnThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/bell-icon.png"))); // NOI18N
         btnThongKe.setText("Thống Kê");
+        btnThongKe.setColorHover(new java.awt.Color(255, 0, 51));
         btnThongKe.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         btnThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,7 +141,10 @@ public class GUI_MAIN extends javax.swing.JFrame {
             }
         });
 
+        btnNhanVien.setBackground(new java.awt.Color(0, 102, 51));
+        btnNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/christmas-tree-icon.png"))); // NOI18N
         btnNhanVien.setText("Nhân Viên");
+        btnNhanVien.setColorHover(new java.awt.Color(255, 0, 51));
         btnNhanVien.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         btnNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +152,10 @@ public class GUI_MAIN extends javax.swing.JFrame {
             }
         });
 
+        btnSanPham.setBackground(new java.awt.Color(0, 102, 51));
+        btnSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/sock-icon.png"))); // NOI18N
         btnSanPham.setText("Sản Phẩm");
+        btnSanPham.setColorHover(new java.awt.Color(255, 0, 51));
         btnSanPham.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         btnSanPham.setMaximumSize(new java.awt.Dimension(141, 41));
         btnSanPham.setMinimumSize(new java.awt.Dimension(141, 41));
@@ -151,7 +165,10 @@ public class GUI_MAIN extends javax.swing.JFrame {
             }
         });
 
-        btnKhachHang.setText("Khách Hàng");
+        btnKhachHang.setBackground(new java.awt.Color(0, 102, 51));
+        btnKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/candles-icon.png"))); // NOI18N
+        btnKhachHang.setText("K.Hàng");
+        btnKhachHang.setColorHover(new java.awt.Color(255, 0, 51));
         btnKhachHang.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,7 +176,10 @@ public class GUI_MAIN extends javax.swing.JFrame {
             }
         });
 
+        btnHome.setBackground(new java.awt.Color(0, 102, 51));
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/home-icon.png"))); // NOI18N
         btnHome.setText("Home");
+        btnHome.setColorHover(new java.awt.Color(255, 0, 51));
         btnHome.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,7 +187,10 @@ public class GUI_MAIN extends javax.swing.JFrame {
             }
         });
 
+        btnThoat.setBackground(new java.awt.Color(0, 102, 51));
+        btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/out.png"))); // NOI18N
         btnThoat.setText("Thoát");
+        btnThoat.setColorHover(new java.awt.Color(255, 0, 51));
         btnThoat.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,7 +198,10 @@ public class GUI_MAIN extends javax.swing.JFrame {
             }
         });
 
-        rSButtonIconD1.setText("Khuyến Mại");
+        rSButtonIconD1.setBackground(new java.awt.Color(0, 102, 51));
+        rSButtonIconD1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/deer-icon.png"))); // NOI18N
+        rSButtonIconD1.setText("K.Mãi");
+        rSButtonIconD1.setColorHover(new java.awt.Color(255, 0, 51));
         rSButtonIconD1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         rSButtonIconD1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,7 +209,10 @@ public class GUI_MAIN extends javax.swing.JFrame {
             }
         });
 
+        rSButtonIconD2.setBackground(new java.awt.Color(0, 102, 51));
+        rSButtonIconD2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/christmass-ball-icon.png"))); // NOI18N
         rSButtonIconD2.setText("Hóa Đơn");
+        rSButtonIconD2.setColorHover(new java.awt.Color(255, 0, 51));
         rSButtonIconD2.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         rSButtonIconD2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,25 +238,25 @@ public class GUI_MAIN extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonIconD2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rSButtonIconD2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonIconD1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rSButtonIconD1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBan, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBan, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -284,8 +313,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(From, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(From, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -349,6 +381,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
         // TODO add your handling code here:
         GUI2.GUI_MAIN table = new GUI2.GUI_MAIN();
         table.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
