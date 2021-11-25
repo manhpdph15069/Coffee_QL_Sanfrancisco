@@ -230,7 +230,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Gi&#x1ea3;m gi&#xe1;"/>
+            <Property name="text" type="java.lang.String" value="Chi&#x1ebf;t Kh&#x1ea5;u"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">

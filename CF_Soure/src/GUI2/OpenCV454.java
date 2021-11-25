@@ -32,13 +32,13 @@ public class OpenCV454 extends JFrame{
     private JButton btnCapture;
     private VideoCapture capture;
     private Mat image;
-    private boolean clicked = true;
+    private boolean clicked;
     
     public OpenCV454(){
         // thiet ke ui
           
         setLayout(null);
-        
+
         cameraScreen = new JLabel();
         cameraScreen.setBounds(0, 0, 640, 480);
         add(cameraScreen);
@@ -57,7 +57,9 @@ public class OpenCV454 extends JFrame{
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                capture.release();
+                if (capture!=null) {
+                    capture.release();
+                }
                 System.exit(0);
             }  
 });
@@ -67,6 +69,7 @@ public class OpenCV454 extends JFrame{
     setLocationRelativeTo(null);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
+         
 }
     
     // tao camera
@@ -81,7 +84,6 @@ public class OpenCV454 extends JFrame{
             final MatOfByte buf = new MatOfByte();
             Imgcodecs.imencode(".jpg", image, buf);
             imageData = buf.toArray();
-            
             icon = new ImageIcon(imageData);
             cameraScreen.setIcon(icon);
             if (clicked) {
@@ -96,22 +98,22 @@ public class OpenCV454 extends JFrame{
         }
     }
     public static void main(String[] args) {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+       System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         EventQueue.invokeLater(new Runnable() {
-            @Override
+          @Override
             public void run() {
                OpenCV454 openCV454 = new OpenCV454();
-               
-               new Thread(new Runnable() {
+             
+              new Thread(new Runnable() {
                    @Override
                    public void run() {
                        openCV454.StartCamera();
-                   }
-               }).start();
-            }
+                  }
+              }).start();
+           }
         } );
         
-        System.out.println("load thanh cong");
+      System.out.println("load thanh cong");
     }
     
 }

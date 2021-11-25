@@ -342,6 +342,11 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         btnChupAnh.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnChupAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/red-camera-icon.png"))); // NOI18N
         btnChupAnh.setText("Chụp ảnh");
+        btnChupAnh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnChupAnhMouseClicked(evt);
+            }
+        });
         btnChupAnh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChupAnhActionPerformed(evt);
@@ -727,9 +732,15 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnChupAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChupAnhActionPerformed
-          GUI2.OpenCV454 mocam = new GUI2.OpenCV454();
-          mocam.setVisible(true);
+//          GUI2.OpenCV454 mocam = new GUI2.OpenCV454();
+//          mocam.setVisible(true);
+
     }//GEN-LAST:event_btnChupAnhActionPerformed
+
+    private void btnChupAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChupAnhMouseClicked
+//        GUI2.OpenCV454 mocam = new GUI2.OpenCV454();
+//          mocam.setVisible(true);
+    }//GEN-LAST:event_btnChupAnhMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChupAnh;

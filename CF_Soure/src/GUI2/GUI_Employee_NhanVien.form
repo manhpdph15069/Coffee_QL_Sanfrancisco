@@ -775,6 +775,7 @@
             <Property name="text" type="java.lang.String" value="Ch&#x1ee5;p &#x1ea3;nh"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnChupAnhMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChupAnhActionPerformed"/>
           </Events>
         </Component>

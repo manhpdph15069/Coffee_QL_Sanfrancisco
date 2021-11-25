@@ -49,7 +49,7 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
         try {
             List<ENTITY_Customer> list = dao.select();
             for (ENTITY_Customer kh : list) {
-                Object[] row = {kh.getIDCust(),kh.getCusName(), dateHelper.dateToString(kh.getDateAdd(), "dd/MM/yyyy"), dateHelper.dateToString(kh.getDateEnd(), "dd/MM/yyyy"), kh.getPhone(), kh.getEmail(), kh.getDiscount()};
+                Object[] row = {kh.getIDCust(),kh.getCusName(), dateHelper.dateToString(kh.getDateAdd(), "dd/MM/yyyy"), dateHelper.dateToString(kh.getDateEnd(), "dd/MM/yyyy"), kh.getPhone(), kh.getEmail(), kh.getDiscount()+"%"};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -220,7 +220,7 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
         jLabel5.setText("Ngày mở");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setText("Giảm giá");
+        jLabel6.setText("Chiết Khấu");
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setText("Email");
