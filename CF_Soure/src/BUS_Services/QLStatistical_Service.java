@@ -169,7 +169,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 400));
+        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
 
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
@@ -203,7 +203,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 400));
+        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
 
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
@@ -240,7 +240,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 400));
+        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
 
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
@@ -274,7 +274,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 400));
+        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
 
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
