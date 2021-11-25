@@ -299,7 +299,7 @@ public class QLOrder_Service implements IQLOrder_Service {
         this.listBa = listBan.size();
         ClassLoader classLoader = that.getClass().getClassLoader();
         pnlMain.removeAll();
-        pnlMain.setBounds(0, 375, 850, 630);
+        pnlMain.setBounds(0, 230, 705, 760);
         pnlMain.setBackground(new java.awt.Color(0,102,255));
         pnlMain.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách Bàn"));
 //         JScrollPane sn = new JScrollPane();
