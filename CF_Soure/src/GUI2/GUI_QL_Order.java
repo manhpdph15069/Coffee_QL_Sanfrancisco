@@ -188,7 +188,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         });
         pmnOder.add(mnHuymon);
 
-        setBackground(new java.awt.Color(0, 102, 255));
+        setBackground(new java.awt.Color(0, 153, 153));
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 255));
 
@@ -221,7 +221,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 
         txtTong.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
-        btnThanhToan.setBackground(new java.awt.Color(51, 153, 0));
+        btnThanhToan.setBackground(new java.awt.Color(0, 102, 51));
         btnThanhToan.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnThanhToan.setForeground(new java.awt.Color(0, 0, 0));
         btnThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Cash-register-icon.png"))); // NOI18N
@@ -271,7 +271,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(255, 51, 51));
         jLabel8.setText("Tiền thừa");
 
-        jButton1.setBackground(new java.awt.Color(204, 0, 0));
+        jButton1.setBackground(new java.awt.Color(255, 0, 51));
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Button-Close-icon.png"))); // NOI18N
@@ -569,13 +569,14 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Khu vực");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/chaomungfran.png"))); // NOI18N
 
-        btnVaoBan.setBackground(new java.awt.Color(0, 255, 0));
+        btnVaoBan.setBackground(new java.awt.Color(0, 102, 51));
         btnVaoBan.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnVaoBan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/vaoban.png"))); // NOI18N
         btnVaoBan.setText("Vào bàn");

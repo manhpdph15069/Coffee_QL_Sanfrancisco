@@ -13,30 +13,49 @@ import Utils.Auth;
 import Utils.Check;
 import Utils.ThongBao;
 import Utils.XImage;
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import static java.awt.Color.pink;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.videoio.VideoCapture;
 
 /**
  *
  * @author notak
  */
 public class GUI_Employee_NhanVien extends javax.swing.JPanel {
-    //  SimpleDateFormat fomat = 
+   
 
     IQLEmployee_Service dao;
     Employee_Service nv = new Employee_Service();
     int row = 0;
+    
+    private  JLabel cameraScreen;
+    private VideoCapture capture;
+    private Mat image;
+    private boolean clicked = true;
 
     public GUI_Employee_NhanVien() {
         initComponents();
         dao = (IQLEmployee_Service) new QLEmployee_Service();
         dao.fillTable(tblEmployee);
         resetForm();
-
+   
     }
 
     ENTITY_Employee getModel() {
@@ -158,7 +177,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnChupAnh = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -319,11 +338,13 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
 
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/vuong1.gif"))); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 51));
-        jButton1.setText("Chụp ảnh");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnChupAnh.setBackground(new java.awt.Color(0, 102, 51));
+        btnChupAnh.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnChupAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/red-camera-icon.png"))); // NOI18N
+        btnChupAnh.setText("Chụp ảnh");
+        btnChupAnh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnChupAnhActionPerformed(evt);
             }
         });
 
@@ -383,6 +404,19 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(99, 99, 99)
+                                .addComponent(jLabel25)
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel11)
+                                .addGap(54, 54, 54)
+                                .addComponent(jLabel12)
+                                .addGap(51, 51, 51)
+                                .addComponent(jLabel22)
+                                .addGap(59, 59, 59)
+                                .addComponent(jLabel23)
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel24))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -396,26 +430,18 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
                                         .addComponent(jLabel5)
                                         .addComponent(jLabel3))
                                     .addComponent(jLabel4))
-                                .addGap(45, 45, 45)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(rdoNu)
-                                        .addGap(54, 54, 54)
-                                        .addComponent(rdoNam))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(99, 99, 99)
-                                .addComponent(jLabel25)
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel11)
-                                .addGap(54, 54, 54)
-                                .addComponent(jLabel12)
-                                .addGap(51, 51, 51)
-                                .addComponent(jLabel22)
-                                .addGap(59, 59, 59)
-                                .addComponent(jLabel23)
-                                .addGap(43, 43, 43)
-                                .addComponent(jLabel24))))
+                                        .addGap(45, 45, 45)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(rdoNu)
+                                                .addGap(54, 54, 54)
+                                                .addComponent(rdoNam))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(391, 391, 391)
+                                        .addComponent(btnChupAnh))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -426,14 +452,9 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(293, 293, 293)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(85, 85, 85)
-                                .addComponent(lblAnh))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(144, 144, 144)
-                                .addComponent(jButton1)))))
-                .addGap(18, 18, 18)
+                        .addGap(85, 85, 85)
+                        .addComponent(lblAnh)))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel14)
@@ -449,10 +470,19 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(jLabel19)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel14))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel20))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,25 +517,20 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
                                         .addGap(152, 152, 152)
                                         .addComponent(txtPassWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(97, 97, 97)
+                                .addGap(109, 109, 109)
                                 .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel2)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4))
-                            .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4))
+                                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel14))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addComponent(jLabel20)))))
+                                .addComponent(btnChupAnh)))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
@@ -555,7 +580,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(15, 15, 15)
                                         .addComponent(jLabel16)))
-                                .addContainerGap(137, Short.MAX_VALUE))
+                                .addContainerGap(136, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel17)
                                 .addGap(0, 0, Short.MAX_VALUE))))))
@@ -701,17 +726,18 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnChupAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChupAnhActionPerformed
+          GUI2.OpenCV454 mocam = new GUI2.OpenCV454();
+          mocam.setVisible(true);
+    }//GEN-LAST:event_btnChupAnhActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChupAnh;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
