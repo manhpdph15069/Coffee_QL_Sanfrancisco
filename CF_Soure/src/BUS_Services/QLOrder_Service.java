@@ -41,6 +41,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,8 +50,10 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -978,6 +981,23 @@ public class QLOrder_Service implements IQLOrder_Service {
                 cTT.getNote(), cTT.isStatus() ? "Hủy" : "", "Xóa", false
             };
             model.addRow(row);
+        }
+    }
+
+    @Override
+    public void ReloadCombobox(JComboBox cbb) {
+        cbb.removeAllItems();
+        cbb.addItem("Không có");
+        cbb.addItem("Khách hàng VIP");
+        String sql = "select * from Promotions where StartPromo <= ? and EndPromo >= ?";
+        try {
+            Date now = new Date();
+            ResultSet rs = JDBC.query(sql, dateHelper.DATE_FORMATER2.format(now),dateHelper.DATE_FORMATER2.format(now));                        
+            while (rs.next()) {
+                cbb.addItem(rs.getString(2));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Lỗi 101:: Không thể kết nối đến máy chủ");
         }
     }
 

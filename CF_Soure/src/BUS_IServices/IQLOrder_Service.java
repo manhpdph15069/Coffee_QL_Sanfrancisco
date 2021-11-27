@@ -12,6 +12,7 @@ import DAL_Models.ENTITY_Product;
 import java.awt.Panel;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -72,4 +73,6 @@ public interface IQLOrder_Service {
     public void taoNhom(String tenNhom,String IDTable);
     
     public void xoaNhom(String nhom);
+    
+    public void ReloadCombobox(JComboBox cbb);
 }
