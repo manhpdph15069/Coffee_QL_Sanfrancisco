@@ -75,4 +75,6 @@ public interface IQLOrder_Service {
     public void xoaNhom(String nhom);
     
     public void ReloadCombobox(JComboBox cbb);
+    
+    public void txtMaKHCaretUpdate(JTextField txtMaKH,JTextField txtdis1,JLabel lbl,JLabel lbIDCus,JLabel lbNameCus,JLabel lbDateCus,JLabel lbDateEndCus,JLabel lbDisCus);
 }

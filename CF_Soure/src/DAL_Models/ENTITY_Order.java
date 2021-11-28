@@ -5,6 +5,7 @@
  */
 package DAL_Models;
 
+import Utils.Auth;
 import Utils.dateHelper;
 import java.time.DateTimeException;
 import java.util.Date;
@@ -20,8 +21,9 @@ public class ENTITY_Order {
     private String IDOrder;
     private Date DateOrder = dateHelper.now();
     private Date TimeOrder = dateHelper.timeNow();
-    private String UsernameEMP="THANHNV";
+    private String UsernameEMP = Auth.user==null ? null : Auth.user.getUsernameEMP();
     private String IDCust = null;
+    private String NamePromo = null;
     private int Status = 1;
 
     public ENTITY_Order() {
@@ -29,6 +31,14 @@ public class ENTITY_Order {
 
     public String getIDOrder() {
         return IDOrder;
+    }
+
+    public String getNamePromo() {
+        return NamePromo;
+    }
+
+    public void setNamePromo(String NamePromo) {
+        this.NamePromo = NamePromo;
     }
 
     public void setIDOrder(String IDOrder) {

@@ -39,6 +39,8 @@ import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -842,6 +844,7 @@ public class QLOrder_Service implements IQLOrder_Service {
 
     @Override
     public double tongTien(JTextField txttong, JTable tblOder) {
+        NumberFormat formatter = new DecimalFormat("#,###");
         double total = 0;
         int line = tblOder.getRowCount();
         for (int i = 0; i < line; i++) {
@@ -852,7 +855,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                 total += thanhtien;
             }
         }
-        txttong.setText(total + "VNĐ");
+        txttong.setText(formatter.format(total) + "VNĐ");
         return total;
     }
 
@@ -997,8 +1000,33 @@ public class QLOrder_Service implements IQLOrder_Service {
                 cbb.addItem(rs.getString(2));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Lỗi 101:: Không thể kết nối đến máy chủ");
+            dialogHelper.alert(null, "Lỗi 101:: Không thể kết nối đến máy chủ");
         }
+    }
+
+    @Override
+    public void txtMaKHCaretUpdate(JTextField txtMaKH, JTextField txtdis1, JLabel lbl,JLabel lbIDCus,JLabel lbNameCus,JLabel lbDateCus,JLabel lbDateEndCus,JLabel lbDisCus) {
+        String sql = "Select * from Customer where IDCust = ?";
+         try {
+                ResultSet rs = JDBC.query(sql,txtMaKH.getText());
+                if (!rs.next()) {
+                    lbl.setText("Mã thẻ không tồn tại!");
+                    lbl.setForeground(Color.red);
+                    txtdis1.setText("0");
+//                    ResetPnInfor();
+                } else {
+                    lbl.setText("Thành công.");
+                    lbl.setForeground(Color.YELLOW);
+                    lbIDCus.setText(rs.getString(1));
+                    lbNameCus.setText(rs.getString(2));
+                    lbDateEndCus.setText(rs.getString(4));                    
+                    lbDateCus.setText(rs.getString(3));                    
+                    lbDisCus.setText(rs.getString(7) + "%");
+                    txtdis1.setText(rs.getString(7));
+                }
+            } catch (SQLException ex) {
+                dialogHelper.alert(null, "Lỗi 101:: Không thể kết nối đến máy chủ");
+            }
     }
 
 }
