@@ -831,6 +831,7 @@ public class QLOrder_Service implements IQLOrder_Service {
             txtNameEMP.setText(cTT.getNameEMP() == null ? "Admin" : cTT.getNameEMP());
             TimeOrder.setText(dateHelper.Time_FORMATER.format(cTT.getTimeOrder()));
             Object[] row = new Object[]{
+                cTT.getIDOrderString(),
                 cTT.getIDProduct(),
                 cTT.getProductName(),
                 cTT.getSize(),

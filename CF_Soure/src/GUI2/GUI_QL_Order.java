@@ -976,9 +976,11 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             txtmaHD.setText(tblLichSu.getValueAt(tblLichSu.getSelectedRow(), 0).toString());
-            qlod.billTable(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder, lblBan.getText());
+            qlod.bill(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder);
             CardLayout card = (CardLayout) PanCac.getLayout();
             card.show(PanCac, "card3");
+            Total();
+            UpdatetxtDis1();
         }
     }//GEN-LAST:event_tblLichSuMouseClicked
 
@@ -1232,6 +1234,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         int vitri = tblOrder.getSelectedRow();
         this.txtmaHD.setText(tblOrder.getValueAt(vitri, 0).toString());
         this.Total();
+        UpdatetxtDis1();
     }//GEN-LAST:event_tblOrderMouseClicked
 
     private void tblOrderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseReleased
