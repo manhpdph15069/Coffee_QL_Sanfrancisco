@@ -7,8 +7,21 @@ package GUI2;
 
 import GUI_Dialog.GUI_Login;
 import GUI_Dialog.GUI_ResetPassword;
+import Utils.Auth;
 import Utils.ThongBao;
+import Utils.XImage;
+import Utils.dialogHelper;
+import java.awt.Desktop;
+import java.awt.Image;
+import java.awt.TextArea;
+import java.io.IOException;
+import java.net.URI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -283,6 +296,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
                 jMenuItem1MouseClicked(evt);
             }
         });
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
         jMenu1.add(jSeparator6);
 
@@ -430,6 +448,21 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1MouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if (Auth.isAdmin()) {
+            dialogHelper.alert(this,"Bạn là "+Auth.admin.getUsername()+"Đẹp Trai");
+        }else{    
+            try {
+                Desktop.getDesktop().browse(URI.create("https://www.facebook.com/ilov3myou.hoangthong/"));
+            } catch (IOException ex) {
+                Logger.getLogger(GUI_MAIN.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ImageIcon ok=new ImageIcon(new ImageIcon("logos\\"+Auth.user.getImage()).getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT));
+            JOptionPane.showMessageDialog(this,"Bạn là "+Auth.user.getUsernameEMP()+"\n"+"Họ Tên : "+Auth.user.getNameEMP(),
+                    "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆",JOptionPane.INFORMATION_MESSAGE,ok);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     public void goiPan(JPanel nel) {
         nel.setVisible(true);
