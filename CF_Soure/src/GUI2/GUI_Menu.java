@@ -210,9 +210,19 @@ public class GUI_Menu extends javax.swing.JPanel {
 
         btn1.setBackground(new java.awt.Color(0, 102, 51));
         btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/first.png"))); // NOI18N
+        btn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn1ActionPerformed(evt);
+            }
+        });
 
         btn3.setBackground(new java.awt.Color(0, 102, 51));
         btn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/next.png"))); // NOI18N
+        btn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn3ActionPerformed(evt);
+            }
+        });
 
         btn2.setBackground(new java.awt.Color(0, 102, 51));
         btn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/back.png"))); // NOI18N
@@ -224,6 +234,11 @@ public class GUI_Menu extends javax.swing.JPanel {
 
         btn4.setBackground(new java.awt.Color(0, 102, 51));
         btn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/last.png"))); // NOI18N
+        btn4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn4ActionPerformed(evt);
+            }
+        });
 
         txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -378,7 +393,6 @@ public class GUI_Menu extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(lblID))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
@@ -540,6 +554,9 @@ public class GUI_Menu extends javax.swing.JPanel {
                 System.out.println(row);
                 if (this.row >= 0) {
                     this.edit();
+                    btnThem.setEnabled(false);
+                    btnSua.setEnabled(true);
+                    btnXoa.setEnabled(true);
                 }
             }
         } catch (Exception e) {
@@ -549,7 +566,7 @@ public class GUI_Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
-        // TODO add your handling code here:
+      prev();
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
@@ -608,6 +625,18 @@ public class GUI_Menu extends javax.swing.JPanel {
             menu.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_cboLoaiMouseReleased
+
+    private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
+        first();
+    }//GEN-LAST:event_btn1ActionPerformed
+
+    private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
+        last();
+    }//GEN-LAST:event_btn4ActionPerformed
+
+    private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
+        next();
+    }//GEN-LAST:event_btn3ActionPerformed
 
     private void setForm(SanPham sp) {
         lblID.setText(sp.getIDProduct());
@@ -703,6 +732,9 @@ public class GUI_Menu extends javax.swing.JPanel {
         lblHinh.setIcon(XImage.read("no_image.jpg"));
         dao.taoID(lblID);
         this.row = -1;
+        btnThem.setEnabled(true);
+        btnSua.setEnabled(false);
+        btnXoa.setEnabled(false);
     }
 
     void khoiphuc() {
@@ -745,6 +777,30 @@ public class GUI_Menu extends javax.swing.JPanel {
                 }
             }
         }
+    }
+
+    void first() {
+        this.row = 0;
+        this.edit();
+    }
+    void next() {
+        if (this.row < tblSanPham.getRowCount() - 1) {
+            this.row++;
+            this.edit();
+        }
+    }
+
+    void prev() {
+        if (this.row > 0) {
+            this.row--;
+            this.edit();
+        }
+    }
+
+    void last() {
+        this.row = tblSanPham.getRowCount() - 1;
+        this.edit();
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn1;

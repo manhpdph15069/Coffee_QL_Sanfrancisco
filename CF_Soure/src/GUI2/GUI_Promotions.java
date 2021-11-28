@@ -90,6 +90,9 @@ public class GUI_Promotions extends javax.swing.JPanel {
         pro.setEndPromo(dateHelper.add(15));
         this.setForm(pro);
         this.row = -1;
+        jButton1.setEnabled(true);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
     }
 
     void edit() {
@@ -510,6 +513,9 @@ public class GUI_Promotions extends javax.swing.JPanel {
                 this.row = tblGiamgia.getSelectedRow();
                 if (this.row >= 0) {
                     edit();
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(true);
+                    jButton3.setEnabled(true);
                 }
             }
         } catch (Exception e) {

@@ -39,13 +39,12 @@ import org.opencv.videoio.VideoCapture;
  * @author notak
  */
 public class GUI_Employee_NhanVien extends javax.swing.JPanel {
-   
 
     IQLEmployee_Service dao;
     Employee_Service nv = new Employee_Service();
     int row = 0;
-    
-    private  JLabel cameraScreen;
+
+    private JLabel cameraScreen;
     private VideoCapture capture;
     private Mat image;
     private boolean clicked = true;
@@ -55,7 +54,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         dao = (IQLEmployee_Service) new QLEmployee_Service();
         dao.fillTable(tblEmployee);
         resetForm();
-   
+
     }
 
     ENTITY_Employee getModel() {
@@ -84,6 +83,9 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         this.txtUserName.setEditable(true);
         this.txtPassWord.setEditable(true);
         this.lblAnh.setIcon(XImage.read("no_image.jpg"));
+        btnThem.setEnabled(true);
+        btnSua.setEnabled(false);
+        btnXoa.setEnabled(false);
     }
 
     public Date now() {
@@ -689,6 +691,9 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
                 this.edit();
                 txtPassWord.setEditable(false);
                 txtUserName.setEditable(false);
+                btnThem.setEnabled(false);
+                btnSua.setEnabled(true);
+                btnXoa.setEnabled(true);
             }
         }
     }//GEN-LAST:event_tblEmployeeMouseClicked
@@ -738,8 +743,8 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btnChupAnhActionPerformed
 
     private void btnChupAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChupAnhMouseClicked
-//        GUI2.OpenCV454 mocam = new GUI2.OpenCV454();
-//          mocam.setVisible(true);
+        GUI2.OpenCV454 mocam = new GUI2.OpenCV454();
+        mocam.setVisible(true);
     }//GEN-LAST:event_btnChupAnhMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

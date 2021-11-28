@@ -53,8 +53,8 @@ public class GUI_Table extends javax.swing.JPanel {
         txtMaBan.setEditable(false);
         dao.taoIDTable(txtMaBan);
         fillComboBoxKhu();
-
         dao.fillTable(tblTable);
+        this.xoaform();
     }
 
     /**
@@ -454,6 +454,9 @@ public class GUI_Table extends javax.swing.JPanel {
             if (this.row >= 0) {
                 this.edit();
                 // dao.fillTableIDArea(tblTable, cbbKhu);
+                btnThem.setEnabled(false);
+                btnSua.setEnabled(true);
+                btnXoa.setEnabled(true);
             }
         }
         Test();
@@ -496,16 +499,16 @@ public class GUI_Table extends javax.swing.JPanel {
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void rSButtonIconD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD1ActionPerformed
-            
+
         String khu = JOptionPane.showInputDialog(this, "Nhập khu bạn muốn thêm");
         List<ENTITY_Area> list = this.khu.findById(khu);
-        if (list.size()==0) {
-        if (khu != null) {
-            this.khu.insert(khu);
-            fillComboBoxKhu();
-            ThongBao.alert(this, "Thêm khu thành công!");
-        }
-        }else{
+        if (list.size() == 0) {
+            if (khu != null) {
+                this.khu.insert(khu);
+                fillComboBoxKhu();
+                ThongBao.alert(this, "Thêm khu thành công!");
+            }
+        } else {
             ThongBao.alert(this, "Khu đã tồn tại");
         }
     }//GEN-LAST:event_rSButtonIconD1ActionPerformed
@@ -524,8 +527,8 @@ public class GUI_Table extends javax.swing.JPanel {
     private void cbbKhuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbKhuMousePressed
         // TODO add your handling code here:
         //        if (evt.isPopupTrigger()) {
-            //            menu.show(evt.getComponent(), evt.getX(), evt.getY());
-            //        }
+        //            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        //        }
     }//GEN-LAST:event_cbbKhuMousePressed
 
     private void cbbKhuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbKhuMouseClicked
@@ -553,16 +556,16 @@ public class GUI_Table extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 String ma = cbbKhu.getSelectedItem().toString();
-                if (ma!=null) {
-                    
-                try {
-                    khu.delete(ma);
-                    fillComboBoxKhu();
-                    ThongBao.alert(null, "Xóa thành công");
-                } catch (SQLException ex) {
-                    ThongBao.alert(null, "Chưa cho chưa những khu có hóa đơn, đợi bản cập nhập sau =]]");
-                   // Logger.getLogger(GUI_Table.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                if (ma != null) {
+
+                    try {
+                        khu.delete(ma);
+                        fillComboBoxKhu();
+                        ThongBao.alert(null, "Xóa thành công");
+                    } catch (SQLException ex) {
+                        ThongBao.alert(null, "Chưa cho chưa những khu có hóa đơn, đợi bản cập nhập sau =]]");
+                        // Logger.getLogger(GUI_Table.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
 
             }
@@ -611,6 +614,9 @@ public class GUI_Table extends javax.swing.JPanel {
         this.txtTimKiem.setText("");
         this.cbbKhu.setSelectedIndex(0);
         dao.taoIDTable(txtMaBan);
+        btnThem.setEnabled(true);
+        btnSua.setEnabled(false);
+        btnXoa.setEnabled(false);
     }
 
     void edit() {
@@ -665,6 +671,6 @@ public class GUI_Table extends javax.swing.JPanel {
         btnSua.setEnabled(edit);
         btnXoa.setEnabled(edit);
         //trạng thái điều hướng
-       
+
     }
 }

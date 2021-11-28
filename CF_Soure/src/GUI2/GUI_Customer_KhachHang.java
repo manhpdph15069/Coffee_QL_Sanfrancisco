@@ -23,7 +23,8 @@ import javax.swing.table.TableRowSorter;
  * @author notak
  */
 public class GUI_Customer_KhachHang extends javax.swing.JPanel {
-    SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
+
+    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
     Customer_Service dao = new Customer_Service();
     int row = -1;
 
@@ -49,7 +50,7 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
         try {
             List<ENTITY_Customer> list = dao.select();
             for (ENTITY_Customer kh : list) {
-                Object[] row = {kh.getIDCust(),kh.getCusName(), dateHelper.dateToString(kh.getDateAdd(), "dd/MM/yyyy"), dateHelper.dateToString(kh.getDateEnd(), "dd/MM/yyyy"), kh.getPhone(), kh.getEmail(), kh.getDiscount()+"%"};
+                Object[] row = {kh.getIDCust(), kh.getCusName(), dateHelper.dateToString(kh.getDateAdd(), "dd/MM/yyyy"), dateHelper.dateToString(kh.getDateEnd(), "dd/MM/yyyy"), kh.getPhone(), kh.getEmail(), kh.getDiscount() + "%"};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -87,6 +88,9 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
         this.setForm(nv);
         this.row = -1;
         taoID();
+        jButton1.setEnabled(true);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
     }
 
     public void taoID() {
@@ -135,7 +139,7 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
     }
 
     private void delete() {
-        String IDCust = lblID.getText();    
+        String IDCust = lblID.getText();
         dialogHelper.confirm(this, "Mày Thích Xóa Không?");
         try {
             dao.delete(IDCust);
@@ -467,27 +471,26 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (Check.checkNullText(txtSDT)
-                &&Check.checkNullText(txtEmail)
-                &&Check.checkNullText(txtGiamGia)
-                &&Check.checkNullText(txtNgayMo)
-                &&Check.checkNullText(txtTenKH)) {
+                && Check.checkNullText(txtEmail)
+                && Check.checkNullText(txtGiamGia)
+                && Check.checkNullText(txtNgayMo)
+                && Check.checkNullText(txtTenKH)) {
             if (Check.checkEmail(txtEmail)
-                    &&Check.checkSDT(txtSDT)
-                    &&Check.checkDate(format.format(txtNgayMo.getText()))) {
-            insert();               
+                    && Check.checkSDT(txtSDT)) {
+                insert();
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-               if (Check.checkNullText(txtSDT)
-                &&Check.checkNullText(txtEmail)
-                &&Check.checkNullText(txtGiamGia)
-                &&Check.checkNullText(txtNgayMo)
-                &&Check.checkNullText(txtTenKH)) {
+        if (Check.checkNullText(txtSDT)
+                && Check.checkNullText(txtEmail)
+                && Check.checkNullText(txtGiamGia)
+                && Check.checkNullText(txtNgayMo)
+                && Check.checkNullText(txtTenKH)) {
             if (Check.checkEmail(txtEmail)
-                    &&Check.checkSDT(txtSDT)) {
-            update();               
+                    && Check.checkSDT(txtSDT)) {
+                update();
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -506,11 +509,14 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
 
-        if (evt.getClickCount()==1) {
-            this.row=tblKhachHang.getSelectedRow();
-            if (this.row>=0) {
+        if (evt.getClickCount() == 1) {
+            this.row = tblKhachHang.getSelectedRow();
+            if (this.row >= 0) {
                 this.edit();
-            }      
+                jButton2.setEnabled(true);
+                jButton3.setEnabled(true);
+                jButton1.setEnabled(false);
+            }
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
