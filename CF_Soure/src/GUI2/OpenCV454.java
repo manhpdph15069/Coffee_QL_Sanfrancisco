@@ -36,7 +36,6 @@ public class OpenCV454 extends JFrame{
     
     public OpenCV454(){
         // thiet ke ui
-          
         setLayout(null);
 
         cameraScreen = new JLabel();
@@ -61,7 +60,8 @@ public class OpenCV454 extends JFrame{
                     capture.release();
                 }
                 System.exit(0);
-            }  
+            }
+            
 });
         
         
@@ -69,7 +69,7 @@ public class OpenCV454 extends JFrame{
     setLocationRelativeTo(null);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
-         
+     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 }
     
     // tao camera
@@ -80,7 +80,7 @@ public class OpenCV454 extends JFrame{
         ImageIcon icon;
         while (true) {            
             capture.read(image);
-            
+
             final MatOfByte buf = new MatOfByte();
             Imgcodecs.imencode(".jpg", image, buf);
             imageData = buf.toArray();
@@ -97,23 +97,23 @@ public class OpenCV454 extends JFrame{
             }
         }
     }
-    public static void main(String[] args) {
-       System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        EventQueue.invokeLater(new Runnable() {
-          @Override
-            public void run() {
-               OpenCV454 openCV454 = new OpenCV454();
-             
-              new Thread(new Runnable() {
-                   @Override
-                   public void run() {
-                       openCV454.StartCamera();
-                  }
-              }).start();
-           }
-        } );
-        
-      System.out.println("load thanh cong");
-    }
+//    public static void main(String[] args) {
+//       System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+//        EventQueue.invokeLater(new Runnable() {
+//          @Override
+//            public void run() {
+//               OpenCV454 openCV454 = new OpenCV454();
+//             
+//              new Thread(new Runnable() {
+//                   @Override
+//                   public void run() {
+//                       openCV454.StartCamera();
+//                  }
+//              }).start();
+//           }
+//        } );
+//        
+//      System.out.println("load thanh cong");
+//    }
     
 }
