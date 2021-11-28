@@ -5,7 +5,7 @@
             <url>src/GUI2/GUI_MAIN.java</url>
             <bookmark id="1">
                 <name/>
-                <line>323</line>
+                <line>327</line>
                 <key/>
             </bookmark>
         </file>
@@ -15,6 +15,7 @@
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI2/JDialog_LoaiSP.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI2/JDialogTaoBan.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/DAL_Models/ENTITY_Promotion.java</file>
+            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI_Dialog/GUI_ForgetPassword2.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/Utils/XImage.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI2/GUI_Statistical_ThongKe.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/BUS_Services/QLOrder_Service.java</file>
@@ -33,18 +34,21 @@
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI_Dialog/GUI_ResetPassword.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/Utils/ThongBao.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/DAL_Services/Admin.java</file>
+            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI_Dialog/GUI_ForgetPassword1.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI_Dialog/GUI_Hello.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI2/GUI_Employee_NhanVien.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI2/OpenCV454.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/BUS_Models/QLSanPham.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/DAL_Models/ENTITY_Product.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/Utils/JDBC.java</file>
+            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/Utils/Auth.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI2/GUI_MAIN.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/DAL_Services/Promotion_Service.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI2/GUI_Menu.java</file>
-            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI_Dialog/GUI_Login.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/DAL_Models/ENTITY_Employee.java</file>
+            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI_Dialog/GUI_Login.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/DAL_IServices/IProduct_Service.java</file>
+            <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/DAL_Services/Employee_Service.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/DAL_IServices/ITable_Service.java</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/DA1/Coffee_QL/CF_Soure/src/GUI2/GUI_HoaDon.java</file>
         </group>

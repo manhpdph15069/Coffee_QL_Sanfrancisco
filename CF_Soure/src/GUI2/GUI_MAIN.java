@@ -22,7 +22,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
      */
     public GUI_MAIN() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);    //cho toàn màn hình 
+        setExtendedState(JFrame.MAXIMIZED_BOTH);    //cho toàn màn hình
+        init();
+    }
+      void init(){
+        new GUI_Login(this,true).setVisible(true);
     }
 
     /**
