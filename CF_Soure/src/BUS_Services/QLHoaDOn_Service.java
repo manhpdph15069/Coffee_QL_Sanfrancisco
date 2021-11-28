@@ -58,7 +58,7 @@ public class QLHoaDOn_Service {
 
     public List<Object[]> getListHoaDon() {
         String sql = "{CALL getListHoaDon}";
-        String[] cols = {"IDHD", "UsernameEMP", "DateOrder", "TimeOder", "Reason", "TongTien", "Status"};
+        String[] cols = {"IDHD", "NameEMP", "DateOrder", "TimeOder", "Reason", "TongTien", "Status"};
         return this.getListOfArray(sql, cols);
     }
     public List<ENTITY_Product> getListDoUong(String idHD) {
@@ -71,6 +71,7 @@ public class QLHoaDOn_Service {
         model.setRowCount(0);
                 String tt = null;
                 String doUong="";
+                String nv="";
         List<Object[]> list = getListHoaDon();
         if (list != null) {
             for (Object[] o : list) {
@@ -88,11 +89,16 @@ public class QLHoaDOn_Service {
                 }else if (ma==3) {                  
                     tt="Đã hủy";
                 }
-
+//               String tennv = String.valueOf(o[1]);
+//                if (tennv.equals("NULL")) {
+//                    nv="ADMIN";
+//                }else{
+//                    nv=tennv;
+//                }
                 
                 Object[] row = new Object[]{
                     o[0],
-                    o[1],
+                    o[1]==null?"ADMIN":o[1],
                     o[2],
                     o[3],
                     o[4],

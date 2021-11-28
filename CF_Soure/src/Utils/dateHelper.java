@@ -43,7 +43,7 @@ public class dateHelper {
     return date kiểu String đã định theo dạng pattern
     */
     public static String dateToString(Date date, String...pattern){
-        if(pattern.length>0)DATE_FORMATER.applyPattern(pattern[0]);
+        if(pattern.length>0)DATE_FORMATER2.applyPattern(pattern[0]);
         if(date==null)date=dateHelper.now();
         return DATE_FORMATER.format(date);
     }
