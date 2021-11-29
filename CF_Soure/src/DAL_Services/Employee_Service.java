@@ -18,6 +18,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Employee_Service implements IEmployee_Service {
 
@@ -32,7 +34,7 @@ public class Employee_Service implements IEmployee_Service {
     public void checkTrung(ENTITY_Employee entity) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         try {
             JDBC.update(check,
-                     entity.getNameEMP(),
+                    entity.getNameEMP(),
                     entity.getPhone(),
                     entity.getBirthday(),
                     entity.getAddress(),
@@ -46,20 +48,21 @@ public class Employee_Service implements IEmployee_Service {
             e.printStackTrace();
         }
     }
-public void updateMK(String pass,String maNV){
+    public void updateMK(String pass,String maNV){
     try {
          JDBC.update(UPDATE_MK, pass,maNV);
     } catch (Exception e) {
         e.printStackTrace();
     }
 }
+
     @Override
     public void insert(ENTITY_Employee entity) {
         try {
             JDBC.update(INSERT_SQL,
                     entity.getUsernameEMP(),
-                   // maHoa(entity.getPassword()),
-                     entity.getPassword(),
+                    // maHoa(entity.getPassword()),
+                    entity.getPassword(),
                     entity.getNameEMP(),
                     entity.getPhone(),
                     entity.getBirthday(),
@@ -77,7 +80,6 @@ public void updateMK(String pass,String maNV){
     public void update(ENTITY_Employee entity) {
         try {
             JDBC.update(UPDATE_SQL,
-                    entity.getPassword(),
                     entity.getNameEMP(),
                     entity.getPhone(),
                     entity.getBirthday(),
@@ -86,8 +88,8 @@ public void updateMK(String pass,String maNV){
                     entity.getEmail(),
                     entity.getImage(),
                     entity.getUsernameEMP());
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee_Service.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -109,6 +111,7 @@ public void updateMK(String pass,String maNV){
         }
         return list.get(0);
     }
+
     public ENTITY_Employee selectByID(String id) {
         List<ENTITY_Employee> list = this.SelectBySQL(SELECT_BY_ID, id);
         if (list.isEmpty()) {
@@ -116,6 +119,7 @@ public void updateMK(String pass,String maNV){
         }
         return list.get(0);
     }
+
     @Override
     public List<ENTITY_Employee> SelectBySQL(String sql, Object... args) {
         List<ENTITY_Employee> list = new ArrayList<>();
@@ -141,7 +145,28 @@ public void updateMK(String pass,String maNV){
             throw new RuntimeException(e);
         }
     }
-    
+
+    public void update1(ENTITY_Employee entity) {
+
+        String UPDATE1 = "UPDATE [Employee] SET [Password]=?, [NameEMP] = ?,[Phone]=?,[Birthday]=?,[Address]=?,[Sex]=?,[Email]=?,[Image]=? WHERE [UsernameEMP]= ?";
+        try {
+            JDBC.update(UPDATE1,
+                    entity.getPassword(),
+                    entity.getNameEMP(),
+                    entity.getPhone(),
+                    entity.getBirthday(),
+                    entity.getAddress(),
+                    entity.getSex(),
+                    entity.getEmail(),
+                    entity.getImage(),
+                    entity.getUsernameEMP());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 //             public String maHoa(String srcText) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 //        String enrText;
 //
@@ -154,4 +179,4 @@ public void updateMK(String pass,String maNV){
 //
 //        return enrText;
 //    }
-}
+        }

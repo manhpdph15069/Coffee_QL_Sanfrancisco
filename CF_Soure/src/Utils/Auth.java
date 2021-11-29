@@ -17,6 +17,7 @@ public class Auth {
         public static ENTITY_ADMIN admin = null;
     public static void clear(){
         Auth.user=null;
+        Auth.admin=null;
     }
     public static boolean isLogin(){
         return Auth.user!=null;
