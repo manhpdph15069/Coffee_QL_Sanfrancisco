@@ -39,6 +39,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
         dao = new QLHoaDOn_Service();
         dao.fillTable(tbl);
         jdate.setDate(now());
+        jRadioButton4.setSelected(true);
     }
 
     public Date now() {
@@ -278,7 +279,8 @@ public class GUI_HoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButton4MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        int t = jdate.getDate().getMonth()+1;
+        dao.fillTabletHANG(tbl,t);
 
     }//GEN-LAST:event_jButton2ActionPerformed
     public void loc(String txt) {

@@ -5,17 +5,36 @@
  */
 package GUI_Dialog;
 
+import DAL_Models.ENTITY_Employee;
+import DAL_Services.Employee_Service;
+import Utils.Check;
+import Utils.ThongBao;
+import java.util.Properties;
+import java.util.Random;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author notak
  */
 public class GUI_ForgetPassword1 extends javax.swing.JFrame {
 
+    private int randumCode;
+    Employee_Service dao;
+
     /**
      * Creates new form GUI_ForgetPassword1
      */
     public GUI_ForgetPassword1() {
         initComponents();
+        setLocationRelativeTo(null);
+        dao = new Employee_Service();
     }
 
     /**
@@ -30,8 +49,8 @@ public class GUI_ForgetPassword1 extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtMaNV = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
@@ -75,8 +94,8 @@ public class GUI_ForgetPassword1 extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(121, 121, 121)
                         .addComponent(jButton1)))
@@ -89,11 +108,11 @@ public class GUI_ForgetPassword1 extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(33, 33, 33))
@@ -117,7 +136,67 @@ public class GUI_ForgetPassword1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        ENTITY_Employee e = dao.findById(txtMaNV.getText());
+        if (Check.checkNullText(txtMaNV) && Check.checkNullText(txtEmail)) {
+            if (e != null) {
+                guiCode();
+                GUI_ForgetPassword2 ff = new GUI_ForgetPassword2(String.valueOf(randumCode), txtMaNV.getText());
+                ff.setVisible(true);
+                this.dispose();
+            } else {
+                ThongBao.alert(this, "Mã nhân viên không tồn tại");
+            }
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+    void guiCode() {
+        try {
+            Random random = new Random();
+            this.randumCode = random.nextInt(999999);//tạo 1 số ngẫu nhiên từ 0 đến 999999
+            String host = "smtp.gmail.com";
+            String user = "manh19qn@gmail.com";
+            String pass = "Manh0988307480";
+            String to = txtEmail.getText();
+            String subject = "Reseting Code";
+            String message = "Your reset code is " + randumCode;
+            boolean sessionDebug = false;
+            //!.Tạo 1 dối tượng Properties
+            Properties pros = new Properties();
+            pros.put("mail.smtp.auth", "true");
+            pros.put("mail.smtp.starttls.enable", "true");
+            pros.put("mail.smtp.host", "smtp.gmail.com");//2.Chỉ ra máy chủ mail của gg
+            pros.put("mail.smtp.port", 587);//3.Chỉ ra port : 587 Cổng vào ra dữ liệu
+            pros.put("mail.smtp.starttls.required", "true");
+            java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+
+            Session mailSession = Session.getInstance(pros,
+                    new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(user, pass);//Tài khoản Gmail của bạn và pass
+                }
+            }
+            );
+            mailSession.setDebug(sessionDebug);
+            Message msg = new MimeMessage(mailSession);
+            //Gán giá trị cho các thuộc tính đôi tượng msg
+            msg.setFrom(new InternetAddress(user));//5.Từ địa chỉ Gmail nào gưởi đi
+            //            InternetAddress[] address = {new InternetAddress(to)};
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));//Tù Gmail gưởi đến mai nào
+            msg.setSubject(subject);//Tiêu đề thư
+            msg.setText(message);//Nội dung thư
+////            Transport.send(msg);
+            Transport transport = mailSession.getTransport("smtp");
+            transport.connect(host, user, pass);
+            transport.sendMessage(msg, msg.getAllRecipients());
+            transport.close();
+            ThongBao.alert(this, "Code has been send to the email");
+            this.dispose();
+            // String macodeString = JOptionPane.showInputDialog("Nhập vào mã Code (6 số)");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -160,7 +239,7 @@ public class GUI_ForgetPassword1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtMaNV;
     // End of variables declaration//GEN-END:variables
 }
