@@ -102,10 +102,10 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         this.txtmaHD.setEditable(false);
         this.txtNameEMP.setEditable(false);
         this.txtTong.setEditable(false);
-        this.txtTienThua.setEditable(false);        
-        this.txtDis1.setEditable(false);        
-        this.txtDis2.setEditable(false);        
-        this.txtPay.setEditable(false);        
+        this.txtTienThua.setEditable(false);
+        this.txtDis1.setEditable(false);
+        this.txtDis2.setEditable(false);
+        this.txtPay.setEditable(false);
         tblSanPham.getColumnModel().getColumn(5).setCellRenderer(new GUI2.GUI_QL_Order.ClientsTableButtonRenderer());
         tblSanPham.getColumnModel().getColumn(5).setCellEditor(new GUI2.GUI_QL_Order.ClientsTableRenderer(new JCheckBox()));
         tblSanPham.setPreferredScrollableViewportSize(tblSanPham.getPreferredSize());
@@ -171,7 +171,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         txtPay = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        txtTienTra2 = new javax.swing.JTextField();
+        txtTienTra = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         txtDis2 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel(){
@@ -488,15 +488,15 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         jLabel14.setForeground(new java.awt.Color(255, 51, 51));
         jLabel14.setText("Thành tiền");
 
-        txtTienTra2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtTienTra2.setText("0VNĐ");
-        txtTienTra2.setToolTipText("");
-        txtTienTra2.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtTienTra.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTienTra.setText("0VNĐ");
+        txtTienTra.setToolTipText("");
+        txtTienTra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtTienTra2KeyPressed(evt);
+                txtTienTraKeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtTienTra2KeyTyped(evt);
+                txtTienTraKeyTyped(evt);
             }
         });
 
@@ -727,7 +727,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                                     .addGroup(PanOrderLayout.createSequentialGroup()
                                         .addGap(141, 141, 141)
                                         .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtTienTra2)
+                                            .addComponent(txtTienTra)
                                             .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(356, 356, 356))
                             .addGroup(PanOrderLayout.createSequentialGroup()
@@ -798,7 +798,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel8))
                             .addGroup(PanOrderLayout.createSequentialGroup()
-                                .addComponent(txtTienTra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTienTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
@@ -1038,18 +1038,36 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                             int n5 = Integer.valueOf(tblOrder.getValueAt(i, 5).toString());//SL
                             tongSl += n5;
                             //                    String n6 = (String) tblOrder.getValueAt(i, 7);
-                            b.write("\t" + n1 + "\t" + n2 + "\t\t\t\t" + n3 + "\t\t" + n4 + "\t\t\t\t\t" + n5 + "\t" + "\r\n");
+                            b.write("\t" + n1 + "\t" + n2 + "\t\t\t\t" + n3 + "\t\t" +n.format(n4) + "\t\t\t\t\t" + n5 + "\t" + "\r\n");
                         }
                     }
                 }
                 b.write("\t-------------------------------------------------------------------------------\r\n");
-                String tt = txtTong.getText().substring(0, txtTong.getText().lastIndexOf("VNĐ"));
+                String tt = txtTong.getText().substring(0, txtTong.getText().lastIndexOf("VNĐ")).replaceAll(",", "");
                 double x = Double.parseDouble(tt);
-                b.write("\t-----------------------------------------------------------------\r\n");
-                b.write("\tTổng cộng:  " + tongSl + "\t\t\t" + n.format(Total()) + "VNĐ\r\n");
-                b.write("\t-----------------------------------------------------------------\r\n");
-                b.write("\tTiền khách đưa:\t\t\t" + n.format(x) + "VNĐ\r\n");
-                b.write("\tTiền trả lại:\t\t\t" + n.format(Double.parseDouble(txtTienThua.getText().substring(0, txtTienThua.getText().lastIndexOf("VNĐ")))) + "VNĐ\r\n");
+                b.write("\t------------------------------------------------------------\r\n");
+                b.write("\tTổng cộng:\t\t" + tongSl + "\t\t\t" + n.format(Total()) + " VNĐ\r\n");
+                b.write("\t\tChiết khấu:\t" + txtDis1.getText() + "%\t\t-" + txtDis2.getText() + "\r\n");
+                b.write("\t\t--------------------------------------------\r\n");
+                b.write("\t\tThành tiền:\t\t\t" + txtPay.getText() + "\r\n");
+                b.write("\t\t--------------------------------------------\r\n");
+                b.write("\t\tTiền khách đưa:\t\t\t" + txtTienTra.getText() + "\r\n");
+                b.write("\t\tTiền trả lại:\t\t\t" + txtTienTra.getText() + "\r\n");
+                b.write("\t------------------------------------------------------------\r\n");
+                b.write("\tChương trình khuyến mãi: ");
+                if (cbbkm.getSelectedItem().equals("Không có")) {
+                    b.write("\tKhông có.\r\n");
+                } else if (cbbkm.getSelectedItem().equals("Khách hàng VIP")) {
+                    b.write("\tThành viên quán.\r\n");
+                    b.write("\t-----Thông tin thành viên-----\r\n");
+                    b.write("\tMã thẻ: " + lbIDCus.getText() + "\r\n");
+                    b.write("\tTên thành viên: " + lbNameCus.getText() + "\r\n");
+                    b.write("\tNgày đăng ký: " + lbDateaddCus.getText() + "\r\n");
+                    b.write("\tNgày hết hạn: " + lbDateEndCus.getText() + "\r\n");                    
+                    b.write("\tChiết khấu : " + lbDisCus.getText() + "\r\n");
+                } else {
+                    b.write(cbbkm.getSelectedItem().toString() + "\r\n");
+                }
                 b.write("\t-----------------------------------------------------------------\r\n");
                 b.write("\tMật khẩu Wifi: Mua 2 ly tà tư rồi cho\r\n");
                 b.write("\t-----------------------CẢM ƠN QUÝ KHÁCH--------------------------\r\n");
@@ -1057,43 +1075,44 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         } catch (HeadlessException | IOException e) {
             e.printStackTrace();
         }
-        String hd = "\t\t\t\t\t\tSanfrancisco Coffee\r\n\r\n\""
-                + "\t\t\t\tĐịa chỉ: Tổ 4, P.Cự Khối, Q.Long Biên, Hà Nội\r\n"
-                + "\t\t\t\tSĐT: 091 323 40 38\r\n"
-                + "\t\t\t\tMã hóa đơn :" + txtmaHD.getText() + "\r\n"
-                + "\t\t\t\tThời gian: " + lblTime.getText().trim() + " " + dateHelper.DATE_FORMATER.format(dateHelper.now()) + "\r\n"
-                + "\t\t\t\tNhân viên :" + txtNameEMP.getText() + "\r\n"
-                + "\t-------------------------------------------------------------------------------\r\n"
-                + "\tMã SP\tTên sản phẩm\t\t\tSize\tGiá tiền (VNĐ)\t\t\t SL\t \r\n"
-                + "\t-------------------------------------------------------------------------------\r\n";
-        int line = tblOrder.getRowCount();
-        int tongSl = 0;
-        for (int i = 0; i < line; i++) {
-            if (tblOrder.getValueAt(i, 0).toString().equals(txtmaHD.getText())) {
-                if (tblOrder.getValueAt(i, 7).toString().equals("")) {
-                    String n1 = tblOrder.getValueAt(i, 1).toString();//IDSP
-                    String n2 = tblOrder.getValueAt(i, 2).toString();//Tên SP
-                    String n3 = tblOrder.getValueAt(i, 3) == null ? "Ly" : tblOrder.getValueAt(i, 3).toString();//Size
-                    double n4 = Double.parseDouble(tblOrder.getValueAt(i, 4).toString());//Giá
-                    int n5 = Integer.valueOf(tblOrder.getValueAt(i, 5).toString());//SL
-                    tongSl += n5;
-                    //                    String n6 = (String) tblOrder.getValueAt(i, 7);
-                    hd = hd + "\t" + n1 + "\t" + n2 + "\t\t\t" + n3 + "\t" + n4 + "\t\t\t" + n5 + "\t" + "\r\n";
-                }
-            }
-        }
-        String tt = txtDis1.getText().substring(0, txtDis1.getText().lastIndexOf("VNĐ"));
-        double x = Double.parseDouble(tt);
-        hd = hd + "\t-----------------------------------------------------------------\r\n"
-                + "\tTổng cộng:  " + tongSl + "\t\t\t" + n.format(Total()) + "VNĐ\r\n"
-                + "\t-----------------------------------------------------------------\r\n"
-                + "\tTiền khách đưa:\t\t\t" + n.format(x) + "VNĐ\r\n"
-                + "\tTiền trả lại:\t\t\t" + n.format(Double.parseDouble(txtTienThua.getText().substring(0, txtTienThua.getText().lastIndexOf("VNĐ")))) + "VNĐ\r\n"
-                + "\t-----------------------------------------------------------------\r\n"
-                + "\tMật khẩu Wifi: Mua 2 ly tà tư rồi cho\r\n"
-                + "\t-----------------------CẢM ƠN QUÝ KHÁCH--------------------------\r\n";
-        GUI2.GUI_QL_BILL bill = new GUI2.GUI_QL_BILL(null, true, hd);
-        bill.setVisible(true);
+//        String hd = "\t\t\t\t\t\tSanfrancisco Coffee\r\n\r\n\""
+//                + "\t\t\t\tĐịa chỉ: Tổ 4, P.Cự Khối, Q.Long Biên, Hà Nội\r\n"
+//                + "\t\t\t\tSĐT: 091 323 40 38\r\n"
+//                + "\t\t\t\tMã hóa đơn :" + txtmaHD.getText() + "\r\n"
+//                + "\t\t\t\tThời gian: " + lblTime.getText().trim() + " " + dateHelper.DATE_FORMATER.format(dateHelper.now()) + "\r\n"
+//                + "\t\t\t\tNhân viên :" + txtNameEMP.getText() + "\r\n"
+//                + "\t-------------------------------------------------------------------------------\r\n"
+//                + "\tMã SP\tTên sản phẩm\t\t\tSize\tGiá tiền (VNĐ)\t\t\t SL\t \r\n"
+//                + "\t-------------------------------------------------------------------------------\r\n";
+//        int line = tblOrder.getRowCount();
+//        int tongSl = 0;
+//        for (int i = 0; i < line; i++) {
+//            if (tblOrder.getValueAt(i, 0).toString().equals(txtmaHD.getText())) {
+//                if (tblOrder.getValueAt(i, 7).toString().equals("")) {
+//                    String n1 = tblOrder.getValueAt(i, 1).toString();//IDSP
+//                    String n2 = tblOrder.getValueAt(i, 2).toString();//Tên SP
+//                    String n3 = tblOrder.getValueAt(i, 3) == null ? "Ly" : tblOrder.getValueAt(i, 3).toString();//Size
+//                    double n4 = Double.parseDouble(tblOrder.getValueAt(i, 4).toString());//Giá
+//                    int n5 = Integer.valueOf(tblOrder.getValueAt(i, 5).toString());//SL
+//                    tongSl += n5;
+//                    //                    String n6 = (String) tblOrder.getValueAt(i, 7);
+//                    hd = hd + "\t" + n1 + "\t" + n2 + "\t\t\t" + n3 + "\t" + n4 + "\t\t\t" + n5 + "\t" + "\r\n";
+//                    System.out.printf("%-10s %-10s %-10s %-10s\n", n1, n2, n3, n4);
+//                }
+//            }
+//        }
+//        String tt = txtTong.getText().substring(0, txtTong.getText().lastIndexOf("VNĐ")).replaceAll(",", "");
+//        double x = Double.parseDouble(tt);
+//        hd = hd + "\t-----------------------------------------------------------------\r\n"
+//                + "\tTổng cộng:  " + tongSl + "\t\t\t" + n.format(Total()) + "VNĐ\r\n"
+//                + "\t-----------------------------------------------------------------\r\n"
+//                + "\tTiền khách đưa:\t\t\t" + n.format(x) + "VNĐ\r\n"
+//                + "\tTiền trả lại:\t\t\t" + n.format(Double.parseDouble(txtTienThua.getText().substring(0, txtTienThua.getText().lastIndexOf("VNĐ")))) + "VNĐ\r\n"
+//                + "\t-----------------------------------------------------------------\r\n"
+//                + "\tMật khẩu Wifi: Mua 2 ly tà tư rồi cho\r\n"
+//                + "\t-----------------------CẢM ƠN QUÝ KHÁCH--------------------------\r\n";
+//        GUI2.GUI_QL_BILL bill = new GUI2.GUI_QL_BILL(null, true, hd);
+//        bill.setVisible(true);
         //Mở file txt
         Runtime runtime = Runtime.getRuntime();
         try {
@@ -1255,13 +1274,13 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblOrderMouseReleased
 
-    private void txtTienTra2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienTra2KeyPressed
+    private void txtTienTraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienTraKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTienTra2KeyPressed
+    }//GEN-LAST:event_txtTienTraKeyPressed
 
-    private void txtTienTra2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienTra2KeyTyped
+    private void txtTienTraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienTraKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTienTra2KeyTyped
+    }//GEN-LAST:event_txtTienTraKeyTyped
     public void PanelOnOff(boolean b) {
         lbNhap.setVisible(b);
         txtMaKH.setVisible(b);
@@ -1275,21 +1294,21 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         //tính Discount
         String Order = txtTong.getText().substring(0, txtTong.getText().lastIndexOf("VNĐ")).replaceAll(",", "");
         Dis = (Double.valueOf(txtDis1.getText()) * Double.valueOf(Order)) / 100;
-        txtDis2.setText(formatter.format(Dis)+"VNĐ");
+        txtDis2.setText(formatter.format(Dis) + "VNĐ");
         //tính total
         double total = Double.parseDouble(Order) - Dis;
-        txtPay.setText(formatter.format(total)+"VNĐ");
+        txtPay.setText(formatter.format(total) + "VNĐ");
     }
 
     private void ResetPnInfor() {
         lbIDCus.setText("...");
         lbNameCus.setText("...");
-        lbDateaddCus.setText("...");        
+        lbDateaddCus.setText("...");
         lbDisCus.setText("...");
     }
     private void cbbkmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbkmActionPerformed
         // TODO add your handling code here:
-        if (cbbkm.getSelectedItem()==null) {
+        if (cbbkm.getSelectedItem() == null) {
             return;
         }
         if (cbbkm.getSelectedItem().equals("Không có")) {
@@ -1309,32 +1328,30 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             PanelOnOff(false);
             ResetPnInfor();
             txtMaKH.setText("");
-            lbIDError.setText("");        
+            lbIDError.setText("");
             try {
                 String sql = "Select * from Promotions where NamePromo=?";
-                ResultSet rs  = JDBC.query(sql, cbbkm.getSelectedItem().toString());                                
+                ResultSet rs = JDBC.query(sql, cbbkm.getSelectedItem().toString());
                 if (rs.next()) {
-//                    Date start = dateHelper.DATE_FORMATER2.parse(rs.getString(4));
-//                    Date end = dateHelper.DATE_FORMATER2.parse(rs.getString(5));
                     txtDis1.setText(rs.getString(3));
                     lbNgayKM.setText(dateHelper.DATE_FORMATER.format(rs.getDate(4)) + " - " + dateHelper.DATE_FORMATER.format(rs.getDate(5)));
                     UpdatetxtDis1();
                 }
             } catch (SQLException ex) {
                 dialogHelper.alert(null, "Lỗi 101:: Không thể kết nối đến máy chủ");
-            } 
+            }
         }
     }//GEN-LAST:event_cbbkmActionPerformed
 
     private void txtMaKHCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtMaKHCaretUpdate
         // TODO add your handling code here:                
-         if (txtMaKH.getText().trim().equals("")) {
+        if (txtMaKH.getText().trim().equals("")) {
             txtDis1.setText("0");
             lbIDError.setText("Vui lòng nhập mã thẻ.");
             lbIDError.setForeground(Color.red);
             ResetPnInfor();
-        } else {           
-           qlod.txtMaKHCaretUpdate(txtMaKH, txtDis1, lbIDError, lbIDCus, lbNameCus, lbDateaddCus,lbDateEndCus, lbDisCus);
+        } else {
+            qlod.txtMaKHCaretUpdate(txtMaKH, txtDis1, lbIDError, lbIDCus, lbNameCus, lbDateaddCus, lbDateEndCus, lbDisCus);
         }
         UpdatetxtDis1();
     }//GEN-LAST:event_txtMaKHCaretUpdate
@@ -1499,6 +1516,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                         }
                     });
                 }
+
                 public void focusLost(FocusEvent fe) {
                 }
             });
@@ -1622,7 +1640,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
     private javax.swing.JTextField txtNameEMP;
     private javax.swing.JTextField txtPay;
     private javax.swing.JTextField txtTienThua;
-    private javax.swing.JTextField txtTienTra2;
+    private javax.swing.JTextField txtTienTra;
     private javax.swing.JTextField txtTim;
     private javax.swing.JTextField txtTong;
     private javax.swing.JTextField txtmaHD;
