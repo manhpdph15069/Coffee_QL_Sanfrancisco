@@ -26,7 +26,7 @@ import javax.swing.JTextField;
  */
 public interface IQLOrder_Service {
 
-    public void taoTable(JPanel that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac);
+    public void taoTable(JPanel that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac,JTextField txtThanhTien,JTextField txtDis1,JTextField txtDis2);
 
     public ArrayList<ENTITY_Area> getkhu();
 
@@ -60,7 +60,7 @@ public interface IQLOrder_Service {
 
     public int dongC();
 
-    public double tongTien(JTextField txttong, JTable tblOder);
+    public double tongTien(JTextField txttong, JTable tblOder,JTextField txtThanhTien);
     
     public void huyMon(JTextField txtMaHD,String Reason,String IDProduct,String Note);
     
@@ -77,4 +77,8 @@ public interface IQLOrder_Service {
     public void ReloadCombobox(JComboBox cbb);
     
     public void txtMaKHCaretUpdate(JTextField txtMaKH,JTextField txtdis1,JLabel lbl,JLabel lbIDCus,JLabel lbNameCus,JLabel lbDateCus,JLabel lbDateEndCus,JLabel lbDisCus);
+    
+    public void UpdatetxtDis1(JTextField txtTong,JTextField txtDis1,JTextField txtDis2,JTextField txtPay);
+    
+    public void UpdateKM(String IDCust,String NamePromo,String IDOrder);
 }

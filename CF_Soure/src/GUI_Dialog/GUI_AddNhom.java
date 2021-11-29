@@ -162,7 +162,7 @@ public class GUI_AddNhom extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.ql.taoNhom(this.cbbTenNhom.getSelectedItem().toString(), ban.getIDTable());
-        this.ql.taoTable(that, ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac);
+        this.ql.taoTable(that, ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,null,null,null);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

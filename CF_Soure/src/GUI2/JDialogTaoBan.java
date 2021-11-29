@@ -138,7 +138,7 @@ public class JDialogTaoBan extends javax.swing.JDialog {
         // TODO add your handling code here:
         ban.setLocation(Integer.valueOf(txtviTri.getText()));
         daoban.insertMATABLE(ban);
-        ql.taoTable(that, ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac);
+        ql.taoTable(that, ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,null,null,null);
         this.dispose();        
         
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -234,7 +234,7 @@ public class JDialogHuyDon extends javax.swing.JDialog {
         } catch (SQLException ex) {
             Logger.getLogger(QLOrder_Service.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.ql.taoTable(that,khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac);
+        this.ql.taoTable(that,khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,null,null,null);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
