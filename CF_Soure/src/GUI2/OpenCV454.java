@@ -97,23 +97,23 @@ public class OpenCV454 extends JFrame{
             }
         }
     }
-//    public static void main(String[] args) {
-//       System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-//        EventQueue.invokeLater(new Runnable() {
-//          @Override
-//            public void run() {
-//               OpenCV454 openCV454 = new OpenCV454();
-//             
-//              new Thread(new Runnable() {
-//                   @Override
-//                   public void run() {
-//                       openCV454.StartCamera();
-//                  }
-//              }).start();
-//           }
-//        } );
-//        
-//      System.out.println("load thanh cong");
-//    }
+    public static void main(String[] args) {
+       System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        EventQueue.invokeLater(new Runnable() {
+          @Override
+            public void run() {
+               OpenCV454 openCV454 = new OpenCV454();
+             
+              new Thread(new Runnable() {
+                   @Override
+                   public void run() {
+                       openCV454.StartCamera();
+                  }
+              }).start();
+           }
+        } );
+        
+      System.out.println("load thanh cong");
+    }
     
 }
