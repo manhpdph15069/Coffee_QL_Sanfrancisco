@@ -28,7 +28,7 @@ public class Employee_Service implements IEmployee_Service {
     String SELECT_BY_ID_SQL = "SELECT * FROM [Employee] WHERE [UsernameEMP] = ? and [Status]=0";
     String SELECT_BY_ID = "SELECT * FROM [Employee] WHERE [UsernameEMP] = ? and [Status]=1";
     String check = "UPDATE [Employee] SET [NameEMP] = ?,[Phone]=?,[Birthday]=?,[Address]=?,[Sex]=?,[Email]=?,[Image]=?,[Password]=?,[Status]=0 WHERE [UsernameEMP]= ? And [Status]=1";
-
+    String UPDATE_MK ="UPDATE [Employee] SET [Password]=? where [UsernameEMP] = ? and [Status]=0";
     public void checkTrung(ENTITY_Employee entity) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         try {
             JDBC.update(check,
@@ -46,7 +46,13 @@ public class Employee_Service implements IEmployee_Service {
             e.printStackTrace();
         }
     }
-
+public void updateMK(String pass,String maNV){
+    try {
+         JDBC.update(UPDATE_MK, pass,maNV);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
     @Override
     public void insert(ENTITY_Employee entity) {
         try {

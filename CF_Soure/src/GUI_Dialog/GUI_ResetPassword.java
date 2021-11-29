@@ -282,7 +282,7 @@ public class GUI_ResetPassword extends javax.swing.JDialog {
             if (matKhau.equals(Auth.user.getPassword())) {
                 if (matKhauMoi.equals(xacNhanMKM)) {
                     Auth.user.setPassword(matKhauMoi);
-                    dao.update(Auth.user);
+                    dao.update1(Auth.user);
                     dialogHelper.alert(this, "Đổi mật khẩu thành công!!");
                     this.dispose();
                 } else {

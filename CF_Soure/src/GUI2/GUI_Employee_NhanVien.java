@@ -743,8 +743,10 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btnChupAnhActionPerformed
 
     private void btnChupAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChupAnhMouseClicked
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         GUI2.OpenCV454 mocam = new GUI2.OpenCV454();
-        mocam.setVisible(true);
+        mocam.StartCamera();
+
     }//GEN-LAST:event_btnChupAnhMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

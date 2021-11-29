@@ -5,17 +5,29 @@
  */
 package GUI_Dialog;
 
+import Utils.Check;
+import Utils.ThongBao;
+
 /**
  *
  * @author notak
  */
 public class GUI_ForgetPassword2 extends javax.swing.JFrame {
-
+    String ma;
+    String maNV;
     /**
      * Creates new form GUI_ForgetPassword2
      */
+    
     public GUI_ForgetPassword2() {
+    }
+
+    public GUI_ForgetPassword2(String ma,String manv) {
         initComponents();
+       this.ma=ma;
+       this.maNV=manv;
+        System.out.println(""+ma);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -30,7 +42,7 @@ public class GUI_ForgetPassword2 extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtMACODE = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,7 +78,7 @@ public class GUI_ForgetPassword2 extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel2)
                         .addGap(21, 21, 21)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtMACODE, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(123, 123, 123)
                         .addComponent(jButton1)))
@@ -80,7 +92,7 @@ public class GUI_ForgetPassword2 extends javax.swing.JFrame {
                 .addGap(77, 77, 77)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMACODE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(47, 47, 47))
@@ -102,6 +114,21 @@ public class GUI_ForgetPassword2 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        System.out.println(""+ma);
+                if (Check.checkNullText(txtMACODE)) {
+                    if (Check.checkCode(txtMACODE.getText())) {
+                        
+                if (Integer.valueOf(txtMACODE.getText()).equals(Integer.valueOf(ma))) {
+
+                    GUI_ForgetPassword3 d = new GUI_ForgetPassword3(maNV);
+                    d.setVisible(true);
+                    ThongBao.alert(this, "Xác nhận thành công");
+                    this.dispose();
+                } else {
+                    ThongBao.alert(this, "code bạn nhập không đúng");
+                }           
+                    }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -144,6 +171,6 @@ public class GUI_ForgetPassword2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtMACODE;
     // End of variables declaration//GEN-END:variables
 }

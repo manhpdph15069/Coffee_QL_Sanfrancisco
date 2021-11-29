@@ -61,6 +61,11 @@ public class QLHoaDOn_Service {
         String[] cols = {"IDHD", "NameEMP", "DateOrder", "TimeOder", "Reason", "TongTien", "Status"};
         return this.getListOfArray(sql, cols);
     }
+    public List<Object[]> getListHoaDonTHANG(int thang) {
+        String sql = "{CALL getListHoaDonThang(?)}";
+        String[] cols = {"IDHD", "NameEMP", "DateOrder", "TimeOder", "Reason", "TongTien", "Status"};
+        return this.getListOfArray(sql, cols,thang);
+    }
     public List<ENTITY_Product> getListDoUong(String idHD) {
         String sql = "select ProductName from Product p join OrderDetail od on p.IDProduct=od.IDProduct where od.IDOrder=?";
         return SelectBySQL(sql, idHD);
@@ -89,12 +94,45 @@ public class QLHoaDOn_Service {
                 }else if (ma==3) {                  
                     tt="Đã hủy";
                 }
-//               String tennv = String.valueOf(o[1]);
-//                if (tennv.equals("NULL")) {
-//                    nv="ADMIN";
-//                }else{
-//                    nv=tennv;
-//                }
+                
+                Object[] row = new Object[]{
+                    o[0],
+                    o[1]==null?"ADMIN":o[1],
+                    o[2],
+                    o[3],
+                    o[4],
+                    doUong,
+                    o[5],
+                    tt                  
+                };
+                model.addRow(row);
+                
+            }
+        }
+    }
+    public void fillTabletHANG(JTable tbl,int thang) {
+        DefaultTableModel model = (DefaultTableModel) tbl.getModel();
+        model.setRowCount(0);
+                String tt = null;
+                String doUong="";
+                String nv="";
+        List<Object[]> list = getListHoaDonTHANG(thang);
+        if (list != null) {
+            for (Object[] o : list) {
+        List<ENTITY_Product> listdoUong = getListDoUong(String.valueOf(o[0]));
+        doUong="";
+                for (ENTITY_Product odu : listdoUong) {
+                        doUong = doUong+ odu.getProductName()+",";
+                }
+                
+                int ma = Integer.valueOf(String.valueOf(o[6]));
+                if (ma==1) {
+                    tt="Chưa thanh toán";
+                }else if (ma==2) {
+                    tt="Đã thanh toán";
+                }else if (ma==3) {                  
+                    tt="Đã hủy";
+                }
                 
                 Object[] row = new Object[]{
                     o[0],
