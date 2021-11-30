@@ -507,7 +507,6 @@ public class GUI_Menu extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         if (Check.checkNullText(txtTen)
                 && Check.checkNullText(txtGia)) {
-            if (Check.checkName(txtTen)) {
                 SanPham sp = getForm();
                 try {
                     dao.updateSP(sp);
@@ -519,7 +518,7 @@ public class GUI_Menu extends javax.swing.JPanel {
                     dialogHelper.alert(this, "Bố Đíu cho Sửa đấy");
                     e.printStackTrace();
                 }
-            }
+            
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
@@ -549,7 +548,7 @@ public class GUI_Menu extends javax.swing.JPanel {
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         try {
-            if (evt.getClickCount() == 2) {
+            if (evt.getClickCount() == 1) {
                 this.row = tblSanPham.getSelectedRow();
                 System.out.println(row);
                 if (this.row >= 0) {
@@ -557,6 +556,9 @@ public class GUI_Menu extends javax.swing.JPanel {
                     btnThem.setEnabled(false);
                     btnSua.setEnabled(true);
                     btnXoa.setEnabled(true);
+                    if (cboSize.getSelectedItem()==null) {
+                        cboSize.addItem("");
+                    }
                 }
             }
         } catch (Exception e) {
@@ -659,7 +661,9 @@ public class GUI_Menu extends javax.swing.JPanel {
         sp.setIDProduct(lblID.getText());
         sp.setProductName(txtTen.getText());
         sp.setPrice(Float.valueOf(txtGia.getText()));
-        sp.setSize((String) cboSize.getSelectedItem().toString());
+        if (cboSize.getSelectedItem()==null) {        
+        }else{
+        sp.setSize((String) cboSize.getSelectedItem().toString());}
         sp.setTypeName((String) cboLoai.getSelectedItem().toString());
         sp.setImage(lblHinh.getToolTipText());
         sp.setIDType(Integer.valueOf(lblType.getText()));

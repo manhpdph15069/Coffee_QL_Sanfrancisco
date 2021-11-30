@@ -43,12 +43,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     IQLEmployee_Service dao;
     Employee_Service nv = new Employee_Service();
     int row = 0;
-
-    private JLabel cameraScreen;
-    private VideoCapture capture;
-    private Mat image;
-    private boolean clicked = true;
-
+      
     public GUI_Employee_NhanVien() {
         initComponents();
         dao = (IQLEmployee_Service) new QLEmployee_Service();
@@ -737,15 +732,13 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnChupAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChupAnhActionPerformed
-//          GUI2.OpenCV454 mocam = new GUI2.OpenCV454();
+          GUI2.OpenCV454 mocam = new GUI2.OpenCV454();
+           System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+          mocam.StartCamera();
 //          mocam.setVisible(true);
-
     }//GEN-LAST:event_btnChupAnhActionPerformed
 
     private void btnChupAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChupAnhMouseClicked
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        GUI2.OpenCV454 mocam = new GUI2.OpenCV454();
-        mocam.StartCamera();
 
     }//GEN-LAST:event_btnChupAnhMouseClicked
 

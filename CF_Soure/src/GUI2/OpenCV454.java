@@ -32,7 +32,7 @@ public class OpenCV454 extends JFrame{
     private JButton btnCapture;
     private VideoCapture capture;
     private Mat image;
-    private boolean clicked;
+    private boolean clicked=false;
     
     public OpenCV454(){
         // thiet ke ui
@@ -67,7 +67,7 @@ public class OpenCV454 extends JFrame{
         
     setSize(new Dimension(640,560));
     setLocationRelativeTo(null);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
      System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 }
@@ -86,7 +86,7 @@ public class OpenCV454 extends JFrame{
             imageData = buf.toArray();
             icon = new ImageIcon(imageData);
             cameraScreen.setIcon(icon);
-            if (clicked) {
+            if (clicked==true) {
                 String name = JOptionPane.showInputDialog(this,"dat ten anh di thg loz");
                 if (name == null) {
                   name = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss").format(new Date());
