@@ -28,6 +28,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class GUI_HoaDon extends javax.swing.JPanel {
 
+    SimpleDateFormat fomat = new SimpleDateFormat("yyyy-MM-dd");
     JPopupMenu menu = new JPopupMenu("Popup");
     QLHoaDOn_Service dao;
 
@@ -183,13 +184,13 @@ public class GUI_HoaDon extends javax.swing.JPanel {
         tbl.setForeground(new java.awt.Color(255, 255, 0));
         tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã HD", "Mã NV", "Ngày order", "Giờ order", "Ghi chú", "Đồ uống", "Tổng tiền", "Trạng thái"
+                "Mã HD", "Nhân viên", "Khách hàng", "Trương trình", "Ngày order", "Giờ order", "Ghi chú", "Đồ uống", "Tổng tiền", "Trạng thái"
             }
         ));
         tbl.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
@@ -246,12 +247,20 @@ public class GUI_HoaDon extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        SimpleDateFormat fomat = new SimpleDateFormat("yyyy-MM-dd");
-        DefaultTableModel m = (DefaultTableModel) tbl.getModel();
-        m.fireTableDataChanged();
-        TableRowSorter sorter = new TableRowSorter(m);
-        tbl.setRowSorter(sorter);
-        sorter.setRowFilter(RowFilter.regexFilter(fomat.format(jdate.getDate()), 2));
+//        SimpleDateFormat fomat = new SimpleDateFormat("yyyy-MM-dd");
+//        DefaultTableModel m = (DefaultTableModel) tbl.getModel();
+//        m.fireTableDataChanged();
+//        TableRowSorter sorter = new TableRowSorter(m);
+//        tbl.setRowSorter(sorter);
+//        sorter.setRowFilter(RowFilter.regexFilter(fomat.format(jdate.getDate()), 4));
+
+        List<Object[]> list = dao.getListHoaDonNgay(jdate.getDate());
+        if (list.size() == 0) {
+            ThongBao.alert(this, "Không có hóa đơn nào trong ngày này");
+        } else {
+            dao.fillTableNgay(tbl, jdate.getDate());
+
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -270,7 +279,6 @@ public class GUI_HoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
-        //   dao.fillTable(tbl);
         loc("");
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
@@ -279,8 +287,15 @@ public class GUI_HoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButton4MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int t = jdate.getDate().getMonth()+1;
-        dao.fillTabletHANG(tbl,t);
+
+        List<Object[]> list = dao.getListHoaDonTHANG(jdate.getDate().getMonth() + 1);
+        if (list.size() == 0) {
+            ThongBao.alert(this, "Tháng này không có hóa đơn nào");
+        } else {
+            dao.fillTableTHANG2(tbl, jdate.getDate().getMonth() + 1);
+
+        }
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
     public void loc(String txt) {

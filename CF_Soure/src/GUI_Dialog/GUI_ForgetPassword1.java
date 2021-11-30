@@ -139,10 +139,17 @@ public class GUI_ForgetPassword1 extends javax.swing.JFrame {
         ENTITY_Employee e = dao.findById(txtMaNV.getText());
         if (Check.checkNullText(txtMaNV) && Check.checkNullText(txtEmail)) {
             if (e != null) {
+                if (Check.checkEmail(txtEmail)) {
+                    
+                if (txtEmail.getText().equalsIgnoreCase(e.getEmail())) {                   
                 guiCode();
                 GUI_ForgetPassword2 ff = new GUI_ForgetPassword2(String.valueOf(randumCode), txtMaNV.getText());
                 ff.setVisible(true);
                 this.dispose();
+                }else{
+                    ThongBao.alert(this, "Email không khớp với tên đăng nhập");
+                }
+                }
             } else {
                 ThongBao.alert(this, "Mã nhân viên không tồn tại");
             }

@@ -42,6 +42,8 @@ public class GUI_ForgetPassword3 extends javax.swing.JFrame {
         txtPassComfim = new javax.swing.JPasswordField();
         txtPass = new javax.swing.JPasswordField();
         rSButtonHover1 = new rojeru_san.complementos.RSButtonHover();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +60,10 @@ public class GUI_ForgetPassword3 extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Xác nhận");
+
+        jLabel2.setText("Mật khẩu mới");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,20 +72,27 @@ public class GUI_ForgetPassword3 extends javax.swing.JFrame {
                 .addContainerGap(140, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPass)
-                            .addComponent(txtPassComfim, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
-                        .addGap(93, 93, 93))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(rSButtonHover1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60))))
+                        .addGap(60, 60, 60))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtPass)
+                                .addComponent(txtPassComfim, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                            .addComponent(jLabel2))
+                        .addGap(93, 93, 93))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(87, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addGap(4, 4, 4)
                 .addComponent(txtPassComfim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(rSButtonHover1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -95,12 +108,19 @@ public class GUI_ForgetPassword3 extends javax.swing.JFrame {
 
     private void rSButtonHover1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonHover1ActionPerformed
         // TODO add your handling code here:
-         if (Check.checkNullText(txtPass)&&Check.checkNullText(txtPassComfim)) {
              String p = new String(txtPass.getPassword());
-             System.out.println(""+maNV);
-            dao.updateMK(p, maNV);
-             ThongBao.alert(this, "Đổi mật khẩu thành công");
-             this.dispose();
+             String pC = new String(txtPassComfim.getPassword());
+             
+         if (Check.checkNullText(txtPass)&&Check.checkNullText(txtPassComfim)) {
+             if (p.equals(pC)) {
+                 
+                 dao.updateMK(p, maNV);
+                 ThongBao.alert(this, "Đổi mật khẩu thành công");
+                 this.dispose();
+             }else{
+                 ThongBao.alert(this, "Xác nhận mật khẩu không chính xác");
+             }
+           
         }
     }//GEN-LAST:event_rSButtonHover1ActionPerformed
 
@@ -140,6 +160,8 @@ public class GUI_ForgetPassword3 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private rojeru_san.complementos.RSButtonHover rSButtonHover1;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JPasswordField txtPassComfim;
