@@ -9,6 +9,7 @@ import GUI_Dialog.GUI_Login;
 import GUI_Dialog.GUI_ResetPassword;
 import Utils.Auth;
 import Utils.ThongBao;
+import Utils.XImage;
 import Utils.dialogHelper;
 import java.awt.Desktop;
 import java.awt.Image;
@@ -35,8 +36,10 @@ public class GUI_MAIN extends javax.swing.JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);    //cho toàn màn hình
         init();
     }
-      void init(){
-        new GUI_Login(this,true).setVisible(true);
+
+    void init() {
+        setIconImage(XImage.APP_ICON); //đặt icon góc trên trái
+        new GUI_Login(this, true).setVisible(true);
     }
 
     /**
@@ -74,6 +77,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Hệ thống quản lý quán Coffee Sanfrancis");
 
         From.setBackground(new java.awt.Color(255, 204, 255));
 
@@ -447,20 +451,20 @@ public class GUI_MAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1MouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-                if (Auth.isAdmin()) {
-            dialogHelper.alert(this,"Bạn là "+Auth.admin.getUsername()+" Đẹp Trai");
-        }else{    
+        if (Auth.isAdmin()) {
+            dialogHelper.alert(this, "Bạn là " + Auth.admin.getUsername() + " Đẹp Trai");
+        } else {
             try {
                 Desktop.getDesktop().browse(URI.create("https://www.facebook.com/ilov3myou.hoangthong/"));
             } catch (IOException ex) {
                 Logger.getLogger(GUI_MAIN.class.getName()).log(Level.SEVERE, null, ex);
             }
-            ImageIcon ok=new ImageIcon(new ImageIcon("logos/"+Auth.user.getImage()).getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT));
-            JOptionPane.showMessageDialog(this,"Bạn là "+Auth.user.getUsernameEMP()+"\n"+"Họ Tên : "+Auth.user.getNameEMP(),
-                    "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆",JOptionPane.INFORMATION_MESSAGE,ok);
+            ImageIcon ok = new ImageIcon(new ImageIcon("logos/" + Auth.user.getImage()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            JOptionPane.showMessageDialog(this, "Bạn là " + Auth.user.getUsernameEMP() + "\n" + "Họ Tên : " + Auth.user.getNameEMP(),
+                    "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.INFORMATION_MESSAGE, ok);
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-    
+
     public void goiPan(JPanel nel) {
         nel.setVisible(true);
         this.Fromch.removeAll();

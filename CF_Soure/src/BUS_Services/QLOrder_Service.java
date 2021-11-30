@@ -55,7 +55,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -404,7 +403,8 @@ public class QLOrder_Service implements IQLOrder_Service {
                 switch (tn) {
                     case "Nhóm 1":
                         button.setBackground(Color.orange);
-                        button.setText("Nhóm 1");
+                        button.setFont(new Font("Dialog", 8, 8));
+                        button.setText(button.getText()+" Nhóm 1");
                         break;
                     case "Nhóm 2":
                         button.setBackground(Color.yellow);
@@ -555,10 +555,10 @@ public class QLOrder_Service implements IQLOrder_Service {
                 }
                 BanButtons ban = banButtonList.get(ButtonGop);
                 if (dialogHelper.confirm(null, "Bạn có muốn gộp hóa đơn vào luôn không")) {
-                    chuenBan(banButton.getIDTalbe(), "Chuyển từ bàn :" + ban.getIDTalbe() + "Đến" + banButton.getIDTalbe(), IDOrderCu);
+                    chuenBan(banButton.getIDTalbe(), "Chuyển từ bàn :" + ban.getIDTalbe() + "Đến Bàn : " + banButton.getIDTalbe(), IDOrderCu);
                     gopBanvsHD(banButton.getIDTalbe(), IDOrderCu, IDOrderMoi);
                 } else {
-                    chuenBan(banButton.getIDTalbe(), "Chuyển từ bàn :" + ban.getIDTalbe() + "Đến" + banButton.getIDTalbe(), IDOrderCu);
+                    chuenBan(banButton.getIDTalbe(), "Chuyển từ bàn : " + ban.getIDTalbe() + "Đến Bàn : " + banButton.getIDTalbe(), IDOrderCu);
                 }
 
                 String sql = "UPDATE [Table] SET [Status] = 0 WHERE IDTable = ?";
@@ -708,16 +708,19 @@ public class QLOrder_Service implements IQLOrder_Service {
     public void hienTableSP(JTable tbl) {
         this.model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
-        this.model.setColumnIdentifiers(new Object[]{"IDSP", "Loại", "Tên SP", "Size", "Giá", ""});
+        this.model.setColumnIdentifiers(new Object[]{"IDSP","Hình", "Loại", "Tên SP", "Size", "Giá", ""});
         TableColumnModel columnModel = tbl.getColumnModel();
-        columnModel.getColumn(3).setMaxWidth(40);
-        columnModel.getColumn(0).setMaxWidth(40);
-        columnModel.getColumn(5).setMaxWidth(60);
+        columnModel.getColumn(4).setMaxWidth(40);
+        columnModel.getColumn(0).setMaxWidth(70);
+        columnModel.getColumn(0).setMinWidth(50);
+        columnModel.getColumn(1).setMaxWidth(80);
+        columnModel.getColumn(6).setMaxWidth(70);
         try {
             ArrayList<SPChiTiet> list = this.select();
             for (SPChiTiet cd : list) {
                 Object[] row = {
                     cd.getIDProduct(),
+                    cd.getImage(),
                     cd.getTypeName(),
                     cd.getProductName(),
                     cd.getSize(),

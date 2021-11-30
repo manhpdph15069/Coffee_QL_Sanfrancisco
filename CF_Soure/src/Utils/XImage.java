@@ -19,6 +19,15 @@ import javax.swing.ImageIcon;
  * @author PC
  */
 public class XImage {
+    public static final Image APP_ICON;
+    static {
+        // Tải biểu tượng ứng dụng 
+        //CÁCH TẢI ẢNH TỪ TRONG PROJECT
+        //icon là thư mục con của src
+        //Logo cho ứng dụng
+        String file = "/icon/logo.png";      //icon là thư mục con của src
+        APP_ICON = new ImageIcon(XImage.class.getResource(file)).getImage();        
+    }
     public static Image getAppIcon(){ //Lấy ảnh làm icon 
         URL url =  XImage.class.getResource("File anh o day....");
        return new ImageIcon(url).getImage();
@@ -40,5 +49,9 @@ public class XImage {
     public static ImageIcon read(String fileName){
         File path = new File("logos",fileName);
         return new ImageIcon(new ImageIcon(path.getAbsolutePath()).getImage().getScaledInstance(180, 180,Image.SCALE_DEFAULT));
+    }
+    public static ImageIcon read1(String fileName){
+        File path = new File("logos",fileName);
+        return new ImageIcon(new ImageIcon(path.getAbsolutePath()).getImage().getScaledInstance(80, 80,Image.SCALE_DEFAULT));
     }
 }
