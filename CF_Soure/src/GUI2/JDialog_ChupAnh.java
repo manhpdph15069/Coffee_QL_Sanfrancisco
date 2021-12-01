@@ -13,7 +13,6 @@ import java.io.ByteArrayInputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.imageio.ImageIO;
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -24,18 +23,18 @@ import org.opencv.videoio.VideoCapture;
  * @author PC
  */
 public class JDialog_ChupAnh extends javax.swing.JDialog {
-    
+
     private DaemonThread myThread = null;
     int count = 0;
     VideoCapture webSource = null;
-    
+
     Mat image = new Mat();
     MatOfByte mem = new MatOfByte();
-    
+
     class DaemonThread implements Runnable {
-        
+
         protected volatile boolean runnable = false;
-        
+
         @Override
         public void run() {
             synchronized (this) {
@@ -71,8 +70,9 @@ public class JDialog_ChupAnh extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         thongpro();
+        jButton1.setVisible(false);
     }
-    
+
     void thongpro() {
         webSource = new VideoCapture(0);
         myThread = new DaemonThread();
@@ -95,6 +95,7 @@ public class JDialog_ChupAnh extends javax.swing.JDialog {
 
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -117,19 +118,28 @@ public class JDialog_ChupAnh extends javax.swing.JDialog {
             .addGap(0, 443, Short.MAX_VALUE)
         );
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/doimk-icon.png"))); // NOI18N
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(301, 301, 301)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(31, 31, 31)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(42, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(301, 301, 301)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +147,9 @@ public class JDialog_ChupAnh extends javax.swing.JDialog {
                 .addGap(17, 17, 17)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
 
@@ -145,20 +157,28 @@ public class JDialog_ChupAnh extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jButton1.setVisible(true);
+        jButton2.setEnabled(false);
         myThread.runnable = false;
 //        jButton2.setEnabled(false);
 //        jButton1.setEnabled(true);
-        String name =dialogHelper.prompt(this, "Đặt tên ảnh đi Pro");
+        String name = dialogHelper.prompt(this, "Đặt tên ảnh đi Pro");
         if (name != null) {
-        // ghi file
+            // ghi file
             Imgcodecs.imwrite("logos/" + name + ".jpg", image);
             webSource.release();
             dialogHelper.alert(this, "Lưu thành công");
             this.dispose();
-        } else{
-             name = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss").format(new Date());
+        } else {
+            name = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss").format(new Date());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        thongpro();
+        jButton2.setEnabled(true);
+        jButton1.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,6 +224,7 @@ public class JDialog_ChupAnh extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
