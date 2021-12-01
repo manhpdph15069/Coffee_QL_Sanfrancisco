@@ -358,7 +358,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         jLabel3.setText("Bàn");
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Tổng tiền");
 
         txtTong.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -399,11 +399,11 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tiền khách trả");
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Tiền thừa");
 
         txtTienThua.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -485,7 +485,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblOrder);
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Chiết Khấu");
 
         txtPay.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -493,7 +493,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         txtPay.setText("0VNĐ");
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Thành tiền");
 
         txtTienTra.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -506,7 +506,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         });
 
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("%");
 
         txtDis2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -1012,7 +1012,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                         txtMaKH.grabFocus();
                         return;
                     } else {
-                        qlod.UpdateKM(lbNameCus.getText(), null, txtmaHD.getText());
+                        qlod.UpdateKM(lbIDCus.getText(), null, txtmaHD.getText());
                         qlod.xoaNhom(lblBan.getToolTipText());
                         qlod.thanhToan(txtmaHD);
                         qlod.updatebnThanhToan(txtmaHD);
@@ -1437,6 +1437,13 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 
     private void txtmaHDCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtmaHDCaretUpdate
         // TODO add your handling code here:
+        if (qlod.ChuongTrinhKM(txtmaHD.getText(), txtMaKH).equals("VIP")) {
+            this.cbbkm.setSelectedIndex(1);
+        }else if (qlod.ChuongTrinhKM(txtmaHD.getText(), txtMaKH).equals("")) {
+            this.cbbkm.setSelectedIndex(0);
+        }else{
+            this.cbbkm.setSelectedItem(qlod.ChuongTrinhKM(txtmaHD.getText(), txtMaKH));
+        }
     }//GEN-LAST:event_txtmaHDCaretUpdate
     public double Total() {
         double total = 0;
