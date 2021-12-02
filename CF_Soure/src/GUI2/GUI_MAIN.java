@@ -13,14 +13,19 @@ import Utils.XImage;
 import Utils.dialogHelper;
 import java.awt.Desktop;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  *
@@ -39,7 +44,25 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
     void init() {
         setIconImage(XImage.APP_ICON); //đặt icon góc trên trái
+        startDongHo();
         new GUI_Login(this, true).setVisible(true);
+//        if (Auth.isLogin()) {
+//
+//            lblUsser.setText(Auth.user.getNameEMP());
+//        }
+
+    }
+
+    void startDongHo() {
+        new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date now = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss aa");
+                String text = format.format(now);
+                lblDH.setText(text);
+            }
+        }).start();
     }
 
     /**
@@ -52,10 +75,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private void initComponents() {
 
         From = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblDH = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         Fromch = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        lblUsser = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnOrder = new rojerusan.RSButtonIconD();
         btnBan = new rojerusan.RSButtonIconD();
@@ -81,9 +105,9 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
         From.setBackground(new java.awt.Color(255, 204, 255));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 102, 0));
-        jLabel1.setText("00:00:00");
+        lblDH.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblDH.setForeground(new java.awt.Color(51, 102, 0));
+        lblDH.setText("00:00:00");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Button-Info-icon.png"))); // NOI18N
         jLabel3.setMaximumSize(new java.awt.Dimension(20, 20));
@@ -98,6 +122,8 @@ public class GUI_MAIN extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/cafe_main.gif"))); // NOI18N
         Fromch.add(jLabel2);
 
+        lblUsser.setText("jLabel1");
+
         javax.swing.GroupLayout FromLayout = new javax.swing.GroupLayout(From);
         From.setLayout(FromLayout);
         FromLayout.setHorizontalGroup(
@@ -106,8 +132,10 @@ public class GUI_MAIN extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblDH)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblUsser)
+                .addGap(759, 759, 759))
             .addGroup(FromLayout.createSequentialGroup()
                 .addComponent(Fromch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -117,13 +145,12 @@ public class GUI_MAIN extends javax.swing.JFrame {
             .addGroup(FromLayout.createSequentialGroup()
                 .addComponent(Fromch, javax.swing.GroupLayout.PREFERRED_SIZE, 1001, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(FromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(FromLayout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-                        .addGap(21, 21, 21))
-                    .addGroup(FromLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(FromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(FromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblDH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblUsser))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(102, 153, 255));
@@ -399,6 +426,13 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
         // TODO add your handling code here:
+//        if (Auth.isAdmin()) {
+//        GUI2.GUI_Menu table = new GUI2.GUI_Menu();
+//        goiPan(table);
+//        }else{
+//            ThongBao.alert(this, "Vui lòng  đăng nhập");
+//        }
+
         GUI2.GUI_Menu table = new GUI2.GUI_Menu();
         goiPan(table);
     }//GEN-LAST:event_btnSanPhamActionPerformed
@@ -518,7 +552,6 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private rojerusan.RSButtonIconD btnSanPham;
     private rojerusan.RSButtonIconD btnThoat;
     private rojerusan.RSButtonIconD btnThongKe;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
@@ -530,6 +563,8 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JLabel lblDH;
+    private javax.swing.JLabel lblUsser;
     private rojerusan.RSButtonIconD rSButtonIconD1;
     private rojerusan.RSButtonIconD rSButtonIconD2;
     // End of variables declaration//GEN-END:variables

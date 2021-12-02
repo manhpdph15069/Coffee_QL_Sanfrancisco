@@ -7,6 +7,7 @@ package GUI2;
 
 import BUS_IServices.IQLStatistical_Service;
 import BUS_Services.QLStatistical_Service;
+import Utils.dateHelper;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -32,16 +33,13 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
 
     void init() {
         dao = new QLStatistical_Service();
-        jDateNBD.setDate(now());
-        JDateNKT.setDate(now());
+        jDateNBD.setDate(dateHelper.now());
+        JDateNKT.setDate(dateHelper.now());
         lblTong.setText("0");
         lblHD.setText("0");
         lblTM.setText("0");
     }
 
-    public Date now() {
-        return new Date();
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

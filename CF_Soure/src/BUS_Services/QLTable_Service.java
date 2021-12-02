@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,14 +45,17 @@ public class QLTable_Service implements IQLTable_Service {
             d.setRowCount(0);
             List<ENTITY_Table> list = (List<ENTITY_Table>) dao.select();
             for (ENTITY_Table t : list) {
-
+               List<ENTITY_Area> l= layAreaname(String.valueOf(t.getIDArea()));
+                for (ENTITY_Area e : l) {
+                    
                 Object[] row = new Object[]{
                     t.getIDTable(),
-                    "Khu " + t.getIDArea(),
+                    e.getAreaName(),
                     t.getLocation(),
                     "Hoạt động"
                 };
                 d.addRow(row);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,6 +63,23 @@ public class QLTable_Service implements IQLTable_Service {
 
     }
 
+    public List<ENTITY_Area> layAreaname(String ma){
+        try {
+                    List<ENTITY_Area> list = new ArrayList<>();
+            String sql = "SELECT Areaname from Area where IDArea=?";
+            ResultSet rs = JDBC.query(sql, ma);
+            while(rs.next()){
+                ENTITY_Area a = new ENTITY_Area();
+                a.setAreaName(rs.getString(1));
+                list.add(a);
+            }
+             rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+    
     @Override
     public void taoIDTable(JTextField maTable) {
         try {

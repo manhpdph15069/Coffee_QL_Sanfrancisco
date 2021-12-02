@@ -6,8 +6,10 @@
 package BUS_Services;
 
 import BUS_IServices.*;
+import DAL_Models.ENTITY_Product;
 import Utils.JDBC;
 import Utils.ThongBao;
+import Utils.dateHelper;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 
@@ -44,6 +46,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
     SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss aa");
     SimpleDateFormat formatThang = new SimpleDateFormat("dd-MM-yyyy");
     SimpleDateFormat formatNam = new SimpleDateFormat("yyyy");
+    QLHoaDOn_Service daoHD = new QLHoaDOn_Service();
 
     @Override
     public List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
@@ -189,29 +192,29 @@ public class QLStatistical_Service implements IQLStatistical_Service {
     public void setDataThang(JPanel pnlNgay, int thang) {
         try {
             List<Object[]> list = getListByTKThang(thang);
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        if (list != null) {
-            for (Object[] o : list) {
-                String t = String.valueOf(o[0]);
-                float tien = Float.valueOf(t);
-                String ngay = String.valueOf(formatThang.format(o[1]));
+            DefaultCategoryDataset data = new DefaultCategoryDataset();
+            if (list != null) {
+                for (Object[] o : list) {
+                    String t = String.valueOf(o[0]);
+                    float tien = Float.valueOf(t);
+                    String ngay = String.valueOf(formatThang.format(o[1]));
 
-                data.addValue(tien, "Số tiền", ngay);
+                    data.addValue(tien, "Số tiền", ngay);
+                }
             }
-        }
-        JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu tháng".toUpperCase(), "Thời gian", "Số Tiền", data,
-                PlotOrientation.VERTICAL, false, true, false);
+            JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu tháng".toUpperCase(), "Thời gian", "Số Tiền", data,
+                    PlotOrientation.VERTICAL, false, true, false);
 
-        ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
+            ChartPanel chartPanel = new ChartPanel(barChart);
+            chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
 
-        pnlNgay.removeAll();
-        pnlNgay.setLayout(new CardLayout());
-        pnlNgay.add(chartPanel);
-        pnlNgay.validate();
-        pnlNgay.repaint();
+            pnlNgay.removeAll();
+            pnlNgay.setLayout(new CardLayout());
+            pnlNgay.add(chartPanel);
+            pnlNgay.validate();
+            pnlNgay.repaint();
         } catch (Exception e) {
-          //  e.printStackTrace();
+            //  e.printStackTrace();
         }
     }
 
@@ -296,7 +299,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             String user = "manh1qn@gmail.com";
             String pass = "Manh0988307480";
             String to = "manh1qn@gmail.com";
-            String subject = "Báo cáo";
+            String subject = "Báo cáo ngày " + formatThang.format(dateHelper.now());
 
             boolean sessionDebug = false;
             //!.Tạo 1 dối tượng Properties
@@ -413,8 +416,11 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             List<Object[]> list3 = getBillHuyNgay(ngay);
             List<Object[]> list4 = getListByTKNgay(ngay);
 
+            float tien = 0;
+            String doUong = "";
+            String maNV = "";
             for (Object[] o : list2) {
-                message = message + "\t\t\t\tBáo cáo trong ngày\n"
+                message = message + "\t\t\t\tBáo cáo trong ngày\n "
                         + "|---------------------------------------------------------------------------|\n"
                         + " |                                                  \t\t\t\t\t|\n"
                         + "\t\tTổng món bán trong ngay: " + String.valueOf(o[0]) + "\t\t\n"
@@ -426,23 +432,31 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                     if (list4.size() >= 1) {
 
                         for (Object[] oT : list4) {
-
-                            message = message + "\t\tDoanh thu trong ngay: " + String.valueOf(oT[0]) + "VNĐ" + "\t\t\n"
-                                    + "|---------------------------------------------------------------------------|" + "\n\n";
-                            break;
+                            tien += Float.parseFloat(String.valueOf(oT[0]));
                         }
+                        message = message + "\t\tDoanh thu trong ngay: " + tien + "VNĐ" + "\t\t\n"
+                                + "|---------------------------------------------------------------------------|" + "\n\n";
                     }
                 }
                 for (Object[] oo : list1) {
-                    System.out.println("" + o[0] + o[1]);
-                    message = message + "\t|-----------------------------------------------------|\n"
-                            + "\t|\tMã hóa đơn bị hủy là: " + String.valueOf(oo[0] + "\t\n"
-                                    + "\t|\tMã nhân viên order: " + String.valueOf(oo[1])) + "\t\n"
-                            + "\t|\tNgày: " + String.valueOf(oo[2] + "\t\n"
-                                    + "\t|\tGiờ: " + String.valueOf(oo[3]) + "\t\n"
-                                    + "\t|\tLý do: " + String.valueOf(oo[4]) + "\t\n"
-                                    + "\t|-----------------------------------------------------|\n"
-                            );
+                    List<ENTITY_Product> listDU = daoHD.getListDoUong(String.valueOf(oo[0]));
+                    doUong = "";
+                    for (ENTITY_Product oDU : listDU) {
+                        doUong = doUong + oDU.getProductName() + ",";
+                    }
+                    if (String.valueOf(oo[1]).equalsIgnoreCase("Null")) {
+                        maNV = "Admin";
+                    } else {
+                        maNV = String.valueOf(oo[1]);
+                    }
+                    message = message + "|--------------------------------------------------------|\n"
+                            + "\t\tMã hóa đơn bị hủy là: " + String.valueOf(oo[0]) + "\t\n"
+                            + "\t\tMã nhân viên order: " + maNV + "\t\n"
+                            + "\t\tNgày: " + String.valueOf(oo[2]) + "\t\n"
+                            + "\t\tGiờ: " + String.valueOf(oo[3]) + "\t\n"
+                            + "\t\tĐồ uống: " + doUong + "\t\n"
+                            + "\t\tLý do: " + String.valueOf(oo[4]) + "\t\n"
+                            + "|--------------------------------------------------------|\n";
 
                 }
             }

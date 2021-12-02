@@ -44,4 +44,5 @@ public class ENTITY_Area {
     public void setMaxTable(int maxTable) {
         MaxTable = maxTable;
     }
+    
 }

@@ -19,6 +19,7 @@ private int Status;
 private int IDArea;
 private String TableGroup;
 
+
     public ENTITY_Table() {
     }
 
