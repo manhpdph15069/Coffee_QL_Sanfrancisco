@@ -108,7 +108,6 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         tblSanPham.getColumnModel().getColumn(6).setCellRenderer(new GUI2.GUI_QL_Order.ClientsTableButtonRenderer());
         tblSanPham.getColumnModel().getColumn(6).setCellEditor(new GUI2.GUI_QL_Order.ClientsTableRenderer(new JCheckBox()));
         tblSanPham.setPreferredScrollableViewportSize(tblSanPham.getPreferredSize());
-//        tblSanPham.setRowHeight(80);
         tblSanPham.getColumnModel().getColumn(1).setCellRenderer(new ImageRenderer());
         tblOrder.getColumnModel().getColumn(8).setCellRenderer(new GUI2.GUI_QL_Order.ClientsTableButtonRenderer());
         tblOrder.getColumnModel().getColumn(8).setCellEditor(new GUI2.GUI_QL_Order.ClientsTableRenderer(new JCheckBox()));
@@ -513,7 +512,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         txtDis2.setText("0VNĐ");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Chương trình khuyến mãi");
 
         cbbkm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -1195,7 +1194,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         }
         if (e > 0) {
             qlod.updatebnGuoi();
-            dialogHelper.alert(PanCac, "gưởi thành công");
+            dialogHelper.alert(PanCac, "Gửi thành công ");
         }
         card.show(PanCac, "card4");
         ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
@@ -1292,7 +1291,6 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             }
         }
         this.qlod.billTable(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder, lblBan.getText());
-
 
     }//GEN-LAST:event_btnTachHDActionPerformed
 

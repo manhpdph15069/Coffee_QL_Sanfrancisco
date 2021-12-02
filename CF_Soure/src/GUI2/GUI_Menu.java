@@ -474,8 +474,7 @@ public class GUI_Menu extends javax.swing.JPanel {
         if (cboLoai.getSelectedItem() != null) {
             if (!cboLoai.getSelectedItem().equals(cboLoai.getSelectedItem().toString())) {
                 ENTITY_ProductType sp = (ENTITY_ProductType) cboLoai.getSelectedItem();
-                lblType.setText("" + sp.getIDType());
-                System.out.println("----" + sp.getIDType());
+                lblType.setText("" + sp.getIDType());                
                 if (sp != null) {
                     dao.loadComboSize(cboSize, String.valueOf(sp.getTypeName()), lblType);
                 }
