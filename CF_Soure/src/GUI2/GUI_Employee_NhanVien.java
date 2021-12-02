@@ -734,9 +734,18 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     private void btnChupAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChupAnhActionPerformed
 
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        JDialog_ChupAnh ok=new JDialog_ChupAnh(null,true);
+        JDialog_ChupAnh ok=new JDialog_ChupAnh(null,true,lblAnh);
 //        ok.thongpro();
         ok.setVisible(true);
+         ok.addWindowListener(new WindowAdapter()
+    {
+      public void windowClosed(WindowEvent e)
+      {
+        System.out.println("Tat webcam");
+        ok.webSource.release();
+        ok.dispose();
+      }
+    });
     }//GEN-LAST:event_btnChupAnhActionPerformed
 
     private void btnChupAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChupAnhMouseClicked

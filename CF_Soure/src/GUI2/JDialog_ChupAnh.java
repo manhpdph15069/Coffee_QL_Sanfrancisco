@@ -5,14 +5,18 @@
  */
 package GUI2;
 
+import Utils.XImage;
 import Utils.dialogHelper;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -24,10 +28,11 @@ import org.opencv.videoio.VideoCapture;
  */
 public class JDialog_ChupAnh extends javax.swing.JDialog {
 
+    static JDialog_ChupAnh jdialog;
+    private JLabel lblJLabel = null;
     private DaemonThread myThread = null;
     int count = 0;
     VideoCapture webSource = null;
-
     Mat image = new Mat();
     MatOfByte mem = new MatOfByte();
 
@@ -54,7 +59,7 @@ public class JDialog_ChupAnh extends javax.swing.JDialog {
                                 }
                             }
                         } catch (Exception e) {
-                            System.out.println("Lỗi");
+//                            System.out.println("Lỗi");
                         }
                     }
                 }
@@ -65,10 +70,11 @@ public class JDialog_ChupAnh extends javax.swing.JDialog {
     /**
      * Creates new form NewJDialog1
      */
-    public JDialog_ChupAnh(java.awt.Frame parent, boolean modal) {
+    public JDialog_ChupAnh(java.awt.Frame parent, boolean modal, JLabel lbl) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        this.lblJLabel = lbl;
         thongpro();
         jButton1.setVisible(false);
     }
@@ -157,21 +163,20 @@ public class JDialog_ChupAnh extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jButton1.setVisible(true);
+//        jButton1.setVisible(true);
         jButton2.setEnabled(false);
         myThread.runnable = false;
-//        jButton2.setEnabled(false);
-//        jButton1.setEnabled(true);
-        String name = dialogHelper.prompt(this, "Đặt tên ảnh đi Pro");
-        if (name != null) {
-            // ghi file
-            Imgcodecs.imwrite("logos/" + name + ".jpg", image);
-            webSource.release();
-            dialogHelper.alert(this, "Lưu thành công");
-            this.dispose();
-        } else {
+        String name;
+//        = dialogHelper.prompt(this, "Đặt tên ảnh đi Pro");
+//        if (name == null) {
             name = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss").format(new Date());
-        }
+//        }
+        // ghi file
+        Imgcodecs.imwrite("logos/" + name + ".jpg", image);
+        webSource.release();
+        dialogHelper.alert(this, "Lưu thành công");
+        lblJLabel.setIcon(XImage.read(name + ".jpg"));
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
