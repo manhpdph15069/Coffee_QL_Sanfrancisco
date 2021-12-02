@@ -65,7 +65,7 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sản Phẩm");
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
 
         jButton4.setText("Mới");
         jButton4.addActionListener(new java.awt.event.ActionListener() {

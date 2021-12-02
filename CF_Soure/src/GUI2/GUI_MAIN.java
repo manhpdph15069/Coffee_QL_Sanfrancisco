@@ -153,7 +153,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel3.setBackground(new java.awt.Color(255, 153, 153));
 
         btnOrder.setBackground(new java.awt.Color(0, 102, 51));
         btnOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/santa-icon.png"))); // NOI18N

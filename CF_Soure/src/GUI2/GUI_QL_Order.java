@@ -240,14 +240,14 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         });
         pmnOder.add(mnHuymon);
 
-        setBackground(new java.awt.Color(0, 102, 255));
+        setBackground(new java.awt.Color(255, 153, 153));
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 0, 0));
 
         PanCac.setForeground(new java.awt.Color(153, 255, 153));
         PanCac.setLayout(new java.awt.CardLayout());
 
-        panChao.setBackground(new java.awt.Color(0, 153, 255));
+        panChao.setBackground(new java.awt.Color(255, 0, 51));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/chaoOrder.gif"))); // NOI18N
 
@@ -260,7 +260,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         panChaoLayout.setHorizontalGroup(
             panChaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panChaoLayout.createSequentialGroup()
-                .addContainerGap(268, Short.MAX_VALUE)
+                .addContainerGap(271, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addGap(265, 265, 265))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panChaoLayout.createSequentialGroup()
@@ -881,7 +881,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             }
         });
 
-        PanSanPham.setBackground(new java.awt.Color(51, 153, 255));
+        PanSanPham.setBackground(new java.awt.Color(255, 0, 0));
         PanSanPham.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách sản phẩm"));
 
         txtTim.addKeyListener(new java.awt.event.KeyAdapter() {

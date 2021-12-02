@@ -90,7 +90,7 @@ public class JDialogHuyDon extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
 
         lblHD.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblHD.setText("Hủy Đơn :");
