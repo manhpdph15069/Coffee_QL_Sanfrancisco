@@ -150,7 +150,9 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
         Fromch.add(Home);
 
+        lblUsser.setBackground(new java.awt.Color(204, 0, 51));
         lblUsser.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblUsser.setForeground(new java.awt.Color(204, 0, 0));
         lblUsser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Users.png"))); // NOI18N
         lblUsser.setText("Người Dùng");
 
@@ -160,9 +162,9 @@ public class GUI_MAIN extends javax.swing.JFrame {
         jLabel1.setMaximumSize(new java.awt.Dimension(100, 24));
 
         lblFacebook.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblFacebook.setForeground(new java.awt.Color(0, 51, 255));
+        lblFacebook.setForeground(new java.awt.Color(0, 51, 153));
         lblFacebook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/facebook.png"))); // NOI18N
-        lblFacebook.setText("Faceboock");
+        lblFacebook.setText("Facebook");
         lblFacebook.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblFacebookMouseClicked(evt);

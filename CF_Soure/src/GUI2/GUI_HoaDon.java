@@ -127,10 +127,13 @@ public class GUI_HoaDon extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 153, 153));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 0));
         jLabel1.setText("Quản lý hóa đơn");
 
         jdate.setDateFormatString("yyyy-MM-dd");
 
+        btnNgay.setBackground(new java.awt.Color(0, 102, 0));
+        btnNgay.setForeground(new java.awt.Color(255, 255, 255));
         btnNgay.setText("Lọc ngày");
         btnNgay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,8 +141,10 @@ public class GUI_HoaDon extends javax.swing.JPanel {
             }
         });
 
+        jRadioButton1.setBackground(new java.awt.Color(255, 153, 153));
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jRadioButton1.setForeground(new java.awt.Color(0, 102, 0));
         jRadioButton1.setText("Đã hủy");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,8 +152,10 @@ public class GUI_HoaDon extends javax.swing.JPanel {
             }
         });
 
+        jRadioButton2.setBackground(new java.awt.Color(255, 153, 153));
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jRadioButton2.setForeground(new java.awt.Color(0, 102, 0));
         jRadioButton2.setText("Chưa thanh toán");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,8 +163,10 @@ public class GUI_HoaDon extends javax.swing.JPanel {
             }
         });
 
+        jRadioButton3.setBackground(new java.awt.Color(255, 153, 153));
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jRadioButton3.setForeground(new java.awt.Color(0, 102, 0));
         jRadioButton3.setText("Đã Thanh Toán");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,8 +174,10 @@ public class GUI_HoaDon extends javax.swing.JPanel {
             }
         });
 
+        jRadioButton4.setBackground(new java.awt.Color(255, 153, 153));
         buttonGroup1.add(jRadioButton4);
         jRadioButton4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jRadioButton4.setForeground(new java.awt.Color(0, 102, 0));
         jRadioButton4.setText("Tất cả");
         jRadioButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -179,6 +190,8 @@ public class GUI_HoaDon extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(0, 102, 0));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Lọc Tháng");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,10 +203,13 @@ public class GUI_HoaDon extends javax.swing.JPanel {
 
         lblTBillH.setText("0");
 
+        jLabel2.setForeground(new java.awt.Color(0, 102, 0));
         jLabel2.setText("Tổng HD");
 
+        jLabel3.setForeground(new java.awt.Color(0, 102, 0));
         jLabel3.setText("Tổng HD Hủy");
 
+        jLabel4.setForeground(new java.awt.Color(0, 102, 0));
         jLabel4.setText("Từ ngày");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

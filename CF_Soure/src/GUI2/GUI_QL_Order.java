@@ -140,8 +140,6 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         PanCac = new javax.swing.JPanel();
         panChao = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         PanLichSu = new javax.swing.JPanel();
         lblNgay = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -251,10 +249,6 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/chaoOrder.gif"))); // NOI18N
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/lacdit.gif"))); // NOI18N
-
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/lacdit.gif"))); // NOI18N
-
         javax.swing.GroupLayout panChaoLayout = new javax.swing.GroupLayout(panChao);
         panChao.setLayout(panChaoLayout);
         panChaoLayout.setHorizontalGroup(
@@ -262,20 +256,14 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panChaoLayout.createSequentialGroup()
                 .addContainerGap(271, Short.MAX_VALUE)
                 .addComponent(jLabel13)
-                .addGap(265, 265, 265))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panChaoLayout.createSequentialGroup()
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel15))
+                .addGap(268, 268, 268))
         );
         panChaoLayout.setVerticalGroup(
             panChaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panChaoLayout.createSequentialGroup()
+                .addGap(172, 172, 172)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panChaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         PanCac.add(panChao, "card4");
@@ -1656,8 +1644,6 @@ public class GUI_QL_Order extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
