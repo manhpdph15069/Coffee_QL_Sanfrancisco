@@ -6,7 +6,9 @@
 package BUS_Services;
 
 import BUS_IServices.*;
+import BUS_Models.ThongKeSP;
 import DAL_Models.ENTITY_Product;
+import DAL_Services.Product_Service;
 import Utils.JDBC;
 import Utils.ThongBao;
 import Utils.dateHelper;
@@ -14,6 +16,9 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,7 +35,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -45,8 +52,11 @@ public class QLStatistical_Service implements IQLStatistical_Service {
     List<Object[]> msList = new ArrayList<>();
     SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss aa");
     SimpleDateFormat formatThang = new SimpleDateFormat("dd-MM-yyyy");
+
     SimpleDateFormat formatNam = new SimpleDateFormat("yyyy");
     QLHoaDOn_Service daoHD = new QLHoaDOn_Service();
+    Product_Service daoSP = new Product_Service();
+    private NumberFormat n = new DecimalFormat("#,###");
 
     @Override
     public List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
@@ -172,7 +182,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
+        chartPanel.setPreferredSize(new Dimension(600, 321));
 
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
@@ -464,6 +474,278 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             sendmail(message);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    //---------------------------------------------
+    public List<ThongKeSP> tkSanPhamDB() {
+        String sql = "select p.ProductName,count(*)as Soluong,p.Price,o.Reason,o.Status from product p join OrderDetail o on p.IDProduct=o.IDProduct \n"
+                + "join [Order] od on od.IDOrder=o.IDOrder\n"
+                + "group by p.ProductName,p.Price,o.Status,o.Reason";
+        return this.layTK_Products(sql);
+    }
+
+    public List<ThongKeSP> tkSanPhamDBNGAY(String date) {
+        String sql = "select p.ProductName,count(*)as Soluong,p.Price,o.Reason,o.Status from product p join OrderDetail o on p.IDProduct=o.IDProduct \n"
+                + "join [Order] od on od.IDOrder=o.IDOrder\n"
+                + "where od.DateOrder=?\n"
+                + "group by p.ProductName,p.Price,o.Status,o.Reason";
+        return this.layTK_Products(sql, date);
+    }
+
+    public List<ThongKeSP> tkSanPhamDBTHANG(int thang) {
+        String sql = "select p.ProductName,count(*)as Soluong,p.Price,o.Reason,o.Status from product p join OrderDetail o on p.IDProduct=o.IDProduct \n"
+                + "join [Order] od on od.IDOrder=o.IDOrder\n"
+                + "where Month(od.DateOrder)=?\n"
+                + "group by p.ProductName,p.Price,o.Status,o.Reason";
+        return this.layTK_Products(sql, thang);
+    }
+
+    public List<ThongKeSP> tkSanPhamDBNAM(int nam) {
+        String sql = "select p.ProductName,count(*)as Soluong,p.Price,o.Reason,o.Status from product p join OrderDetail o on p.IDProduct=o.IDProduct \n"
+                + "join [Order] od on od.IDOrder=o.IDOrder\n"
+                + "where Year(od.DateOrder)=?\n"
+                + "group by p.ProductName,p.Price,o.Status,o.Reason";
+        return this.layTK_Products(sql, nam);
+    }
+
+    public List<ThongKeSP> layTK_Products(String sql, Object... args) {
+        List<ThongKeSP> list = new ArrayList<>();
+        try {
+            ResultSet rs = JDBC.query(sql, args);
+            while (rs.next()) {
+                ThongKeSP table = new ThongKeSP();
+                table.setProductName(rs.getString(1));
+                table.setSoLuong(rs.getInt(2));
+                table.setGia(rs.getFloat(3));
+                table.setLyDo(rs.getString(4));
+                table.setStatus(rs.getBoolean(5));
+
+                list.add(table);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void fillTableSanPham(JTable tbl, JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2) {
+        DefaultTableModel model = (DefaultTableModel) tbl.getModel();
+        model.setRowCount(0);
+        DefaultTableModel model2 = (DefaultTableModel) tbl2.getModel();
+        model2.setRowCount(0);
+        float tong = 0;
+        int tongM = 0;
+        float tong2 = 0;
+        int tongM2 = 0;
+        List<ThongKeSP> list2 = tkSanPhamDB();
+        for (ThongKeSP tk : list2) {
+            if (tk.isStatus() == false) {
+
+                Object[] row = new Object[]{
+                    tk.getProductName(),
+                    tk.getSoLuong(),
+                    n.format(tk.getGia()) + " VNĐ",
+                    n.format((tk.getGia() * tk.getSoLuong())) + " VNĐ",
+                    "Đã bán"
+                };
+                model.addRow(row);
+            } else {
+                Object[] row = new Object[]{
+                    tk.getProductName(),
+                    tk.getSoLuong(),
+                    n.format(tk.getGia()) + " VNĐ",
+                    n.format((tk.getGia() * tk.getSoLuong())) + " VNĐ",
+                    tk.getLyDo(),
+                    "Đã Hủy"
+                };
+                model2.addRow(row);
+            }
+        }
+
+        for (ThongKeSP tt : list2) {
+            if (tt.isStatus() == false) {
+                tong += (tt.getGia() * tt.getSoLuong());
+                tongM += tt.getSoLuong();
+            } else {
+                tong2 += (tt.getGia() * tt.getSoLuong());
+                tongM2 += tt.getSoLuong();
+            }
+        }
+        lbl.setText(n.format(tong) + " VNĐ");
+        lblTM.setText(String.valueOf(tongM));
+        lbl2.setText(n.format(tong2) + " VNĐ");
+        lblTM2.setText(String.valueOf(tongM2));
+
+    }
+
+    @Override
+    public void fillTableSanPhamNGAY(String ngay, JTable tbl, JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2) {
+        DefaultTableModel model = (DefaultTableModel) tbl.getModel();
+        model.setRowCount(0);
+        DefaultTableModel model2 = (DefaultTableModel) tbl2.getModel();
+        model2.setRowCount(0);
+        float tong = 0;
+        int tongM = 0;
+        float tong2 = 0;
+        int tongM2 = 0;
+        List<ThongKeSP> list2 = tkSanPhamDBNGAY(ngay);
+        if (list2.size() != 0) {
+
+            for (ThongKeSP tk : list2) {
+                if (tk.isStatus() == false) {
+
+                    Object[] row = new Object[]{
+                        tk.getProductName(),
+                        tk.getSoLuong(),
+                        n.format(tk.getGia()) + " VNĐ",
+                        n.format((tk.getGia() * tk.getSoLuong())) + " VNĐ",
+                        "Đã bán"
+                    };
+                    model.addRow(row);
+                } else {
+                    Object[] row = new Object[]{
+                        tk.getProductName(),
+                        tk.getSoLuong(),
+                        n.format(tk.getGia()) + " VNĐ",
+                        n.format((tk.getGia() * tk.getSoLuong())) + " VNĐ",
+                        tk.getLyDo(),
+                        "Đã Hủy"
+                    };
+                    model2.addRow(row);
+                }
+            }
+
+            for (ThongKeSP tt : list2) {
+                if (tt.isStatus() == false) {
+                    tong += (tt.getGia() * tt.getSoLuong());
+                    tongM += tt.getSoLuong();
+                } else {
+                    tong2 += (tt.getGia() * tt.getSoLuong());
+                    tongM2 += tt.getSoLuong();
+                }
+            }
+            lbl.setText(n.format(tong) + " VNĐ");
+            lblTM.setText(String.valueOf(tongM));
+            lbl2.setText(n.format(tong2) + " VNĐ");
+            lblTM2.setText(String.valueOf(tongM2));
+        } else {
+            ThongBao.alert(null, "Ngày này không bán được gì");
+        }
+
+    }
+
+    @Override
+    public void fillTableSanPhamTHANG(int thang, JTable tbl, JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2) {
+        DefaultTableModel model = (DefaultTableModel) tbl.getModel();
+        model.setRowCount(0);
+        DefaultTableModel model2 = (DefaultTableModel) tbl2.getModel();
+        model2.setRowCount(0);
+        float tong = 0;
+        int tongM = 0;
+        float tong2 = 0;
+        int tongM2 = 0;
+        List<ThongKeSP> list2 = tkSanPhamDBTHANG(thang);
+        if (list2.size() != 0) {
+
+            for (ThongKeSP tk : list2) {
+                if (tk.isStatus() == false) {
+
+                    Object[] row = new Object[]{
+                        tk.getProductName(),
+                        tk.getSoLuong(),
+                        n.format(tk.getGia()) + " VNĐ",
+                        n.format((tk.getGia() * tk.getSoLuong())) + " VNĐ",
+                        "Đã bán"
+                    };
+                    model.addRow(row);
+                } else {
+                    Object[] row = new Object[]{
+                        tk.getProductName(),
+                        tk.getSoLuong(),
+                        n.format(tk.getGia()) + " VNĐ",
+                        n.format((tk.getGia() * tk.getSoLuong())) + " VNĐ",
+                        tk.getLyDo(),
+                        "Đã Hủy"
+                    };
+                    model2.addRow(row);
+                }
+            }
+
+            for (ThongKeSP tt : list2) {
+                if (tt.isStatus() == false) {
+                    tong += (tt.getGia() * tt.getSoLuong());
+                    tongM += tt.getSoLuong();
+                } else {
+                    tong2 += (tt.getGia() * tt.getSoLuong());
+                    tongM2 += tt.getSoLuong();
+                }
+            }
+            lbl.setText(n.format(tong) + " VNĐ");
+            lblTM.setText(String.valueOf(tongM));
+            lbl2.setText(n.format(tong2) + " VNĐ");
+            lblTM2.setText(String.valueOf(tongM2));
+        } else {
+            ThongBao.alert(null, "Tháng này này ế không bán được gì");
+        }
+
+    }
+
+    @Override
+    public void fillTableSanPhamNAM(int nam, JTable tbl, JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2) {
+        DefaultTableModel model = (DefaultTableModel) tbl.getModel();
+        model.setRowCount(0);
+        DefaultTableModel model2 = (DefaultTableModel) tbl2.getModel();
+        model2.setRowCount(0);
+        float tong = 0;
+        int tongM = 0;
+        float tong2 = 0;
+        int tongM2 = 0;
+        List<ThongKeSP> list2 = tkSanPhamDBNAM(nam);
+        if (list2.size() != 0) {
+
+            for (ThongKeSP tk : list2) {
+                if (tk.isStatus() == false) {
+
+                    Object[] row = new Object[]{
+                        tk.getProductName(),
+                        tk.getSoLuong(),
+                        n.format(tk.getGia()) + " VNĐ",
+                        n.format((tk.getGia() * tk.getSoLuong())) + " VNĐ",
+                        "Đã bán"
+                    };
+                    model.addRow(row);
+                } else {
+                    Object[] row = new Object[]{
+                        tk.getProductName(),
+                        tk.getSoLuong(),
+                        n.format(tk.getGia()) + " VNĐ",
+                        n.format((tk.getGia() * tk.getSoLuong())) + " VNĐ",
+                        tk.getLyDo(),
+                        "Đã Hủy"
+                    };
+                    model2.addRow(row);
+                }
+            }
+
+            for (ThongKeSP tt : list2) {
+                if (tt.isStatus() == false) {
+                    tong += (tt.getGia() * tt.getSoLuong());
+                    tongM += tt.getSoLuong();
+                } else {
+                    tong2 += (tt.getGia() * tt.getSoLuong());
+                    tongM2 += tt.getSoLuong();
+                }
+            }
+            lbl.setText(n.format(tong) + " VNĐ");
+            lblTM.setText(String.valueOf(tongM));
+            lbl2.setText(n.format(tong2) + " VNĐ");
+            lblTM2.setText(String.valueOf(tongM2));
+
+        } else {
+            ThongBao.alert(null, "Chắc đóng cửa rồi! Năm này không bán được gì");
         }
     }
 

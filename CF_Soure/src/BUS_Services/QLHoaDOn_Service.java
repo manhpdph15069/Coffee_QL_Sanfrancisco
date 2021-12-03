@@ -5,6 +5,7 @@
  */
 package BUS_Services;
 
+import DAL_Models.ENTITY_Order;
 import DAL_Models.ENTITY_Product;
 import Utils.JDBC;
 import java.sql.ResultSet;
@@ -203,6 +204,24 @@ public class QLHoaDOn_Service {
                 model.addRow(row);
 
             }
+        }
+    }
+    
+  
+  public void huyHoaDon(String lyDo,String idOrder){
+        try {
+            String sql = "Update [Order] SET Status=3,Reason=? where IDOrder=?";
+            JDBC.update(sql,lyDo,idOrder);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+  public void khoiPhucHD(String lyDo,String idOrder){
+        try {
+            String sql = "Update [Order] SET Status=2,Reason=? where IDOrder=?";
+            JDBC.update(sql,lyDo,idOrder);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

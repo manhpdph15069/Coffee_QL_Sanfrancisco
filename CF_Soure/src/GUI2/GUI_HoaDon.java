@@ -28,7 +28,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class GUI_HoaDon extends javax.swing.JPanel {
 
-    SimpleDateFormat fomat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat fomat = new SimpleDateFormat("hh:mm | dd-MM-yyyy");
     JPopupMenu menu = new JPopupMenu("Popup");
     QLHoaDOn_Service dao;
 
@@ -62,6 +62,56 @@ public class GUI_HoaDon extends javax.swing.JPanel {
 
     public Date now() {
         return new Date();
+    }
+
+    public void huyHD() {
+        menu.removeAll();
+
+        JMenuItem item = new JMenuItem("Hủy đơn");
+        item.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String ma = (String) tbl.getValueAt(tbl.getSelectedRow(), 0);
+                String check = (String) tbl.getValueAt(tbl.getSelectedRow(), 9);
+
+                if (tbl.getSelectedRow() > 0) {
+                    if (check.equals("Đã hủy")) {
+                        ThongBao.alert(null, "Đơn này hủy rồi hủy gì nữa");
+                    } else {
+
+                        if (ThongBao.comfirm(null, "Bạn chắc chắn muốn hủy đơn này?")) {
+
+                            dao.huyHoaDon("Admin hủy đơn lúc " + fomat.format(dateHelper.now()), ma);
+                            ThongBao.alert(null, "Hủy thành công");
+                            dao.fillTable(tbl);
+                        }
+                    }
+                }
+            }
+        });
+
+        menu.add(item);
+        
+         item = new JMenuItem("Khôi phục đơn");
+        item.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String ma = (String) tbl.getValueAt(tbl.getSelectedRow(), 0);
+                String check = (String) tbl.getValueAt(tbl.getSelectedRow(), 9);
+
+                if (tbl.getSelectedRow() > 0) {
+                    if (check.equals("Đã hủy")) {                        
+                        if (ThongBao.comfirm(null, "Bạn chắc chắn muốn khôi phục đơn này?")) {
+                            dao.khoiPhucHD("Admin khôi phục lại lúc " + fomat.format(dateHelper.now()), ma);
+                            ThongBao.alert(null, "Khôi phục thành công");
+                            dao.fillTable(tbl);
+                        }
+                    } else {
+                        ThongBao.alert(null, "Có hủy đâu mà khôi phục");
+                    }
+                }
+            }
+        });
+
+        menu.add(item);
     }
 
     /**
@@ -252,6 +302,11 @@ public class GUI_HoaDon extends javax.swing.JPanel {
             }
         ));
         tbl.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
+        tbl.setColorFilasForeground1(new java.awt.Color(0, 0, 0));
+        tbl.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
+        tbl.setFuenteFilas(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tbl.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tbl.setFuenteHead(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         tbl.setMinimumSize(new java.awt.Dimension(1235, 64));
         tbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -262,6 +317,18 @@ public class GUI_HoaDon extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tbl);
+        if (tbl.getColumnModel().getColumnCount() > 0) {
+            tbl.getColumnModel().getColumn(0).setMinWidth(100);
+            tbl.getColumnModel().getColumn(0).setMaxWidth(100);
+            tbl.getColumnModel().getColumn(1).setMinWidth(140);
+            tbl.getColumnModel().getColumn(1).setMaxWidth(140);
+            tbl.getColumnModel().getColumn(4).setMinWidth(130);
+            tbl.getColumnModel().getColumn(4).setMaxWidth(150);
+            tbl.getColumnModel().getColumn(5).setMinWidth(130);
+            tbl.getColumnModel().getColumn(5).setMaxWidth(150);
+            tbl.getColumnModel().getColumn(6).setMinWidth(300);
+            tbl.getColumnModel().getColumn(6).setMaxWidth(350);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -300,7 +367,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_tblMouseReleased
 
     private void tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMouseClicked
-
+        huyHD();
     }//GEN-LAST:event_tblMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -347,7 +414,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         List<Object[]> list = dao.getListHoaDonTHANG(jdate.getDate().getMonth() + 1);
-        int billH =0;
+        int billH = 0;
         for (Object[] o : list) {
             if (String.valueOf(o[8]).equalsIgnoreCase("3")) {
                 billH++;

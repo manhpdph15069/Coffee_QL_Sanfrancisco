@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -58,4 +59,11 @@ public interface IQLStatistical_Service {
 
     void guiBCN(int nam);
     void guiBCNgay(Date ngay);
+    
+    
+    
+    public void fillTableSanPham(JTable tbl,JTable tbl2,JLabel lbl,JLabel lblTM, JLabel lbl2, JLabel lblTM2);
+    public void fillTableSanPhamNGAY(String ngay,JTable tbl,JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2);
+    public void fillTableSanPhamTHANG(int Thang,JTable tbl,JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2);
+    public void fillTableSanPhamNAM(int Nam,JTable tbl,JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2);
 }
