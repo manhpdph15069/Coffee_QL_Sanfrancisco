@@ -104,6 +104,8 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         lbltkspTT1 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         lbltkspTM1 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText(":");
@@ -506,19 +508,29 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         lbltkspTM1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         lbltkspTM1.setText("0000");
 
+        jLabel20.setText("Sản phẩm bán ra");
+
+        jLabel21.setText("Sản phẩm đã hủy");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2)
-                .addContainerGap())
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(141, 141, 141)
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(142, 142, 142)
                 .addComponent(jLabel15)
                 .addGap(18, 18, 18)
                 .addComponent(lbltkspTT)
@@ -526,7 +538,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                 .addComponent(jLabel18)
                 .addGap(18, 18, 18)
                 .addComponent(lbltkspTM)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
+                .addGap(288, 288, 288)
                 .addComponent(jLabel17)
                 .addGap(18, 18, 18)
                 .addComponent(lbltkspTT1)
@@ -534,24 +546,27 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                 .addComponent(jLabel19)
                 .addGap(18, 18, 18)
                 .addComponent(lbltkspTM1)
-                .addGap(145, 145, 145))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107)
+                .addGap(95, 95, 95)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(lbltkspTT1)
+                    .addComponent(jLabel19)
+                    .addComponent(lbltkspTM1)
                     .addComponent(jLabel15)
                     .addComponent(lbltkspTT)
                     .addComponent(jLabel18)
-                    .addComponent(lbltkspTM)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel17)
-                        .addComponent(lbltkspTT1)
-                        .addComponent(jLabel19)
-                        .addComponent(lbltkspTM1)))
-                .addGap(18, 18, 18)
+                    .addComponent(lbltkspTM))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21))
+                .addGap(7, 7, 7)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
@@ -723,6 +738,8 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

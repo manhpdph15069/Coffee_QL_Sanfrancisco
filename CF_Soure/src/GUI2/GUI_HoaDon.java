@@ -55,6 +55,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
                 billH++;
             }
         }
+        btnNgayActionPerformed(null);
         lblTBill.setText(String.valueOf(list.size()));
         lblTBillH.setText(String.valueOf(billH));
 
@@ -64,55 +65,34 @@ public class GUI_HoaDon extends javax.swing.JPanel {
         return new Date();
     }
 
-    public void huyHD() {
-        menu.removeAll();
-
-        JMenuItem item = new JMenuItem("Hủy đơn");
-        item.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String ma = (String) tbl.getValueAt(tbl.getSelectedRow(), 0);
-                String check = (String) tbl.getValueAt(tbl.getSelectedRow(), 9);
-
-                if (tbl.getSelectedRow() > 0) {
-                    if (check.equals("Đã hủy")) {
-                        ThongBao.alert(null, "Đơn này hủy rồi hủy gì nữa");
-                    } else {
-
-                        if (ThongBao.comfirm(null, "Bạn chắc chắn muốn hủy đơn này?")) {
-
-                            dao.huyHoaDon("Admin hủy đơn lúc " + fomat.format(dateHelper.now()), ma);
-                            ThongBao.alert(null, "Hủy thành công");
-                            dao.fillTable(tbl);
-                        }
-                    }
-                }
-            }
-        });
-
-        menu.add(item);
-        
-         item = new JMenuItem("Khôi phục đơn");
-        item.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String ma = (String) tbl.getValueAt(tbl.getSelectedRow(), 0);
-                String check = (String) tbl.getValueAt(tbl.getSelectedRow(), 9);
-
-                if (tbl.getSelectedRow() > 0) {
-                    if (check.equals("Đã hủy")) {                        
-                        if (ThongBao.comfirm(null, "Bạn chắc chắn muốn khôi phục đơn này?")) {
-                            dao.khoiPhucHD("Admin khôi phục lại lúc " + fomat.format(dateHelper.now()), ma);
-                            ThongBao.alert(null, "Khôi phục thành công");
-                            dao.fillTable(tbl);
-                        }
-                    } else {
-                        ThongBao.alert(null, "Có hủy đâu mà khôi phục");
-                    }
-                }
-            }
-        });
-
-        menu.add(item);
-    }
+//    public void huyHD() {
+//        menu.removeAll();
+//
+//        JMenuItem item = new JMenuItem("Hủy đơn");
+//        item.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                String ma = (String) tbl.getValueAt(tbl.getSelectedRow(), 0);
+//                String check = (String) tbl.getValueAt(tbl.getSelectedRow(), 9);
+//
+//                if (tbl.getSelectedRow() > 0) {
+//                    if (check.equals("Đã hủy")) {
+//                        ThongBao.alert(null, "Đơn này hủy rồi hủy gì nữa");
+//                    } else if (check.equals("Chưa thanh toán")) {
+//                        if (ThongBao.comfirm(null, "Bạn chắc chắn muốn hủy đơn này?")) {
+//
+//                            dao.huyHoaDon("Admin hủy đơn lúc " + fomat.format(dateHelper.now()), ma);
+//                            ThongBao.alert(null, "Hủy thành công");
+//                            dao.fillTableNgay(tbl,jdate.getDate());
+//                        }
+//                    }else{
+//                        ThongBao.alert(null, "Đơn đã thanh toán không thể hủy");
+//                    }
+//                }
+//            }
+//        });
+//
+//        menu.add(item);
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -127,7 +107,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jdate = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
+        btnNgay = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
@@ -151,10 +131,10 @@ public class GUI_HoaDon extends javax.swing.JPanel {
 
         jdate.setDateFormatString("yyyy-MM-dd");
 
-        jButton1.setText("Lọc ngày");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnNgay.setText("Lọc ngày");
+        btnNgay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnNgayActionPerformed(evt);
             }
         });
 
@@ -239,7 +219,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jdate, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(btnNgay)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2))
                     .addComponent(jLabel4))
@@ -272,7 +252,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
+                            .addComponent(btnNgay)
                             .addComponent(jButton2))
                         .addComponent(jdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -367,10 +347,10 @@ public class GUI_HoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_tblMouseReleased
 
     private void tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMouseClicked
-        huyHD();
+      //  huyHD();
     }//GEN-LAST:event_tblMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgayActionPerformed
         List<Object[]> list = dao.getListHoaDonNgay(jdate.getDate());
         int tBill = list.size();
         int tBillH = 0;
@@ -387,7 +367,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
             lblTBillH.setText(String.valueOf(tBillH));
 
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnNgayActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
@@ -440,8 +420,8 @@ public class GUI_HoaDon extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNgay;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
