@@ -20,7 +20,7 @@ public class Auth {
         Auth.admin=null;
     }
     public static boolean isLogin(){
-        return Auth.user!=null;
+        return Auth.user!=null;        
     }
     public static boolean isAdmin(){
         return Auth.admin!=null;

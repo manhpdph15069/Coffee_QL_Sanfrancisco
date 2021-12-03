@@ -242,12 +242,12 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 153, 153));
 
-        jPanel2.setBackground(new java.awt.Color(255, 0, 0));
+        jPanel2.setBackground(new java.awt.Color(255, 153, 153));
 
         PanCac.setForeground(new java.awt.Color(153, 255, 153));
         PanCac.setLayout(new java.awt.CardLayout());
 
-        panChao.setBackground(new java.awt.Color(255, 0, 51));
+        panChao.setBackground(new java.awt.Color(255, 153, 153));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/chaoOrder.gif"))); // NOI18N
 
@@ -280,7 +280,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 
         PanCac.add(panChao, "card4");
 
-        PanLichSu.setBackground(new java.awt.Color(0, 153, 204));
+        PanLichSu.setBackground(new java.awt.Color(255, 153, 153));
         PanLichSu.setBorder(javax.swing.BorderFactory.createTitledBorder("Lịch sử Order"));
         PanLichSu.setForeground(new java.awt.Color(102, 255, 102));
 
@@ -334,7 +334,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 
         PanCac.add(PanLichSu, "card2");
 
-        PanOrder.setBackground(new java.awt.Color(0, 102, 204));
+        PanOrder.setBackground(new java.awt.Color(255, 153, 153));
         PanOrder.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách Order"));
         PanOrder.setForeground(new java.awt.Color(153, 255, 51));
 
@@ -881,7 +881,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             }
         });
 
-        PanSanPham.setBackground(new java.awt.Color(255, 0, 0));
+        PanSanPham.setBackground(new java.awt.Color(255, 153, 153));
         PanSanPham.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách sản phẩm"));
 
         txtTim.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1084,7 +1084,6 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                             double n4 = Double.parseDouble(tblOrder.getValueAt(i, 4).toString());//Giá
                             int n5 = Integer.valueOf(tblOrder.getValueAt(i, 5).toString());//SL
                             tongSl += n5;
-                            //                    String n6 = (String) tblOrder.getValueAt(i, 7);
                             b.write("\t" + n1 + "\t" + n2 + "\t\t\t\t" + n3 + "\t\t" + n.format(n4) + "\t\t\t\t\t" + n5 + "\t" + "\r\n");
                         }
                     }
@@ -1122,44 +1121,6 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         } catch (HeadlessException | IOException e) {
             e.printStackTrace();
         }
-//        String hd = "\t\t\t\t\t\tSanfrancisco Coffee\r\n\r\n\""
-//                + "\t\t\t\tĐịa chỉ: Tổ 4, P.Cự Khối, Q.Long Biên, Hà Nội\r\n"
-//                + "\t\t\t\tSĐT: 091 323 40 38\r\n"
-//                + "\t\t\t\tMã hóa đơn :" + txtmaHD.getText() + "\r\n"
-//                + "\t\t\t\tThời gian: " + lblTime.getText().trim() + " " + dateHelper.DATE_FORMATER.format(dateHelper.now()) + "\r\n"
-//                + "\t\t\t\tNhân viên :" + txtNameEMP.getText() + "\r\n"
-//                + "\t-------------------------------------------------------------------------------\r\n"
-//                + "\tMã SP\tTên sản phẩm\t\t\tSize\tGiá tiền (VNĐ)\t\t\t SL\t \r\n"
-//                + "\t-------------------------------------------------------------------------------\r\n";
-//        int line = tblOrder.getRowCount();
-//        int tongSl = 0;
-//        for (int i = 0; i < line; i++) {
-//            if (tblOrder.getValueAt(i, 0).toString().equals(txtmaHD.getText())) {
-//                if (tblOrder.getValueAt(i, 7).toString().equals("")) {
-//                    String n1 = tblOrder.getValueAt(i, 1).toString();//IDSP
-//                    String n2 = tblOrder.getValueAt(i, 2).toString();//Tên SP
-//                    String n3 = tblOrder.getValueAt(i, 3) == null ? "Ly" : tblOrder.getValueAt(i, 3).toString();//Size
-//                    double n4 = Double.parseDouble(tblOrder.getValueAt(i, 4).toString());//Giá
-//                    int n5 = Integer.valueOf(tblOrder.getValueAt(i, 5).toString());//SL
-//                    tongSl += n5;
-//                    //                    String n6 = (String) tblOrder.getValueAt(i, 7);
-//                    hd = hd + "\t" + n1 + "\t" + n2 + "\t\t\t" + n3 + "\t" + n4 + "\t\t\t" + n5 + "\t" + "\r\n";
-//                    System.out.printf("%-10s %-10s %-10s %-10s\n", n1, n2, n3, n4);
-//                }
-//            }
-//        }
-//        String tt = txtTong.getText().substring(0, txtTong.getText().lastIndexOf("VNĐ")).replaceAll(",", "");
-//        double x = Double.parseDouble(tt);
-//        hd = hd + "\t-----------------------------------------------------------------\r\n"
-//                + "\tTổng cộng:  " + tongSl + "\t\t\t" + n.format(Total()) + "VNĐ\r\n"
-//                + "\t-----------------------------------------------------------------\r\n"
-//                + "\tTiền khách đưa:\t\t\t" + n.format(x) + "VNĐ\r\n"
-//                + "\tTiền trả lại:\t\t\t" + n.format(Double.parseDouble(txtTienThua.getText().substring(0, txtTienThua.getText().lastIndexOf("VNĐ")))) + "VNĐ\r\n"
-//                + "\t-----------------------------------------------------------------\r\n"
-//                + "\tMật khẩu Wifi: Mua 2 ly tà tư rồi cho\r\n"
-//                + "\t-----------------------CẢM ƠN QUÝ KHÁCH--------------------------\r\n";
-//        GUI2.GUI_QL_BILL bill = new GUI2.GUI_QL_BILL(null, true, hd);
-//        bill.setVisible(true);
         //Mở file txt
         Runtime runtime = Runtime.getRuntime();
         try {
@@ -1400,46 +1361,60 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         // TODO add your handling code here:
         double Repay;
         //tính Discount
-        String tientra = txtTienTra.getText().substring(0, txtTienTra.getText().lastIndexOf("VNĐ")).replaceAll(",", "").trim();
-        if (txtTienTra.getText().trim().equals("0VNĐ")) {
-            lbLoiGia.setText("Khách hàng chưa đưa tiền.");
-            txtTienThua.setText("0NVĐ");
-            btnThanhToan.setEnabled(false);
-            return;
-        } else if (!tientra.matches("\\d+")) {
-            lbLoiGia.setText("Tiền có dạng số.");
-            txtTienThua.setText("0VNĐ");
-            btnThanhToan.setEnabled(false);
-            return;
-        } else {
-            lbLoiGia.setText("");
-            btnThanhToan.setEnabled(false);
+        try {
+            String tientra = "";                        
+            if (!txtTienTra.getText().matches("\\d+VNĐ")) {
+                txtTienTra.setText("0VNĐ");
+                dialogHelper.alert(this, "Sai định dạnh tiền Việt");
+            }else{
+                tientra=txtTienTra.getText().substring(0, txtTienTra.getText().lastIndexOf("VNĐ")).replaceAll(",", "").trim();
+            }
+            if (txtTienTra.getText().trim().equals("0VNĐ")) {
+                lbLoiGia.setText("Khách hàng chưa đưa tiền.");
+                txtTienThua.setText("0VNĐ");
+                btnThanhToan.setEnabled(false);
+                return;
+            } else if (!tientra.matches("\\d+")) {
+                lbLoiGia.setText("Tiền có dạng số.");
+                txtTienThua.setText("0VNĐ");
+                btnThanhToan.setEnabled(false);
+                return;
+            } else {
+                lbLoiGia.setText("");
+                btnThanhToan.setEnabled(false);
 //                break;
+            }
+
+            String total = txtPay.getText().substring(0, txtPay.getText().lastIndexOf("VNĐ")).replaceAll(",", "");
+            Repay = Double.parseDouble(tientra) - Double.parseDouble(total);
+            txtTienThua.setText(n.format(Repay) + "VNĐ");
+            if (Repay < 0) {
+                lbLoiGia.setText("Khách hàng chưa đưa đủ tiền.");
+                btnThanhToan.setEnabled(false);
+                txtTienThua.setText("0VNĐ");
+            } else if (Double.parseDouble(tientra) == 0) {
+                btnThanhToan.setEnabled(false);
+                txtTienThua.setText("0VNĐ");
+            } else {
+                lbLoiGia.setText("");
+                btnThanhToan.setEnabled(true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            txtTienTra.setText(0 + "VNĐ");
+            dialogHelper.alert(this, "Sai định dạng tiền ");
         }
 
-        String total = txtPay.getText().substring(0, txtPay.getText().lastIndexOf("VNĐ")).replaceAll(",", "");
-        Repay = Double.parseDouble(tientra) - Double.parseDouble(total);
-        txtTienThua.setText(n.format(Repay) + "VNĐ");
-        if (Repay < 0) {
-            lbLoiGia.setText("Khách hàng chưa đưa đủ tiền.");
-            btnThanhToan.setEnabled(false);
-            txtTienThua.setText("0VNĐ");
-        } else if (Double.parseDouble(tientra) == 0) {
-            btnThanhToan.setEnabled(false);
-            txtTienThua.setText("0VNĐ");
-        } else {
-            lbLoiGia.setText("");
-            btnThanhToan.setEnabled(true);
-        }
+
     }//GEN-LAST:event_txtTienTraCaretUpdate
 
     private void txtmaHDCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtmaHDCaretUpdate
         // TODO add your handling code here:
         if (qlod.ChuongTrinhKM(txtmaHD.getText(), txtMaKH).equals("VIP")) {
             this.cbbkm.setSelectedIndex(1);
-        }else if (qlod.ChuongTrinhKM(txtmaHD.getText(), txtMaKH).equals("")) {
+        } else if (qlod.ChuongTrinhKM(txtmaHD.getText(), txtMaKH).equals("")) {
             this.cbbkm.setSelectedIndex(0);
-        }else{
+        } else {
             this.cbbkm.setSelectedItem(qlod.ChuongTrinhKM(txtmaHD.getText(), txtMaKH));
         }
     }//GEN-LAST:event_txtmaHDCaretUpdate
@@ -1770,8 +1745,8 @@ class ImageRenderer extends DefaultTableCellRenderer {
 
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
             boolean hasFocus, int row, int column) {
-        if (value != null) {            
-            lbl.setIcon(XImage.read1(String.valueOf(value))); 
+        if (value != null) {
+            lbl.setIcon(XImage.read1(String.valueOf(value)));
         } else {
             lbl.setIcon(XImage.read1("no_image.jpg"));
         }

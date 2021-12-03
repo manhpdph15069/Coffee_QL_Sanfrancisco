@@ -46,11 +46,13 @@ public class GUI_MAIN extends javax.swing.JFrame {
         setIconImage(XImage.APP_ICON); //đặt icon góc trên trái
         startDongHo();
         new GUI_Login(this, true).setVisible(true);
-//        if (Auth.isLogin()) {
-//
-//            lblUsser.setText(Auth.user.getNameEMP());
-//        }
-
+        if (Auth.isLogin()) {
+            lblUsser.setText(Auth.user.getNameEMP());
+        } else if (Auth.isAdmin()) {
+            lblUsser.setText(Auth.admin.getUsername());
+        } else {
+            lblUsser.setText("Chưa đăng nhập");
+        }
     }
 
     void startDongHo() {
@@ -78,8 +80,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
         lblDH = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         Fromch = new javax.swing.JPanel();
+        Home = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lblUsser = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblFacebook = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnOrder = new rojerusan.RSButtonIconD();
         btnBan = new rojerusan.RSButtonIconD();
@@ -107,6 +112,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
         lblDH.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblDH.setForeground(new java.awt.Color(51, 102, 0));
+        lblDH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Alarm.png"))); // NOI18N
         lblDH.setText("00:00:00");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Button-Info-icon.png"))); // NOI18N
@@ -120,22 +126,65 @@ public class GUI_MAIN extends javax.swing.JFrame {
         Fromch.setLayout(new javax.swing.BoxLayout(Fromch, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/cafe_main.gif"))); // NOI18N
-        Fromch.add(jLabel2);
 
-        lblUsser.setText("jLabel1");
+        javax.swing.GroupLayout HomeLayout = new javax.swing.GroupLayout(Home);
+        Home.setLayout(HomeLayout);
+        HomeLayout.setHorizontalGroup(
+            HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1920, Short.MAX_VALUE)
+            .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(HomeLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        HomeLayout.setVerticalGroup(
+            HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 995, Short.MAX_VALUE)
+            .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(HomeLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 995, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        Fromch.add(Home);
+
+        lblUsser.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblUsser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Users.png"))); // NOI18N
+        lblUsser.setText("Người Dùng");
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel1.setText("Hệ thống quản lý ");
+        jLabel1.setMaximumSize(new java.awt.Dimension(100, 24));
+
+        lblFacebook.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblFacebook.setForeground(new java.awt.Color(0, 51, 255));
+        lblFacebook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/facebook.png"))); // NOI18N
+        lblFacebook.setText("Faceboock");
+        lblFacebook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblFacebookMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout FromLayout = new javax.swing.GroupLayout(From);
         From.setLayout(FromLayout);
         FromLayout.setHorizontalGroup(
             FromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FromLayout.createSequentialGroup()
-                .addGap(7, 7, 7)
+                .addGap(1, 1, 1)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDH)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83)
+                .addComponent(lblFacebook, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99)
                 .addComponent(lblUsser)
-                .addGap(759, 759, 759))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDH)
+                .addGap(308, 308, 308))
             .addGroup(FromLayout.createSequentialGroup()
                 .addComponent(Fromch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -143,14 +192,19 @@ public class GUI_MAIN extends javax.swing.JFrame {
         FromLayout.setVerticalGroup(
             FromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FromLayout.createSequentialGroup()
-                .addComponent(Fromch, javax.swing.GroupLayout.PREFERRED_SIZE, 1001, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Fromch, javax.swing.GroupLayout.PREFERRED_SIZE, 995, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(FromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(FromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblDH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblUsser))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGroup(FromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FromLayout.createSequentialGroup()
+                        .addGroup(FromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblUsser)
+                            .addComponent(lblFacebook)
+                            .addComponent(lblDH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(FromLayout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 153, 153));
@@ -309,7 +363,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
                 .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -371,12 +425,9 @@ public class GUI_MAIN extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(From, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(From, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -397,8 +448,13 @@ public class GUI_MAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLVip3ActionPerformed
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
-        GUI2.GUI_QL_Order table = new GUI2.GUI_QL_Order();
-        goiPan(table);
+
+        if (!Auth.isLogin() && !Auth.isAdmin()) {
+            dialogHelper.alert(this, "Vui lòng đăng nhập");
+        } else {
+            GUI2.GUI_QL_Order table = new GUI2.GUI_QL_Order();
+            goiPan(table);
+        }
     }//GEN-LAST:event_btnOrderActionPerformed
 
     private void btnOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseClicked
@@ -408,46 +464,82 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
         // TODO add your handling code here:
-        GUI2.GUI_Statistical_ThongKe table = new GUI2.GUI_Statistical_ThongKe();
-        goiPan(table);
+
+        if (!Auth.isLogin() && !Auth.isAdmin()) {
+            dialogHelper.alert(this, "Vui lòng đăng nhập");
+        } else {
+            if (Auth.isAdmin()) {
+                GUI2.GUI_Statistical_ThongKe table = new GUI2.GUI_Statistical_ThongKe();
+                goiPan(table);
+            } else if (Auth.isLogin()) {
+                dialogHelper.alert(this, "Nhân viên không dùng được chức năng này");
+            }
+        }
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
         // TODO add your handling code here:
-        GUI2.GUI_Customer_KhachHang table = new GUI2.GUI_Customer_KhachHang();
-        goiPan(table);
+
+        if (!Auth.isLogin() && !Auth.isAdmin()) {
+            dialogHelper.alert(this, "Vui lòng đăng nhập");
+        } else {
+            if (Auth.isAdmin()) {
+                GUI2.GUI_Customer_KhachHang table = new GUI2.GUI_Customer_KhachHang();
+                goiPan(table);
+            } else if (Auth.isLogin()) {
+                dialogHelper.alert(this, "Nhân viên không dùng được chức năng này");
+            }
+        }
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
         // TODO add your handling code here:
-        GUI2.GUI_Employee_NhanVien table = new GUI2.GUI_Employee_NhanVien();
-        goiPan(table);
+
+        if (!Auth.isLogin() && !Auth.isAdmin()) {
+            dialogHelper.alert(this, "Vui lòng đăng nhập");
+        } else {
+            if (Auth.isAdmin()) {
+                GUI2.GUI_Employee_NhanVien table = new GUI2.GUI_Employee_NhanVien();
+                goiPan(table);
+            } else if (Auth.isLogin()) {
+                dialogHelper.alert(this, "Nhân viên không dùng được chức năng này");
+            }
+        }
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
         // TODO add your handling code here:
-//        if (Auth.isAdmin()) {
-//        GUI2.GUI_Menu table = new GUI2.GUI_Menu();
-//        goiPan(table);
-//        }else{
-//            ThongBao.alert(this, "Vui lòng  đăng nhập");
-//        }
 
-        GUI2.GUI_Menu table = new GUI2.GUI_Menu();
-        goiPan(table);
+        if (!Auth.isLogin() && !Auth.isAdmin()) {
+            dialogHelper.alert(this, "Vui lòng đăng nhập");
+        } else {
+            if (Auth.isAdmin()) {
+                GUI2.GUI_Menu table = new GUI2.GUI_Menu();
+                goiPan(table);
+            } else if (Auth.isLogin()) {
+                dialogHelper.alert(this, "Nhân viên không dùng được chức năng này");
+            }
+        }
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanActionPerformed
         // TODO add your handling code here:
-        GUI2.GUI_Table table = new GUI2.GUI_Table();
-        goiPan(table);
+
+        if (!Auth.isLogin() && !Auth.isAdmin()) {
+            dialogHelper.alert(this, "Vui lòng đăng nhập");
+        } else {
+            if (Auth.isAdmin()) {
+                GUI2.GUI_Table table = new GUI2.GUI_Table();
+                goiPan(table);
+            } else if (Auth.isLogin()) {
+                dialogHelper.alert(this, "Nhân viên không dùng được chức năng này");
+            }
+        }
     }//GEN-LAST:event_btnBanActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-        GUI2.GUI_MAIN table = new GUI2.GUI_MAIN();
-        table.setVisible(true);
-        this.dispose();
+        goiPan(Home);
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
@@ -459,25 +551,56 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
     private void rSButtonIconD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD1ActionPerformed
         // TODO add your handling code here:
-        GUI2.GUI_Promotions table = new GUI2.GUI_Promotions();
-        goiPan(table);
+
+        if (!Auth.isLogin() && !Auth.isAdmin()) {
+            dialogHelper.alert(this, "Vui lòng đăng nhập");
+        } else {
+            if (Auth.isAdmin()) {
+                GUI2.GUI_Promotions table = new GUI2.GUI_Promotions();
+                goiPan(table);
+            } else if (Auth.isLogin()) {
+                dialogHelper.alert(this, "Nhân viên không dùng được chức năng này");
+            }
+        }
     }//GEN-LAST:event_rSButtonIconD1ActionPerformed
 
     private void rSButtonIconD2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD2ActionPerformed
         // TODO add your handling code here:
-        GUI2.GUI_HoaDon t = new GUI_HoaDon();
-        goiPan(t);
+
+        if (!Auth.isLogin() && !Auth.isAdmin()) {
+            dialogHelper.alert(this, "Vui lòng đăng nhập");
+        } else {
+            if (Auth.isAdmin()) {
+                GUI2.GUI_HoaDon t = new GUI_HoaDon();
+                goiPan(t);
+            } else if (Auth.isLogin()) {
+                dialogHelper.alert(this, "Nhân viên không dùng được chức năng này");
+            }
+        }
     }//GEN-LAST:event_rSButtonIconD2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         if (ThongBao.comfirm(this, "Bạn chắc chắn muốn đăng xuất")) {
+            Auth.clear();
+            lblUsser.setText("Chưa đăng nhập");
             new GUI_Login(this, true).setVisible(true);
+            if (Auth.isLogin()) {
+                lblUsser.setText(Auth.user.getNameEMP());
+            } else if (Auth.isAdmin()) {
+                lblUsser.setText(Auth.admin.getUsername());
+            } else {
+                lblUsser.setText("Chưa đăng nhập");
+            }
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        new GUI_ResetPassword(this, true).setVisible(true);
+        if (!Auth.isLogin() && !Auth.isAdmin()) {
+            dialogHelper.alert(this, "Vui lòng đăng nhập");
+        } else {
+            new GUI_ResetPassword(this, true).setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
@@ -485,19 +608,32 @@ public class GUI_MAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1MouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if (Auth.isAdmin()) {
-            dialogHelper.alert(this, "Bạn là " + Auth.admin.getUsername() + " Đẹp Trai");
+        if (!Auth.isLogin() && !Auth.isAdmin()) {
+            dialogHelper.alert(this, "Vui lòng đăng nhập");
         } else {
-            try {
-                Desktop.getDesktop().browse(URI.create("https://www.facebook.com/ilov3myou.hoangthong/"));
-            } catch (IOException ex) {
-                Logger.getLogger(GUI_MAIN.class.getName()).log(Level.SEVERE, null, ex);
+            if (Auth.isAdmin()) {
+                dialogHelper.alert(this, "Bạn là " + Auth.admin.getUsername() + " Đẹp Trai");
+            } else if (Auth.isLogin()) {
+                try {
+                    Desktop.getDesktop().browse(URI.create("https://www.facebook.com/ilov3myou.hoangthong/"));
+                } catch (IOException ex) {
+                    Logger.getLogger(GUI_MAIN.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ImageIcon ok = new ImageIcon(new ImageIcon("logos/" + Auth.user.getImage()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                JOptionPane.showMessageDialog(this, "Bạn là " + Auth.user.getUsernameEMP() + "\n" + "Họ Tên : " + Auth.user.getNameEMP(),
+                        "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.INFORMATION_MESSAGE, ok);
             }
-            ImageIcon ok = new ImageIcon(new ImageIcon("logos/" + Auth.user.getImage()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-            JOptionPane.showMessageDialog(this, "Bạn là " + Auth.user.getUsernameEMP() + "\n" + "Họ Tên : " + Auth.user.getNameEMP(),
-                    "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.INFORMATION_MESSAGE, ok);
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void lblFacebookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFacebookMouseClicked
+        // TODO add your handling code here:
+        try {
+            Desktop.getDesktop().browse(URI.create("https://www.facebook.com/profile.php?id=100025310501929"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_lblFacebookMouseClicked
 
     public void goiPan(JPanel nel) {
         nel.setVisible(true);
@@ -520,16 +656,24 @@ public class GUI_MAIN extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI_MAIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_MAIN.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI_MAIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_MAIN.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI_MAIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_MAIN.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI_MAIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_MAIN.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -544,6 +688,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel From;
     private javax.swing.JPanel Fromch;
+    private javax.swing.JPanel Home;
     private rojerusan.RSButtonIconD btnBan;
     private rojerusan.RSButtonIconD btnHome;
     private rojerusan.RSButtonIconD btnKhachHang;
@@ -552,6 +697,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private rojerusan.RSButtonIconD btnSanPham;
     private rojerusan.RSButtonIconD btnThoat;
     private rojerusan.RSButtonIconD btnThongKe;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
@@ -564,6 +710,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JLabel lblDH;
+    private javax.swing.JLabel lblFacebook;
     private javax.swing.JLabel lblUsser;
     private rojerusan.RSButtonIconD rSButtonIconD1;
     private rojerusan.RSButtonIconD rSButtonIconD2;
