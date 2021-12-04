@@ -198,7 +198,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
                 .addComponent(lblFacebook, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99)
                 .addComponent(lblUsser)
-                .addGap(53, 53, 53)
+                .addGap(291, 291, 291)
                 .addComponent(lblDH)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(FromLayout.createSequentialGroup()

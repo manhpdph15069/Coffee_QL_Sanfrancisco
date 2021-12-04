@@ -37,16 +37,19 @@ public class JDialogHuyDon extends javax.swing.JDialog {
     private JLabel TimeOrder;
     private JTextField txtTong;
     private JPanel PanCac;
+        private JTextField txtThanhTien;
+    private JTextField txtDis1;
+    private JTextField txtDis2;
     private String lydo ="Nhân viên Order ngu ";
     private int khu;
 
     /**
      * Creates new form JDialogHuyDon
      */
-    public JDialogHuyDon(JPanel parent, boolean modal, JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac,int khu) {
+    public JDialogHuyDon(JPanel parent, boolean modal, JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac,int khu, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
 //        super(parent, modal);
         initComponents();
-        this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac);
+        this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
         this.that = that;
         this.btnVaoBan = btnVaoBan;
         this.lblBan = lblBan;
@@ -61,6 +64,9 @@ public class JDialogHuyDon extends javax.swing.JDialog {
         this.txtTong = txtTong;
         this.PanCac = PanCac;
         this.khu = khu;
+                this.txtThanhTien = txtThanhTien;
+        this.txtDis1=txtDis1;
+        this.txtDis2=txtDis2;
         this.lblKhac.setVisible(false);
         this.txtKhac.setVisible(false);
         this.lblHD.setText(lblHD.getText()+txtMaHD.getText());
@@ -89,6 +95,7 @@ public class JDialogHuyDon extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Hệ thống hủy đơn");
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 153));
 
@@ -234,7 +241,7 @@ public class JDialogHuyDon extends javax.swing.JDialog {
         } catch (SQLException ex) {
             Logger.getLogger(QLOrder_Service.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.ql.taoTable(that,khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,null,null,null);
+        this.ql.taoTable(that,khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

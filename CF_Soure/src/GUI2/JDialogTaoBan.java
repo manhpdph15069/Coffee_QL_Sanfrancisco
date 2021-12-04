@@ -38,14 +38,17 @@ public class JDialogTaoBan extends javax.swing.JDialog {
     private JLabel TimeOrder;
     private JTextField txtTong;
     private JPanel PanCac;
+    private JTextField txtThanhTien;
+    private JTextField txtDis1;
+    private JTextField txtDis2;
     /**
      * Creates new form JDialogTaoBan
      */
-    public JDialogTaoBan(JPanel parent, boolean moda, ENTITY_Table tbl,JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac) {
+    public JDialogTaoBan(JPanel parent, boolean moda, ENTITY_Table tbl,JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
 //        super(parent, modal);
         initComponents();
         this.daoban = new QLTable_Service();
-        this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac);
+        this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
         this.ban = tbl;
         this.that = that;
         this.btnVaoBan = btnVaoBan;
@@ -60,6 +63,9 @@ public class JDialogTaoBan extends javax.swing.JDialog {
         this.TimeOrder = TimeOrder;
         this.txtTong = txtTong;
         this.PanCac = PanCac;                
+        this.txtThanhTien = txtThanhTien;
+        this.txtDis1=txtDis1;
+        this.txtDis2=txtDis2;
         this.setLocationRelativeTo(null);
     }
 
@@ -80,6 +86,7 @@ public class JDialogTaoBan extends javax.swing.JDialog {
         txtviTri = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Hệ thống tạo nhanh bàn");
         setAlwaysOnTop(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 153));
@@ -138,7 +145,7 @@ public class JDialogTaoBan extends javax.swing.JDialog {
         // TODO add your handling code here:
         ban.setLocation(Integer.valueOf(txtviTri.getText()));
         daoban.insertMATABLE(ban);
-        ql.taoTable(that, ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,null,null,null);
+        ql.taoTable(that, ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
         this.dispose();        
         
     }//GEN-LAST:event_jButton1ActionPerformed
