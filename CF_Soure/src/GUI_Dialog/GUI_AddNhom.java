@@ -37,14 +37,17 @@ public class GUI_AddNhom extends javax.swing.JDialog {
     private JTextField txtTong;
     private JPanel PanCac;
     private ENTITY_Table ban;
+        private JTextField txtThanhTien;
+    private JTextField txtDis1;
+    private JTextField txtDis2;
 
     /**
      * Creates new form GUI_AddNhom
      */
-    public GUI_AddNhom(JPanel parent, boolean moda, ENTITY_Table tbl, JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac) {
+    public GUI_AddNhom(JPanel parent, boolean moda, ENTITY_Table tbl, JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
         initComponents();
         finCbbNhom();
-        this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac);
+        this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
         this.ban = tbl;
         this.that = that;
         this.btnVaoBan = btnVaoBan;
@@ -59,6 +62,9 @@ public class GUI_AddNhom extends javax.swing.JDialog {
         this.TimeOrder = TimeOrder;
         this.txtTong = txtTong;
         this.PanCac = PanCac;
+                this.txtThanhTien = txtThanhTien;
+        this.txtDis1=txtDis1;
+        this.txtDis2=txtDis2;
         this.setLocationRelativeTo(null);
     }
 
@@ -95,6 +101,7 @@ public class GUI_AddNhom extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Hệ thống thêm bàn vào nhóm");
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
 
@@ -162,7 +169,7 @@ public class GUI_AddNhom extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.ql.taoNhom(this.cbbTenNhom.getSelectedItem().toString(), ban.getIDTable());
-        this.ql.taoTable(that, ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,null,null,null);
+        this.ql.taoTable(that, ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

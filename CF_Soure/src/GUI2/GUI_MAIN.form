@@ -144,7 +144,7 @@
                   <Component id="lblFacebook" min="-2" pref="150" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                   <Component id="lblUsser" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="291" max="-2" attributes="0"/>
                   <Component id="lblDH" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
