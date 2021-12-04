@@ -146,6 +146,10 @@ public class QLOrder_Service implements IQLOrder_Service {
 
         mnChuyenBan.setBackground(new java.awt.Color(255, 204, 102));
         mnChuyenBan.setText("Chuyển bàn");
+        URL imagePath5 = classLoader.getResource("Icon/" + "Switch-icon" + ".png");
+        Image imgBan5 = new ImageIcon(imagePath5).getImage();
+        Icon iconBan5 = new ImageIcon(imgBan5.getScaledInstance(20, 20, imgBan5.SCALE_SMOOTH));
+        mnChuyenBan.setIcon(iconBan5);
         mnChuyenBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnChuyenBanActionPerformed(evt);
@@ -155,6 +159,10 @@ public class QLOrder_Service implements IQLOrder_Service {
 
         mnGopBan.setBackground(new java.awt.Color(255, 204, 102));
         mnGopBan.setText("Gộp bàn");
+        URL imagePath6 = classLoader.getResource("Icon/" + "Generate-tables-icon" + ".png");
+        Image imgBan6 = new ImageIcon(imagePath6).getImage();
+        Icon iconBan6 = new ImageIcon(imgBan6.getScaledInstance(20, 20, imgBan6.SCALE_SMOOTH));
+        mnGopBan.setIcon(iconBan6);
         mnGopBan.setToolTipText("");
         mnGopBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,6 +179,10 @@ public class QLOrder_Service implements IQLOrder_Service {
         pmmBtn.add(mnGopBan);
         mnNhomBan.setBackground(new java.awt.Color(255, 204, 102));
         mnNhomBan.setText("Tạo nhóm");
+        URL imagePath4 = classLoader.getResource("Icon/" + "plus-icon" + ".png");
+        Image imgBan4 = new ImageIcon(imagePath4).getImage();
+        Icon iconBan4 = new ImageIcon(imgBan4.getScaledInstance(20, 20, imgBan4.SCALE_SMOOTH));
+        mnNhomBan.setIcon(iconBan4);
         mnNhomBan.setToolTipText("");
         mnNhomBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,7 +196,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                     tbl.setIDArea(khu);
                     tbl.setIDTable(bn.getIDTalbe());
                     tbl.setStatus(0);
-                    GUI_Dialog.GUI_TaoNhom taonhom = new GUI_Dialog.GUI_TaoNhom(pnlMain, true, tbl, that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
+                    GUI_Dialog.GUI_TaoNhom taonhom = new GUI_Dialog.GUI_TaoNhom(pnlMain, true, tbl, that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
                     taonhom.setVisible(true);
 
                 }
@@ -194,6 +206,10 @@ public class QLOrder_Service implements IQLOrder_Service {
         //----------------------------------------------------------------------------------------------------------------------Tạo bàn -----------------------------------------------------------
         mnTaoBanAo.setBackground(new java.awt.Color(255, 204, 102));
         mnTaoBanAo.setText("Tạo bàn nhanh");
+        URL imagePath3 = classLoader.getResource("Icon/" + "Table-icon" + ".png");
+        Image imgBan3 = new ImageIcon(imagePath3).getImage();
+        Icon iconBan3 = new ImageIcon(imgBan3.getScaledInstance(20, 20, imgBan3.SCALE_SMOOTH));
+        mnTaoBanAo.setIcon(iconBan3);
         mnTaoBanAo.setToolTipText("");
         mnTaoBanAo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,7 +237,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                         tbl.setIDArea(khu);
                         tbl.setIDTable(IDTable);
                         tbl.setStatus(0);
-                        JDialogTaoBan taoBan = new JDialogTaoBan(pnlMain, true, tbl, that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
+                        JDialogTaoBan taoBan = new JDialogTaoBan(pnlMain, true, tbl, that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
                         taoBan.setVisible(true);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -242,12 +258,13 @@ public class QLOrder_Service implements IQLOrder_Service {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnXoaBanActionPerformed(evt);
             }
+
             private void mnXoaBanActionPerformed(ActionEvent evt) {
                 if (evt.getSource().getClass() == JMenuItem.class) {
                     BanButtons bn = banButtonList.get(firstButton);
                     //=====================================                                                                        
                     xoaBan(bn.getIDTalbe());
-                    taoTable(that, khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
+                    taoTable(that, khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
                 }
             }
         });
@@ -255,6 +272,10 @@ public class QLOrder_Service implements IQLOrder_Service {
         //-==================================================Hết xóa bàn
         mnaddNhom.setBackground(new java.awt.Color(255, 204, 102));
         mnaddNhom.setText("Thêm vào nhóm");
+        URL imagePath2 = classLoader.getResource("Icon/" + "groupBan" + ".png");
+        Image imgBan2 = new ImageIcon(imagePath2).getImage();
+        Icon iconBan2 = new ImageIcon(imgBan2.getScaledInstance(20, 20, imgBan2.SCALE_SMOOTH));
+        mnaddNhom.setIcon(iconBan2);
         mnaddNhom.setToolTipText("");
         mnaddNhom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,7 +289,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                     tbl.setIDArea(khu);
                     tbl.setIDTable(bn.getIDTalbe());
                     tbl.setStatus(0);
-                    GUI_Dialog.GUI_AddNhom taonhom = new GUI_Dialog.GUI_AddNhom(pnlMain, true, tbl, that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
+                    GUI_Dialog.GUI_AddNhom taonhom = new GUI_Dialog.GUI_AddNhom(pnlMain, true, tbl, that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
                     taonhom.setVisible(true);
                 }
             }
@@ -291,7 +312,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                 if (evt.getSource().getClass() == JMenuItem.class) {
                     BanButtons bn = banButtonList.get(firstButton);
                     khoiPhucBan(bn.getIDTalbe());
-                    taoTable(that, khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
+                    taoTable(that, khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
                 }
             }
         });
@@ -335,11 +356,13 @@ public class QLOrder_Service implements IQLOrder_Service {
                     button.setBackground(Color.GREEN);
                     button.addMouseListener(new MouseAdapter() {
                         public void mouseReleased(MouseEvent e) {
-                            selectedButtonPopup(e, button);
+                            selectedButtonPopup(e);
                         }
 
-                        private void selectedButtonPopup(MouseEvent e, JButton button) {
-                            if (e.getSource().getClass() == button.getClass()) {
+                        private void selectedButtonPopup(MouseEvent e) {
+                            JButton selectedButton = (JButton) e.getSource();
+                            firstButton = selectedButton;
+                            if (e.getSource().getClass() == selectedButton.getClass()) {
                                 JButton b = (JButton) e.getSource();
                                 if (e.isPopupTrigger()) {
                                     pmmXoaBan.show(e.getComponent(), e.getX(), e.getY());
@@ -363,11 +386,13 @@ public class QLOrder_Service implements IQLOrder_Service {
                     }
                     button.addMouseListener(new MouseAdapter() {
                         public void mouseReleased(MouseEvent e) {
-                            selectedButtonPopup(e, button);
+                            selectedButtonPopup(e);
                         }
 
-                        private void selectedButtonPopup(MouseEvent e, JButton button) {
-                            if (e.getSource().getClass() == button.getClass()) {
+                        private void selectedButtonPopup(MouseEvent e) {
+                            JButton selectedButton = (JButton) e.getSource();
+                            firstButton = selectedButton;
+                            if (e.getSource().getClass() == selectedButton.getClass()) {
                                 JButton b = (JButton) e.getSource();
                                 if (e.isPopupTrigger()) {
                                     pmmBtn.show(e.getComponent(), e.getX(), e.getY());
@@ -385,11 +410,13 @@ public class QLOrder_Service implements IQLOrder_Service {
                     button.setVerticalTextPosition(3);
                     button.addMouseListener(new MouseAdapter() {
                         public void mouseReleased(MouseEvent e) {
-                            selectedButtonPopup(e, button);
+                            selectedButtonPopup(e);
                         }
 
-                        private void selectedButtonPopup(MouseEvent e, JButton button) {
-                            if (e.getSource().getClass() == button.getClass()) {
+                        private void selectedButtonPopup(MouseEvent e) {
+                            JButton selectedButton = (JButton) e.getSource();
+                            firstButton = selectedButton;
+                            if (e.getSource().getClass() == selectedButton.getClass()) {
                                 JButton b = (JButton) e.getSource();
                                 if (e.isPopupTrigger()) {
                                     pmmKhoiPhuc.show(e.getComponent(), e.getX(), e.getY());
@@ -554,7 +581,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                 } catch (SQLException ex) {
                     Logger.getLogger(QLOrder_Service.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                taoTable(that, khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
+                taoTable(that, khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
                 ButtonChuyen = null;
             }
             if (ButtonGop != null) {//----------------------------Nếu bọn chuyển bàn hoặc gộp bàn
@@ -579,7 +606,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                 } catch (SQLException ex) {
                     Logger.getLogger(QLOrder_Service.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                taoTable(that, khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
+                taoTable(that, khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
                 ButtonGop = null;
             }
         }

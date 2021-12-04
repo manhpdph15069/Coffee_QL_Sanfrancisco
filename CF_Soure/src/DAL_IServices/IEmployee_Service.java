@@ -30,4 +30,6 @@ public interface IEmployee_Service {
     public ENTITY_Employee findById(String UsernameEMP);
 
     public List<ENTITY_Employee> SelectBySQL(String sql, Object... args);
+    
+    public void updateMK(String pass,String maNV);
 }

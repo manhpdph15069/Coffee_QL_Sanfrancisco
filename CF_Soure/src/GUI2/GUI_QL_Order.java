@@ -227,6 +227,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
 
+        mnTachMon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/tachHD.png"))); // NOI18N
         mnTachMon.setText("Tách món");
         mnTachMon.setToolTipText("");
         mnTachMon.addActionListener(new java.awt.event.ActionListener() {
@@ -236,6 +237,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         });
         pmnOder.add(mnTachMon);
 
+        mnHuymon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Button-Close-icon.png"))); // NOI18N
         mnHuymon.setText("Hủy món");
         mnHuymon.setToolTipText("");
         mnHuymon.addActionListener(new java.awt.event.ActionListener() {
@@ -1422,8 +1424,6 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                     btnThanhToan.setEnabled(true);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-//                txtTienTra.setText(0 + "VNĐ");                
             }
         }
     }//GEN-LAST:event_txtTienTraCaretUpdate

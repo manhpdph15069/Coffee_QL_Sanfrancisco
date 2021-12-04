@@ -11,10 +11,8 @@ import DAL_Services.Admin;
 import DAL_Services.Employee_Service;
 import Utils.Auth;
 import Utils.ThongBao;
-import java.awt.Color;
 import static java.awt.Color.pink;
 import static java.awt.Color.white;
-import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -68,6 +66,8 @@ public class GUI_Login extends javax.swing.JDialog {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Hệ thống đăng nhập");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
@@ -86,18 +86,10 @@ public class GUI_Login extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(0, 51, 51));
         jLabel1.setText("WELLCOME");
 
-        lblForgetpass.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
-        lblForgetpass.setForeground(new java.awt.Color(51, 51, 55));
         lblForgetpass.setText("Forget password");
         lblForgetpass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblForgetpassMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblForgetpassMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblForgetpassMouseExited(evt);
             }
         });
 
@@ -247,10 +239,10 @@ public class GUI_Login extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLogin2ActionPerformed
 
     private void lblForgetpassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgetpassMouseClicked
-        // TODO add your handling code here:
-        GUI_ForgetPassword1 rs = new GUI_ForgetPassword1();
-        rs.setVisible(true);
-        this.dispose();
+        // TODO add your handling code here:        
+        ENTITY_Employee nv = dao.findById(txtUsername.getText());
+         new GUI_sendCodeJDialog(null, rootPaneCheckingEnabled, nv).setVisible(true);
+        
     }//GEN-LAST:event_lblForgetpassMouseClicked
 
     private void btnLogin2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLogin2KeyPressed
@@ -278,14 +270,6 @@ public class GUI_Login extends javax.swing.JDialog {
             btnLogin2ActionPerformed(null);
         }
     }//GEN-LAST:event_txtUsernameKeyPressed
-
-    private void lblForgetpassMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgetpassMouseEntered
-        lblForgetpass.setForeground(Color.GREEN);
-    }//GEN-LAST:event_lblForgetpassMouseEntered
-
-    private void lblForgetpassMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgetpassMouseExited
-        lblForgetpass.setForeground(Color.BLACK);
-    }//GEN-LAST:event_lblForgetpassMouseExited
     void dangNhap() {
         try {
             int tb = 0;
