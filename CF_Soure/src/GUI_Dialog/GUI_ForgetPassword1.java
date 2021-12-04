@@ -5,7 +5,9 @@
  */
 package GUI_Dialog;
 
+import DAL_Models.ENTITY_ADMIN;
 import DAL_Models.ENTITY_Employee;
+import DAL_Services.Admin;
 import DAL_Services.Employee_Service;
 import Utils.Check;
 import Utils.ThongBao;
@@ -24,9 +26,10 @@ import javax.swing.JOptionPane;
  * @author notak
  */
 public class GUI_ForgetPassword1 extends javax.swing.JFrame {
-
+    
     private int randumCode;
     Employee_Service dao;
+    Admin daoAD = new Admin();
 
     /**
      * Creates new form GUI_ForgetPassword1
@@ -137,20 +140,34 @@ public class GUI_ForgetPassword1 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         ENTITY_Employee e = dao.findById(txtMaNV.getText());
+        ENTITY_ADMIN ad = daoAD.findById(txtMaNV.getText());
         if (Check.checkNullText(txtMaNV) && Check.checkNullText(txtEmail)) {
             if (e != null) {
+                
                 if (Check.checkEmail(txtEmail)) {
                     
-                if (txtEmail.getText().equalsIgnoreCase(e.getEmail())) {                   
-                guiCode();
-                GUI_ForgetPassword2 ff = new GUI_ForgetPassword2(String.valueOf(randumCode), txtMaNV.getText());
-                ff.setVisible(true);
-                this.dispose();
-                }else{
-                    ThongBao.alert(this, "Email không khớp với tên đăng nhập");
+                    if (txtEmail.getText().equalsIgnoreCase(e.getEmail())) {
+                        guiCode();
+                        GUI_ForgetPassword2 ff = new GUI_ForgetPassword2(String.valueOf(randumCode), txtMaNV.getText());
+                        ff.setVisible(true);
+                        this.dispose();
+                    } else {
+                        ThongBao.alert(this, "Email không khớp với tên đăng nhập");
+                    }
                 }
+            } else if (ad != null) {
+                                if (Check.checkEmail(txtEmail)) {
+                    
+                    if (txtEmail.getText().equalsIgnoreCase(ad.getEmail())) {
+                        guiCode();
+                        GUI_ForgetPassword2 ff = new GUI_ForgetPassword2(String.valueOf(randumCode), txtMaNV.getText());
+                        ff.setVisible(true);
+                        this.dispose();
+                    } else {
+                        ThongBao.alert(this, "Email không khớp với tên đăng nhập");
+                    }
                 }
-            } else {
+            }else{
                 ThongBao.alert(this, "Mã nhân viên không tồn tại");
             }
         }
@@ -175,7 +192,7 @@ public class GUI_ForgetPassword1 extends javax.swing.JFrame {
             pros.put("mail.smtp.port", 587);//3.Chỉ ra port : 587 Cổng vào ra dữ liệu
             pros.put("mail.smtp.starttls.required", "true");
             java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-
+            
             Session mailSession = Session.getInstance(pros,
                     new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {

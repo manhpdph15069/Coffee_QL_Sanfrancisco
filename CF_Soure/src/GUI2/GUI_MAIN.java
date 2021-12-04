@@ -5,11 +5,14 @@
  */
 package GUI2;
 
+import BUS_IServices.IQLStatistical_Service;
+import BUS_Services.QLStatistical_Service;
 import GUI_Dialog.GUI_Login;
 import GUI_Dialog.GUI_ResetPassword;
 import Utils.Auth;
 import Utils.ThongBao;
 import Utils.XImage;
+import Utils.dateHelper;
 import Utils.dialogHelper;
 import java.awt.Desktop;
 import java.awt.Image;
@@ -18,6 +21,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +37,8 @@ import javax.swing.Timer;
  * @author phamd
  */
 public class GUI_MAIN extends javax.swing.JFrame {
+
+    IQLStatistical_Service daotk;
 
     /**
      * Creates new form GUI_MAIN
@@ -53,6 +60,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
         } else {
             lblUsser.setText("Chưa đăng nhập");
         }
+        daotk = new QLStatistical_Service();
     }
 
     void startDongHo() {
@@ -76,6 +84,8 @@ public class GUI_MAIN extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JSeparator();
         From = new javax.swing.JPanel();
         lblDH = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -100,10 +110,14 @@ public class GUI_MAIN extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+
+        jMenuItem4.setText("jMenuItem4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hệ thống quản lý quán Coffee Sanfrancis");
@@ -184,9 +198,9 @@ public class GUI_MAIN extends javax.swing.JFrame {
                 .addComponent(lblFacebook, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99)
                 .addComponent(lblUsser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(53, 53, 53)
                 .addComponent(lblDH)
-                .addGap(308, 308, 308))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(FromLayout.createSequentialGroup()
                 .addComponent(Fromch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -365,7 +379,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
                 .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -387,6 +401,15 @@ public class GUI_MAIN extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
         jMenu1.add(jSeparator6);
+
+        jMenuItem5.setText("Đăng nhập");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+        jMenu1.add(jSeparator8);
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/doimk-icon.png"))); // NOI18N
         jMenuItem2.setText("Đổi Mật Khẩu");
@@ -546,9 +569,17 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
-        if (ThongBao.comfirm(this, "Bạn muốn đóng ứng dụng?")) {
+        if (JOptionPane.showConfirmDialog(this, "Bạn muốn đóng ứng dụng?") == 0) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+            LocalDateTime date1 = LocalDateTime.now();
+            LocalDateTime date2 = LocalDateTime.parse("2021-12-04 14:00:00", dtf);
+            if (date1.isAfter(date2)) {
+                System.out.println("Ngon");
+                daotk.guiBCNgay(dateHelper.now());
+            }
             System.exit(0);
         }
+
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void rSButtonIconD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD1ActionPerformed
@@ -637,6 +668,23 @@ public class GUI_MAIN extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblFacebookMouseClicked
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        if (!Auth.isLogin() && !Auth.isAdmin()) {
+            GUI_Login l = new GUI_Login(this, true);
+            l.setVisible(true);
+            if (Auth.isLogin()) {
+                lblUsser.setText(Auth.user.getNameEMP());
+
+            } else {
+                lblUsser.setText(Auth.admin.getUsername());
+            }
+
+        } else {
+            ThongBao.alert(this, "Đã đăng nhập nếu muốn đăng nhập lại vui lòng đăng xuất trước");
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     public void goiPan(JPanel nel) {
         nel.setVisible(true);
         this.Fromch.removeAll();
@@ -708,9 +756,13 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
     private javax.swing.JLabel lblDH;
     private javax.swing.JLabel lblFacebook;
     private javax.swing.JLabel lblUsser;

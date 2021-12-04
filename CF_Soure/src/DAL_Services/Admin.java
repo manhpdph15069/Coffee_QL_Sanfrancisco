@@ -33,6 +33,7 @@ public class Admin {
                 ENTITY_ADMIN ad = new ENTITY_ADMIN();
                 ad.setUsername(rs.getString(1));
                 ad.setPassword(rs.getString(2));
+                ad.setEmail(rs.getString(3));
                 list.add(ad);
             }
             rs.getStatement().getConnection().close();

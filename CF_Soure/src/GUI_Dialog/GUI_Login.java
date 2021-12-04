@@ -13,6 +13,7 @@ import Utils.Auth;
 import Utils.ThongBao;
 import static java.awt.Color.pink;
 import static java.awt.Color.white;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -73,6 +74,11 @@ public class GUI_Login extends javax.swing.JDialog {
                 txtUsernameActionPerformed(evt);
             }
         });
+        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 51));
@@ -110,6 +116,23 @@ public class GUI_Login extends javax.swing.JDialog {
         btnLogin2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogin2ActionPerformed(evt);
+            }
+        });
+        btnLogin2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnLogin2KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btnLogin2KeyTyped(evt);
+            }
+        });
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyTyped(evt);
             }
         });
 
@@ -219,6 +242,32 @@ public class GUI_Login extends javax.swing.JDialog {
         rs.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblForgetpassMouseClicked
+
+    private void btnLogin2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLogin2KeyPressed
+
+    }//GEN-LAST:event_btnLogin2KeyPressed
+
+    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+
+    }//GEN-LAST:event_txtPasswordKeyTyped
+
+    private void btnLogin2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLogin2KeyTyped
+
+    }//GEN-LAST:event_btnLogin2KeyTyped
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnLogin2ActionPerformed(null);
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
+
+    private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
+        // TODO add your handling code here:
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnLogin2ActionPerformed(null);
+        }
+    }//GEN-LAST:event_txtUsernameKeyPressed
     void dangNhap() {
         try {
             int tb = 0;
@@ -238,7 +287,7 @@ public class GUI_Login extends javax.swing.JDialog {
                     this.dispose();
                 }
             } else {
-                Auth.user = nv;                
+                Auth.user = nv;
                 if (!pass.equals(nv.getPassword())) {
                     tb++;
                 } else {
@@ -247,7 +296,7 @@ public class GUI_Login extends javax.swing.JDialog {
                 }
             }
             if (tb > 0) {
-                ThongBao.alert(this, "Tài khoản hoặc mật khẩu không chính xác");                
+                ThongBao.alert(this, "Tài khoản hoặc mật khẩu không chính xác");
             }
         } catch (Exception e) {
             e.printStackTrace();

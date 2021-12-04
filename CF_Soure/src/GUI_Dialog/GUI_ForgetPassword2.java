@@ -121,8 +121,8 @@ public class GUI_ForgetPassword2 extends javax.swing.JFrame {
                 if (Integer.valueOf(txtMACODE.getText()).equals(Integer.valueOf(ma))) {
 
                     GUI_ForgetPassword3 d = new GUI_ForgetPassword3(maNV);
-                    d.setVisible(true);
                     ThongBao.alert(this, "Xác nhận thành công");
+                    d.setVisible(true);
                     this.dispose();
                 } else {
                     ThongBao.alert(this, "code bạn nhập không đúng");

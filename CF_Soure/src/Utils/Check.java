@@ -37,12 +37,12 @@ public class Check {
     public static boolean checkCode(String txt) {
        // txt.setBackground(white);
        // String id = txt.getText;
-        String rgx = "[0-9]{6}";
+        String rgx = "[0-9]{5,6}";
         if (txt.matches(rgx)) {
             return true;
         } else {
            // txt.setBackground(pink);
-            ThongBao.alert(null, " phải là số và có đúng 6 số");
+            ThongBao.alert(null, " phải là số");
             return false;
         }
     }

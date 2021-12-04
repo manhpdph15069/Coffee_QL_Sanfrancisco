@@ -15,6 +15,16 @@ package DAL_Models;
 public class ENTITY_ADMIN {
 private String Username;
 private String Password;
+private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     public ENTITY_ADMIN() {
     }

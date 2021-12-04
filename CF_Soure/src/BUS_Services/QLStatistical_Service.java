@@ -632,6 +632,10 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             lbl2.setText(n.format(tong2) + " VNĐ");
             lblTM2.setText(String.valueOf(tongM2));
         } else {
+            lbl.setText(n.format(tong) + " VNĐ");
+            lblTM.setText(String.valueOf(tongM));
+            lbl2.setText(n.format(tong2) + " VNĐ");
+            lblTM2.setText(String.valueOf(tongM2));
             ThongBao.alert(null, "Ngày này không bán được gì");
         }
 
@@ -688,7 +692,11 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             lbl2.setText(n.format(tong2) + " VNĐ");
             lblTM2.setText(String.valueOf(tongM2));
         } else {
-            ThongBao.alert(null, "Tháng này này ế không bán được gì");
+            lbl.setText(n.format(tong) + " VNĐ");
+            lblTM.setText(String.valueOf(tongM));
+            lbl2.setText(n.format(tong2) + " VNĐ");
+            lblTM2.setText(String.valueOf(tongM2));
+            ThongBao.alert(null, "Tháng này này ế không bán được gì =))");
         }
 
     }
@@ -745,6 +753,10 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             lblTM2.setText(String.valueOf(tongM2));
 
         } else {
+            lbl.setText(n.format(tong) + " VNĐ");
+            lblTM.setText(String.valueOf(tongM));
+            lbl2.setText(n.format(tong2) + " VNĐ");
+            lblTM2.setText(String.valueOf(tongM2));
             ThongBao.alert(null, "Chắc đóng cửa rồi! Năm này không bán được gì");
         }
     }
