@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -55,6 +56,12 @@ public class QLEmployee_Service implements IQLEmployee_Service{
     JFileChooser fileChooser = new JFileChooser();
     @Override
     public void chonAnh(JLabel lbl) {
+        fileChooser.setDialogTitle("chọn ảnh đi bro");
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(".jpg","jpg");
+            FileNameExtensionFilter filter1 = new FileNameExtensionFilter(".png","png");
+            fileChooser.addChoosableFileFilter(filter);
+            fileChooser.addChoosableFileFilter(filter1);
         if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();//lay ra file dc chon
             XImage.save(file); // luu vao trong thu muc

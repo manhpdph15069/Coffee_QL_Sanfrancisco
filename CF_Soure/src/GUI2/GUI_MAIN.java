@@ -402,6 +402,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
         jMenu1.add(jSeparator6);
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Key-icon.png"))); // NOI18N
         jMenuItem5.setText("Đăng nhập");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
