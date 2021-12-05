@@ -25,7 +25,7 @@ public class XImage {
         //CÁCH TẢI ẢNH TỪ TRONG PROJECT
         //icon là thư mục con của src
         //Logo cho ứng dụng
-        String file = "/icon/logo.png";      //icon là thư mục con của src
+        String file = "/ICON/logo.png";      //icon là thư mục con của src
         APP_ICON = new ImageIcon(XImage.class.getResource(file)).getImage();        
     }
     public static Image getAppIcon(){ //Lấy ảnh làm icon 

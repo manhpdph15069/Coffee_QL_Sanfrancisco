@@ -1470,13 +1470,13 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             String s = value.toString();
             ClassLoader classLoader = this.getClass().getClassLoader();
             if (s.equals("Thêm")) {
-                URL imagePath = classLoader.getResource("Icon/" + "add-cart" + ".png");
+                URL imagePath = classLoader.getResource("ICON/" + "add-cart" + ".png");
                 Image imgBan = new ImageIcon(imagePath).getImage();
                 Icon iconBan = new ImageIcon(imgBan.getScaledInstance(20, 20, imgBan.SCALE_SMOOTH));
                 setIcon(iconBan);
             }
             if (s.equals("Xóa")) {
-                URL imagePath = classLoader.getResource("Icon/" + "Button-Close-icon" + ".png");
+                URL imagePath = classLoader.getResource("ICON/" + "Button-Close-icon" + ".png");
                 Image imgBan = new ImageIcon(imagePath).getImage();
                 Icon iconBan = new ImageIcon(imgBan.getScaledInstance(20, 20, imgBan.SCALE_SMOOTH));
                 setIcon(iconBan);
@@ -1517,13 +1517,13 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             String s = value.toString();
             ClassLoader classLoader = this.getClass().getClassLoader();
             if (s.equals("Thêm")) {
-                URL imagePath = classLoader.getResource("Icon/" + "add-cart" + ".png");
+                URL imagePath = classLoader.getResource("ICON/" + "add-cart" + ".png");
                 Image imgBan = new ImageIcon(imagePath).getImage();
                 Icon iconBan = new ImageIcon(imgBan.getScaledInstance(20, 20, imgBan.SCALE_SMOOTH));
                 button.setIcon(iconBan);
             }
             if (s.equals("Xóa")) {
-                URL imagePath = classLoader.getResource("Icon/" + "Button-Close-icon" + ".png");
+                URL imagePath = classLoader.getResource("ICON/" + "Button-Close-icon" + ".png");
                 Image imgBan = new ImageIcon(imagePath).getImage();
                 Icon iconBan = new ImageIcon(imgBan.getScaledInstance(20, 20, imgBan.SCALE_SMOOTH));
                 button.setIcon(iconBan);

@@ -612,19 +612,14 @@ public class GUI_Menu extends javax.swing.JPanel {
     private void cboLoaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLoaiMouseClicked
         this.row = tblSanPham.getSelectedRow();
         this.row = -1;
-        Refresh();
     }//GEN-LAST:event_cboLoaiMouseClicked
 
     private void cboLoaiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLoaiMousePressed
-        if (evt.isPopupTrigger()) {
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
-        }
+ 
     }//GEN-LAST:event_cboLoaiMousePressed
 
     private void cboLoaiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLoaiMouseReleased
-        if (evt.isPopupTrigger()) {
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
-        }
+
     }//GEN-LAST:event_cboLoaiMouseReleased
 
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
@@ -699,17 +694,6 @@ public class GUI_Menu extends javax.swing.JPanel {
         menu.add(item2);
     }
 
-    public void Refresh() {
-        menu.removeAll();
-        //  List<ENTITY_Area> area = tbdao.selectIDArea();
-        JMenuItem item = new JMenuItem("Refresh");
-        item.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                init();
-            }
-        });
-        menu.add(item);
-    }
 
     void edit() {
         try {
