@@ -46,6 +46,18 @@ public class Check {
             return false;
         }
     }
+    public static boolean checkTable(String txt) {
+       // txt.setBackground(white);
+       // String id = txt.getText;
+        String rgx = "[0-9]{1,2}";
+        if (txt.matches(rgx)) {
+            return true;
+        } else {
+           // txt.setBackground(pink);
+            ThongBao.alert(null, " phải là số");
+            return false;
+        }
+    }
     
         public static boolean checkPass(JPasswordField txt) {
         txt.setBackground(white);

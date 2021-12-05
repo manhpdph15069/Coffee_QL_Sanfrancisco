@@ -342,7 +342,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
 
-            ThongBao.alert(null, "Gửi thành công");
+            ThongBao.alert(null, "Gửi báo cáo cuối ngày thành công");
         } catch (Exception e) {
         }
     }

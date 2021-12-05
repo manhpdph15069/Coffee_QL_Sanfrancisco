@@ -34,12 +34,12 @@ import javax.swing.JTextField;
  * @author notak
  */
 public class GUI_Table extends javax.swing.JPanel {
-        ENTITY_Area t;
+
     Area_Service khu;
     Table_Service tbdao;
     JPopupMenu menu = new JPopupMenu("Popup");
     IQLTable_Service dao;
-    int row = -1;
+    int row = 0;
     Table_Service ban = new Table_Service();
 
     /**
@@ -54,7 +54,6 @@ public class GUI_Table extends javax.swing.JPanel {
         dao.taoIDTable(txtMaBan);
         fillComboBoxKhu();
         dao.fillTable(tblTable);
-        t = (ENTITY_Area) cbbKhu.getSelectedItem();
         this.xoaform();
     }
 
@@ -258,7 +257,7 @@ public class GUI_Table extends javax.swing.JPanel {
                 .addComponent(cbbKhu, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(rSButtonIconD1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,10 +278,6 @@ public class GUI_Table extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -319,9 +314,13 @@ public class GUI_Table extends javax.swing.JPanel {
                                 .addComponent(jLabel9)
                                 .addGap(41, 41, 41))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(102, 102, 102)
                         .addComponent(jLabel10)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
@@ -400,26 +399,24 @@ public class GUI_Table extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         if (Check.checkNullText(txtViTri)) {
-            
-        int vt = (Integer.parseInt(txtViTri.getText()));
-        List<ENTITY_Table> list = tbdao.select_viTri(vt);
-        if (list.size() == 0) {
-            insert();
-        } else {
-            List<ENTITY_Table> ct = tbdao.select_CheckTrung(vt);
-            if (ct.size() == 0) {
-                if (ThongBao.comfirm(this, "Bàn này đã tồn tại trong hệ thống trước đó chọn 'Yes' để khôi phục hoặc 'No' để tạo bàn mới")) {
-                    
+            if (Check.checkTable(txtViTri.getText())) {
 
-                tbdao.update_trung(String.valueOf(t.getIDArea()), vt);
-                load();
-                }else{
+                int vt = (Integer.parseInt(txtViTri.getText()));
+                List<ENTITY_Table> list = tbdao.select_viTri(vt);
+                if (list.size() == 0) {
                     insert();
+                } else {
+                    List<ENTITY_Table> ct = tbdao.select_CheckTrung(vt);
+                    ENTITY_Area tt = (ENTITY_Area) cbbKhu.getSelectedItem();
+                    if (ct.size() == 0) {
+                        tbdao.update_trung(String.valueOf(tt.getIDArea()), vt);
+                        load();
+                    } else {
+                        ThongBao.alert(this, "Vị trí đã tồn tại");
+                    }
                 }
-            } else {
-                ThongBao.alert(this, "Vị trí đã tồn tại");
             }
-        }
+
         }
 
 
@@ -456,13 +453,15 @@ public class GUI_Table extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        delete();
+        if (ThongBao.comfirm(this, "Bạn chắc chắn muốn xóa bàn này")) {
+            delete();
+
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
     void delete() {
         try {
             this.row = tblTable.getSelectedRow();
-            if (this.row != 0) {
-
+            if (this.row >= 0) {
                 dao.deleteTABLE(txtMaBan.getText());
                 dao.fillTable(tblTable);
                 xoaform();
@@ -474,7 +473,10 @@ public class GUI_Table extends javax.swing.JPanel {
     }
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         if (Check.checkNullText(txtViTri)) {
-            update();
+            if (Check.checkTable(txtViTri.getText())) {
+
+                update();
+            }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
     void update() {
@@ -494,13 +496,13 @@ public class GUI_Table extends javax.swing.JPanel {
 
             if (this.row >= 0) {
                 this.edit();
-          //   dao.fillTableIDArea(tblTable, String.valueOf(t.getIDArea()));
+                //   dao.fillTableIDArea(tblTable, String.valueOf(t.getIDArea()));
                 btnThem.setEnabled(false);
                 btnSua.setEnabled(true);
                 btnXoa.setEnabled(true);
             }
         }
-        Test();
+        //Test();
     }//GEN-LAST:event_tblTableMouseClicked
     private void fillComboBoxKhu() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) this.cbbKhu.getModel();
@@ -555,7 +557,7 @@ public class GUI_Table extends javax.swing.JPanel {
     }//GEN-LAST:event_rSButtonIconD1ActionPerformed
 
     private void cbbKhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhuActionPerformed
-        xoaKhu();
+        // xoaKhu();
     }//GEN-LAST:event_cbbKhuActionPerformed
 
     private void cbbKhuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbKhuMouseReleased
@@ -578,7 +580,9 @@ public class GUI_Table extends javax.swing.JPanel {
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         // TODO add your handling code here:
-        xoaKhu();
+        if (ThongBao.comfirm(this, "Bạn chắc chắn muốn xóa khu này")) {
+            xoaKhu();
+        }
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void jPanel2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseReleased
@@ -594,20 +598,20 @@ public class GUI_Table extends javax.swing.JPanel {
             menu.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jPanel2MousePressed
-    public void Test() {
-        menu.removeAll();
-
-        JMenuItem item = new JMenuItem("Lọc Khu");
-        item.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String cbb = JOptionPane.showInputDialog("NHập khu đi ku:");
-                dao.fillTableIDArea(tblTable, cbb);
-
-            }
-        });
-
-        menu.add(item);
-    }
+//    public void Test() {
+//        menu.removeAll();
+//
+//        JMenuItem item = new JMenuItem("Lọc Khu");
+//        item.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                String cbb = JOptionPane.showInputDialog("NHập khu đi ku:");
+//                dao.fillTableIDArea(tblTable, cbb);
+//
+//            }
+//        });
+//
+//        menu.add(item);
+//    }
 
     public void xoaKhu() {
         menu.removeAll();
@@ -664,9 +668,11 @@ public class GUI_Table extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     ENTITY_Table getModel() {
         ENTITY_Table tbl = new ENTITY_Table();
-        tbl.setIDTable(txtMaBan.getText());
-        tbl.setIDArea(t.getIDArea());
+        ENTITY_Area tt = (ENTITY_Area) cbbKhu.getSelectedItem();
         tbl.setLocation(Integer.valueOf(txtViTri.getText()));
+        tbl.setIDArea(tt.getIDArea());
+        System.out.println("" + tt.getIDArea());
+        tbl.setIDTable(txtMaBan.getText());
         return tbl;
     }
 
@@ -691,10 +697,11 @@ public class GUI_Table extends javax.swing.JPanel {
     }
 
     void setform(ENTITY_Table tb) {
+        ENTITY_Area tt = (ENTITY_Area) cbbKhu.getSelectedItem();
         String maTB = (String) tblTable.getValueAt(this.row, 0);
         txtMaBan.setText(maTB);
         txtViTri.setText(String.valueOf(tb.getLocation()));
-        cbbKhu.setSelectedItem(t.getAreaName());
+        cbbKhu.setSelectedItem(tt.getAreaName());
 
     }
 

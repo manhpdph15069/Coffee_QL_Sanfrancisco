@@ -49,7 +49,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
         jRadioButton4.setSelected(true);
 
         int billH = 0;
-        List<Object[]> list = dao.getListHoaDon();
+        List<Object[]> list = dao.getListHoaDonNgay(jdate.getDate());
         for (Object[] o : list) {
             if (String.valueOf(o[8]).equalsIgnoreCase("3")) {
                 billH++;
@@ -199,13 +199,17 @@ public class GUI_HoaDon extends javax.swing.JPanel {
             }
         });
 
+        lblTBill.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblTBill.setText("0");
 
+        lblTBillH.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblTBillH.setText("0");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel2.setText("Tổng HD");
+        jLabel2.setText("Tổng Hóa Đơn");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 0));
         jLabel3.setText("Tổng HD Hủy");
 
@@ -230,16 +234,19 @@ public class GUI_HoaDon extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
-                .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
                         .addComponent(jdate, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnNgay)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2))
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(422, 422, 422)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -336,7 +343,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 904, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 898, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

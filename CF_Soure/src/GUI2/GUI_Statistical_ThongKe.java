@@ -45,6 +45,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         lblTM.setText("0");
         rdoTC.setSelected(true);
         rdoTCActionPerformed(null);
+        btnNgayActionPerformed(null);
     }
 
     /**
@@ -634,7 +635,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
     private void btnNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgayActionPerformed
         List<Object[]> list = dao.getListByTKNgay(jDateNBD.getDate());
         try {
-            if (list.size() != 0) {
+//            if (list.size() != 0) {
 
                 dao.setDataNgay(pnlNgay, jDateNBD.getDate());
                 dao.setTongMonNgay(lblTM, lblHD, jDateNBD.getDate());
@@ -645,9 +646,9 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                 }
                 setLbl(tong);
                 lblTong.setText(n.format(tong));
-            } else {
-                ThongBao.alert(this, "Ngày bạn chọn không có dữ liệu");
-            }
+//            } else {
+//                ThongBao.alert(this, "Ngày bạn chọn không có dữ liệu");
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();
