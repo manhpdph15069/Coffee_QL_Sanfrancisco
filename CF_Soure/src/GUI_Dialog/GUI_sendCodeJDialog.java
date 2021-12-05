@@ -166,7 +166,7 @@ public class GUI_sendCodeJDialog extends javax.swing.JDialog {
                 String ma = dialogHelper.prompt(this, "Nhập vào mã Code (6 số)");
                 if (macode == Integer.parseInt(ma)) {
                     this.dispose();
-                    new GUI_resetMKJDialog(null, rootPaneCheckingEnabled, this.nhanVien).setVisible(true);
+                    new GUI_resetMKJDialog(null, rootPaneCheckingEnabled, this.nhanVien,txtmaNV.getText()).setVisible(true);
                 } else {
                     dialogHelper.alert(this, ma + " không khớp");
                 }

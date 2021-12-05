@@ -5,9 +5,10 @@
  */
 package GUI_Dialog;
 
-
 import DAL_IServices.IEmployee_Service;
+import DAL_Models.ENTITY_ADMIN;
 import DAL_Models.ENTITY_Employee;
+import DAL_Services.Admin;
 import DAL_Services.Employee_Service;
 import Utils.dialogHelper;
 import Utils.utilityHelper;
@@ -21,14 +22,16 @@ public class GUI_resetMKJDialog extends javax.swing.JDialog {
 
     private ENTITY_Employee nhanVien;
     private IEmployee_Service NVDao;
+    private String admin = "";
 
     /**
      * Creates new form resetMKJDialog
      */
-    public GUI_resetMKJDialog(java.awt.Frame parent, boolean modal, ENTITY_Employee nv) {
+    public GUI_resetMKJDialog(java.awt.Frame parent, boolean modal, ENTITY_Employee nv, String admin) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        this.admin = admin;
         this.nhanVien = nv;
         this.NVDao = new Employee_Service();
     }
@@ -137,9 +140,17 @@ public class GUI_resetMKJDialog extends javax.swing.JDialog {
                     dialogHelper.alert(this, "Xác nhận mật khẩu không đúng!");
                 } else {
                     try {
-                        this.NVDao.updateMK(txtMatKhau.getText(),this.nhanVien.getUsernameEMP());    //reset MK nhân viên theo maNV và Email
-                        dialogHelper.alert(this, "Cập nhật thành công!");
-                        this.dispose();
+                        if (admin.equalsIgnoreCase("admin")) {
+                                Admin a = new Admin();
+                                ENTITY_ADMIN ad = new ENTITY_ADMIN();
+                                ad.setPassword(txtMatKhau.getText());
+                                a.update(ad);
+                                this.dispose();
+                        } else {
+                            this.NVDao.updateMK(txtMatKhau.getText(), this.nhanVien.getUsernameEMP());    //reset MK nhân viên theo maNV và Email
+                            dialogHelper.alert(this, "Cập nhật thành công!");
+                            this.dispose();
+                        }
                     } catch (Exception e) {
                         dialogHelper.alert(this, "Cập nhật thất bại!");
                         this.dispose();

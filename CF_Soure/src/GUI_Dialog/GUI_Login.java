@@ -67,7 +67,6 @@ public class GUI_Login extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hệ thống đăng nhập");
-        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
