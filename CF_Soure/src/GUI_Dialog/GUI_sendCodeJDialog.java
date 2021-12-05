@@ -6,6 +6,7 @@
 package GUI_Dialog;
 
 import DAL_Models.ENTITY_Employee;
+import DAL_Services.Admin;
 import DAL_Services.Employee_Service;
 import Utils.dialogHelper;
 import Utils.mailHelper;
@@ -17,15 +18,17 @@ import Utils.mailHelper;
 public class GUI_sendCodeJDialog extends javax.swing.JDialog {
 
     private ENTITY_Employee nhanVien;
+    private String admin = "";
 
     /**
      * Creates new form sendCodeJDialog
      */
-    public GUI_sendCodeJDialog(java.awt.Frame parent, boolean modal, ENTITY_Employee nv) {
+    public GUI_sendCodeJDialog(java.awt.Frame parent, boolean modal, ENTITY_Employee nv, String admin) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         this.nhanVien = nv;
+        this.admin = admin;
         macDinh();
     }
 
@@ -37,6 +40,11 @@ public class GUI_sendCodeJDialog extends javax.swing.JDialog {
         } else {
             this.txtEmail.setText(nhanVien.getEmail());
             this.txtmaNV.setText(nhanVien.getUsernameEMP());
+        }
+        if (admin.equalsIgnoreCase("admin")) {
+            Admin a = new Admin();
+            this.txtmaNV.setText(admin);
+            this.txtEmail.setText(a.select().getEmail());
         }
     }
 
@@ -175,6 +183,11 @@ public class GUI_sendCodeJDialog extends javax.swing.JDialog {
         } else {
             dialogHelper.alert(this, "Không tìm thấy mã nhân viên :" + this.txtmaNV.getText() + " trong CSDL");
         }
+        if (txtmaNV.getText().equalsIgnoreCase("admin")) {
+            Admin a = new Admin();
+            this.txtmaNV.setText(admin);
+            this.txtEmail.setText(a.select().getEmail());
+        }
     }//GEN-LAST:event_txtmaNVActionPerformed
 
     private void txtmaNVKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmaNVKeyPressed
@@ -183,6 +196,11 @@ public class GUI_sendCodeJDialog extends javax.swing.JDialog {
         this.nhanVien = dao.findById(this.txtmaNV.getText());
         if (nhanVien != null) {
             this.txtEmail.setText(nhanVien.getEmail());
+        }
+        if (txtmaNV.getText().equalsIgnoreCase("admin")) {
+            Admin a = new Admin();
+            this.txtmaNV.setText(admin);
+            this.txtEmail.setText(a.select().getEmail());
         }
     }//GEN-LAST:event_txtmaNVKeyPressed
 

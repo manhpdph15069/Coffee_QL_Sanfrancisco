@@ -8,12 +8,19 @@ package BUS_Services;
 import BUS_IServices.*;
 import BUS_Models.ThongKeSP;
 import DAL_Models.ENTITY_Product;
+import DAL_Services.Admin;
 import DAL_Services.Product_Service;
 import Utils.JDBC;
 import Utils.ThongBao;
 import Utils.dateHelper;
+import Utils.mailHelper;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,6 +64,11 @@ public class QLStatistical_Service implements IQLStatistical_Service {
     QLHoaDOn_Service daoHD = new QLHoaDOn_Service();
     Product_Service daoSP = new Product_Service();
     private NumberFormat n = new DecimalFormat("#,###");
+    private static String url = "data.txt";
+    private static FileInputStream fileInputStream = null;
+    private static BufferedReader bufferedReader = null;
+    private static String user = "";
+    private static String pass = "";
 
     @Override
     public List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
@@ -305,10 +317,44 @@ public class QLStatistical_Service implements IQLStatistical_Service {
     @Override
     public void sendmail(String message) {
         try {
+            fileInputStream = new FileInputStream(url);
+            bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            String line = bufferedReader.readLine();
+            int i = 0;
+            while (line != null) {
+                if (i == 0) {
+                    user = line.substring(line.indexOf(':') + 1);
+                }
+                if (i == 1) {
+                    pass = line.substring(line.indexOf(':') + 1);
+                }
+//                System.out.println(line+":"+i);
+                i++;
+                line = bufferedReader.readLine();
+            }
+            System.out.println(user);
+            System.out.println(pass);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(mailHelper.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(mailHelper.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                bufferedReader.close();
+                fileInputStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(mailHelper.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            Admin d = new Admin();
             String host = "smtp.gmail.com";
-            String user = "manh1qn@gmail.com";
-            String pass = "Manh0988307480";
-            String to = "manh1qn@gmail.com";
+            String user = QLStatistical_Service.user;
+            String pass = QLStatistical_Service.pass;
+            String to = d.select().getEmail();
             String subject = "Báo cáo ngày " + formatThang.format(dateHelper.now());
 
             boolean sessionDebug = false;

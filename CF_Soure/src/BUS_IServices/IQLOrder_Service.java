@@ -44,7 +44,7 @@ public interface IQLOrder_Service {
 
     public void taoHD(JTextField txt);
 
-    public void updatebnGuoi();
+    public void updatebnGuoi(String idBan);
 
     public void updatebnThanhToan(JTextField txtMaHD);
 

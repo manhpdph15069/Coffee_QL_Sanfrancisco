@@ -526,7 +526,7 @@ public class QLOrder_Service implements IQLOrder_Service {
         if (e.getSource().getClass() == JButton.class) {
             JButton selectedButton = (JButton) e.getSource();
             this.firstButton = selectedButton;
-            BanButtons banButton = banButtonList.get(selectedButton);
+            BanButtons banButton = banButtonList.get(selectedButton);            
             this.GroupBan = banButton.getTableGroup();
             lblBan.setToolTipText(banButton.getTableGroup());
             lblBan.setText(String.valueOf(banButton.getIDTalbe()));
@@ -574,7 +574,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                 }
                 BanButtons ban = banButtonList.get(ButtonChuyen);
                 chuenBan(banButton.getIDTalbe(), "Chuyển từ bàn :" + ban.getIDTalbe() + "Đến" + banButton.getIDTalbe(), IDOrderCu);
-                updatebnGuoi();
+                updatebnGuoi(banButton.getIDTalbe());
                 String sql = "UPDATE [Table] SET [Status] = 0 WHERE IDTable = ?";
                 try {
                     JDBC.update(sql, ban.getIDTalbe());
@@ -834,12 +834,10 @@ public class QLOrder_Service implements IQLOrder_Service {
     }
 
     @Override
-    public void updatebnGuoi() {
+    public void updatebnGuoi(String IdBan) {
         String sql = "UPDATE [Table] SET [Status] = 1 WHERE IDTable = ?";
-        JButton selectedButton = firstButton;
-        BanButtons banButton = banButtonList.get(selectedButton);
         try {
-            JDBC.update(sql, banButton.getIDTalbe());
+            JDBC.update(sql, IdBan);
         } catch (SQLException ex) {
             Logger.getLogger(QLOrder_Service.class.getName()).log(Level.SEVERE, null, ex);
         }

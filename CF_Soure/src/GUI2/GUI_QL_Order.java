@@ -1175,7 +1175,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             e++;
         }
         if (e > 0) {
-            qlod.updatebnGuoi();
+            qlod.updatebnGuoi(lblBan.getText());
             dialogHelper.alert(PanCac, "Gửi thành công ");
         }
         card.show(PanCac, "card4");

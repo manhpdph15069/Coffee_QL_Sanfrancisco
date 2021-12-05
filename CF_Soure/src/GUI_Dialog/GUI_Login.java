@@ -120,14 +120,6 @@ public class GUI_Login extends javax.swing.JDialog {
                 btnLogin2ActionPerformed(evt);
             }
         });
-        btnLogin2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnLogin2KeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                btnLogin2KeyTyped(evt);
-            }
-        });
 
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -241,21 +233,13 @@ public class GUI_Login extends javax.swing.JDialog {
     private void lblForgetpassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgetpassMouseClicked
         // TODO add your handling code here:        
         ENTITY_Employee nv = dao.findById(txtUsername.getText());
-         new GUI_sendCodeJDialog(null, rootPaneCheckingEnabled, nv).setVisible(true);
-        
+        new GUI_sendCodeJDialog(null, rootPaneCheckingEnabled, nv, txtUsername.getText()).setVisible(true);
+
     }//GEN-LAST:event_lblForgetpassMouseClicked
-
-    private void btnLogin2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLogin2KeyPressed
-
-    }//GEN-LAST:event_btnLogin2KeyPressed
 
     private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
 
     }//GEN-LAST:event_txtPasswordKeyTyped
-
-    private void btnLogin2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLogin2KeyTyped
-
-    }//GEN-LAST:event_btnLogin2KeyTyped
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
@@ -266,7 +250,7 @@ public class GUI_Login extends javax.swing.JDialog {
 
     private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
         // TODO add your handling code here:
-                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnLogin2ActionPerformed(null);
         }
     }//GEN-LAST:event_txtUsernameKeyPressed

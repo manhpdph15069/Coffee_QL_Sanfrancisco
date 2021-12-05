@@ -100,6 +100,12 @@ public class JDialogTaoBan extends javax.swing.JDialog {
             }
         });
 
+        txtviTri.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtviTriKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -145,10 +151,15 @@ public class JDialogTaoBan extends javax.swing.JDialog {
         // TODO add your handling code here:
         ban.setLocation(Integer.valueOf(txtviTri.getText()));
         daoban.insertMATABLE(ban);
+//        public void taoTable(JPanel that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
         ql.taoTable(that, ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
         this.dispose();        
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtviTriKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtviTriKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtviTriKeyTyped
 
     /**
      * @param args the command line arguments

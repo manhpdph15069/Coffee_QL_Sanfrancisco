@@ -575,7 +575,6 @@ public class GUI_MAIN extends javax.swing.JFrame {
             LocalDateTime date1 = LocalDateTime.now();
             LocalDateTime date2 = LocalDateTime.parse("2021-12-04 14:00:00", dtf);
             if (date1.isAfter(date2)) {
-                System.out.println("Ngon");
                 daotk.guiBCNgay(dateHelper.now());
             }
             System.exit(0);

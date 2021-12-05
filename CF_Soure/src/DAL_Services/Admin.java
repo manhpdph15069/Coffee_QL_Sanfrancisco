@@ -16,20 +16,24 @@ import java.util.List;
  * @author phamd
  */
 public class Admin {
-    String SELECT = "SELECT * From [Admin] where Username =?";
-    String UPDATE ="UPDATE [ADMIN] SET [Password]=?";
-    public void update(ENTITY_ADMIN ad){
+
+    String SELECT = "SELECT * From [Admin]";
+    String SELECT1 = "SELECT * From [Admin] WHERE [Username] = ?";
+    String UPDATE = "UPDATE [ADMIN] SET [Password]=?";
+
+    public void update(ENTITY_ADMIN ad) {
         try {
             JDBC.update(UPDATE, ad.getPassword());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public List<ENTITY_ADMIN> selectBySQL(String sql,Object...args){
-        List<ENTITY_ADMIN> list =new ArrayList<>();
+
+    public List<ENTITY_ADMIN> selectBySQL(String sql, Object... args) {
+        List<ENTITY_ADMIN> list = new ArrayList<>();
         try {
-            ResultSet rs =  JDBC.query(sql, args);
-            while(rs.next()){
+            ResultSet rs = JDBC.query(sql, args);
+            while (rs.next()) {
                 ENTITY_ADMIN ad = new ENTITY_ADMIN();
                 ad.setUsername(rs.getString(1));
                 ad.setPassword(rs.getString(2));
@@ -42,15 +46,17 @@ public class Admin {
             throw new RuntimeException();
         }
     }
-        public ENTITY_ADMIN select() {
+
+    public ENTITY_ADMIN select() {
         List<ENTITY_ADMIN> list = this.selectBySQL(SELECT);
-            if (list.isEmpty()) {
-                return null;
-            }
-            return list.get(0);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
-            public ENTITY_ADMIN findById(String user) {
-        List<ENTITY_ADMIN> list = this.selectBySQL(SELECT,user);
+
+    public ENTITY_ADMIN findById(String user) {
+        List<ENTITY_ADMIN> list = this.selectBySQL(SELECT1, user);
         if (list.isEmpty()) {
             return null;
         }
