@@ -25,4 +25,5 @@ public interface IArea_Service {
     public List<ENTITY_Area> findById(String IDTable);
 
     public List<ENTITY_Area> SelectBySQL(String sql, Object... args);
+    public List<ENTITY_Area> findByIdArea(String IDTable);
 }

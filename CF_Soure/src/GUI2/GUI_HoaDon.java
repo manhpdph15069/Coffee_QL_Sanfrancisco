@@ -27,7 +27,7 @@ import javax.swing.table.TableRowSorter;
  * @author phamd
  */
 public class GUI_HoaDon extends javax.swing.JPanel {
-
+    
     private NumberFormat n = new DecimalFormat("#,###");
     SimpleDateFormat fomat = new SimpleDateFormat("hh:mm | dd-MM-yyyy");
     JPopupMenu menu = new JPopupMenu("Popup");
@@ -38,46 +38,35 @@ public class GUI_HoaDon extends javax.swing.JPanel {
      */
     public GUI_HoaDon() {
         initComponents();
-
+        
         init();
-
+        
     }
-
+    
     void init() {
         dao = new QLHoaDOn_Service();
         jdate.setDate(now());
         rdoTC.setSelected(true);
-
+        
         int billH = 0;
         float tien = 0;
         List<Object[]> list = dao.getListHoaDonNgay(jdate.getDate());
-
+        
         if (list.size() != 0) {
             btnNgayActionPerformed(null);
         } else {
-            {
-                for (Object[] objects : list) {
-                    if (String.valueOf(objects[8]).equals("3")) {
-                        billH++;
-                    }
-                    tien += Float.parseFloat(String.valueOf(objects[7]));
-                }
-                lblTBill.setText(String.valueOf(list.size()));
-                lblTBillH.setText(String.valueOf(billH));
-                lblTien.setText(n.format(tien) + " VNĐ");
-                dao.fillTable(tbl);
-            }
-
+            btnTAtcaActionPerformed(null);
+            
         }
     }
-
+    
     public Date now() {
         return new Date();
     }
-
+    
     public void LocTheoMaNV() {
         menu.removeAll();
-
+        
         JMenuItem item = new JMenuItem("Lọc Nhân Viên");
         item.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -88,9 +77,9 @@ public class GUI_HoaDon extends javax.swing.JPanel {
                 tbl.setRowSorter(sorter);
                 sorter.setRowFilter(RowFilter.regexFilter(ma, 1));
             }
-
+            
         });
-
+        
         menu.add(item);
     }
 
@@ -122,7 +111,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
         lblTBill = new javax.swing.JLabel();
         lblTBillH = new javax.swing.JLabel();
         lblTien = new javax.swing.JLabel();
-        rSButtonMetro1 = new rojerusan.RSButtonMetro();
+        btnTAtca = new rojerusan.RSButtonMetro();
         jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -273,11 +262,11 @@ public class GUI_HoaDon extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        rSButtonMetro1.setText("Tất cả");
-        rSButtonMetro1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        rSButtonMetro1.addActionListener(new java.awt.event.ActionListener() {
+        btnTAtca.setText("Tất cả");
+        btnTAtca.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnTAtca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonMetro1ActionPerformed(evt);
+                btnTAtcaActionPerformed(evt);
             }
         });
 
@@ -317,7 +306,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)))
                 .addGap(18, 18, 18)
-                .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTAtca, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -327,12 +316,12 @@ public class GUI_HoaDon extends javax.swing.JPanel {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -340,7 +329,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
                             .addComponent(jRadioButton2)
                             .addComponent(jRadioButton3)
                             .addComponent(rdoTC)))
-                    .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTAtca, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jLabel4)
@@ -368,7 +357,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
                 "Mã HD", "Nhân viên", "Khách hàng", "Trương trình", "Ngày order", "Giờ order", "Ghi chú", "Đồ uống", "Tổng tiền", "Trạng thái"
             }
         ));
-        tbl.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
+        tbl.setColorFilasBackgound2(new java.awt.Color(233, 233, 233));
         tbl.setColorFilasForeground1(new java.awt.Color(0, 0, 0));
         tbl.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
         tbl.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -460,7 +449,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
             lblTBill.setText(String.valueOf(tBill));
             lblTBillH.setText(String.valueOf(tBillH));
             lblTien.setText(n.format(tien) + " VNĐ");
-
+            
         }
     }//GEN-LAST:event_btnNgayActionPerformed
 
@@ -504,9 +493,9 @@ public class GUI_HoaDon extends javax.swing.JPanel {
             lblTBill.setText(String.valueOf(list.size()));
             lblTBillH.setText(String.valueOf(billH));
             lblTien.setText(n.format(ttien) + " VNĐ");
-
+            
         }
-
+        
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -526,7 +515,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
         sorter.setRowFilter(RowFilter.regexFilter(txtTimKiem.getText()));
     }//GEN-LAST:event_txtTimKiemKeyTyped
 
-    private void rSButtonMetro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro1ActionPerformed
+    private void btnTAtcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTAtcaActionPerformed
         // TODO add your handling code here:
         rdoTC.setSelected(true);
         List<Object[]> list = dao.getListHoaDon();
@@ -545,8 +534,8 @@ public class GUI_HoaDon extends javax.swing.JPanel {
             dao.fillTable(tbl);
         }
 
-    }//GEN-LAST:event_rSButtonMetro1ActionPerformed
-
+    }//GEN-LAST:event_btnTAtcaActionPerformed
+    
     public void loc(String txt) {
         DefaultTableModel m = (DefaultTableModel) tbl.getModel();
         m.fireTableDataChanged();
@@ -557,6 +546,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNgay;
+    private rojerusan.RSButtonMetro btnTAtca;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
@@ -576,7 +566,6 @@ public class GUI_HoaDon extends javax.swing.JPanel {
     private javax.swing.JLabel lblTBill;
     private javax.swing.JLabel lblTBillH;
     private javax.swing.JLabel lblTien;
-    private rojerusan.RSButtonMetro rSButtonMetro1;
     private javax.swing.JRadioButton rdoTC;
     private rojeru_san.complementos.RSTableMetro tbl;
     private javax.swing.JTextField txtTimKiem;

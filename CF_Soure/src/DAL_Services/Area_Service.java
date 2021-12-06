@@ -11,9 +11,10 @@ import java.util.List;
 public class Area_Service implements IArea_Service {
     String INSERT_SQL = "INSERT INTO [Area]([AreaName]) VALUES(?);";
     String UPDATE_SQL = "UPDATE [Area] Set [AreaName]=?,[MaxTable]=?, WHERE [IDArea]=?";
-    String DELETE_SQL = "DELETE [Area] WHERE [AreaName]=?";
+    String DELETE_SQL = "DELETE [Area] WHERE [IDArea]=?";
     String SELECT_ALL_SQL = "SELECT * FROM [Area]";
     String SELECT_BY_ID_SQL = "SELECT * FROM [Area] WHERE [AreaName]=?";
+    String select = "SELECT * FROM [Area] WHERE [IDArea]=?";
 
     @Override
     public void insert(String khu) {
@@ -49,6 +50,10 @@ public class Area_Service implements IArea_Service {
     @Override
     public List<ENTITY_Area> findById(String IDTable) {
         return this.SelectBySQL(SELECT_BY_ID_SQL, IDTable);
+    }
+    @Override
+    public List<ENTITY_Area> findByIdArea(String IDTable) {
+        return this.SelectBySQL(select, IDTable);
     }
 
     @Override
