@@ -571,9 +571,11 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
         if (JOptionPane.showConfirmDialog(this, "Bạn muốn đóng ứng dụng?") == 0) {
+                        SimpleDateFormat fo = new SimpleDateFormat("yyyy-MM-dd");
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+            String n =fo.format(dateHelper.now());
             LocalDateTime date1 = LocalDateTime.now();
-            LocalDateTime date2 = LocalDateTime.parse("2021-12-04 14:00:00", dtf);
+            LocalDateTime date2 = LocalDateTime.parse(n+" 09:00:00", dtf);
             if (date1.isAfter(date2)) {
                 daotk.guiBCNgay(dateHelper.now());
             }

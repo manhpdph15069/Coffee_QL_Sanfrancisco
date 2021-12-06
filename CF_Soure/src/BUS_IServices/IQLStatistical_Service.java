@@ -24,9 +24,9 @@ public interface IQLStatistical_Service {
 
     public void setDataNgay(JPanel pnlNgay, Date jdateNgay);
 
-    public List<Object[]> getListByTKThang(int thang);
+    public List<Object[]> getListByTKThang(int thang,int nam);
 
-    public void setDataThang(JPanel pnlNgay, int thang);
+   public void setDataThang(JPanel pnlNgay, int thang,int nam);
 
     public List<Object[]> getListByTKNam(int nam);
 
@@ -52,18 +52,18 @@ public interface IQLStatistical_Service {
 
     public List<Object[]> getListTongMonvaHDKhoang(Date ngayBD, Date ngayKT);
 
-    
-    
-    
     void sendmail(String message);
 
     void guiBCN(int nam);
+
     void guiBCNgay(Date ngay);
-    
-    
-    
-    public void fillTableSanPham(JTable tbl,JTable tbl2,JLabel lbl,JLabel lblTM, JLabel lbl2, JLabel lblTM2);
-    public void fillTableSanPhamNGAY(String ngay,JTable tbl,JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2);
-    public void fillTableSanPhamTHANG(int Thang,JTable tbl,JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2);
-    public void fillTableSanPhamNAM(int Nam,JTable tbl,JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2);
+    void guiBCThang(int thang,int nam);
+
+    public void fillTableSanPham(JTable tbl, JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2);
+
+    public void fillTableSanPhamNGAY(String ngay, JTable tbl, JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2);
+
+    public void fillTableSanPhamTHANG(int Thang, JTable tbl, JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2);
+
+    public void fillTableSanPhamNAM(int Nam, JTable tbl, JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2);
 }

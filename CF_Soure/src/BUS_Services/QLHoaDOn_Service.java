@@ -5,13 +5,21 @@
  */
 package BUS_Services;
 
+import BUS_IServices.IQLEmployee_Service;
+import DAL_IServices.IEmployee_Service;
+import DAL_Models.ENTITY_Employee;
 import DAL_Models.ENTITY_Order;
 import DAL_Models.ENTITY_Product;
+import DAL_Services.Employee_Service;
 import Utils.JDBC;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +29,8 @@ import javax.swing.table.DefaultTableModel;
  * @author phamd
  */
 public class QLHoaDOn_Service {
+
+    private NumberFormat n = new DecimalFormat("#,###");
 
     public List<ENTITY_Product> SelectBySQL(String sql, Object... args) {
         List<ENTITY_Product> list = new ArrayList<>();
@@ -114,7 +124,7 @@ public class QLHoaDOn_Service {
                     o[5],
                     o[6],
                     doUong,
-                    o[7],
+                    n.format(o[7]) + " VNĐ",
                     tt
                 };
                 model.addRow(row);
@@ -156,7 +166,7 @@ public class QLHoaDOn_Service {
                     o[5],
                     o[6],
                     doUong,
-                    o[7],
+                    n.format(o[7]) + " VNĐ",
                     tt
                 };
                 model.addRow(row);
@@ -198,7 +208,7 @@ public class QLHoaDOn_Service {
                     o[5],
                     o[6],
                     doUong,
-                    o[7],
+                    n.format(o[7]) + " VNĐ",
                     tt
                 };
                 model.addRow(row);
@@ -206,20 +216,20 @@ public class QLHoaDOn_Service {
             }
         }
     }
-    
-  
-  public void huyHoaDon(String lyDo,String idOrder){
+
+    public void huyHoaDon(String lyDo, String idOrder) {
         try {
             String sql = "Update [Order] SET Status=3,Reason=? where IDOrder=?";
-            JDBC.update(sql,lyDo,idOrder);
+            JDBC.update(sql, lyDo, idOrder);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-  public void khoiPhucHD(String lyDo,String idOrder){
+
+    public void khoiPhucHD(String lyDo, String idOrder) {
         try {
             String sql = "Update [Order] SET Status=2,Reason=? where IDOrder=?";
-            JDBC.update(sql,lyDo,idOrder);
+            JDBC.update(sql, lyDo, idOrder);
         } catch (Exception e) {
             e.printStackTrace();
         }

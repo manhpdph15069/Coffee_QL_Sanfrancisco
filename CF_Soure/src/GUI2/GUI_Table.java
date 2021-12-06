@@ -404,13 +404,19 @@ public class GUI_Table extends javax.swing.JPanel {
                 int vt = (Integer.parseInt(txtViTri.getText()));
                 List<ENTITY_Table> list = tbdao.select_viTri(vt);
                 if (list.size() == 0) {
-                    insert();
+                    if (ThongBao.comfirm(this, "Bạn chắc chắn muốn thêm")) {
+
+                        insert();
+                    }
                 } else {
                     List<ENTITY_Table> ct = tbdao.select_CheckTrung(vt);
                     ENTITY_Area tt = (ENTITY_Area) cbbKhu.getSelectedItem();
                     if (ct.size() == 0) {
-                        tbdao.update_trung(String.valueOf(tt.getIDArea()), vt);
-                        load();
+                        if (ThongBao.comfirm(this, "Bạn chắc chắn muốn thêm")) {
+
+                            tbdao.update_trung(String.valueOf(tt.getIDArea()), vt);
+                            load();
+                        }
                     } else {
                         ThongBao.alert(this, "Vị trí đã tồn tại");
                     }
@@ -474,8 +480,10 @@ public class GUI_Table extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         if (Check.checkNullText(txtViTri)) {
             if (Check.checkTable(txtViTri.getText())) {
+                if (ThongBao.comfirm(this, "Bạn chắc chắn muốn sửa")) {
 
-                update();
+                    update();
+                }
             }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -547,9 +555,12 @@ public class GUI_Table extends javax.swing.JPanel {
         List<ENTITY_Area> list = this.khu.findById(khu);
         if (list.size() == 0) {
             if (khu != null) {
-                this.khu.insert(khu);
-                fillComboBoxKhu();
-                ThongBao.alert(this, "Thêm khu thành công!");
+                if (ThongBao.comfirm(this, "Bạn chắc chắn muốn thêm")) {
+
+                    this.khu.insert(khu);
+                    fillComboBoxKhu();
+                    ThongBao.alert(this, "Thêm khu thành công!");
+                }
             }
         } else {
             ThongBao.alert(this, "Khu đã tồn tại");
