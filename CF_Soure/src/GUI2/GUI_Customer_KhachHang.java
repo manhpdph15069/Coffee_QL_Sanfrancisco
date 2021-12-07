@@ -234,6 +234,7 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
     public void Giahanthe() {
         menu.removeAll();
         JMenuItem item = new JMenuItem("Gia Hạn Thẻ");
+        JMenuItem item1 = new JMenuItem("Gửi Thông Báo");
         item.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 SimpleDateFormat fo = new SimpleDateFormat("dd-MM-yyyy");
@@ -241,16 +242,17 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
                 if (row >= 0) {
                     String ID = (String) tblKhachHang.getValueAt(row, 0);
                     ENTITY_Customer pro = dao.findById(ID);
-                    String date1 = fo.format(dateHelper.now());
-                    String date2 = fo.format(pro.getDateEnd());
+                    Date date1 = dateHelper.now();
+                    Date date2 = pro.getDateEnd();
+                    System.out.println(pro.getDateEnd());
                     String songay = dialogHelper.prompt(null, "Nhập số ngày muốn gia hạn thẻ");
                     if (songay == null) {
                     } else {
-                        if (date1.compareTo(date2) > 0) { //neu dateEnd<today
+                        if (date1.after(date2)) { //neu dateEnd<today
                             pro.setDateEnd(dateHelper.add(Integer.valueOf(songay)));
-                        } else if (date1.compareTo(date2) < 0) {
+                        } else if (date1.before(date2)) {
                             pro.setDateEnd(dateHelper.addDays(pro.getDateEnd(), Integer.valueOf(songay)));
-                        } else {
+                        } else{
                             pro.setDateEnd(dateHelper.addDays(pro.getDateEnd(), Integer.valueOf(songay)));
                         }
                         try {
@@ -259,10 +261,10 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
                             filltoTable();
                             dialogHelper.alert(null, "Gia Hạn Thành Công");
                             dialogHelper.alert(null,
-                                    "Mã Thẻ : "+pro.getIDCust()
-                                    +"\n"+"Tên Khách Hàng : "+pro.getCusName()
-                                    +"\n"+"Ngày Mở Thẻ  : "+fo.format(pro.getDateAdd())
-                                    +"\n"+"Ngày Hết Hạn : "+fo.format(pro.getDateEnd()));
+                                    "Mã Thẻ : " + pro.getIDCust()
+                                    + "\n" + "Tên Khách Hàng : " + pro.getCusName()
+                                    + "\n" + "Ngày Mở Thẻ  : " + fo.format(pro.getDateAdd())
+                                    + "\n" + "Ngày Hết Hạn : " + fo.format(pro.getDateEnd()));
                         } catch (SQLException ex) {
                             dialogHelper.alert(null, "Gia Hạn Thất Bại");
                             Logger.getLogger(GUI_Customer_KhachHang.class.getName()).log(Level.SEVERE, null, ex);
@@ -274,6 +276,36 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
             }
         });
         menu.add(item);
+        item1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SimpleDateFormat fo = new SimpleDateFormat("dd-MM-yyyy");
+                row = tblKhachHang.getSelectedRow();
+                if (row>=0) {
+                String ID = (String) tblKhachHang.getValueAt(row, 0);
+                ENTITY_Customer pro = dao.findById(ID);
+                Date date1 = dateHelper.now();
+                Date date2 = pro.getDateEnd();
+                int p = JOptionPane.showConfirmDialog(null, "Bạn Muốn Gửi Thông Báo Cho Khách Hàng Này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
+                if (p == JOptionPane.YES_OPTION) {
+                    String message = "Thẻ Khách Hàng Của Bạn Đã Hết Hạn Vào Ngày " + fo.format(pro.getDateEnd()) + "\n"
+                            + "Vui Lòng Đến Cửa Hàng Để Gia Hạn Thẻ";
+                    String message1 = "Thẻ Khách Hàng Của Bạn Sẽ Hết Hạn Vào Ngày Hôm Nay";
+                    String message2 = "Thẻ Khách Hàng Của Bạn Sẽ Hết hạn Vào Ngày " + fo.format(pro.getDateEnd());
+                    if (date1.after(date2)) { //neu DateEnd < Today
+                        dao.sendmail(message, tblKhachHang, row);
+                    } else if (date1.equals(date2)) {
+                        dao.sendmail(message1, tblKhachHang, row);
+                    } else {
+                        dao.sendmail(message2, tblKhachHang, row);
+                    }
+                } else {
+                    return;
+                }  
+                }
+            }
+        });
+        menu.add(item1);
     }
 
     /**
