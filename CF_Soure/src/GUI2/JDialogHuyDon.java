@@ -131,10 +131,14 @@ public class JDialogHuyDon extends javax.swing.JDialog {
         txtKhac.setRows(5);
         jScrollPane1.setViewportView(txtKhac);
 
+        lblKhac.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         lblKhac.setText("Lý do khác");
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel3.setText("Lý do hủy đơn :");
 
+        jButton1.setBackground(new java.awt.Color(102, 255, 102));
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jButton1.setText("Xác nhận");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,7 +168,7 @@ public class JDialogHuyDon extends javax.swing.JDialog {
                             .addComponent(lblKhac)
                             .addComponent(jScrollPane1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
+                        .addGap(140, 140, 140)
                         .addComponent(jButton1)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -189,7 +193,7 @@ public class JDialogHuyDon extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -123,8 +123,10 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblType);
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel2.setText("Size");
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel1.setText("Loại Sản Phẩm");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
