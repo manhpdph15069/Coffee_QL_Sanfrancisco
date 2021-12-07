@@ -126,7 +126,7 @@ public class Check {
             return true;
         } else {
             txt.setBackground(pink);
-            ThongBao.alert(txt.getRootPane(), "Họ tên phải là tên tiếng việt hoặc không đấu\ntừ 3-25 kí tự");
+            ThongBao.alert(txt.getRootPane(), "Tên phải là tên tiếng việt hoặc không đấu\ntừ 3-25 kí tự");
             return false;
         }
     }

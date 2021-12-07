@@ -19,7 +19,7 @@ public class JDialog_Xemchitiet extends javax.swing.JDialog {
 
     QLMenu_Service dao = new QLMenu_Service();
 //    String tbl = null;
-    int row=1;
+    int row = 1;
 
     /**
      * Creates new form JDialog_LoaiSP
@@ -31,16 +31,16 @@ public class JDialog_Xemchitiet extends javax.swing.JDialog {
         this.row = tbl.getSelectedRow();
         System.out.println(row);
         if (this.row >= 0) {
-        try {
-           String ID = (String) tbl.getValueAt(this.row,0);
-            SanPham sp = dao.findById(ID); //lay thong tin sp tuong ung trong csdl
-            if (sp != null) {
-                this.set(sp);
+            try {
+                String ID = (String) tbl.getValueAt(this.row, 0);
+                SanPham sp = dao.findById(ID); //lay thong tin sp tuong ung trong csdl
+                if (sp != null) {
+                    this.set(sp);
+                }
+            } catch (Exception e) {
+                dialogHelper.alert(this, "Lỗi");
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            dialogHelper.alert(this, "Lỗi");
-            e.printStackTrace();
-        }
         }
     }
 
@@ -84,7 +84,7 @@ public class JDialog_Xemchitiet extends javax.swing.JDialog {
 
         jLabel6.setText("Danh Mục :");
 
-        jLabel7.setText("Đơn vị (Size) ;");
+        jLabel7.setText("Đơn vị (Size) :");
 
         lblID.setText("jLabel8");
 
@@ -99,11 +99,6 @@ public class JDialog_Xemchitiet extends javax.swing.JDialog {
         lblDonvi.setText("jLabel13");
 
         lblHinh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        lblHinh.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblHinhMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,10 +170,6 @@ public class JDialog_Xemchitiet extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblHinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhMouseClicked
-        dao.chonAnh(lblHinh);
-    }//GEN-LAST:event_lblHinhMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -225,9 +216,13 @@ public class JDialog_Xemchitiet extends javax.swing.JDialog {
         lblID.setText(sp.getIDProduct());
         lblTensp.setText(sp.getProductName());
         lblGia.setText(String.valueOf(sp.getPrice()));
-        lblTrangThai.setText(String.valueOf(sp.isStatus()?"Đang sử dụng" : "Không sử dụng"));
+        lblTrangThai.setText(String.valueOf(sp.isStatus() ? "Đang sử dụng" : "Không sử dụng"));
         lblDanhMuc.setText(sp.getTypeName());
-        lblDonvi.setText(sp.getSize());
+        if (sp.getSize() == null) {
+            lblDonvi.setText("Không có");
+        } else {
+            lblDonvi.setText(sp.getSize());
+        }
         if (sp.getImage() != null) {
             lblHinh.setToolTipText(sp.getImage()); //lay ra ten file trong tooltip 
             lblHinh.setIcon(XImage.read(sp.getImage())); //doc file trong tooltip va hien thi len lable
@@ -235,7 +230,6 @@ public class JDialog_Xemchitiet extends javax.swing.JDialog {
             lblHinh.setIcon(XImage.read("no_image.jpg"));
         }
     }
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

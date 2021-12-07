@@ -33,9 +33,6 @@ import javax.swing.table.TableRowSorter;
  * @author phamd
  */
 public class QLMenu_Service implements IQLMenu_Service {
-
-    private IProduct_Service ips;
-    IProduct_Service dao = new Product_Service();
     String sql_all = "SELECT [IDProduct],ProductName,Price,Image,Status,TypeName,Size FROM [Product] "
             + "Join ProductType on Product.IDType = ProductType.IDType";
     String SELECT_BY_TypeName = "Select DISTINCT TypeName from ProductType";

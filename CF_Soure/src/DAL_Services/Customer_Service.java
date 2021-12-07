@@ -22,11 +22,13 @@ import java.util.List;
  *
  * */
 public class Customer_Service implements ICustomer_Service {
-    String INSERT_SQL = "INSERT INTO [Customer]([IDCust], [CusName], [DateAdd], [DateEnd],[Phone],[Email],[Discount],[Status]) VALUES (?, ?, ?, ?,?,?,?,1)";
-    String UPDATE_SQL = "UPDATE [Customer] SET [CusName]= ?, [DateAdd] = ?,[DateEnd]=?,[Phone]=?,[Email]=?,[Discount]=?,[Status]=1 WHERE [IDCust]= ?";
+
+    String INSERT_SQL = "INSERT INTO [Customer]([IDCust], [CusName], [DateAdd], [DateEnd],[Phone],[Email],[Discount],[Status]),[CCCD]=? VALUES (?, ?, ?, ?,?,?,?,1,?)";
+    String UPDATE_SQL = "UPDATE [Customer] SET [CusName]= ?, [DateAdd] = ?,[DateEnd]=?,[Phone]=?,[Email]=?,[Discount]=?,[CCCD]=? WHERE [IDCust]= ?";
     String DELETE_SQL = "UPDATE [Customer] SET [Status]=0 WHERE [IDCust]= ?";
-    String SELECT_ALL_SQL = "SELECT * FROM [Customer] Where [Status]=1";
-    String SELECT_BY_ID_SQL = "SELECT * FROM [Customer] WHERE [IDCust] = ? and [Status]=1";
+    String SELECT_ALL_SQL = "SELECT * FROM [Customer]";
+    String SELECT_BY_ID_SQL = "SELECT * FROM [Customer] WHERE [IDCust] = ?";
+    String up = "Update [Customer] set Status=0 where DateEnd=?";
 
     @Override
     public void insert(ENTITY_Customer entity) {
@@ -38,7 +40,8 @@ public class Customer_Service implements ICustomer_Service {
                     entity.getDateEnd(),
                     entity.getPhone(),
                     entity.getEmail(),
-                    entity.getDiscount());
+                    entity.getDiscount(),
+                    entity.getCCCD());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,6 +57,7 @@ public class Customer_Service implements ICustomer_Service {
                     entity.getPhone(),
                     entity.getEmail(),
                     entity.getDiscount(),
+                    entity.getCCCD(),
                     entity.getIDCust());
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,6 +98,7 @@ public class Customer_Service implements ICustomer_Service {
                 customer.setEmail(rs.getString("Email"));
                 customer.setDiscount(rs.getInt("Discount"));
                 customer.setStatus(rs.getBoolean("Status"));
+                customer.setCCCD(rs.getString("CCCD"));
                 list.add(customer);
             }
             rs.getStatement().getConnection().close();
@@ -101,5 +106,21 @@ public class Customer_Service implements ICustomer_Service {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void up(String DateEnd) throws SQLException {
+        JDBC.update(up, DateEnd);
+    }
+
+    public void up1(String DateEnd) throws SQLException {
+        String sql = "Update [Customer] set Status=1 where DateEnd=?";
+        JDBC.update(sql, DateEnd);
+    }
+
+    public void giahan(ENTITY_Customer entity) throws SQLException {
+        String sql = "Update [Customer] set DateEnd=? where IDCust=?";
+        JDBC.update(sql,
+                entity.getDateEnd(),
+                entity.getIDCust());
     }
 }

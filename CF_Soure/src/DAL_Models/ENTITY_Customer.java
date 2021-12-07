@@ -23,7 +23,7 @@ public class ENTITY_Customer {
     private String Email;
     private int Discount;
     private boolean Status;
-
+    private String CCCD;
 
     public ENTITY_Customer() {
     }
@@ -91,5 +91,14 @@ public class ENTITY_Customer {
     public void setStatus(boolean status) {
         Status = status;
     }
+
+    public String getCCCD() {
+        return CCCD;
+    }
+
+    public void setCCCD(String CCCD) {
+        this.CCCD = CCCD;
+    }
+    
 
 }
