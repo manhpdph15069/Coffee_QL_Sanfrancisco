@@ -55,11 +55,11 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * @author phamd
  */
 public class QLStatistical_Service implements IQLStatistical_Service {
-    
+
     List<Object[]> msList = new ArrayList<>();
     SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss aa");
     SimpleDateFormat formatThang = new SimpleDateFormat("dd-MM-yyyy");
-    
+
     SimpleDateFormat formatNam = new SimpleDateFormat("yyyy");
     QLHoaDOn_Service daoHD = new QLHoaDOn_Service();
     Product_Service daoSP = new Product_Service();
@@ -69,7 +69,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
     private static BufferedReader bufferedReader = null;
     private static String user = "";
     private static String pass = "";
-    
+
     @Override
     public List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
         try {
@@ -89,14 +89,14 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             throw new RuntimeException(e);
         }
     }
-    
+
     @Override
     public List<Object[]> getListTongMonvaHDNgay(Date date) {
         String sql = "{CALL getTongMvaTongHD(?)}";
         String[] cols = {"tongM", "TongHD"};
         return this.getListOfArray(sql, cols, date);
     }
-    
+
     @Override
     public void setTongMonNgay(JLabel lblTM, JLabel lblHD, Date ngay) {
         List<Object[]> list = getListTongMonvaHDNgay(ngay);
@@ -105,18 +105,18 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 System.out.println("" + o[0] + o[1]);
                 lblTM.setText(String.valueOf(o[0]));
                 lblHD.setText(String.valueOf(o[1]));
-                
+
             }
         }
     }
-    
+
     @Override
     public List<Object[]> getListTongMonvaHDThang(int date) {
         String sql = "{CALL getTongMvaTongHDThang(?)}";
         String[] cols = {"tongM", "TongHD"};
         return this.getListOfArray(sql, cols, date);
     }
-    
+
     @Override
     public void setTongMonThang(JLabel lblTM, JLabel lblHD, int thang) {
         List<Object[]> list = getListTongMonvaHDThang(thang);
@@ -128,21 +128,21 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             }
         }
     }
-    
+
     @Override
     public List<Object[]> getListTongMonvaHDNam(int date) {
         String sql = "{CALL getTongMvaTongHDNam(?)}";
         String[] cols = {"tongM", "TongHD"};
         return this.getListOfArray(sql, cols, date);
     }
-    
+
     @Override
     public List<Object[]> getListTongMonvaHDKhoang(Date ngayBD, Date ngayKT) {
         String sql = "{CALL getTongMvaTongHDKhoang(?,?)}";
         String[] cols = {"tongM", "TongHD"};
         return this.getListOfArray(sql, cols, ngayBD, ngayKT);
     }
-    
+
     @Override
     public void setTongMonKhoang(JLabel lblTM, JLabel lblHD, Date ngayBD, Date ngayKT) {
         List<Object[]> list = getListTongMonvaHDKhoang(ngayBD, ngayKT);
@@ -151,11 +151,11 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 System.out.println("" + o[0] + o[1]);
                 lblTM.setText(String.valueOf(o[0]));
                 lblHD.setText(String.valueOf(o[1]));
-                
+
             }
         }
     }
-    
+
     @Override
     public void setTongMonNam(JLabel lblTM, JLabel lblHD, int nam) {
         List<Object[]> list = getListTongMonvaHDNam(nam);
@@ -164,21 +164,21 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 System.out.println("" + o[0] + o[1]);
                 lblTM.setText(String.valueOf(o[0]));
                 lblHD.setText(String.valueOf(o[1]));
-                
+
             }
         }
     }
-    
+
     @Override
     public List<Object[]> getListByTKNgay(Date ngay) {
         String sql = "{CALL DT_THONGKENGAY(?)}";
         String[] cols = {"Tien", "TimeOder"};
         return this.getListOfArray(sql, cols, ngay);
     }
-    
+
     @Override
     public void setDataNgay(JPanel pnlNgay, Date jdateNgay) {
-        
+
         List<Object[]> list = getListByTKNgay(jdateNgay);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         if (list != null) {
@@ -192,24 +192,24 @@ public class QLStatistical_Service implements IQLStatistical_Service {
         }
         JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu ngày".toUpperCase(), "Thời gian", "Số Tiền", data,
                 PlotOrientation.VERTICAL, false, true, false);
-        
+
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new Dimension(600, 321));
-        
+
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
         pnlNgay.add(chartPanel);
         pnlNgay.validate();
         pnlNgay.repaint();
     }
-    
+
     @Override
     public List<Object[]> getListByTKThang(int thang, int nam) {
         String sql = "{CALL DT_THONGKETHANG(?,?)}";
         String[] cols = {"Tien", "Ngay"};
         return this.getListOfArray(sql, cols, thang, nam);
     }
-    
+
     @Override
     public void setDataThang(JPanel pnlNgay, int thang, int nam) {
         try {
@@ -220,16 +220,16 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                     String t = String.valueOf(o[0]);
                     float tien = Float.valueOf(t);
                     String ngay = String.valueOf(formatThang.format(o[1]));
-                    
+
                     data.addValue(tien, "Số tiền", ngay);
                 }
             }
             JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu tháng".toUpperCase(), "Thời gian", "Số Tiền", data,
                     PlotOrientation.VERTICAL, false, true, false);
-            
+
             ChartPanel chartPanel = new ChartPanel(barChart);
             chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
-            
+
             pnlNgay.removeAll();
             pnlNgay.setLayout(new CardLayout());
             pnlNgay.add(chartPanel);
@@ -239,17 +239,17 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             //  e.printStackTrace();
         }
     }
-    
+
     @Override
     public List<Object[]> getListByTKNam(int nam) {
         String sql = "{CALL DT_THONGKENAM(?)}";
         String[] cols = {"Tien", "Thang"};
         return this.getListOfArray(sql, cols, nam);
     }
-    
+
     @Override
     public void setDataNam(JPanel pnlNgay, int nam) {
-        
+
         List<Object[]> list = getListByTKNam(nam);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         if (list != null) {
@@ -263,24 +263,24 @@ public class QLStatistical_Service implements IQLStatistical_Service {
         }
         JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu năm".toUpperCase(), "Thời gian", "Số Tiền", data,
                 PlotOrientation.VERTICAL, false, true, false);
-        
+
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
-        
+
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
         pnlNgay.add(chartPanel);
         pnlNgay.validate();
         pnlNgay.repaint();
     }
-    
+
     @Override
     public List<Object[]> getListByTKKhoangList(Date ngayBD, Date ngayKT) {
         String sql = "{CALL DT_THONGKEKHOANG(?,?)}";
         String[] cols = {"Tien", "Ngay"};
         return this.getListOfArray(sql, cols, ngayBD, ngayKT);
     }
-    
+
     @Override
     public void setDataKhoang(JPanel pnlNgay, Date ngayBD, Date ngayKT) {
         List<Object[]> list = getListByTKKhoangList(ngayBD, ngayKT);
@@ -297,23 +297,23 @@ public class QLStatistical_Service implements IQLStatistical_Service {
         }
         JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu theo khoảng".toUpperCase(), "Thời gian", "Số Tiền", dataset,
                 PlotOrientation.VERTICAL, false, true, false);
-        
+
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
-        
+
         pnlNgay.removeAll();
         pnlNgay.setLayout(new CardLayout());
         pnlNgay.add(chartPanel);
         pnlNgay.validate();
         pnlNgay.repaint();
     }
-    
+
     public List<Object[]> getListBysendMail(int nam) {
         String sql = "{CALL sendmailNam(?)}";
         String[] cols = {"IDHD", "UsernameEMP", "DateOrder", "TimeOder", "Reason"};
         return this.getListOfArray(sql, cols, nam);
     }
-    
+
     @Override
     public void sendmail(String message) {
         try {
@@ -356,7 +356,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             String pass = QLStatistical_Service.pass;
             String to = d.select().getEmail();
             String subject = "Báo cáo ngày " + formatThang.format(dateHelper.now());
-            
+
             boolean sessionDebug = false;
             //!.Tạo 1 dối tượng Properties
             Properties pros = new Properties();
@@ -366,7 +366,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             pros.put("mail.smtp.port", 587);//3.Chỉ ra port : 587 Cổng vào ra dữ liệu
             pros.put("mail.smtp.starttls.required", "true");
             java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-            
+
             Session mailSession = Session.getInstance(pros,
                     new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -387,61 +387,59 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             transport.connect(host, user, pass);
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
-            
-            ThongBao.alert(null, "Gửi báo cáo cuối ngày thành công");
+
+            ThongBao.alert(null, "Gửi báo cáo thành công");
         } catch (Exception e) {
         }
     }
-    
+
     public List<Object[]> getBillHuyNam(int nam) {
         String sql = "{CALL getBillHuyNam(?)}";
         String[] cols = {"tongBillHuy"};
         return this.getListOfArray(sql, cols, nam);
     }
-    
+
     @Override
     public void guiBCN(int nam) {
-        
+        float tien = 0;
         String message = "";
         try {
             List<Object[]> list1 = getListBysendMail(nam);
             List<Object[]> list2 = getListTongMonvaHDNam(nam);
             List<Object[]> list3 = getBillHuyNam(nam);
             List<Object[]> list4 = getListByTKNam(nam);
-            
             if (list1 != null) {
                 for (Object[] o : list2) {
                     if (list2 != null) {
                         if (list4 != null) {
                             for (Object[] oT : list4) {
-                                message = message + "\t\t\t\tBáo cáo trong năm\n"
-                                        + "|---------------------------------------------------------------------------|\n"
-                                        + "                                                   \t\t\t\t\t\n"
-                                        + "\t\tTổng món bán trong năm: " + String.valueOf(o[0]) + "\t\t\n"
-                                        + "\t\tTổng bill trong năm: " + String.valueOf(o[1]) + "\t\t\n"
-                                        + "\t\tTổng tiền trong năm: " + n.format(String.valueOf(oT[0])) + "VNĐ" + "\t\t\n";
-                                if (list3 != null) {
-                                    for (Object[] oh : list3) {
-                                        message = message + "\t\tTổng bill bị hủy: " + String.valueOf(oh[0]) + "\t\t\n"
-                                                + "                                                    \t\t\t\t\t\n"
-                                                + "" + "\n\n";
-                                    }
-                                }
-                                for (Object[] oo : list1) {
-                                    System.out.println("" + o[0] + o[1]);
-                                    message = message + "\t\n"
-                                            + "\t\tMã hóa đơn bị hủy là: " + String.valueOf(oo[0] + "\t\n"
-                                                    + "\t\tMã nhân viên order: " + String.valueOf(oo[1])) + "\t\n"
-                                            + "\t\tNgày :  " + String.valueOf(oo[2] + "\t\n"
-                                                    + "\t\tGiờ: " + String.valueOf(oo[3]) + "\t\n"
-                                                    + "\t\tLý do: " + String.valueOf(oo[4]) + "\t\n"
-                                                    + "\t\n"
-                                            );
-                                    
+                                tien += Float.parseFloat(String.valueOf(oT[0]));
+                            }
+                            message = message + "\t\t\t\tBáo cáo trong năm " + nam + "\n"
+                                    + "|---------------------------------------------------------------------------|\n"
+                                    + "                                                   \t\t\t\t\t\n"
+                                    + "\t\tTổng món bán trong năm: " + String.valueOf(o[0]) + "\t\t\n"
+                                    + "\t\tTổng bill trong năm: " + String.valueOf(o[1]) + "\t\t\n"
+                                    + "\t\tTổng tiền trong năm: " + tien + "VNĐ" + "\t\t\n";
+                            if (list3 != null) {
+                                for (Object[] oh : list3) {
+                                    message = message + "\t\tTổng bill bị hủy: " + String.valueOf(oh[0]) + "\t\t\n\n"
+                                            + "\t" + "Danh sách đơn bị hủy: \n";
                                 }
                             }
+                            for (Object[] oo : list1) {
+                                message = message + "\t\n"
+                                        + "\t\tMã hóa đơn bị hủy là: " + String.valueOf(oo[0] + "\t\n"
+                                                + "\t\tMã nhân viên order: " + String.valueOf(oo[1])) + "\t\n"
+                                        + "\t\tNgày :  " + String.valueOf(oo[2] + "\t\n"
+                                                + "\t\tGiờ: " + String.valueOf(oo[3]) + "\t\n"
+                                                + "\t\tLý do: " + String.valueOf(oo[4]) + "\t\n"
+                                                + "\t\n"
+                                        );
+
+                            }
                         }
-                        
+
                     }
                 }
             }
@@ -450,31 +448,31 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             e.printStackTrace();
         }
     }
-    
+
     public List<Object[]> getListBysendMailNgay(Date ngay) {
         String sql = "{CALL sendmailNgay(?)}";
         String[] cols = {"IDHD", "UsernameEMP", "DateOrder", "TimeOder", "Reason"};
         return this.getListOfArray(sql, cols, ngay);
     }
-    
+
     public List<Object[]> getListBysendMailThang(int thang, int nam) {
         String sql = "{CALL sendmailThang(?,?)}";
         String[] cols = {"IDHD", "UsernameEMP", "DateOrder", "TimeOder", "Reason"};
         return this.getListOfArray(sql, cols, thang, nam);
     }
-    
+
     public List<Object[]> getBillHuyNgay(Date ngay) {
         String sql = "{CALL getBillHuyNgay(?)}";
         String[] cols = {"tongBillHuy"};
         return this.getListOfArray(sql, cols, ngay);
     }
-    
+
     public List<Object[]> getBillHuyThang(int thang, int nam) {
         String sql = "{CALL getBillHuyThang(?,?)}";
         String[] cols = {"tongBillHuy"};
         return this.getListOfArray(sql, cols, thang, nam);
     }
-    
+
     @Override
     public void guiBCThang(int thang, int nam) {
         String message = "";
@@ -483,26 +481,26 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             List<Object[]> list2 = getListTongMonvaHDThang(thang);
             List<Object[]> list3 = getBillHuyThang(thang, nam);
             List<Object[]> list4 = getListByTKThang(thang, nam);
-            
+
             float tien = 0;
             String doUong = "";
             String maNV = "";
             for (Object[] o : list2) {
-                message = message + "\t\t\t\tBáo cáo trong tháng\n "
+                message = message + "\t\t\t\tBáo cáo trong tháng " + thang + "\n"
                         + "|---------------------------------------------------------------------------|\n"
                         + "                                                   \t\t\t\t\t\n"
                         + "\t\tTổng món bán trong tháng: " + String.valueOf(o[0]) + "\t\t\n"
                         + "\t\tTổng hóa đơn trong tháng: " + String.valueOf(o[1]) + "\t\t\n";
-                
+
                 for (Object[] oh : list3) {
                     message = message + "\t\tTổng hóa đơn bị hủy trong tháng: " + String.valueOf(oh[0]) + "\t\t\n";
                     if (list4.size() >= 1) {
-                        
+
                         for (Object[] oT : list4) {
                             tien += Float.parseFloat(String.valueOf(oT[0]));
                         }
-                        message = message + "\t\tDoanh thu trong tháng: " + n.format(tien) + "VNĐ" + "\t\t\n"
-                                + "" + "\n\n";
+                        message = message + "\t\tDoanh thu trong tháng: " + n.format(tien) + "VNĐ" + "\t\t\n\n"
+                                + "\t" + "Danh sách đơn bị hủy: \n";
                     }
                 }
                 for (Object[] oo : list1) {
@@ -524,16 +522,16 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                             + "\t\tĐồ uống: " + doUong + "\t\n"
                             + "\t\tLý do: " + String.valueOf(oo[4]) + "\t\n"
                             + "\n";
-                    
+
                 }
             }
-            
+
             sendmail(message);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
     @Override
     public void guiBCNgay(Date ngay) {
         String message = "";
@@ -542,26 +540,26 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             List<Object[]> list2 = getListTongMonvaHDNgay(ngay);
             List<Object[]> list3 = getBillHuyNgay(ngay);
             List<Object[]> list4 = getListByTKNgay(ngay);
-            
+
             float tien = 0;
             String doUong = "";
             String maNV = "";
             for (Object[] o : list2) {
-                message = message + "\t\t\t\tBáo cáo trong ngày\n "
+                message = message + "\t\t\t\tBáo cáo trong ngày " + "\n "
                         + "|---------------------------------------------------------------------------|\n"
                         + "                                                   \t\t\t\t\t\n"
                         + "\t\tTổng món bán trong ngày: " + String.valueOf(o[0]) + "\t\t\n"
                         + "\t\tTổng hóa đơn trong ngày: " + String.valueOf(o[1]) + "\t\t\n";
-                
+
                 for (Object[] oh : list3) {
                     message = message + "\t\tTổng hóa đơn bị hủy trong ngày: " + String.valueOf(oh[0]) + "\t\t\n";
                     if (list4.size() >= 1) {
-                        
+
                         for (Object[] oT : list4) {
                             tien += Float.parseFloat(String.valueOf(oT[0]));
                         }
-                        message = message + "\t\tDoanh thu trong ngày: " + n.format(tien) + "VNĐ" + "\t\t\n"
-                                + "" + "\n\n";
+                        message = message + "\t\tDoanh thu trong ngày: " + n.format(tien) + "VNĐ" + "\t\t\n\n"
+                                + "\t" + "Danh sách đơn bị hủy: \n";
                     }
                 }
                 for (Object[] oo : list1) {
@@ -583,10 +581,10 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                             + "\t\tĐồ uống: " + doUong + "\t\n"
                             + "\t\tLý do: " + String.valueOf(oo[4]) + "\t\n"
                             + "\n";
-                    
+
                 }
             }
-            
+
             sendmail(message);
         } catch (Exception e) {
             e.printStackTrace();
@@ -600,7 +598,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 + "group by p.ProductName,p.Price,o.Status,o.Reason";
         return this.layTK_Products(sql);
     }
-    
+
     public List<ThongKeSP> tkSanPhamDBNGAY(String date) {
         String sql = "select p.ProductName,count(*)as Soluong,p.Price,o.Reason,o.Status from product p join OrderDetail o on p.IDProduct=o.IDProduct \n"
                 + "join [Order] od on od.IDOrder=o.IDOrder\n"
@@ -608,7 +606,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 + "group by p.ProductName,p.Price,o.Status,o.Reason";
         return this.layTK_Products(sql, date);
     }
-    
+
     public List<ThongKeSP> tkSanPhamDBTHANG(int thang) {
         String sql = "select p.ProductName,count(*)as Soluong,p.Price,o.Reason,o.Status from product p join OrderDetail o on p.IDProduct=o.IDProduct \n"
                 + "join [Order] od on od.IDOrder=o.IDOrder\n"
@@ -616,7 +614,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 + "group by p.ProductName,p.Price,o.Status,o.Reason";
         return this.layTK_Products(sql, thang);
     }
-    
+
     public List<ThongKeSP> tkSanPhamDBNAM(int nam) {
         String sql = "select p.ProductName,count(*)as Soluong,p.Price,o.Reason,o.Status from product p join OrderDetail o on p.IDProduct=o.IDProduct \n"
                 + "join [Order] od on od.IDOrder=o.IDOrder\n"
@@ -624,7 +622,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 + "group by p.ProductName,p.Price,o.Status,o.Reason";
         return this.layTK_Products(sql, nam);
     }
-    
+
     public List<ThongKeSP> layTK_Products(String sql, Object... args) {
         List<ThongKeSP> list = new ArrayList<>();
         try {
@@ -636,7 +634,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 table.setGia(rs.getFloat(3));
                 table.setLyDo(rs.getString(4));
                 table.setStatus(rs.getBoolean(5));
-                
+
                 list.add(table);
             }
             rs.getStatement().getConnection().close();
@@ -645,7 +643,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             throw new RuntimeException(e);
         }
     }
-    
+
     @Override
     public void fillTableSanPham(JTable tbl, JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2) {
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
@@ -659,7 +657,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
         List<ThongKeSP> list2 = tkSanPhamDB();
         for (ThongKeSP tk : list2) {
             if (tk.isStatus() == false) {
-                
+
                 Object[] row = new Object[]{
                     tk.getProductName(),
                     tk.getSoLuong(),
@@ -680,7 +678,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                 model2.addRow(row);
             }
         }
-        
+
         for (ThongKeSP tt : list2) {
             if (tt.isStatus() == false) {
                 tong += (tt.getGia() * tt.getSoLuong());
@@ -694,9 +692,9 @@ public class QLStatistical_Service implements IQLStatistical_Service {
         lblTM.setText(String.valueOf(tongM));
         lbl2.setText(n.format(tong2) + " VNĐ");
         lblTM2.setText(String.valueOf(tongM2));
-        
+
     }
-    
+
     @Override
     public void fillTableSanPhamNGAY(String ngay, JTable tbl, JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2) {
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
@@ -709,10 +707,10 @@ public class QLStatistical_Service implements IQLStatistical_Service {
         int tongM2 = 0;
         List<ThongKeSP> list2 = tkSanPhamDBNGAY(ngay);
         if (list2.size() != 0) {
-            
+
             for (ThongKeSP tk : list2) {
                 if (tk.isStatus() == false) {
-                    
+
                     Object[] row = new Object[]{
                         tk.getProductName(),
                         tk.getSoLuong(),
@@ -733,7 +731,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                     model2.addRow(row);
                 }
             }
-            
+
             for (ThongKeSP tt : list2) {
                 if (tt.isStatus() == false) {
                     tong += (tt.getGia() * tt.getSoLuong());
@@ -754,9 +752,9 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             lblTM2.setText(String.valueOf(tongM2));
             ThongBao.alert(null, "Ngày này không bán được gì");
         }
-        
+
     }
-    
+
     @Override
     public void fillTableSanPhamTHANG(int thang, JTable tbl, JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2) {
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
@@ -769,10 +767,10 @@ public class QLStatistical_Service implements IQLStatistical_Service {
         int tongM2 = 0;
         List<ThongKeSP> list2 = tkSanPhamDBTHANG(thang);
         if (list2.size() != 0) {
-            
+
             for (ThongKeSP tk : list2) {
                 if (tk.isStatus() == false) {
-                    
+
                     Object[] row = new Object[]{
                         tk.getProductName(),
                         tk.getSoLuong(),
@@ -793,7 +791,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                     model2.addRow(row);
                 }
             }
-            
+
             for (ThongKeSP tt : list2) {
                 if (tt.isStatus() == false) {
                     tong += (tt.getGia() * tt.getSoLuong());
@@ -814,9 +812,9 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             lblTM2.setText(String.valueOf(tongM2));
             ThongBao.alert(null, "Tháng này này ế không bán được gì =))");
         }
-        
+
     }
-    
+
     @Override
     public void fillTableSanPhamNAM(int nam, JTable tbl, JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2) {
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
@@ -829,10 +827,10 @@ public class QLStatistical_Service implements IQLStatistical_Service {
         int tongM2 = 0;
         List<ThongKeSP> list2 = tkSanPhamDBNAM(nam);
         if (list2.size() != 0) {
-            
+
             for (ThongKeSP tk : list2) {
                 if (tk.isStatus() == false) {
-                    
+
                     Object[] row = new Object[]{
                         tk.getProductName(),
                         tk.getSoLuong(),
@@ -853,7 +851,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                     model2.addRow(row);
                 }
             }
-            
+
             for (ThongKeSP tt : list2) {
                 if (tt.isStatus() == false) {
                     tong += (tt.getGia() * tt.getSoLuong());
@@ -867,7 +865,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             lblTM.setText(String.valueOf(tongM));
             lbl2.setText(n.format(tong2) + " VNĐ");
             lblTM2.setText(String.valueOf(tongM2));
-            
+
         } else {
             lbl.setText(n.format(tong) + " VNĐ");
             lblTM.setText(String.valueOf(tongM));
@@ -876,5 +874,5 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             ThongBao.alert(null, "Chắc đóng cửa rồi! Năm này không bán được gì");
         }
     }
-    
+
 }

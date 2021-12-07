@@ -9,6 +9,7 @@ import BUS_IServices.IQLStatistical_Service;
 import BUS_Services.QLStatistical_Service;
 import GUI_Dialog.GUI_Login;
 import GUI_Dialog.GUI_ResetPassword;
+import GUI_Dialog.GUI_SendMail;
 import Utils.Auth;
 import Utils.ThongBao;
 import Utils.XImage;
@@ -243,7 +244,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
         btnBan.setBackground(new java.awt.Color(0, 102, 51));
         btnBan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/candykane-icon.png"))); // NOI18N
-        btnBan.setText("Bàn");
+        btnBan.setText("Gửi báo cáo");
         btnBan.setColorHover(new java.awt.Color(255, 0, 51));
         btnBan.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         btnBan.addActionListener(new java.awt.event.ActionListener() {
@@ -549,17 +550,10 @@ public class GUI_MAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanActionPerformed
-        // TODO add your handling code here:
-
         if (!Auth.isLogin() && !Auth.isAdmin()) {
             dialogHelper.alert(this, "Vui lòng đăng nhập");
         } else {
-            if (Auth.isAdmin()) {
-                GUI2.GUI_Table table = new GUI2.GUI_Table();
-                goiPan(table);
-            } else if (Auth.isLogin()) {
-                dialogHelper.alert(this, "Nhân viên không dùng được chức năng này");
-            }
+            new GUI_SendMail(this, true).setVisible(true);
         }
     }//GEN-LAST:event_btnBanActionPerformed
 
@@ -571,14 +565,33 @@ public class GUI_MAIN extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
         if (JOptionPane.showConfirmDialog(this, "Bạn muốn đóng ứng dụng?") == 0) {
-                        SimpleDateFormat fo = new SimpleDateFormat("yyyy-MM-dd");
+            //--Gửi cuối ngày
+            SimpleDateFormat fo = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat foTHang = new SimpleDateFormat("yyyy-MM");
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
-            String n =fo.format(dateHelper.now());
+            String n = fo.format(dateHelper.now());
             LocalDateTime date1 = LocalDateTime.now();
-            LocalDateTime date2 = LocalDateTime.parse(n+" 09:00:00", dtf);
+            LocalDateTime date2 = LocalDateTime.parse(n + " 20:00:00", dtf);
+            System.out.println("" + date2);
             if (date1.isAfter(date2)) {
                 daotk.guiBCNgay(dateHelper.now());
             }
+            //---Gửi cuối tháng
+            LocalDateTime dateTHANG1 = LocalDateTime.now();
+            LocalDateTime dateTHANG2 = LocalDateTime.parse(n.substring(0, 7) + "-07" + " 20:00:00", dtf);
+            if (dateTHANG1.isAfter(dateTHANG2)) {
+                String nam = String.valueOf(foTHang.format(dateHelper.now()));
+                daotk.guiBCThang(Integer.valueOf(n.substring(5, 7)), Integer.valueOf(n.substring(0, 4)));
+            }
+            //--Gửi cuối năm
+            String nNAM = foTHang.format(dateHelper.now());
+            LocalDateTime dateNAM1 = LocalDateTime.now();
+            LocalDateTime dateNAM2 = LocalDateTime.parse(nNAM.substring(0, 4) + "-12" + "-07" + " 20:00:00", dtf);
+            if (dateNAM1.isAfter(dateNAM2)) {
+                String nam = String.valueOf(foTHang.format(dateHelper.now()));
+                daotk.guiBCN(Integer.valueOf(n.substring(0, 4)));
+            }
+
             System.exit(0);
         }
 

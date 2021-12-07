@@ -5,18 +5,29 @@
  */
 package GUI_Dialog;
 
+import BUS_IServices.IQLStatistical_Service;
+import BUS_Services.QLStatistical_Service;
+import Utils.ThongBao;
+import Utils.dateHelper;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author phamd
  */
 public class GUI_SendMail extends javax.swing.JDialog {
-
+    IQLStatistical_Service dao;
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat formatNAM = new SimpleDateFormat("yyyy");
     /**
      * Creates new form GUI_SendMail
      */
     public GUI_SendMail(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        date.setDate(dateHelper.now());
+        dao = new QLStatistical_Service();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -28,21 +39,107 @@ public class GUI_SendMail extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        date = new com.toedter.calendar.JDateChooser();
+        rSButtonMetro1 = new rojerusan.RSButtonMetro();
+        rSButtonMetro2 = new rojerusan.RSButtonMetro();
+        rSButtonMetro3 = new rojerusan.RSButtonMetro();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        date.setDateFormatString("yyyy-MM-dd");
+
+        rSButtonMetro1.setText("Báo cáo năm");
+        rSButtonMetro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro1ActionPerformed(evt);
+            }
+        });
+
+        rSButtonMetro2.setText("Báo cáo tháng");
+        rSButtonMetro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro2ActionPerformed(evt);
+            }
+        });
+
+        rSButtonMetro3.setText("Báo cáo ngày");
+        rSButtonMetro3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro3ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Thời gian");
+
+        jLabel2.setText("Gửi báo cáo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(rSButtonMetro3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(190, 190, 190))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(245, 245, 245)
+                .addComponent(jLabel2)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(67, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rSButtonMetro3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void rSButtonMetro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro2ActionPerformed
+        // TODO add your handling code here:
+        int thang = date.getDate().getMonth()+1;
+        int nam = Integer.valueOf(formatNAM.format(date.getDate()));
+        if (ThongBao.comfirm(this, "Bạn chắc chắn muốn gửi báo cáo của tháng " +thang)) {
+            dao.guiBCThang(thang, nam);
+        }
+    }//GEN-LAST:event_rSButtonMetro2ActionPerformed
+
+    private void rSButtonMetro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro3ActionPerformed
+        if (ThongBao.comfirm(this, "Bạn chắc chắn muốn gửi báo cáo của ngày "+format.format(date.getDate()))) {
+        dao.guiBCNgay(date.getDate());            
+        }
+    }//GEN-LAST:event_rSButtonMetro3ActionPerformed
+
+    private void rSButtonMetro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro1ActionPerformed
+        int nam = Integer.valueOf(formatNAM.format(date.getDate()));
+        if (ThongBao.comfirm(this, "Bạn chắc chắn muốn gửi báo cáo của năm " +nam)) {
+            dao.guiBCN(nam);
+        }
+    }//GEN-LAST:event_rSButtonMetro1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -87,5 +184,11 @@ public class GUI_SendMail extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser date;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private rojerusan.RSButtonMetro rSButtonMetro1;
+    private rojerusan.RSButtonMetro rSButtonMetro2;
+    private rojerusan.RSButtonMetro rSButtonMetro3;
     // End of variables declaration//GEN-END:variables
 }

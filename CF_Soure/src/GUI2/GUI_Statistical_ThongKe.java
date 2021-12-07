@@ -178,7 +178,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNgayLayout.createSequentialGroup()
-                        .addGap(0, 51, Short.MAX_VALUE)
+                        .addGap(0, 50, Short.MAX_VALUE)
                         .addComponent(jLabel14)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -581,9 +581,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                 .addGap(2, 2, 2)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel20)))
+                    .addComponent(jLabel20))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 843, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -643,7 +641,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                                 .addGap(17, 17, 17)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE))
                             .addComponent(jLabel20))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jScrollPane1, jScrollPane2});
@@ -660,7 +658,9 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, 1010, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, 997, Short.MAX_VALUE)
+                .addGap(2, 2, 2))
         );
     }// </editor-fold>//GEN-END:initComponents
 
