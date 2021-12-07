@@ -24,6 +24,7 @@ import DAL_Services.Order_Service;
 import DAL_Services.Product_Service;
 import DAL_Services.Table_Service;
 import GUI2.JDialogTaoBan;
+import Utils.Auth;
 import Utils.JDBC;
 import Utils.dateHelper;
 import Utils.dialogHelper;
@@ -102,9 +103,9 @@ public class QLOrder_Service implements IQLOrder_Service {
     private javax.swing.JMenuItem mnGopBan;
     private javax.swing.JMenuItem mnNhomBan;
     private javax.swing.JMenuItem mnaddNhom;
-
     private DefaultTableModel model;
-    String sql_all = "SELECT [IDProduct],ProductName,Price,Image,Status,TypeName,Size FROM [Product] Join ProductType on Product.IDType = ProductType.IDType";
+    
+    String sql_all = "SELECT [IDProduct],ProductName,Price,Image,Status,TypeName,Size FROM [Product] Join ProductType on Product.IDType = ProductType.IDType WHERE Product.Status =1";
     String SQL_liSu = "SELECT DISTINCT OrderDetail.IDOrder,TimeOder,EMP.NameEMP,Cus.CusName,OD.[Status] FROM OrderDetail  \n"
             + " JOIN [Order] OD ON OD.IDOrder = OrderDetail.IDOrder\n"
             + " LEFT JOIN Employee EMP ON EMP.UsernameEMP = OD.UsernameEMP\n"
@@ -977,7 +978,8 @@ public class QLOrder_Service implements IQLOrder_Service {
     @Override
     public void huyDon(String txtMaHD, String Reason) {
         String sql = "UPDATE [Order] SET [Status] = 3,Reason =? WHERE IDOrder = ?";
-        String huy = Reason + "Cancel Time " + dateHelper.Time_FORMATER.format(dateHelper.timeNow());
+        String nv = Auth.isAdmin() ? "Admin" : Auth.user.getNameEMP();
+        String huy = Reason +"- Nhân viên : " +nv+"- Cancel Time " + dateHelper.Time_FORMATER.format(dateHelper.timeNow());
         try {
             JDBC.update(sql, huy, txtMaHD);
         } catch (SQLException e) {
@@ -987,9 +989,9 @@ public class QLOrder_Service implements IQLOrder_Service {
 
     @Override
     public void tachHDon(String txtMaHDCu, String txtMaHDMoi, String IDProduct, String Note, String IDTable) {
-        String sql = "UPDATE OrderDetail SET IDOrder = ?,IDTable = ? WHERE IDProduct = ? AND Note = ? AND IDOrder = ?";
+        String sql = "UPDATE OrderDetail SET Note = ?,IDOrder = ?,IDTable = ? WHERE IDProduct = ? AND Note = ? AND IDOrder = ?";
         try {
-            JDBC.update(sql, txtMaHDMoi, IDTable, IDProduct, Note, txtMaHDCu);
+            JDBC.update(sql, "Tách từ hóa đơn :"+txtMaHDCu,txtMaHDMoi, IDTable, IDProduct, Note, txtMaHDCu);
         } catch (SQLException e) {
             e.printStackTrace();
         }

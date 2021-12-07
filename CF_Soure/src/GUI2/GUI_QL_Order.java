@@ -190,12 +190,26 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         };
         jLabel6 = new javax.swing.JLabel();
         cbbkm = new javax.swing.JComboBox<>();
+        lbNhap1 = new javax.swing.JLabel();
+        lbNgayKM = new javax.swing.JLabel();
+        lbIDError = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel(){
+            ImageIcon icon = new ImageIcon("logos//hqR7r.png");
+            public void paintComponent(Graphics g){
+                Dimension d = getSize();
+                //        g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
+                setOpaque(false);
+                //        setBackground(new Color(0,0,0,125));
+                super.paintComponent(g);
+            }
+        };
         pnInformation2 = new javax.swing.JPanel(){
             ImageIcon icon = new ImageIcon("logos//hqR7r.png");
             public void paintComponent(Graphics g){
                 Dimension d = getSize();
-                g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
+                //        g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
                 setOpaque(false);
+                //        setBackground(new Color(0,0,0,125));
                 super.paintComponent(g);
             }
         };
@@ -212,9 +226,6 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         lbNhap = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         lbDateEndCus = new javax.swing.JLabel();
-        lbNhap1 = new javax.swing.JLabel();
-        lbNgayKM = new javax.swing.JLabel();
-        lbIDError = new javax.swing.JLabel();
         lbLoiGia = new javax.swing.JLabel();
         cbbKhu = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -355,7 +366,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         jLabel5.setText("Mã HĐ");
 
         lblBan.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lblBan.setForeground(new java.awt.Color(51, 255, 0));
+        lblBan.setForeground(new java.awt.Color(51, 51, 255));
         lblBan.setText("00");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -363,12 +374,12 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         jLabel3.setText("Bàn");
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Tổng tiền");
 
         txtTong.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         txtTong.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtTong.setText("0VNĐ");
+        txtTong.setText("0.VNĐ");
 
         btnThanhToan.setBackground(new java.awt.Color(51, 153, 0));
         btnThanhToan.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -404,15 +415,15 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Tiền khách trả");
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Tiền thừa");
 
         txtTienThua.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtTienThua.setText("0VNĐ");
+        txtTienThua.setText("0.VNĐ");
         txtTienThua.setToolTipText("");
 
         btnhuy.setBackground(new java.awt.Color(204, 0, 0));
@@ -430,7 +441,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Time Order");
 
-        lblTime.setForeground(new java.awt.Color(51, 255, 0));
+        lblTime.setForeground(new java.awt.Color(51, 51, 255));
         lblTime.setText("12:12 PM");
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -490,19 +501,19 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblOrder);
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Chiết Khấu");
 
         txtPay.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtPay.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtPay.setText("0VNĐ");
+        txtPay.setText("0.VNĐ");
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Thành tiền");
 
         txtTienTra.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtTienTra.setText("0VNĐ");
+        txtTienTra.setText("0.VNĐ");
         txtTienTra.setToolTipText("");
         txtTienTra.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -511,11 +522,13 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         });
 
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setText("%");
 
         txtDis2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtDis2.setText("0VNĐ");
+        txtDis2.setText("0.VNĐ");
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -528,32 +541,45 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             }
         });
 
+        lbNhap1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbNhap1.setForeground(new java.awt.Color(0, 0, 0));
+        lbNhap1.setText("Chương trình");
+
+        lbNgayKM.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lbNgayKM.setForeground(new java.awt.Color(51, 51, 255));
+        lbNgayKM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lbIDError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbIDError.setForeground(new java.awt.Color(0, 0, 0));
+        lbIDError.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbIDError.setToolTipText("");
+
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel32.setForeground(new java.awt.Color(255, 0, 255));
+        jLabel32.setForeground(new java.awt.Color(0, 0, 0));
         jLabel32.setText("Thông tin khách hàng:");
 
-        jLabel33.setForeground(new java.awt.Color(255, 0, 255));
+        jLabel33.setForeground(new java.awt.Color(0, 0, 0));
         jLabel33.setText("Mã thẻ:");
 
-        jLabel34.setForeground(new java.awt.Color(255, 0, 255));
+        jLabel34.setForeground(new java.awt.Color(0, 0, 0));
         jLabel34.setText("Họ và tên:");
 
-        jLabel36.setForeground(new java.awt.Color(255, 0, 255));
+        jLabel36.setForeground(new java.awt.Color(0, 0, 0));
         jLabel36.setText("Được giảm:");
 
-        lbIDCus.setForeground(new java.awt.Color(255, 255, 102));
+        lbIDCus.setForeground(new java.awt.Color(51, 102, 255));
         lbIDCus.setText("...");
 
-        lbNameCus.setForeground(new java.awt.Color(255, 255, 102));
+        lbNameCus.setForeground(new java.awt.Color(51, 102, 255));
         lbNameCus.setText("...");
 
-        lbDisCus.setForeground(new java.awt.Color(255, 255, 102));
+        lbDisCus.setForeground(new java.awt.Color(51, 102, 255));
         lbDisCus.setText("...");
 
-        lbDateaddCus.setForeground(new java.awt.Color(255, 255, 102));
+        lbDateaddCus.setForeground(new java.awt.Color(51, 102, 255));
         lbDateaddCus.setText("...");
 
-        jLabel37.setForeground(new java.awt.Color(255, 0, 255));
+        jLabel37.setForeground(new java.awt.Color(0, 0, 0));
         jLabel37.setText("Ngày đăng ký:");
 
         txtMaKH.addCaretListener(new javax.swing.event.CaretListener() {
@@ -563,21 +589,21 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         });
 
         lbNhap.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbNhap.setForeground(new java.awt.Color(255, 0, 255));
+        lbNhap.setForeground(new java.awt.Color(0, 0, 0));
         lbNhap.setText("Nhập mã thẻ:");
 
-        jLabel38.setForeground(new java.awt.Color(255, 0, 255));
+        jLabel38.setForeground(new java.awt.Color(0, 0, 0));
         jLabel38.setText("Ngày hết hạn");
 
-        lbDateEndCus.setForeground(new java.awt.Color(255, 255, 102));
+        lbDateEndCus.setForeground(new java.awt.Color(51, 102, 255));
         lbDateEndCus.setText("...");
 
         javax.swing.GroupLayout pnInformation2Layout = new javax.swing.GroupLayout(pnInformation2);
         pnInformation2.setLayout(pnInformation2Layout);
         pnInformation2Layout.setHorizontalGroup(
             pnInformation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnInformation2Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnInformation2Layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(pnInformation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel32)
                     .addGroup(pnInformation2Layout.createSequentialGroup()
@@ -597,12 +623,12 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                     .addGroup(pnInformation2Layout.createSequentialGroup()
                         .addGroup(pnInformation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnInformation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbDateEndCus)
                             .addComponent(lbDateaddCus))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
         pnInformation2Layout.setVerticalGroup(
             pnInformation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -635,39 +661,49 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        lbNhap1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbNhap1.setForeground(new java.awt.Color(255, 0, 255));
-        lbNhap1.setText("Chương trình");
-
-        lbNgayKM.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lbNgayKM.setForeground(new java.awt.Color(255, 0, 0));
-        lbNgayKM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        lbIDError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lbIDError.setForeground(new java.awt.Color(255, 0, 0));
-        lbIDError.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbIDError.setToolTipText("");
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnInformation2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnInformation2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbIDError, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbNhap1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbbkm, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lbNgayKM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbNhap1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbbkm, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbNgayKM, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(132, 132, 132))
-            .addComponent(pnInformation2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -681,10 +717,10 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 .addGap(3, 3, 3)
                 .addComponent(lbNgayKM, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbIDError, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbIDError, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnInformation2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lbLoiGia.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
@@ -787,7 +823,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                     .addComponent(txtNameEMP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(PanOrderLayout.createSequentialGroup()
                         .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
@@ -826,11 +862,9 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                                 .addGroup(PanOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btnguowi, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnTachHD, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PanOrderLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 422, Short.MAX_VALUE))))
+                            .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(406, Short.MAX_VALUE))
         );
 
         PanCac.add(PanOrder, "card3");
@@ -1055,30 +1089,33 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 goiTaoBan(khu);
                 card.show(PanCac, "card4");
             }
-            this.txtTienTra.setText("0VNĐ");
-            this.txtTienThua.setText("0VNĐ");
+            this.txtTienTra.setText("0.VNĐ");
+            this.txtTienThua.setText("0.VNĐ");
         }
 
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnLuuVSInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuVSInActionPerformed
-        if (cbbkm.getSelectedItem().equals("Khách hàng VIP")) {
-            while (true) {
-                if (txtMaKH.getText().trim().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Mã thẻ VIP không được để trống!");
-                    txtMaKH.grabFocus();
-                    return;
-                } else if (!txtMaKH.getText().trim().equals("") && !lbIDError.getText().equals("Thành công.")) {
-                    JOptionPane.showMessageDialog(null, "Mã thẻ VIP chưa đúng, vui lòng nhập lại!");
-                    txtMaKH.grabFocus();
-                    return;
-                } else {
-                    XuatTxt();
-                    break;
+        if (dialogHelper.confirm(this, "Bạn có muốn in hóa đơn :" + txtmaHD.getText())) {
+            if (cbbkm.getSelectedItem().equals("Khách hàng VIP")) {
+                while (true) {
+                    if (txtMaKH.getText().trim().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Mã thẻ VIP không được để trống!");
+                        txtMaKH.grabFocus();
+                        return;
+                    } else if (!txtMaKH.getText().trim().equals("") && !lbIDError.getText().equals("Thành công.")) {
+                        JOptionPane.showMessageDialog(null, "Mã thẻ VIP chưa đúng, vui lòng nhập lại!");
+                        txtMaKH.grabFocus();
+                        return;
+                    } else {
+                        XuatTxt();
+                        break;
+                    }
                 }
+            } else {
+                XuatTxt();
             }
         }
-
     }//GEN-LAST:event_btnLuuVSInActionPerformed
 
     public void XuatTxt() throws NumberFormatException {
@@ -1110,10 +1147,10 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                     }
                 }
                 b.write("\t-------------------------------------------------------------------------------\r\n");
-                String tt = txtTong.getText().substring(0, txtTong.getText().lastIndexOf("VNĐ")).replaceAll(",", "");
+                String tt = txtTong.getText().substring(0, txtTong.getText().lastIndexOf(".VNĐ")).replaceAll(",", "");
                 double x = Double.parseDouble(tt);
                 b.write("\t------------------------------------------------------------\r\n");
-                b.write("\tTổng cộng:\t\t" + tongSl + "\t\t\t" + n.format(Total()) + " VNĐ\r\n");
+                b.write("\tTổng cộng:\t\t" + tongSl + "\t\t\t" + n.format(Total()) + ".VNĐ\r\n");
                 b.write("\t\tChiết khấu:\t" + txtDis1.getText() + "%\t\t-" + txtDis2.getText() + "\r\n");
                 b.write("\t\t--------------------------------------------\r\n");
                 b.write("\t\tThành tiền:\t\t\t" + txtPay.getText() + "\r\n");
@@ -1153,34 +1190,36 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 
     private void btnguowiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguowiActionPerformed
         // TODO add your handling code here:
-        int e = 0;
-        for (int i = 0; i < qlod.dongC(); i++) {
-            ENTITY_BILL bill = new ENTITY_BILL();
-            bill.setIDOrder(this.txtmaHD.getText());
-            bill.setIDProduct(this.tblOrder.getValueAt(i, 1).toString());
-            bill.setNote(this.tblOrder.getValueAt(i, 6).toString());
-            bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 5).toString()));
-            qlod.updateOderDe(bill);
+        if (dialogHelper.confirm(this, "Xác nhận gưởi hóa đơn " + txtmaHD.getText())) {
+            int e = 0;
+            for (int i = 0; i < qlod.dongC(); i++) {
+                ENTITY_BILL bill = new ENTITY_BILL();
+                bill.setIDOrder(this.txtmaHD.getText());
+                bill.setIDProduct(this.tblOrder.getValueAt(i, 1).toString());
+                bill.setNote(this.tblOrder.getValueAt(i, 6).toString());
+                bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 5).toString()));
+                qlod.updateOderDe(bill);
+            }
+            for (int i = qlod.dongC(); i < this.modell.getRowCount(); i++) {
+                ENTITY_BILL bill = new ENTITY_BILL();
+                bill.setIDOrder(this.txtmaHD.getText());
+                bill.setIDProduct(this.tblOrder.getValueAt(i, 1).toString());
+                bill.setIDTable(this.lblBan.getText());
+                bill.setNote(this.tblOrder.getValueAt(i, 6).toString());
+                bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 5).toString()));
+                bill.setReason("");
+                bill.setStatus(false);
+                qlod.insertOderDe(bill);
+                e++;
+            }
+            if (e > 0) {
+                qlod.updatebnGuoi(lblBan.getText());
+                dialogHelper.alert(PanCac, "Gửi thành công ");
+            }
+            card.show(PanCac, "card4");
+            ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
+            goiTaoBan(khu);
         }
-        for (int i = qlod.dongC(); i < this.modell.getRowCount(); i++) {
-            ENTITY_BILL bill = new ENTITY_BILL();
-            bill.setIDOrder(this.txtmaHD.getText());
-            bill.setIDProduct(this.tblOrder.getValueAt(i, 1).toString());
-            bill.setIDTable(this.lblBan.getText());
-            bill.setNote(this.tblOrder.getValueAt(i, 6).toString());
-            bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 5).toString()));
-            bill.setReason("");
-            bill.setStatus(false);
-            qlod.insertOderDe(bill);
-            e++;
-        }
-        if (e > 0) {
-            qlod.updatebnGuoi(lblBan.getText());
-            dialogHelper.alert(PanCac, "Gửi thành công ");
-        }
-        card.show(PanCac, "card4");
-        ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
-        goiTaoBan(khu);
     }//GEN-LAST:event_btnguowiActionPerformed
 
     private void cbbKhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhuActionPerformed
@@ -1225,55 +1264,61 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 
     private void mnTachMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTachMonActionPerformed
         // TODO add your handling code here:
-        String slTach = dialogHelper.prompt(this, "Nhập số lượng muốn tách ra đi cu :)");
-        int slTc = Integer.valueOf(slTach);
-        int slcu = Integer.valueOf(this.tblOrder.getValueAt(row, 5).toString());
-        if (slcu - slTc <= 0) {
-            dialogHelper.alert(this, "Có mỗi " + slcu + " Mà đòi tách ra " + slTach + " à :)");
-            return;
+        if (tblOrder.getValueAt(row, 7).toString().equals("Hủy")) {
+            dialogHelper.alert(this, "Món này đã bị hủy không thể tách");
+        } else {
+            String slTach = dialogHelper.prompt(this, "Nhập số lượng muốn tách ra đi cu :)");
+            int slTc = Integer.valueOf(slTach);
+            int slcu = Integer.valueOf(this.tblOrder.getValueAt(row, 5).toString());
+            if (slcu - slTc <= 0) {
+                dialogHelper.alert(this, "Có mỗi " + slcu + " Mà đòi tách ra " + slTach + " à :)");
+                return;
+            }
+            ENTITY_BILL bill = new ENTITY_BILL();//Cập nhập món cũ
+            bill.setIDOrder(this.txtmaHD.getText());
+            bill.setIDProduct(this.tblOrder.getValueAt(row, 1).toString());
+            bill.setNote(this.tblOrder.getValueAt(row, 6).toString());
+            bill.setQuantity(slTc);
+            bill.setReason("");
+            bill.setStatus(false);
+            qlod.updateOderDe(bill);
+            ENTITY_BILL bill1 = new ENTITY_BILL();
+            bill1.setIDOrder(this.txtmaHD.getText());
+            bill1.setIDProduct(this.tblOrder.getValueAt(row, 1).toString());
+            bill1.setNote(this.tblOrder.getValueAt(row, 6).toString() + "Tách : " + (slcu - slTc));
+            bill1.setQuantity(Integer.valueOf(slcu - slTc));
+            bill1.setReason("");
+            bill1.setIDTable(lblBan.getText());
+            bill1.setStatus(false);
+            bill.setIDTable(lblBan.getText());
+            qlod.insertOderDe(bill1);
+            qlod.billTable(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder, lblBan.getText());
         }
-        ENTITY_BILL bill = new ENTITY_BILL();//Cập nhập món cũ
-        bill.setIDOrder(this.txtmaHD.getText());
-        bill.setIDProduct(this.tblOrder.getValueAt(row, 1).toString());
-        bill.setNote(this.tblOrder.getValueAt(row, 6).toString());
-        bill.setQuantity(slTc);
-        bill.setReason("");
-        bill.setStatus(false);
-        qlod.updateOderDe(bill);
-        ENTITY_BILL bill1 = new ENTITY_BILL();
-        bill1.setIDOrder(this.txtmaHD.getText());
-        bill1.setIDProduct(this.tblOrder.getValueAt(row, 1).toString());
-        bill1.setNote(this.tblOrder.getValueAt(row, 6).toString() + "Tách : " + (slcu - slTc));
-        bill1.setQuantity(Integer.valueOf(slcu - slTc));
-        bill1.setReason("");
-        bill1.setIDTable(lblBan.getText());
-        bill1.setStatus(false);
-        bill.setIDTable(lblBan.getText());
-        qlod.insertOderDe(bill1);
-        qlod.billTable(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder, lblBan.getText());
     }//GEN-LAST:event_mnTachMonActionPerformed
 
     private void btnTachHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTachHDActionPerformed
         // TODO add your handling code here:
-        int a = 0;
-        JTextField txt = new JTextField();
-        this.qlod.taoHD(txt);
-        this.qlod.insertOr(txt);
-        for (int i = 0; i < this.tblOrder.getRowCount(); i++) {
-            Boolean isDelete = (Boolean) tblOrder.getValueAt(i, 9);
-            if (isDelete) {
-                a++;
-                ENTITY_BILL bill1 = new ENTITY_BILL();
-                bill1.setIDOrder(txt.getText());
-                bill1.setIDProduct(this.tblOrder.getValueAt(i, 1).toString());
-                bill1.setNote(this.tblOrder.getValueAt(i, 6).toString());
-                bill1.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 5).toString()));
-                bill1.setReason("");
-                this.qlod.tachHDon(this.txtmaHD.getText(), txt.getText(), bill1.getIDProduct(), bill1.getNote(), lblBan.getText());
+        if (dialogHelper.confirm(this, "Xác nhận tách hóa đơn ")) {
+            int a = 0;
+            JTextField txt = new JTextField();
+            this.qlod.taoHD(txt);
+            this.qlod.insertOr(txt);
+            for (int i = 0; i < this.tblOrder.getRowCount(); i++) {
+                Boolean isDelete = (Boolean) tblOrder.getValueAt(i, 9);
+                if (isDelete) {
+                    a++;
+                    ENTITY_BILL bill1 = new ENTITY_BILL();
+                    bill1.setIDOrder(txt.getText());
+                    bill1.setIDProduct(this.tblOrder.getValueAt(i, 1).toString());
+                    bill1.setNote(this.tblOrder.getValueAt(i, 6).toString());
+                    bill1.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 5).toString()));
+                    bill1.setReason("");
+                    this.qlod.tachHDon(this.txtmaHD.getText(), txt.getText(), bill1.getIDProduct(), bill1.getNote(), lblBan.getText());
+                }
             }
+            this.qlod.billTable(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder, lblBan.getText());
+            dialogHelper.alert(this, "Tách hóa đơn thành công ");
         }
-        this.qlod.billTable(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder, lblBan.getText());
-        dialogHelper.alert(this, "Tách hóa đơn thành công ");
     }//GEN-LAST:event_btnTachHDActionPerformed
 
     private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
@@ -1312,12 +1357,12 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         double Dis;
         NumberFormat formatter = new DecimalFormat("#,###");
         //tính Discount
-        String Order = txtTong.getText().substring(0, txtTong.getText().lastIndexOf("VNĐ")).replaceAll(",", "");
+        String Order = txtTong.getText().substring(0, txtTong.getText().lastIndexOf(".VNĐ")).replaceAll(",", "");
         Dis = (Double.valueOf(txtDis1.getText()) * Double.valueOf(Order)) / 100;
-        txtDis2.setText(formatter.format(Dis) + "VNĐ");
+        txtDis2.setText(formatter.format(Dis) + ".VNĐ");
         //tính total
         double total = Double.parseDouble(Order) - Dis;
-        txtPay.setText(formatter.format(total) + "VNĐ");
+        txtPay.setText(formatter.format(total) + ".VNĐ");
         txtTienTraCaretUpdate(null);
     }
 
@@ -1389,36 +1434,36 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         } else {
             try {
                 String tientra = "";
-                if (!txtTienTra.getText().matches("\\d+VNĐ")) {
-                    txtTienTra.setText("0VNĐ");
+                if (!txtTienTra.getText().matches("\\d+.VNĐ")) {
+                    txtTienTra.setText("0.VNĐ");
                     dialogHelper.alert(this, "Sai định dạng tiền Việt.");
                 } else {
-                    tientra = txtTienTra.getText().substring(0, txtTienTra.getText().lastIndexOf("VNĐ")).replaceAll(",", "").trim();
+                    tientra = txtTienTra.getText().substring(0, txtTienTra.getText().lastIndexOf(".VNĐ")).replaceAll(",", "").trim();
                 }
-                if (txtTienTra.getText().trim().equals("0VNĐ")) {
+                if (txtTienTra.getText().trim().equals("0.VNĐ")) {
                     lbLoiGia.setText("Khách hàng chưa đưa tiền.");
-                    txtTienThua.setText("0VNĐ");
+                    txtTienThua.setText("0.VNĐ");
                     btnThanhToan.setEnabled(false);
                     return;
                 } else if (!tientra.matches("\\d+")) {
                     lbLoiGia.setText("Tiền có dạng số.");
-                    txtTienThua.setText("0VNĐ");
+                    txtTienThua.setText("0.VNĐ");
                     btnThanhToan.setEnabled(false);
                     return;
                 } else {
                     lbLoiGia.setText("");
                     btnThanhToan.setEnabled(false);
                 }
-                String total = txtPay.getText().substring(0, txtPay.getText().lastIndexOf("VNĐ")).replaceAll(",", "");
+                String total = txtPay.getText().substring(0, txtPay.getText().lastIndexOf(".VNĐ")).replaceAll(",", "");
                 Repay = Double.parseDouble(tientra) - Double.parseDouble(total);
-                txtTienThua.setText(n.format(Repay) + "VNĐ");
+                txtTienThua.setText(n.format(Repay) + ".VNĐ");
                 if (Repay < 0) {
                     lbLoiGia.setText("Khách hàng chưa đưa đủ tiền.");
                     btnThanhToan.setEnabled(false);
-                    txtTienThua.setText("0VNĐ");
+                    txtTienThua.setText("0.VNĐ");
                 } else if (Double.parseDouble(tientra) == 0) {
                     btnThanhToan.setEnabled(false);
-                    txtTienThua.setText("0VNĐ");
+                    txtTienThua.setText("0.VNĐ");
                 } else {
                     lbLoiGia.setText("");
                     btnThanhToan.setEnabled(true);
@@ -1452,7 +1497,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 }
             }
         }
-        this.txtTong.setText(formatter.format(total) + "VNĐ");
+        this.txtTong.setText(formatter.format(total) + ".VNĐ");
         return total;
     }
 
@@ -1660,11 +1705,11 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         JTextField t = this.txtmaHD;
         new Timer(100, new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                
+            public void actionPerformed(ActionEvent e) {
                 if (txtmaHD.getToolTipText() != null) {
-                    if (Integer.parseInt(txtmaHD.getToolTipText())==0) {
-                        huy = 0;                        
-                        btnhuy.setEnabled(true);                        
+                    if (Integer.parseInt(txtmaHD.getToolTipText()) == 0) {
+                        huy = 0;
+                        btnhuy.setEnabled(true);
                     }
                 }
             }
@@ -1709,6 +1754,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

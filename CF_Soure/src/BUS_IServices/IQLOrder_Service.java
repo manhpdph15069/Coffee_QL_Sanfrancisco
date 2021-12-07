@@ -5,18 +5,14 @@
  */
 package BUS_IServices;
 
-import BUS_Models.SPChiTiet;
 import DAL_Models.ENTITY_Area;
 import DAL_Models.ENTITY_BILL;
 import DAL_Models.ENTITY_Product;
-import java.awt.Panel;
 import java.util.ArrayList;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
+import javax.swing.JComboBox;;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
