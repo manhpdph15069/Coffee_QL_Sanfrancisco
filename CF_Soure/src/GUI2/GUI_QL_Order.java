@@ -986,7 +986,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                                 .addComponent(btnxemlichsu, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnVaoBan, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(PanSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1051,15 +1051,16 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:        
-        if (dialogHelper.confirm(PanOrder, "Xác nhận thanh toán HĐ :" + txtmaHD.getText())) {
+        if (dialogHelper.confirm(this, "Xác nhận thanh toán HĐ :" + txtmaHD.getText())) {
+            btnLuuVSInActionPerformed(null);
             if (cbbkm.getSelectedItem().equals("Khách hàng VIP")) {
                 while (true) {
                     if (txtMaKH.getText().trim().equals("")) {
-                        JOptionPane.showMessageDialog(null, "Mã thẻ VIP không được để trống!");
+                        JOptionPane.showMessageDialog(this, "Mã thẻ VIP không được để trống!");
                         txtMaKH.grabFocus();
                         return;
                     } else if (!txtMaKH.getText().trim().equals("") && !lbIDError.getText().equals("Thành công.")) {
-                        JOptionPane.showMessageDialog(null, "Mã thẻ VIP chưa đúng, vui lòng nhập lại!");
+                        JOptionPane.showMessageDialog(this, "Mã thẻ VIP chưa đúng, vui lòng nhập lại!");
                         txtMaKH.grabFocus();
                         return;
                     } else {
@@ -1104,7 +1105,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                         txtMaKH.grabFocus();
                         return;
                     } else if (!txtMaKH.getText().trim().equals("") && !lbIDError.getText().equals("Thành công.")) {
-                        JOptionPane.showMessageDialog(null, "Mã thẻ VIP chưa đúng, vui lòng nhập lại!");
+                        JOptionPane.showMessageDialog(this, "Mã thẻ VIP chưa đúng, vui lòng nhập lại!");
                         txtMaKH.grabFocus();
                         return;
                     } else {
@@ -1192,7 +1193,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (dialogHelper.confirm(this, "Xác nhận gưởi hóa đơn " + txtmaHD.getText())) {
             int e = 0;
-            for (int i = 0; i < qlod.dongC(); i++) {
+            for (int i = 0; i < qlod.dongC(-1); i++) {
                 ENTITY_BILL bill = new ENTITY_BILL();
                 bill.setIDOrder(this.txtmaHD.getText());
                 bill.setIDProduct(this.tblOrder.getValueAt(i, 1).toString());
@@ -1200,7 +1201,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 bill.setQuantity(Integer.valueOf(this.tblOrder.getValueAt(i, 5).toString()));
                 qlod.updateOderDe(bill);
             }
-            for (int i = qlod.dongC(); i < this.modell.getRowCount(); i++) {
+            for (int i = qlod.dongC(-1); i < this.modell.getRowCount(); i++) {
                 ENTITY_BILL bill = new ENTITY_BILL();
                 bill.setIDOrder(this.txtmaHD.getText());
                 bill.setIDProduct(this.tblOrder.getValueAt(i, 1).toString());
@@ -1214,7 +1215,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             }
             if (e > 0) {
                 qlod.updatebnGuoi(lblBan.getText());
-                dialogHelper.alert(PanCac, "Gửi thành công ");
+                dialogHelper.alert(this, "Gửi thành công ");
             }
             card.show(PanCac, "card4");
             ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
@@ -1238,6 +1239,8 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         this.PanOrder.setVisible(true);
         this.PanLichSu.setVisible(false);
         qlod.insertOr(txtmaHD);
+        this.row=-1;
+        this.qlod.dongC(0);
     }//GEN-LAST:event_btnVaoBanActionPerformed
 
     private void btnxemlichsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxemlichsuActionPerformed
@@ -1339,7 +1342,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             tblOrder.clearSelection();
         }
         int rowindex = tblOrder.getSelectedRow();
-        if (rowindex < 0 || rowindex >= qlod.dongC()) {
+        if (rowindex < 0 || rowindex >= qlod.dongC(-1)) {
             return;
         }
         if (evt.isPopupTrigger() && evt.getComponent() instanceof JTable) {
@@ -1595,7 +1598,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                         UpdatetxtDis1();
                     }
                 } else {
-                    if (this.row >= qlod.dongC()) {
+                    if (this.row >= qlod.dongC(-1)) {
                         modell.removeRow(this.row);
                         Total();
                         UpdatetxtDis1();

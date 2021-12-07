@@ -104,7 +104,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     private javax.swing.JMenuItem mnNhomBan;
     private javax.swing.JMenuItem mnaddNhom;
     private DefaultTableModel model;
-    
+
     String sql_all = "SELECT [IDProduct],ProductName,Price,Image,Status,TypeName,Size FROM [Product] Join ProductType on Product.IDType = ProductType.IDType WHERE Product.Status =1";
     String SQL_liSu = "SELECT DISTINCT OrderDetail.IDOrder,TimeOder,EMP.NameEMP,Cus.CusName,OD.[Status] FROM OrderDetail  \n"
             + " JOIN [Order] OD ON OD.IDOrder = OrderDetail.IDOrder\n"
@@ -527,43 +527,92 @@ public class QLOrder_Service implements IQLOrder_Service {
         if (e.getSource().getClass() == JButton.class) {
             JButton selectedButton = (JButton) e.getSource();
             this.firstButton = selectedButton;
-            BanButtons banButton = banButtonList.get(selectedButton);            
+            BanButtons banButton = banButtonList.get(selectedButton);
             this.GroupBan = banButton.getTableGroup();
             lblBan.setToolTipText(banButton.getTableGroup());
             lblBan.setText(String.valueOf(banButton.getIDTalbe()));
             model = (DefaultTableModel) tblOder.getModel();
             if (banButton.getStatus() == 0) {//------------------------------Bàn không có khách
-                btnVaoBan.setEnabled(true);
-//                Oder.setVisible(false);
-                CardLayout card = (CardLayout) PanCac.getLayout();
-                card.show(PanCac, "card2");
-                model.getDataVector().removeAllElements();
-                model.fireTableDataChanged();
-                that.revalidate();
-                LichSu(PanlPanelLS, tblLichSu, banButton);
-                txtMaHD.setText("");
-                if (!banButton.getTableGroup().equals("")) {
+//                    System.out.println("Mới "+tblOder.getRowCount()+"Cũ "+dongC(dong));
+                if (tblOder.getRowCount() > dongC(dong)) {
+                    if (dialogHelper.confirm(null, "Hóa đơn chưa được gưởi !\n Bạn có chắc muốn thoát không ?")) {
+                        btnVaoBan.setEnabled(true);
+                        CardLayout card = (CardLayout) PanCac.getLayout();
+                        card.show(PanCac, "card2");
+                        model.getDataVector().removeAllElements();
+                        model.fireTableDataChanged();
+                        that.revalidate();
+                        LichSu(PanlPanelLS, tblLichSu, banButton);
+                        txtMaHD.setText("");
+                        this.dong = 0;
+                        if (!banButton.getTableGroup().equals("")) {
+                            btnVaoBan.setEnabled(false);
+                            card.show(PanCac, "card4");
+                            this.dong = 0;
+                        }
+                    }
+                } else {
+                    btnVaoBan.setEnabled(true);
+                    this.dong = 0;
+                    CardLayout card = (CardLayout) PanCac.getLayout();
+                    card.show(PanCac, "card2");
+                    model.getDataVector().removeAllElements();
+                    model.fireTableDataChanged();
+                    that.revalidate();
+                    LichSu(PanlPanelLS, tblLichSu, banButton);
+                    txtMaHD.setText("");
+                    if (!banButton.getTableGroup().equals("")) {
+                        btnVaoBan.setEnabled(false);
+                        card.show(PanCac, "card4");
+                        this.dong = 0;
+                    }
+                }
+
+            } else if (banButton.getStatus() == 1) {//-----------------------------------------Bàn có khách     
+              
+//                System.out.println("Mới "+tblOder.getRowCount()+"Cũ "+dongC(dong));
+                if (tblOder.getRowCount() > dongC(dong)) {
+                    if (dialogHelper.confirm(null, "Hóa đơn chưa được gưởi !\n Bạn có chắc muốn thoát không ?")) {
+                        model = (DefaultTableModel) tblOder.getModel();
+                        model.setRowCount(0);
+                        txtMaHD.setToolTipText("0");
+                        this.OrderCTT(txtMaHD, banButton.getIDTalbe());
+                        this.billTable(txtMaHD, txtNameEMP, txtMaKH, TimeOrder, tblOder, banButton.getIDTalbe());
+                        IDOrderMoi = txtMaHD.getText();
+                        this.dong = tblOder.getRowCount();
+                        btnVaoBan.setEnabled(false);
+                        CardLayout card = (CardLayout) PanCac.getLayout();
+                        card.show(PanCac, "card3");
+                        this.tongTien(txtTong, tblOder, txtThanhTien);
+                        this.UpdatetxtDis1(txtTong, txtDis1, txtDis2, txtThanhTien);
+                    }
+                } else {
+                    model = (DefaultTableModel) tblOder.getModel();
+                    model.setRowCount(0);
+                    txtMaHD.setToolTipText("0");
+                    this.OrderCTT(txtMaHD, banButton.getIDTalbe());
+                    this.billTable(txtMaHD, txtNameEMP, txtMaKH, TimeOrder, tblOder, banButton.getIDTalbe());
+                    IDOrderMoi = txtMaHD.getText();
+                    this.dong = tblOder.getRowCount();
                     btnVaoBan.setEnabled(false);
+                    CardLayout card = (CardLayout) PanCac.getLayout();
+                    card.show(PanCac, "card3");
+                    this.tongTien(txtTong, tblOder, txtThanhTien);
+                    this.UpdatetxtDis1(txtTong, txtDis1, txtDis2, txtThanhTien);
+                }
+            } else {
+                dong = 0;
+                if (tblOder.getRowCount() > dongC(dong)) {
+                    if (dialogHelper.confirm(null, "Hóa đơn chưa được gưởi !\n Bạn có chắc muốn thoát không ?")) {
+                        btnVaoBan.setEnabled(false);
+                        CardLayout card = (CardLayout) PanCac.getLayout();
+                        card.show(PanCac, "card4");
+                    }
+                } else {
+                    btnVaoBan.setEnabled(false);
+                    CardLayout card = (CardLayout) PanCac.getLayout();
                     card.show(PanCac, "card4");
                 }
-                this.dong = 0;
-            } else if (banButton.getStatus() == 1) {//-----------------------------------------Bàn có khách
-                model = (DefaultTableModel) tblOder.getModel();
-                model.setRowCount(0);
-                txtMaHD.setToolTipText("0");
-                this.OrderCTT(txtMaHD, banButton.getIDTalbe());
-                this.billTable(txtMaHD, txtNameEMP, txtMaKH, TimeOrder, tblOder, banButton.getIDTalbe());
-                IDOrderMoi = txtMaHD.getText();
-                this.dong = tblOder.getRowCount();
-                btnVaoBan.setEnabled(false);
-                CardLayout card = (CardLayout) PanCac.getLayout();
-                card.show(PanCac, "card3");
-                this.tongTien(txtTong, tblOder, txtThanhTien);
-                this.UpdatetxtDis1(txtTong, txtDis1, txtDis2, txtThanhTien);
-            } else {
-                btnVaoBan.setEnabled(false);
-                CardLayout card = (CardLayout) PanCac.getLayout();
-                card.show(PanCac, "card4");
             }
             if (ButtonChuyen != null) {//----------------------------Nếu bọn chuyển bàn hoặc gộp bàn
                 if (banButton.getStatus() == 1) {
@@ -574,7 +623,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                     return;
                 }
                 BanButtons ban = banButtonList.get(ButtonChuyen);
-                chuenBan(banButton.getIDTalbe(), "Chuyển từ bàn :" + ban.getIDTalbe() + "Đến" + banButton.getIDTalbe(), IDOrderCu);
+                chuenBan(banButton.getIDTalbe(), "Chuyển từ bàn số :" + ban.getTen() + " Đến bàn số :" + banButton.getTen(), IDOrderCu);
                 updatebnGuoi(banButton.getIDTalbe());
                 String sql = "UPDATE [Table] SET [Status] = 0 WHERE IDTable = ?";
                 try {
@@ -590,15 +639,15 @@ public class QLOrder_Service implements IQLOrder_Service {
                     dialogHelper.alert(null, "Bàn này có ai đâu mà gộp hả ?");
                     return;
                 } else if (banButton.getStatus() == 2) {
-                    dialogHelper.alert(null, "Bàn này cất rồi gọi chủ ra đi ");
+                    dialogHelper.alert(null, "Bàn này cất rồi gọi chủ ra đi .");
                     return;
                 }
                 BanButtons ban = banButtonList.get(ButtonGop);
                 if (dialogHelper.confirm(null, "Bạn có muốn gộp hóa đơn vào luôn không ?")) {
-                    chuenBan(banButton.getIDTalbe(), "Chuyển từ bàn :" + ban.getIDTalbe() + "Đến Bàn : " + banButton.getIDTalbe(), IDOrderCu);
+                    chuenBan(banButton.getIDTalbe(), "Chuyển từ bàn số : " + ban.getTen() + " Đến bàn số : " + banButton.getTen(), IDOrderCu);
                     gopBanvsHD(banButton.getIDTalbe(), IDOrderCu, IDOrderMoi);
                 } else {
-                    chuenBan(banButton.getIDTalbe(), "Chuyển từ bàn : " + ban.getIDTalbe() + "Đến Bàn : " + banButton.getIDTalbe(), IDOrderCu);
+                    chuenBan(banButton.getIDTalbe(), "Chuyển từ bàn số : " + ban.getTen() + " Đến bàn số : " + banButton.getTen(), IDOrderCu);
                 }
 
                 String sql = "UPDATE [Table] SET [Status] = 0 WHERE IDTable = ?";
@@ -877,8 +926,11 @@ public class QLOrder_Service implements IQLOrder_Service {
     }
 
     @Override
-    public int dongC() {
-        return dong;
+    public int dongC(int dong) {
+        if (dong != -1) {
+            this.dong = dong;
+        }
+        return this.dong;
     }
 
     @Override
@@ -909,15 +961,15 @@ public class QLOrder_Service implements IQLOrder_Service {
         double total = 0;
         int line = tblOder.getRowCount();
         for (int i = 0; i < line; i++) {
-            if (tblOder.getValueAt(i, 6).toString().equals("")) {
+            if (tblOder.getValueAt(i, 7).toString().equals("")) {
                 double gia = Double.valueOf(tblOder.getValueAt(i, 4).toString());
                 int SL = Integer.valueOf(tblOder.getValueAt(i, 5).toString());
                 double thanhtien = gia * SL;
                 total += thanhtien;
             }
         }
-        txttong.setText(formatter.format(total) + "VNĐ");
-        txtThanhTien.setText(formatter.format(total) + "VNĐ");
+        txttong.setText(formatter.format(total) + ".VNĐ");
+        txtThanhTien.setText(formatter.format(total) + ".VNĐ");
         return total;
     }
 
@@ -979,7 +1031,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     public void huyDon(String txtMaHD, String Reason) {
         String sql = "UPDATE [Order] SET [Status] = 3,Reason =? WHERE IDOrder = ?";
         String nv = Auth.isAdmin() ? "Admin" : Auth.user.getNameEMP();
-        String huy = Reason +"- Nhân viên : " +nv+"- Cancel Time " + dateHelper.Time_FORMATER.format(dateHelper.timeNow());
+        String huy = Reason + "- Nhân viên : " + nv + "- Cancel Time " + dateHelper.Time_FORMATER.format(dateHelper.timeNow());
         try {
             JDBC.update(sql, huy, txtMaHD);
         } catch (SQLException e) {
@@ -991,7 +1043,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     public void tachHDon(String txtMaHDCu, String txtMaHDMoi, String IDProduct, String Note, String IDTable) {
         String sql = "UPDATE OrderDetail SET Note = ?,IDOrder = ?,IDTable = ? WHERE IDProduct = ? AND Note = ? AND IDOrder = ?";
         try {
-            JDBC.update(sql, "Tách từ hóa đơn :"+txtMaHDCu,txtMaHDMoi, IDTable, IDProduct, Note, txtMaHDCu);
+            JDBC.update(sql, "Tách từ hóa đơn :" + txtMaHDCu, txtMaHDMoi, IDTable, IDProduct, Note, txtMaHDCu);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -1095,12 +1147,12 @@ public class QLOrder_Service implements IQLOrder_Service {
         double Dis;
         NumberFormat formatter = new DecimalFormat("#,###");
         //tính Discount
-        String Order = txtTong.getText().substring(0, txtTong.getText().lastIndexOf("VNĐ")).replaceAll(",", "");
+        String Order = txtTong.getText().substring(0, txtTong.getText().lastIndexOf(".VNĐ")).replaceAll(",", "");
         Dis = (Double.valueOf(txtDis1.getText()) * Double.valueOf(Order)) / 100;
-        txtDis2.setText(formatter.format(Dis) + "VNĐ");
+        txtDis2.setText(formatter.format(Dis) + ".VNĐ");
         //tính total
         double total = Double.parseDouble(Order) - Dis;
-        txtPay.setText(formatter.format(total) + "VNĐ");
+        txtPay.setText(formatter.format(total) + ".VNĐ");
     }
 
     @Override

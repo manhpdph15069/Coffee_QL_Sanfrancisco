@@ -54,7 +54,7 @@ public interface IQLOrder_Service {
 
     public void lichsuOrder(JPanel PanlPanelLS, JTable tblLichSu);
 
-    public int dongC();
+    public int dongC(int dong);
 
     public double tongTien(JTextField txttong, JTable tblOder,JTextField txtThanhTien);
     
