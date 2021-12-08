@@ -408,8 +408,14 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             List<Object[]> list2 = getListTongMonvaHDNam(nam);
             List<Object[]> list3 = getBillHuyNam(nam);
             List<Object[]> list4 = getListByTKNam(nam);
+            String tongMon="";
             if (list1 != null) {
                 for (Object[] o : list2) {
+                                    if (String.valueOf(o[0]).equalsIgnoreCase("Null")) {
+                    tongMon ="Không có";
+                }else{
+                    tongMon =String.valueOf(o[0]);
+                }
                     if (list2 != null) {
                         if (list4 != null) {
                             for (Object[] oT : list4) {
@@ -418,7 +424,7 @@ public class QLStatistical_Service implements IQLStatistical_Service {
                             message = message + "\t\t\t\tBáo cáo trong năm " + nam + "\n"
                                     + "|---------------------------------------------------------------------------|\n"
                                     + "                                                   \t\t\t\t\t\n"
-                                    + "\t\tTổng món bán trong năm: " + String.valueOf(o[0]) + "\t\t\n"
+                                    + "\t\tTổng món bán trong năm: " + tongMon + "\t\t\n"
                                     + "\t\tTổng bill trong năm: " + String.valueOf(o[1]) + "\t\t\n"
                                     + "\t\tTổng tiền trong năm: " + tien + "VNĐ" + "\t\t\n";
                             if (list3 != null) {
@@ -485,11 +491,17 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             float tien = 0;
             String doUong = "";
             String maNV = "";
+            String tongMon="";
             for (Object[] o : list2) {
+                if (String.valueOf(o[0]).equalsIgnoreCase("Null")) {
+                    tongMon ="Không có";
+                }else{
+                    tongMon =String.valueOf(o[0]);
+                }
                 message = message + "\t\t\t\tBáo cáo trong tháng " + thang + "\n"
                         + "|---------------------------------------------------------------------------|\n"
                         + "                                                   \t\t\t\t\t\n"
-                        + "\t\tTổng món bán trong tháng: " + String.valueOf(o[0]) + "\t\t\n"
+                        + "\t\tTổng món bán trong tháng: " + tongMon + "\t\t\n"
                         + "\t\tTổng hóa đơn trong tháng: " + String.valueOf(o[1]) + "\t\t\n";
 
                 for (Object[] oh : list3) {
@@ -544,11 +556,17 @@ public class QLStatistical_Service implements IQLStatistical_Service {
             float tien = 0;
             String doUong = "";
             String maNV = "";
+            String tongMon="";
             for (Object[] o : list2) {
+                                if (String.valueOf(o[0]).equalsIgnoreCase("Null")) {
+                    tongMon ="Không có";
+                }else{
+                    tongMon =String.valueOf(o[0]);
+                }
                 message = message + "\t\t\t\tBáo cáo trong ngày " + "\n "
                         + "|---------------------------------------------------------------------------|\n"
                         + "                                                   \t\t\t\t\t\n"
-                        + "\t\tTổng món bán trong ngày: " + String.valueOf(o[0]) + "\t\t\n"
+                        + "\t\tTổng món bán trong ngày: " + tongMon + "\t\t\n"
                         + "\t\tTổng hóa đơn trong ngày: " + String.valueOf(o[1]) + "\t\t\n";
 
                 for (Object[] oh : list3) {

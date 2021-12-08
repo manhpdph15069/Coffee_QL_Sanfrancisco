@@ -323,7 +323,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
         rSButtonIconD1.setBackground(new java.awt.Color(0, 102, 51));
         rSButtonIconD1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/deer-icon.png"))); // NOI18N
-        rSButtonIconD1.setText("K.Mãi");
+        rSButtonIconD1.setText("K.Mãi & Bàn");
         rSButtonIconD1.setColorHover(new java.awt.Color(255, 0, 51));
         rSButtonIconD1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         rSButtonIconD1.addActionListener(new java.awt.event.ActionListener() {

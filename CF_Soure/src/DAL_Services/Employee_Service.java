@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class Employee_Service implements IEmployee_Service {
 
     String INSERT_SQL = "INSERT INTO [Employee]([UsernameEMP], [Password], [NameEMP],[Phone],[Birthday],[Address],[Sex],[Email],[Image],[Status]) VALUES (?, ?, ?, ?,?,?,?,?,?,0)";
-    String UPDATE_SQL = "UPDATE [Employee] SET [Password]=?, [NameEMP] = ?,[Phone]=?,[Birthday]=?,[Address]=?,[Sex]=?,[Email]=?,[Image]=? WHERE [UsernameEMP]= ?";
+    String UPDATE_SQL = "UPDATE [Employee] SET  [NameEMP] = ?,[Phone]=?,[Birthday]=?,[Address]=?,[Sex]=?,[Email]=?,[Image]=? WHERE [UsernameEMP]= ?";
     String DELETE_SQL = "UPDATE [Employee] SET [Status]=1 WHERE [UsernameEMP]= ? ";
     String SELECT_ALL_SQL = "SELECT * FROM [Employee] where [Status]=0";
     String SELECT_BY_ID_SQL = "SELECT * FROM [Employee] WHERE [UsernameEMP] = ? and [Status]=0";

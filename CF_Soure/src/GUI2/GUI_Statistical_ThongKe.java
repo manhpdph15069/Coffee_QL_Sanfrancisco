@@ -88,7 +88,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         lblTM = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         lblHD = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSP = new rojeru_san.complementos.RSTableMetro();
@@ -157,7 +156,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addComponent(jLabel14)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlNgayLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel11)
@@ -178,7 +177,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNgayLayout.createSequentialGroup()
-                        .addGap(0, 51, Short.MAX_VALUE)
+                        .addGap(0, 50, Short.MAX_VALUE)
                         .addComponent(jLabel14)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlNgayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +199,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         jDateNBD.setFocusable(false);
 
         btnKhoang.setBackground(new java.awt.Color(0, 102, 51));
-        btnKhoang.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         btnKhoang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/khoang.png"))); // NOI18N
         btnKhoang.setText("Khoảng");
         btnKhoang.setToolTipText("Chọn date ở cả 2 ô");
@@ -211,7 +209,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         });
 
         btnNgay.setBackground(new java.awt.Color(0, 102, 51));
-        btnNgay.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         btnNgay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/ngay.png"))); // NOI18N
         btnNgay.setText("Show Ngày");
         btnNgay.setToolTipText("Chọn ở ô date thứ nhất");
@@ -222,7 +219,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         });
 
         btnThang.setBackground(new java.awt.Color(0, 102, 51));
-        btnThang.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         btnThang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/thang.PNG"))); // NOI18N
         btnThang.setText("Show Tháng");
         btnThang.setToolTipText("Chọn ở ô date thứ nhất");
@@ -233,7 +229,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         });
 
         btnNam.setBackground(new java.awt.Color(0, 102, 51));
-        btnNam.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         btnNam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/nam.png"))); // NOI18N
         btnNam.setText("Show Năm");
         btnNam.setToolTipText("Chọn ở ô date thứ nhất");
@@ -252,11 +247,11 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
 
         jLabel5.setBackground(new java.awt.Color(51, 102, 0));
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setForeground(new java.awt.Color(0, 102, 51));
         jLabel5.setText("Từ Ngày");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(0, 102, 51));
         jLabel6.setText("Đến Ngày");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -272,15 +267,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
 
         lblHD.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         lblHD.setText("00000");
-
-        jButton1.setBackground(new java.awt.Color(0, 102, 51));
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jButton1.setText("Gửi báo cáo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -310,9 +296,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addComponent(btnThang)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnNam)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addGap(57, 57, 57)
+                        .addGap(170, 170, 170)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(lblTM)
@@ -326,9 +310,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnKhoang, btnNam, btnNgay, btnThang, jButton1});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -348,8 +329,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                                     .addComponent(jLabel7)
                                     .addComponent(lblTM)
                                     .addComponent(jLabel9)
-                                    .addComponent(lblHD)
-                                    .addComponent(jButton1)))
+                                    .addComponent(lblHD)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jDateNBD, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -359,8 +339,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addComponent(JDateNKT, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnKhoang, btnNam, btnNgay, btnThang, jButton1});
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -611,7 +589,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
                         .addComponent(lbltkspTM)))
-                .addGap(535, 535, 535)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel19)
@@ -621,31 +599,36 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addComponent(jLabel17)
                         .addGap(18, 18, 18)
                         .addComponent(lbltkspTT1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(362, 362, 362))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(17, 17, 17)
-                            .addComponent(jScrollPane2))
-                        .addComponent(jLabel21))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
-                            .addComponent(lbltkspTM1)
+                            .addComponent(lbltkspTM1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(lbltkspTT1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jScrollPane2))
+                            .addComponent(jLabel21)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
                             .addComponent(lbltkspTM))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
-                            .addComponent(lbltkspTT)
-                            .addComponent(jLabel17)
-                            .addComponent(lbltkspTT1))
+                            .addComponent(lbltkspTT))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -769,18 +752,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnNamActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-        int thang = Integer.valueOf(jDateNBD.getDate().getMonth() + 1);
-        int nam = Integer.valueOf(formatNam.format(jDateNBD.getDate()));
-            dao.guiBCThang(thang,nam);
-            //  dao.guiBCNgay(jDateNBD.getDate());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void rdoTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTCActionPerformed
         // TODO add your handling code here:
         dao.fillTableSanPham(tblSP, tblSP1, lbltkspTT, lbltkspTM, lbltkspTT1, lbltkspTM1);
@@ -834,7 +805,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
     private javax.swing.JButton btnNgay;
     private javax.swing.JButton btnThang;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateNBD;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

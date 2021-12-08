@@ -542,7 +542,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/ICON/deer-icon.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="K.M&#xe3;i"/>
+            <Property name="text" type="java.lang.String" value="K.M&#xe3;i &amp; B&#xe0;n"/>
             <Property name="colorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="0" red="ff" type="rgb"/>
             </Property>
