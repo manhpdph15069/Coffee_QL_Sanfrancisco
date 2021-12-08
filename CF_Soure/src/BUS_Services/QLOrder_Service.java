@@ -406,9 +406,9 @@ public class QLOrder_Service implements IQLOrder_Service {
                 case 2:
                     button.setBackground(Color.GRAY);
                     button.setHorizontalTextPosition(0);
+                    button.setVerticalTextPosition(3);
                     button.setFont(new Font("Dialog", 8, 8));
                     button.setText("Không hoạt động");
-                    button.setVerticalTextPosition(3);
                     button.addMouseListener(new MouseAdapter() {
                         public void mouseReleased(MouseEvent e) {
                             selectedButtonPopup(e);
@@ -436,52 +436,72 @@ public class QLOrder_Service implements IQLOrder_Service {
                         button.setBackground(Color.orange);
                         button.setFont(new Font("Dialog", 8, 8));
                         button.setText(button.getText() + " Nhóm 1");
+                        button.setHorizontalTextPosition(0);
+                        button.setVerticalTextPosition(3);
                         break;
                     case "Nhóm 2":
                         button.setBackground(Color.yellow);
                         button.setFont(new Font("Dialog", 8, 8));
                         button.setText(button.getText() + " Nhóm 2");
+                        button.setHorizontalTextPosition(0);
+                        button.setVerticalTextPosition(3);
                         break;
                     case "Nhóm 3":
                         button.setBackground(Color.pink);
                         button.setFont(new Font("Dialog", 8, 8));
                         button.setText(button.getText() + " Nhóm 3");
+                        button.setHorizontalTextPosition(0);
+                        button.setVerticalTextPosition(3);
                         break;
                     case "Nhóm 4":
                         button.setBackground(Color.magenta);
                         button.setFont(new Font("Dialog", 8, 8));
                         button.setText(button.getText() + " Nhóm 4");
+                        button.setHorizontalTextPosition(0);
+                        button.setVerticalTextPosition(3);
                         break;
                     case "Nhóm 5":
                         button.setBackground(Color.lightGray);
                         button.setFont(new Font("Dialog", 8, 8));
                         button.setText(button.getText() + " Nhóm 5");
+                        button.setHorizontalTextPosition(0);
+                        button.setVerticalTextPosition(3);
                         break;
                     case "Nhóm 6":
                         button.setBackground(Color.cyan);
                         button.setFont(new Font("Dialog", 8, 8));
                         button.setText(button.getText() + " Nhóm 6");
+                        button.setHorizontalTextPosition(0);
+                        button.setVerticalTextPosition(3);
                         break;
                     case "Nhóm 7":
                         button.setBackground(Color.DARK_GRAY);
                         button.setFont(new Font("Dialog", 8, 8));
                         button.setText(button.getText() + " Nhóm 7");
+                        button.setHorizontalTextPosition(0);
+                        button.setVerticalTextPosition(3);
                         break;
                     case "Nhóm 8":
                         button.setBackground(Color.white);
                         button.setFont(new Font("Dialog", 8, 8));
                         button.setFont(new Font("Dialog", 8, 8));
                         button.setText(button.getText() + " Nhóm 8");
+                        button.setHorizontalTextPosition(0);
+                        button.setVerticalTextPosition(3);
                         break;
                     case "Nhóm 9":
                         button.setBackground(Color.green);
                         button.setFont(new Font("Dialog", 8, 8));
                         button.setText(button.getText() + " Nhóm 9");
+                        button.setHorizontalTextPosition(0);
+                        button.setVerticalTextPosition(3);
                         break;
                     case "Nhóm 10":
                         button.setBackground(Color.blue);
                         button.setFont(new Font("Dialog", 8, 8));
                         button.setText(button.getText() + " Nhóm 10");
+                        button.setHorizontalTextPosition(0);
+                        button.setVerticalTextPosition(3);
                         break;
                 }
             }
@@ -569,7 +589,7 @@ public class QLOrder_Service implements IQLOrder_Service {
                 }
 
             } else if (banButton.getStatus() == 1) {//-----------------------------------------Bàn có khách     
-              
+
 //                System.out.println("Mới "+tblOder.getRowCount()+"Cũ "+dongC(dong));
                 if (tblOder.getRowCount() > dongC(dong)) {
                     if (dialogHelper.confirm(null, "Hóa đơn chưa được gưởi !\n Bạn có chắc muốn thoát không ?")) {
@@ -1184,12 +1204,10 @@ public class QLOrder_Service implements IQLOrder_Service {
                     }
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             dialogHelper.alert(null, "Lỗi 101:: Không thể kết nối đến máy chủ");
         }
         return kq;
     }
-
 }

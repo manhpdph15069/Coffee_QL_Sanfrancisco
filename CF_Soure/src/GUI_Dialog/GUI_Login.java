@@ -89,7 +89,7 @@ public class GUI_Login extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(0, 51, 51));
         jLabel1.setText("WELLCOME");
 
-        lblForgetpass.setText("Forget password");
+        lblForgetpass.setText("Forget password ?");
         lblForgetpass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblForgetpassMouseClicked(evt);
@@ -266,7 +266,7 @@ public class GUI_Login extends javax.swing.JDialog {
 
     private void lblForgetpassMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgetpassMouseEntered
         // TODO add your handling code here:
-        lblForgetpass.setForeground(Color.red);
+        lblForgetpass.setForeground(Color.GREEN);
     }//GEN-LAST:event_lblForgetpassMouseEntered
 
     private void lblForgetpassMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgetpassMouseExited
