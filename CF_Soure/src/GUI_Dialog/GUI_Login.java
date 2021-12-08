@@ -89,7 +89,7 @@ public class GUI_Login extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(0, 51, 51));
         jLabel1.setText("WELLCOME");
 
-        lblForgetpass.setText("Forget password");
+        lblForgetpass.setText("Forget password ?");
         lblForgetpass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblForgetpassMouseClicked(evt);

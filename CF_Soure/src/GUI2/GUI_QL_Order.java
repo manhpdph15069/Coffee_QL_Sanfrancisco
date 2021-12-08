@@ -1028,6 +1028,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             card.show(PanCac, "card3");
             Total();
             UpdatetxtDis1();
+            qlod.dongC(tblOrder.getRowCount());
             if (tblLichSu.getValueAt(tblLichSu.getSelectedRow(), 4).toString().equals("Đã hủy")) {
                 btnThanhToan.setEnabled(false);
                 btnhuy.setEnabled(false);

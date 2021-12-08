@@ -151,7 +151,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblForgetpass">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Forget password"/>
+            <Property name="text" type="java.lang.String" value="Forget password ?"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblForgetpassMouseClicked"/>
