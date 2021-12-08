@@ -70,7 +70,7 @@ public class QLHoaDOn_Service {
 
     public List<Object[]> getListHoaDon() {
         String sql = "{CALL getListHoaDon}";
-        String[] cols = {"IDHD", "NameEMP", "CusName", "NamePromo", "DateOrder", "TimeOder", "Reason", "TongTien", "Status"};
+        String[] cols = {"IDHD", "NameEMP", "CusName", "NamePromo", "DateOrder", "TimeOder", "Reason", "TongTien", "Status", "DiscountPromo", "Discount"};
         return this.getListOfArray(sql, cols);
     }
 
@@ -97,6 +97,7 @@ public class QLHoaDOn_Service {
         String tt = null;
         String doUong = "";
         String nv = "";
+        float tongTien = 0;
         List<Object[]> list = getListHoaDon();
         if (list != null) {
             for (Object[] o : list) {
@@ -104,6 +105,16 @@ public class QLHoaDOn_Service {
                 doUong = "";
                 for (ENTITY_Product odu : listdoUong) {
                     doUong = doUong + odu.getProductName() + ",";
+                }
+
+                if (o[2] == null && o[3] == null) {
+                    tongTien = Float.parseFloat(String.valueOf(o[7]));
+                } else {
+                    if (o[2]!=null) {
+                        tongTien = Float.parseFloat(String.valueOf(o[7])) - ((Float.parseFloat(String.valueOf(o[7])) * Float.parseFloat(String.valueOf(o[10]))) / 100);
+                    } else {
+                        tongTien = Float.parseFloat(String.valueOf(o[7])) - ((Float.parseFloat(String.valueOf(o[7])) * Float.parseFloat(String.valueOf(o[9]))) / 100);
+                    }
                 }
 
                 int ma = Integer.valueOf(String.valueOf(o[8]));
@@ -124,7 +135,8 @@ public class QLHoaDOn_Service {
                     o[5],
                     o[6],
                     doUong,
-                    n.format(o[7]) + " VNĐ",
+                    //                    n.format(o[7]) + " VNĐ",
+                    n.format(tongTien),
                     tt
                 };
                 model.addRow(row);

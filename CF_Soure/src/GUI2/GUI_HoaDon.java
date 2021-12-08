@@ -433,28 +433,31 @@ public class GUI_HoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_tblMouseClicked
 
     private void btnNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgayActionPerformed
-      
-
-            List<Object[]> list = dao.getListHoaDonNgay(jdate.getDate());
-            int tBill = list.size();
-            float tien = 0;
-            int tBillH = 0;
-            for (Object[] o : list) {
-                if (String.valueOf(o[8]).equalsIgnoreCase("3")) {
-                    tBillH++;
-                }
-                tien += Float.parseFloat(String.valueOf(o[7]));
+        List<Object[]> list = dao.getListHoaDonNgay(jdate.getDate());
+        int tBill = list.size();
+        float tien = 0;
+        int tBillH = 0;
+        for (Object[] o : list) {
+//            if (String.valueOf(o[7]).equalsIgnoreCase("NULL")) {
+//                tien += Float.parseFloat(String.valueOf(o[7]));
+//            }else{
+//                tien+=tien+ ((Float.parseFloat(String.valueOf(o[7])))*3)/100;
+//            }
+            if (String.valueOf(o[8]).equalsIgnoreCase("3")) {
+                tBillH++;
             }
-            if (list.size() == 0) {
-                ThongBao.alert(this, "Không có hóa đơn nào trong ngày này");
-            } else {
-                dao.fillTableNgay(tbl, jdate.getDate());
-                lblTBill.setText(String.valueOf(tBill));
-                lblTBillH.setText(String.valueOf(tBillH));
-                lblTien.setText(n.format(tien) + " VNĐ");
+           tien += Float.parseFloat(String.valueOf(o[7]));
+        }
+        if (list.size() == 0) {
+            ThongBao.alert(this, "Không có hóa đơn nào trong ngày này");
+        } else {
+            dao.fillTableNgay(tbl, jdate.getDate());
+            lblTBill.setText(String.valueOf(tBill));
+            lblTBillH.setText(String.valueOf(tBillH));
+            lblTien.setText(n.format(tien) + " VNĐ");
 
-            }
-        
+        }
+
     }//GEN-LAST:event_btnNgayActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -481,27 +484,25 @@ public class GUI_HoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_rdoTCMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
 
-            List<Object[]> list = dao.getListHoaDonTHANG(jdate.getDate().getMonth() + 1);
-            int billH = 0;
-            float ttien = 0;
-            for (Object[] o : list) {
-                if (String.valueOf(o[8]).equalsIgnoreCase("3")) {
-                    billH++;
-                }
-                ttien += Float.parseFloat(String.valueOf(o[7]));
+        List<Object[]> list = dao.getListHoaDonTHANG(jdate.getDate().getMonth() + 1);
+        int billH = 0;
+        float ttien = 0;
+        for (Object[] o : list) {
+            if (String.valueOf(o[8]).equalsIgnoreCase("3")) {
+                billH++;
             }
-            if (list.size() == 0) {
-                ThongBao.alert(this, "Tháng này không có hóa đơn nào");
-            } else {
-                dao.fillTableTHANG2(tbl, jdate.getDate().getMonth() + 1);
-                lblTBill.setText(String.valueOf(list.size()));
-                lblTBillH.setText(String.valueOf(billH));
-                lblTien.setText(n.format(ttien) + " VNĐ");
+            ttien += Float.parseFloat(String.valueOf(o[7]));
+        }
+        if (list.size() == 0) {
+            ThongBao.alert(this, "Tháng này không có hóa đơn nào");
+        } else {
+            dao.fillTableTHANG2(tbl, jdate.getDate().getMonth() + 1);
+            lblTBill.setText(String.valueOf(list.size()));
+            lblTBillH.setText(String.valueOf(billH));
+            lblTien.setText(n.format(ttien) + " VNĐ");
 
-            }
-        
+        }
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -524,25 +525,24 @@ public class GUI_HoaDon extends javax.swing.JPanel {
 
     private void btnTAtcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTAtcaActionPerformed
         // TODO add your handling code here:
-        
 
-            rdoTC.setSelected(true);
-            List<Object[]> list = dao.getListHoaDon();
-            int billH = 0;
-            float tien = 0;
-            if (list.size() != 0) {
-                for (Object[] objects : list) {
-                    if (String.valueOf(objects[8]).equals("3")) {
-                        billH++;
-                    }
-                    tien += Float.parseFloat(String.valueOf(objects[7]));
+        rdoTC.setSelected(true);
+        List<Object[]> list = dao.getListHoaDon();
+        int billH = 0;
+        float tien = 0;
+        if (list.size() != 0) {
+            for (Object[] objects : list) {
+                if (String.valueOf(objects[8]).equals("3")) {
+                    billH++;
                 }
-                lblTBill.setText(String.valueOf(list.size()));
-                lblTBillH.setText(String.valueOf(billH));
-                lblTien.setText(n.format(tien) + " VNĐ");
-                dao.fillTable(tbl);
+                tien += Float.parseFloat(String.valueOf(objects[7]));
             }
-        
+            lblTBill.setText(String.valueOf(list.size()));
+            lblTBillH.setText(String.valueOf(billH));
+            lblTien.setText(n.format(tien) + " VNĐ");
+            dao.fillTable(tbl);
+        }
+
 
     }//GEN-LAST:event_btnTAtcaActionPerformed
 
