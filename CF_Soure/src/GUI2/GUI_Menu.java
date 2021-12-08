@@ -259,17 +259,17 @@ public class GUI_Menu extends javax.swing.JPanel {
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Tên sản phẩm", "Size", "Giá", "Loại sản phẩm", "Trạng thái"
+                "ID", "Tên sản phẩm", "Size", "Giá", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -284,11 +284,14 @@ public class GUI_Menu extends javax.swing.JPanel {
         tblSanPham.setFuenteHead(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         tblSanPham.setRowHeight(30);
         tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblSanPhamMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblSanPhamMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tblSanPhamMouseReleased(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSanPhamMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblSanPham);
@@ -381,10 +384,11 @@ public class GUI_Menu extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel4)
-                                            .addComponent(cboLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton2))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(jLabel4)
+                                                .addComponent(cboLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(29, 29, 29)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel1)
@@ -509,15 +513,11 @@ public class GUI_Menu extends javax.swing.JPanel {
         int p = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn Xóa Sản Phẩm này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
         if (p == JOptionPane.YES_OPTION) {
             try {
-                if (sp.isStatus() == false) {
-                    dialogHelper.alert(this, "Sản phẩm không sử dụng mà Pro");
-                } else {
-                    dao.delete(IDProduct);
-                    dao.fillToTable(tblSanPham);
-                    dialogHelper.alert(this, "Xoá Thành Công");
-                    clear();
-                    dao.taoID(lblID);
-                }
+                dao.delete(IDProduct);
+                dao.fillToTable(tblSanPham);
+                dialogHelper.alert(this, "Xoá Thành Công");
+                clear();
+                dao.taoID(lblID);
             } catch (Exception e) {
                 dialogHelper.alert(this, "Lỗi Khi Xóa");
                 e.printStackTrace();
@@ -549,7 +549,7 @@ public class GUI_Menu extends javax.swing.JPanel {
                 lblType.setText("" + sp.getIDType());
             }
         }
-    }//GEN-LAST:event_cboSizeActionPerformed
+    }                                       
 //GEN-LAST:event_cboSizeActionPerformed
 
     private void tblSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMousePressed
@@ -719,7 +719,7 @@ public class GUI_Menu extends javax.swing.JPanel {
             String IDProduct = (String) tblSanPham.getValueAt(this.row, 0);
             SanPham sp = dao.findById(IDProduct);
             dialogHelper.confirm(this, "Bạn muốn Khôi Phục Sản Phẩm này?");
-            if (sp.isStatus() == true) {
+            if (sp.getStatus() == 1) {
                 dialogHelper.alert(this, "Sản Phẩm này vẫn đang được sử dụng");
             } else {
                 try {
@@ -740,7 +740,7 @@ public class GUI_Menu extends javax.swing.JPanel {
             String IDProduct = (String) tblSanPham.getValueAt(this.row, 0);
             SanPham sp = dao.findById(IDProduct);
             dialogHelper.confirm(this, "Sản Phẩm Này Không Còn Sử Dụng?");
-            if (sp.isStatus() == false) {
+            if (sp.getStatus() == 0) {
                 dialogHelper.alert(this, "Sản Phẩm Đang Không sử dụng mà");
             } else {
                 try {

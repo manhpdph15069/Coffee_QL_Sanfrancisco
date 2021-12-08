@@ -45,10 +45,10 @@ import javax.swing.JTable;
  * */
 public class Customer_Service implements ICustomer_Service {
 
-    String INSERT_SQL = "INSERT INTO [Customer]([IDCust], [CusName], [DateAdd], [DateEnd],[Phone],[Email],[Discount],[Status]),[CCCD]=? VALUES (?, ?, ?, ?,?,?,?,1,?)";
+    String INSERT_SQL = "INSERT INTO [Customer]([IDCust], [CusName], [DateAdd], [DateEnd],[Phone],[Email],[Discount],[Status],[CCCD]) VALUES (?, ?, ?, ?,?,?,?,1,?)";
     String UPDATE_SQL = "UPDATE [Customer] SET [CusName]= ?, [DateAdd] = ?,[DateEnd]=?,[Phone]=?,[Email]=?,[Discount]=?,[CCCD]=? WHERE [IDCust]= ?";
-    String DELETE_SQL = "UPDATE [Customer] SET [Status]=0 WHERE [IDCust]= ?";
-    String SELECT_ALL_SQL = "SELECT * FROM [Customer]";
+    String DELETE_SQL = "UPDATE [Customer] SET [Status]=2 WHERE [IDCust]= ?";
+    String SELECT_ALL_SQL = "SELECT * FROM [Customer] where [Status]=1 OR [Status]=0";
     String SELECT_BY_ID_SQL = "SELECT * FROM [Customer] WHERE [IDCust] = ?";
     String up = "Update [Customer] set Status=0 where DateEnd=?";
 
@@ -119,7 +119,7 @@ public class Customer_Service implements ICustomer_Service {
                 customer.setPhone(rs.getString("Phone"));
                 customer.setEmail(rs.getString("Email"));
                 customer.setDiscount(rs.getInt("Discount"));
-                customer.setStatus(rs.getBoolean("Status"));
+                customer.setStatus(rs.getInt("Status"));
                 customer.setCCCD(rs.getString("CCCD"));
                 list.add(customer);
             }
@@ -146,13 +146,6 @@ public class Customer_Service implements ICustomer_Service {
                 entity.getIDCust());
     }
 
-    public ENTITY_Customer select1() {
-        List<ENTITY_Customer> list = this.SelectBySQL(SELECT_ALL_SQL);
-        if (list.isEmpty()) {
-            return null;
-        }
-        return list.get(0);
-    }
     //        private NumberFormat n = new DecimalFormat("#,###");
     private static String url = "data.txt";
     private static FileInputStream fileInputStream = null;

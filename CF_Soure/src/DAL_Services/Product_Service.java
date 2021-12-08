@@ -23,8 +23,8 @@ public class Product_Service implements IProduct_Service {
 
     String INSERT_SQL = "INSERT INTO [Product]([IDProduct], [ProductName], [Price], [Image],[Status],[IDType]) VALUES (?, ?, ?, ?,0,?)";
     String UPDATE_SQL = "UPDATE [Product] SET [ProductName] = ?, [Price] = ?, [Image] = ?,[IDType]=? WHERE [IDProduct] = ?";
-    String DELETE_SQL = "UPDATE [Product] SET [Status]=0 WHERE [IDProduct] = ?";
-    String SELECT_ALL_SQL = "SELECT * FROM [Product]";
+    String DELETE_SQL = "UPDATE [Product] SET [Status]=2 WHERE [IDProduct] = ?";
+    String SELECT_ALL_SQL = "SELECT * FROM [Product] where [Status]=1 OR [Status]=0";
     String SELECT_BY_ID_SQL = "SELECT * FROM [Product] WHERE [IDProduct] = ?";
 
     @Override
@@ -91,7 +91,7 @@ public class Product_Service implements IProduct_Service {
                 product.setProductName(rs.getString("ProductName"));
                 product.setPrice(rs.getFloat("Price"));
                 product.setImage(rs.getString("Image"));
-                product.setStatus(rs.getBoolean("Status"));
+                product.setStatus(rs.getInt("Status"));
                 product.setIDType(rs.getInt("IDType"));
             }
             rs.getStatement().getConnection().close();

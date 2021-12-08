@@ -33,8 +33,9 @@ import javax.swing.table.TableRowSorter;
  * @author phamd
  */
 public class QLMenu_Service implements IQLMenu_Service {
-    String sql_all = "SELECT [IDProduct],ProductName,Price,Image,Status,TypeName,Size FROM [Product] "
-            + "Join ProductType on Product.IDType = ProductType.IDType";
+
+    String sql_all = "SELECT [IDProduct],ProductName,Price,Image,Product.Status,TypeName,Size FROM [Product]"
+            + "Join ProductType on Product.IDType = ProductType.IDType where Product.[Status]=1 OR Product.[Status]=0";
     String SELECT_BY_TypeName = "Select DISTINCT TypeName from ProductType";
     String SELECT_BY_Size = "SELECT IDType,Size FROM ProductType WHERE TypeName =?";
     String insert = "INSERT INTO [Product]([IDProduct], [ProductName], [Price], [Image],[Status],IDType) VALUES (?, ?, ?, ?,1,?)";
@@ -83,7 +84,7 @@ public class QLMenu_Service implements IQLMenu_Service {
 
     @Override
     public void delete(String IDProduct) {
-        String sql = "UPDATE [Product] SET [Status]=0 WHERE [IDProduct] = ?";
+        String sql = "UPDATE [Product] SET [Status]=2 WHERE [IDProduct] = ?";
         try {
             JDBC.update(sql, IDProduct);
         } catch (Exception e) {
@@ -114,7 +115,7 @@ public class QLMenu_Service implements IQLMenu_Service {
                 table.setProductName(rs.getString(2));
                 table.setPrice(rs.getFloat(3));
                 table.setImage(rs.getString(4));
-                table.setStatus(rs.getBoolean(5));
+                table.setStatus(rs.getInt(5));
                 table.setTypeName(rs.getString(6));
                 table.setSize(rs.getString(7));
                 list.add(table);
@@ -194,8 +195,21 @@ public class QLMenu_Service implements IQLMenu_Service {
 //        sorter.setRowFilter(RowFilter.regexFilter(sp1.TypeName));
         try {
             List<SanPham> list = this.select();
+            String t = "";
             for (SanPham pro : list) {
-                Object[] row = {pro.getIDProduct(), pro.getProductName(), pro.getSize(), pro.getPrice(), pro.isStatus() ? "Đang sử dụng" : "Không sử dụng"};
+                if (pro.getStatus() == 1) {
+                    t = "Dang su dung";
+                } else if (pro.getStatus() == 0) {
+                    t = "Khong su dung";
+                } else if (pro.getStatus() == 2) {
+                    t = "";
+                }
+                Object[] row = {
+                    pro.getIDProduct(),
+                    pro.getProductName(),
+                    pro.getSize(),
+                    pro.getPrice(),
+                    t};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -226,10 +240,10 @@ public class QLMenu_Service implements IQLMenu_Service {
         try {
             List<SanPham> list = this.selectSize(type);
             for (SanPham sp : list) {
-                if (list.size() ==1) {
-                    if (sp.getSize()==null) {
-                    cbo.addItem("Trống");
-                    }else{
+                if (list.size() == 1) {
+                    if (sp.getSize() == null) {
+                        cbo.addItem("Trống");
+                    } else {
                         model.addElement(sp);
                     }
                 } else {
@@ -245,11 +259,11 @@ public class QLMenu_Service implements IQLMenu_Service {
 
     public void chonAnh(JLabel lbl) {
         fileChooser.setDialogTitle("chọn ảnh đi bro");
-            fileChooser.setAcceptAllFileFilterUsed(false);
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(".jpg","jpg");
-            FileNameExtensionFilter filter1 = new FileNameExtensionFilter(".png","png");
-            fileChooser.addChoosableFileFilter(filter);
-            fileChooser.addChoosableFileFilter(filter1);
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".jpg", "jpg");
+        FileNameExtensionFilter filter1 = new FileNameExtensionFilter(".png", "png");
+        fileChooser.addChoosableFileFilter(filter);
+        fileChooser.addChoosableFileFilter(filter1);
         if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();//lay ra file dc chon
             XImage.save(file); // luu vao trong thu muc
@@ -279,7 +293,7 @@ public class QLMenu_Service implements IQLMenu_Service {
                 table.setProductName(rs.getString(2));
                 table.setPrice(rs.getFloat(3));
                 table.setImage(rs.getString(4));
-                table.setStatus(rs.getBoolean(5));
+                table.setStatus(rs.getInt(5));
                 table.setIDType(rs.getInt(7));
                 table.setTypeName(rs.getString(8));
                 table.setSize(rs.getString(9));

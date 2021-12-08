@@ -14,14 +14,14 @@ public class SanPham {
     private String IDProduct,ProductName;
     private float Price;
     private String Image;
-    private boolean Status;
+    private int Status;
     private String TypeName;
     private String Size;
 
     public SanPham() {
     }
 
-    public SanPham(String IDProduct, String ProductName, float Price, String Image, boolean Status, String TypeName, String Size) {
+    public SanPham(String IDProduct, String ProductName, float Price, String Image, int Status, String TypeName, String Size) {
         this.IDProduct = IDProduct;
         this.ProductName = ProductName;
         this.Price = Price;
@@ -72,13 +72,15 @@ public class SanPham {
         this.Image = Image;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return Status;
     }
 
-    public void setStatus(boolean Status) {
+    public void setStatus(int Status) {
         this.Status = Status;
     }
+
+ 
 
     public String getTypeName() {
         return TypeName;

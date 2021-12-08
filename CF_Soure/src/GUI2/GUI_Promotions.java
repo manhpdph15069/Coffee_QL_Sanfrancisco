@@ -164,13 +164,21 @@ public class GUI_Promotions extends javax.swing.JPanel {
         try {
             List<ENTITY_Promotion> list = dao.select();
             for (ENTITY_Promotion pro : list) {
+                String t = "";
+                if (pro.getStatus() == 1) {
+                    t = "Đang diễn ra";
+                } else if (pro.getStatus() == 0) {
+                    t = "Đã kết thúc";
+                } else if (pro.getStatus() == 2) {
+                    t = "";
+                }
                 Object[] row = {
                     pro.getIDPro(),
                     pro.getName(),
                     pro.getDiscountPromo() + "%",
                     dateHelper.dateToString(pro.getStartPromo(), "dd/MM/yyyy"),
                     dateHelper.dateToString(pro.getEndPromo(), "dd/MM/yyyy"),
-                    pro.getStatus() ? "Đang diễn ra" : "Đã kết thúc"};
+                    t};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -271,7 +279,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
             int ID = (int) tblGiamgia.getValueAt(this.row, 0);
             ENTITY_Promotion pro = dao.findById(String.valueOf(ID));
             dialogHelper.confirm(this, "Mày Thích Khôi Phục Không?");
-            if (pro.getStatus() == true) {
+            if (pro.getStatus() == 1) {
                 dialogHelper.alert(this, "Chương Trình đang diễn ra Khôi Phục cc");
             } else {
                 try {
@@ -292,7 +300,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
             int ID = (int) tblGiamgia.getValueAt(this.row, 0);
             ENTITY_Promotion pro = dao.findById(String.valueOf(ID));
             dialogHelper.confirm(this, "Bạn muốn Kết thúc Chương Trình Giảm Giá này?");
-            if (pro.getStatus() == false) {
+            if (pro.getStatus() == 0) {
                 dialogHelper.alert(this, "Chương Trình đã kết thúc từ trước");
             } else {
                 try {

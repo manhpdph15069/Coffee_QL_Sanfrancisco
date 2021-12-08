@@ -43,6 +43,7 @@ public class Admin {
             rs.getStatement().getConnection().close();
             return list;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException();
         }
     }

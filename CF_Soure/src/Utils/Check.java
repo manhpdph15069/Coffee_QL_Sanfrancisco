@@ -162,5 +162,17 @@ public class Check {
             return false;
         }
     }
+    public static boolean checkso(String txt) {
+       // txt.setBackground(white);
+       // String id = txt.getText;
+        String rgx = "\\d+";
+        if (txt.matches(rgx)) {
+            return true;
+        } else {
+           // txt.setBackground(pink);
+            ThongBao.alert(null, " Số ngày gia hạn phải là số");
+            return false;
+        }
+    }
      
 }

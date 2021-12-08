@@ -16,7 +16,7 @@ import javax.swing.JTable;
  * @author PC
  */
 public class JDialog_Xemchitiet extends javax.swing.JDialog {
-
+    
     QLMenu_Service dao = new QLMenu_Service();
 //    String tbl = null;
     int row = 1;
@@ -216,7 +216,11 @@ public class JDialog_Xemchitiet extends javax.swing.JDialog {
         lblID.setText(sp.getIDProduct());
         lblTensp.setText(sp.getProductName());
         lblGia.setText(String.valueOf(sp.getPrice()));
-        lblTrangThai.setText(String.valueOf(sp.isStatus() ? "Đang sử dụng" : "Không sử dụng"));
+        if (sp.getStatus() == 1) {
+            lblTrangThai.setText("Dang Su Dung");
+        } else {
+            lblTrangThai.setText("Khong Su Dung");
+        }
         lblDanhMuc.setText(sp.getTypeName());
         if (sp.getSize() == null) {
             lblDonvi.setText("Không có");

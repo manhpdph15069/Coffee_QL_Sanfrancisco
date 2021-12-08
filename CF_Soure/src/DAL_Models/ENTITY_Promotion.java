@@ -18,7 +18,7 @@ public class ENTITY_Promotion {
     private Date StartPromo;
     private Date EndPromo;
     private String Description;
-    private Boolean Status;
+    private int Status;
     
     public ENTITY_Promotion() {
     }
@@ -71,13 +71,15 @@ public class ENTITY_Promotion {
         this.Description = Description;
     }
 
-    public Boolean getStatus() {
+    public int getStatus() {
         return Status;
     }
 
-    public void setStatus(Boolean Status) {
+    public void setStatus(int Status) {
         this.Status = Status;
     }
+
+
     
     
 }

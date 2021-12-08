@@ -22,7 +22,7 @@ public class ENTITY_Customer {
     private String Phone;
     private String Email;
     private int Discount;
-    private boolean Status;
+    private int Status;
     private String CCCD;
 
     public ENTITY_Customer() {
@@ -84,13 +84,15 @@ public class ENTITY_Customer {
         Discount = discount;
     }
 
-    public boolean getStatus() {
+    public int getStatus() {
         return Status;
     }
 
-    public void setStatus(boolean status) {
-        Status = status;
+    public void setStatus(int Status) {
+        this.Status = Status;
     }
+
+ 
 
     public String getCCCD() {
         return CCCD;

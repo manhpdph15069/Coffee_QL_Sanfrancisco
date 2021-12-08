@@ -68,7 +68,6 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
                 System.out.println(date2 + "\n");
                 if (date1.compareTo(date2) > 0) { //neu DateEnd < Today
                     dao.up(String.valueOf(kh.getDateEnd()));
-                    kh.setStatus(false);
                 } else {
                     dao.up1(String.valueOf(kh.getDateEnd()));
                 }
@@ -83,8 +82,16 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
         model.setRowCount(0);
         try {
+            String t = "";
             List<ENTITY_Customer> list = dao.select();
             for (ENTITY_Customer kh : list) {
+                if (kh.getStatus() == 1) {
+                    t = "Hoạt Động";
+                } else if (kh.getStatus() == 0) {
+                    t = "Hết Han";
+                } else if (kh.getStatus() == 2) {
+                    t = "";
+                }
                 Object[] row = {
                     kh.getIDCust(),
                     kh.getCCCD(),
@@ -94,7 +101,8 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
                     kh.getPhone(),
                     kh.getEmail(),
                     kh.getDiscount() + "%",
-                    kh.getStatus() ? "Đang hoạt động" : "Hết Hạn"};
+                    t
+                };
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -116,7 +124,8 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
         return kh;
     }
 
-    void setForm(ENTITY_Customer nv) { //lấy thông tin 1 nv có sẵn hiện thị len Forrm
+    void setForm(ENTITY_Customer nv
+    ) { //lấy thông tin 1 nv có sẵn hiện thị len Forrm
         lblID.setText(nv.getIDCust());
         txtCCCD.setText(nv.getCCCD());
         txtTenKH.setText(nv.getCusName());
@@ -248,29 +257,31 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
                     String songay = dialogHelper.prompt(null, "Nhập số ngày muốn gia hạn thẻ");
                     if (songay == null) {
                     } else {
-                        if (date1.after(date2)) { //neu dateEnd<today
-                            pro.setDateEnd(dateHelper.add(Integer.valueOf(songay)));
-                        } else if (date1.before(date2)) {
-                            pro.setDateEnd(dateHelper.addDays(pro.getDateEnd(), Integer.valueOf(songay)));
-                        } else {
-                            pro.setDateEnd(dateHelper.addDays(pro.getDateEnd(), Integer.valueOf(songay)));
+                        if (Check.checkso(songay)) {
+                            if (date1.after(date2)) { //neu dateEnd<today
+                                pro.setDateEnd(dateHelper.add(Integer.valueOf(songay)));
+                            } else if (date1.before(date2)) {
+                                pro.setDateEnd(dateHelper.addDays(pro.getDateEnd(), Integer.valueOf(songay)));
+                            } else {
+                                pro.setDateEnd(dateHelper.addDays(pro.getDateEnd(), Integer.valueOf(songay)));
+                            }
+                            try {
+                                dao.giahan(pro);
+                                date();
+                                filltoTable();
+                                dialogHelper.alert(null, "Gia Hạn Thành Công");
+                                dialogHelper.alert(null,
+                                        "Mã Thẻ : " + pro.getIDCust()
+                                        + "\n" + "Tên Khách Hàng : " + pro.getCusName()
+                                        + "\n" + "Ngày Mở Thẻ  : " + fo.format(pro.getDateAdd())
+                                        + "\n" + "Ngày Hết Hạn : " + fo.format(pro.getDateEnd()));
+                            } catch (SQLException ex) {
+                                dialogHelper.alert(null, "Gia Hạn Thất Bại");
+                                Logger.getLogger(GUI_Customer_KhachHang.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            System.out.println(fo.format(pro.getDateEnd()));
+                            System.out.println(songay);
                         }
-                        try {
-                            dao.giahan(pro);
-                            date();
-                            filltoTable();
-                            dialogHelper.alert(null, "Gia Hạn Thành Công");
-                            dialogHelper.alert(null,
-                                    "Mã Thẻ : " + pro.getIDCust()
-                                    + "\n" + "Tên Khách Hàng : " + pro.getCusName()
-                                    + "\n" + "Ngày Mở Thẻ  : " + fo.format(pro.getDateAdd())
-                                    + "\n" + "Ngày Hết Hạn : " + fo.format(pro.getDateEnd()));
-                        } catch (SQLException ex) {
-                            dialogHelper.alert(null, "Gia Hạn Thất Bại");
-                            Logger.getLogger(GUI_Customer_KhachHang.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        System.out.println(fo.format(pro.getDateEnd()));
-                        System.out.println(songay);
                     }
                 }
             }
@@ -515,14 +526,14 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
                                 .addComponent(jLabel2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNgayHetHan, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                             .addComponent(txtNgayMo)
                             .addComponent(txtEmail)
-                            .addComponent(txtGiamGia)))
+                            .addComponent(txtGiamGia)
+                            .addComponent(txtNgayHetHan, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(60, 60, 60)
+                .addGap(240, 240, 240)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -542,7 +553,7 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -550,31 +561,33 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(43, 43, 43)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel5)
                                             .addComponent(jLabel1)
                                             .addComponent(lblID)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
-                                        .addComponent(txtNgayHetHan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtNgayMo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(3, 3, 3)))))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(txtCCCD, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtNgayMo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNgayHetHan, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(txtCCCD, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()

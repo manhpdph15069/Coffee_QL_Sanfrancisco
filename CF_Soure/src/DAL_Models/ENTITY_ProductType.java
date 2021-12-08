@@ -11,6 +11,7 @@ public class ENTITY_ProductType {
     private int IDType;
     private String TypeName;
     private String Size;
+    private boolean Status;
 
     public ENTITY_ProductType() {
     }
@@ -43,5 +44,15 @@ public class ENTITY_ProductType {
     public String toString() {
         return TypeName;
     }
+
+    public boolean isStatus() {
+        return Status;
+    }
+
+    public void setStatus(boolean Status) {
+        this.Status = Status;
+    }
+
+
 
 }

@@ -23,8 +23,8 @@ public class Promotion_Service implements IPromotions {
 
     String INSERT_SQL = "InSert into Promotions(NamePromo,DiscountPromo,StartPromo,EndPromo,Description,Status) Values(?,?,?,?,?,1)";
     String UPDATE_SQL = "UPDATE Promotions SET NamePromo=?,DiscountPromo=?,StartPromo=?,EndPromo=?,Description=? WHERE [IDPromo] = ?";
-    String DELETE_SQL = "UPDATE Promotions SET Status =0 WHERE [IDPromo] = ?";
-    String SELECT_ALL_SQL = "Select * from Promotions";
+    String DELETE_SQL = "UPDATE Promotions SET Status =2 WHERE [IDPromo] = ?";
+    String SELECT_ALL_SQL = "Select * from Promotions where [Status]=1 OR [Status]=0";
     String SELECT_BY_ID_SQL = "Select * from Promotions where IDPromo=?";
 
     @Override
@@ -93,7 +93,7 @@ public class Promotion_Service implements IPromotions {
                 pro.setStartPromo(rs.getDate("StartPromo"));
                 pro.setEndPromo(rs.getDate("EndPromo"));
                 pro.setDescription(rs.getString("Description"));
-                pro.setStatus((rs.getBoolean("Status")));
+                pro.setStatus((rs.getInt("Status")));
                 list.add(pro);
             }
             rs.getStatement().getConnection().close();

@@ -17,7 +17,7 @@ public class ENTITY_Product {
     private String ProductName;
     private float Price;
     private String Image;
-    private boolean Status;
+    private int Status;
     private int IDType;
 
     public ENTITY_Product() {
@@ -55,13 +55,15 @@ public class ENTITY_Product {
         Image = image;
     }
 
-    public boolean getStatus() {
+    public int getStatus() {
         return Status;
     }
 
-    public void setStatus(boolean status) {
-        Status = status;
+    public void setStatus(int Status) {
+        this.Status = Status;
     }
+
+ 
 
     public int getIDType() {
         return IDType;
