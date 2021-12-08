@@ -146,6 +146,7 @@ public class Employee_Service implements IEmployee_Service {
             return list;
         } catch (Exception e) {
             throw new RuntimeException(e);
+            
         }
     }
 
