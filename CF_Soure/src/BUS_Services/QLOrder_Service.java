@@ -1129,7 +1129,7 @@ public class QLOrder_Service implements IQLOrder_Service {
 //                    ResetPnInfor();
             } else {
                 lbl.setText("Thành công.");
-                lbl.setForeground(Color.YELLOW);
+                lbl.setForeground(Color.BLUE);
                 lbIDCus.setText(rs.getString(1));
                 lbNameCus.setText(rs.getString(2));
                 lbDateEndCus.setText(rs.getString(4));

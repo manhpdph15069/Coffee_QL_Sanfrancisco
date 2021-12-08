@@ -11,8 +11,10 @@ import DAL_Services.Admin;
 import DAL_Services.Employee_Service;
 import Utils.Auth;
 import Utils.ThongBao;
+import java.awt.Color;
 import static java.awt.Color.pink;
 import static java.awt.Color.white;
+import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -31,6 +33,8 @@ public class GUI_Login extends javax.swing.JDialog {
     public GUI_Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        lblForgetpass.setForeground(Color.BLACK);
+        lblForgetpass.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.setLocationRelativeTo(null);
     }
 
@@ -89,6 +93,12 @@ public class GUI_Login extends javax.swing.JDialog {
         lblForgetpass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblForgetpassMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblForgetpassMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblForgetpassMouseExited(evt);
             }
         });
 
@@ -253,6 +263,16 @@ public class GUI_Login extends javax.swing.JDialog {
             btnLogin2ActionPerformed(null);
         }
     }//GEN-LAST:event_txtUsernameKeyPressed
+
+    private void lblForgetpassMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgetpassMouseEntered
+        // TODO add your handling code here:
+        lblForgetpass.setForeground(Color.red);
+    }//GEN-LAST:event_lblForgetpassMouseEntered
+
+    private void lblForgetpassMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgetpassMouseExited
+        // TODO add your handling code here:
+        lblForgetpass.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lblForgetpassMouseExited
     void dangNhap() {
         try {
             int tb = 0;

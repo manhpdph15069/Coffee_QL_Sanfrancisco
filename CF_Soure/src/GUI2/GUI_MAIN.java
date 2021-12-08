@@ -631,6 +631,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
         if (ThongBao.comfirm(this, "Bạn chắc chắn muốn đăng xuất")) {
             Auth.clear();
             lblUsser.setText("Chưa đăng nhập");
+            btnHomeActionPerformed(evt);
             new GUI_Login(this, true).setVisible(true);
             if (Auth.isLogin()) {
                 lblUsser.setText(Auth.user.getNameEMP());

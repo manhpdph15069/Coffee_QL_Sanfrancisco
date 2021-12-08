@@ -37,19 +37,19 @@ public class JDialogHuyDon extends javax.swing.JDialog {
     private JLabel TimeOrder;
     private JTextField txtTong;
     private JPanel PanCac;
-        private JTextField txtThanhTien;
+    private JTextField txtThanhTien;
     private JTextField txtDis1;
     private JTextField txtDis2;
-    private String lydo ="Nhân viên Order ngu ";
+    private String lydo = "Nhân viên Order ngu ";
     private int khu;
 
     /**
      * Creates new form JDialogHuyDon
      */
-    public JDialogHuyDon(JPanel parent, boolean modal, JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac,int khu, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
+    public JDialogHuyDon(JPanel parent, boolean modal, JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, int khu, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
 //        super(parent, modal);
         initComponents();
-        this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
+        this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
         this.that = that;
         this.btnVaoBan = btnVaoBan;
         this.lblBan = lblBan;
@@ -64,12 +64,12 @@ public class JDialogHuyDon extends javax.swing.JDialog {
         this.txtTong = txtTong;
         this.PanCac = PanCac;
         this.khu = khu;
-                this.txtThanhTien = txtThanhTien;
-        this.txtDis1=txtDis1;
-        this.txtDis2=txtDis2;
+        this.txtThanhTien = txtThanhTien;
+        this.txtDis1 = txtDis1;
+        this.txtDis2 = txtDis2;
         this.lblKhac.setVisible(false);
         this.txtKhac.setVisible(false);
-        this.lblHD.setText(lblHD.getText()+txtMaHD.getText());
+        this.lblHD.setText(lblHD.getText() + txtMaHD.getText());
         this.setLocationRelativeTo(null);
     }
 
@@ -221,7 +221,7 @@ public class JDialogHuyDon extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.lblKhac.setVisible(false);
         this.txtKhac.setVisible(false);
-        this.lydo="Nhân viên Order ngu ";
+        this.lydo = "Nhân viên Order ngu ";
     }//GEN-LAST:event_jRadioButton1MouseClicked
 
     private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
@@ -234,17 +234,17 @@ public class JDialogHuyDon extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:        
         this.ql.huyDon(txtMaHD.getText(), lydo);
-        String sql = "UPDATE [Table] SET [Status] = 0 WHERE IDTable = ?";         
+        String sql = "UPDATE [Table] SET [Status] = 0 WHERE IDTable = ?";
         if (ql.OrderCTT(txtMaHD, lblBan.getText()) != null) {// Kiểm tra còn đơn nào chưa thanh toán không
             this.dispose();
             return;
         }
         try {
-            JDBC.update(sql,lblBan.getText());
+            JDBC.update(sql, lblBan.getText());
         } catch (SQLException ex) {
             Logger.getLogger(QLOrder_Service.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.ql.taoTable(that,khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
+        this.ql.taoTable(that, khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

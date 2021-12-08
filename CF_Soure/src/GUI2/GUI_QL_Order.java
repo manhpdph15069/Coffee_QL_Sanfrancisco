@@ -35,9 +35,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.EventObject;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
@@ -48,7 +46,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -1216,6 +1213,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             if (e > 0) {
                 qlod.updatebnGuoi(lblBan.getText());
                 dialogHelper.alert(this, "Gửi thành công ");
+                qlod.dongC(tblOrder.getRowCount());
             }
             card.show(PanCac, "card4");
             ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
@@ -1239,7 +1237,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         this.PanOrder.setVisible(true);
         this.PanLichSu.setVisible(false);
         qlod.insertOr(txtmaHD);
-        this.row=-1;
+        this.row = -1;
         this.qlod.dongC(0);
     }//GEN-LAST:event_btnVaoBanActionPerformed
 
@@ -1585,17 +1583,19 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                     if (txtmaHD.getText().equals("")) {
                         dialogHelper.alert(PanSanPham, "Bố chưa vào bàn mà đòi thêm cái gì trời ?");
                     } else {
-                        Object[] row = {
-                            txtmaHD.getText(),
-                            tblSanPham.getValueAt(this.row, 0),
-                            tblSanPham.getValueAt(this.row, 3),
-                            tblSanPham.getValueAt(this.row, 4),
-                            tblSanPham.getValueAt(this.row, 5),
-                            1, "", "", "Xóa", false
-                        };
-                        modell.addRow(row);
-                        Total();
-                        UpdatetxtDis1();
+                        if (dialogHelper.confirm(null, "Bạn có chắc muốn thêm " + tblSanPham.getValueAt(this.row, 3) + " vào hóa đơn " + txtmaHD.getText() + " không ?")) {
+                            Object[] row = {
+                                txtmaHD.getText(),
+                                tblSanPham.getValueAt(this.row, 0),
+                                tblSanPham.getValueAt(this.row, 3),
+                                tblSanPham.getValueAt(this.row, 4),
+                                tblSanPham.getValueAt(this.row, 5),
+                                1, "", "", "Xóa", false
+                            };
+                            modell.addRow(row);
+                            Total();
+                            UpdatetxtDis1();
+                        }
                     }
                 } else {
                     if (this.row >= qlod.dongC(-1)) {
