@@ -25,6 +25,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QLEmployee_Service implements IQLEmployee_Service{
     Employee_Service dao = new Employee_Service();
+     FileNameExtensionFilter filter = new FileNameExtensionFilter(".jpg","jpg");
+            FileNameExtensionFilter filter1 = new FileNameExtensionFilter(".png","png");
     @Override
     public void insertMAEMPLOYEE(ENTITY_Employee entity) {
         dao.insert(entity);
@@ -58,8 +60,6 @@ public class QLEmployee_Service implements IQLEmployee_Service{
     public void chonAnh(JLabel lbl) {
         fileChooser.setDialogTitle("chọn ảnh đi bro");
             fileChooser.setAcceptAllFileFilterUsed(false);
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(".jpg","jpg");
-            FileNameExtensionFilter filter1 = new FileNameExtensionFilter(".png","png");
             fileChooser.addChoosableFileFilter(filter);
             fileChooser.addChoosableFileFilter(filter1);
         if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
