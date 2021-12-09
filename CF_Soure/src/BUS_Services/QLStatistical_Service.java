@@ -197,18 +197,21 @@ public class QLStatistical_Service implements IQLStatistical_Service {
     }
 
     @Override
-    public void setDataNgay(JPanel pnlNgay, Date jdateNgay) {
+    public void setDataNgay(JPanel pnlNgay, Date jdateNgay, JLabel lbltien) {
 
         List<Object[]> list = getListByTKNgay(jdateNgay);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
+        float tong=0;
         if (list != null) {
             for (Object[] o : list) {
                 String s = String.valueOf(o[0]);
                 float so = Float.valueOf(s);
                 String gio = format.format(o[1]);
                 data.addValue(so, "Số tiền", gio);
+                tong += Float.parseFloat(String.valueOf(o[0]));
             }
         }
+         lbltien.setText(n.format(tong) + " VNĐ");
         JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu ngày".toUpperCase(), "Thời gian", "Số Tiền", data,
                 PlotOrientation.VERTICAL, false, true, false);
 
@@ -259,18 +262,21 @@ public class QLStatistical_Service implements IQLStatistical_Service {
     }
 
     @Override
-    public void setDataThang(JPanel pnlNgay, int thang, int nam) {
+    public void setDataThang(JPanel pnlNgay, int thang, int nam, JLabel lbltien) {
         try {
             List<Object[]> list = getListByTKThang(thang, nam);
             DefaultCategoryDataset data = new DefaultCategoryDataset();
+            float tong =0;
             if (list != null) {
                 for (Object[] o : list) {
                     String t = String.valueOf(o[0]);
                     float tien = Float.valueOf(t);
                     String ngay = String.valueOf(formatThang.format(o[1]));
                     data.addValue(tien, "Số tiền", ngay);
+                    tong += Float.parseFloat(String.valueOf(o[0]));
                 }
             }
+             lbltien.setText(n.format(tong) + " VNĐ");
             JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu tháng".toUpperCase(), "Thời gian", "Số Tiền", data,
                     PlotOrientation.VERTICAL, false, true, false);
 
@@ -295,18 +301,21 @@ public class QLStatistical_Service implements IQLStatistical_Service {
     }
 
     @Override
-    public void setDataNam(JPanel pnlNgay, int nam) {
+    public void setDataNam(JPanel pnlNgay, int nam, JLabel lbltien) {
 
         List<Object[]> list = getListByTKNam(nam);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
+        float tong=0;
         if (list != null) {
             for (Object[] o : list) {
                 String s = String.valueOf(o[0]);
                 float so = Float.valueOf(s);
                 String thang = String.valueOf(o[1]);
                 data.addValue(so, "Số tiền", "Tháng " + thang);
+                tong += Float.parseFloat(String.valueOf(o[0]));
             }
         }
+         lbltien.setText(n.format(tong) + " VNĐ");
         JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu năm".toUpperCase(), "Thời gian", "Số Tiền", data,
                 PlotOrientation.VERTICAL, false, true, false);
 
@@ -328,18 +337,20 @@ public class QLStatistical_Service implements IQLStatistical_Service {
     }
 
     @Override
-    public void setDataKhoang(JPanel pnlNgay, Date ngayBD, Date ngayKT) {
+    public void setDataKhoang(JPanel pnlNgay, Date ngayBD, Date ngayKT, JLabel lbltien) {
         List<Object[]> list = getListByTKKhoangList(ngayBD, ngayKT);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        float tong=0;
         if (list != null) {
             for (Object[] o : list) {
                 String s = String.valueOf(o[0]);
                 float so = Float.valueOf(s);
                 String ngay = formatThang.format(o[1]);
-
                 dataset.addValue(so, "Số tiền", ngay);
+                tong += Float.parseFloat(String.valueOf(o[0]));
             }
         }
+         lbltien.setText(n.format(tong) + " VNĐ");
         JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu theo khoảng".toUpperCase(), "Thời gian", "Số Tiền", dataset,
                 PlotOrientation.VERTICAL, false, true, false);
 

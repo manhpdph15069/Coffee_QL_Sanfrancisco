@@ -345,32 +345,32 @@ public class GUI_Table extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if (Check.checkNullText(txtViTri)) {
-            if (Check.checkTable(txtViTri.getText())) {
-
-                int vt = (Integer.parseInt(txtViTri.getText()));
-                List<ENTITY_Table> list = tbdao.select_viTri(vt);
-                if (list.size() == 0) {
-                    if (ThongBao.comfirm(this, "Bạn chắc chắn muốn thêm")) {
-
-                        insert();
-                    }
-                } else {
-                    List<ENTITY_Table> ct = tbdao.select_CheckTrung(vt);
-                    ENTITY_Area tt = (ENTITY_Area) cbbKhu.getSelectedItem();
-                    if (ct.size() == 0) {
-                        if (ThongBao.comfirm(this, "Bạn chắc chắn muốn thêm")) {
-
-                            tbdao.update_trung(String.valueOf(tt.getIDArea()), vt);
-                            load();
-                        }
-                    } else {
-                        ThongBao.alert(this, "Vị trí đã tồn tại");
-                    }
-                }
-            }
-
-        }
+//        if (Check.checkNullText(txtViTri)) {
+//            if (Check.checkTable(txtViTri.getText())) {
+//
+//                int vt = (Integer.parseInt(txtViTri.getText()));
+//         //       List<ENTITY_Table> list = tbdao.select_viTri(vt);
+//                if (list.size() == 0) {
+//                    if (ThongBao.comfirm(this, "Bạn chắc chắn muốn thêm")) {
+//
+//                        insert();
+//                    }
+//                } else {
+//                    List<ENTITY_Table> ct = tbdao.select_CheckTrung(vt);
+//                    ENTITY_Area tt = (ENTITY_Area) cbbKhu.getSelectedItem();
+//                    if (ct.size() == 0) {
+//                        if (ThongBao.comfirm(this, "Bạn chắc chắn muốn thêm")) {
+//
+//                            tbdao.update_trung(String.valueOf(tt.getIDArea()), vt);
+//                            load();
+//                        }
+//                    } else {
+//                        ThongBao.alert(this, "Vị trí đã tồn tại");
+//                    }
+//                }
+//            }
+//
+//        }
 
 
     }//GEN-LAST:event_btnThemActionPerformed

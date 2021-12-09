@@ -21,21 +21,24 @@ public interface IQLStatistical_Service {
     List<Object[]> getListOfArray(String sql, String[] cols, Object... args);
 
     public List<Object[]> getListByTKNgay(Date ngayDate);
-    public void setDataTKTONG(JPanel pnlNgay,JLabel lbltien);
-public void setTongMonvaHDTC(JLabel lblTM, JLabel lblHD);
-    public void setDataNgay(JPanel pnlNgay, Date jdateNgay);
 
-    public List<Object[]> getListByTKThang(int thang,int nam);
+    public void setDataTKTONG(JPanel pnlNgay, JLabel lbltien);
 
-   public void setDataThang(JPanel pnlNgay, int thang,int nam);
+    public void setTongMonvaHDTC(JLabel lblTM, JLabel lblHD);
+
+    public void setDataNgay(JPanel pnlNgay, Date jdateNgay, JLabel lbltien);
+
+    public List<Object[]> getListByTKThang(int thang, int nam);
+
+    public void setDataThang(JPanel pnlNgay, int thang, int nam, JLabel lbltien);
+
+    public void setDataNam(JPanel pnlNgay, int nam, JLabel lbltien);
 
     public List<Object[]> getListByTKNam(int nam);
 
-    public void setDataNam(JPanel pnlNgay, int nam);
+    public void setDataKhoang(JPanel pnlNgay, Date ngayBD, Date ngayKT, JLabel lbltien);
 
     public List<Object[]> getListByTKKhoangList(Date ngayBD, Date ngayKT);
-
-    public void setDataKhoang(JPanel pnlNgay, Date ngayBD, Date ngayKT);
 
     public List<Object[]> getListTongMonvaHDNgay(Date date);
 
@@ -58,7 +61,8 @@ public void setTongMonvaHDTC(JLabel lblTM, JLabel lblHD);
     void guiBCN(int nam);
 
     void guiBCNgay(Date ngay);
-    void guiBCThang(int thang,int nam);
+
+    void guiBCThang(int thang, int nam);
 
     public void fillTableSanPham(JTable tbl, JTable tbl2, JLabel lbl, JLabel lblTM, JLabel lbl2, JLabel lblTM2);
 

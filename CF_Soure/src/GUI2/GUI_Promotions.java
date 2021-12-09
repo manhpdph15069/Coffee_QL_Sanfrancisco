@@ -20,7 +20,6 @@ import Utils.dialogHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JMenuItem;
@@ -33,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
  * @author PC
  */
 public class GUI_Promotions extends javax.swing.JPanel {
-    SimpleDateFormat fomat=new SimpleDateFormat("dd/MM/yyyy");
+
     Area_Service khu;
     Table_Service tbdao;
     IQLTable_Service daotb;
@@ -55,8 +54,8 @@ public class GUI_Promotions extends javax.swing.JPanel {
     }
 
     void init() {
-        filltoTable();
-        clearForm();
+//        filltoTable();
+//        clearForm();
         tbdao = new Table_Service();
         daotb = new QLTable_Service();
         khu = new Area_Service();
@@ -177,8 +176,8 @@ public class GUI_Promotions extends javax.swing.JPanel {
                     pro.getIDPro(),
                     pro.getName(),
                     pro.getDiscountPromo() + "%",
-                    fomat.format(pro.getStartPromo()),
-                    fomat.format(pro.getEndPromo()),
+                    dateHelper.dateToString(pro.getStartPromo(), "dd/MM/yyyy"),
+                    dateHelper.dateToString(pro.getEndPromo(), "dd/MM/yyyy"),
                     t};
                 model.addRow(row);
             }
@@ -247,12 +246,9 @@ public class GUI_Promotions extends javax.swing.JPanel {
     }
 
     void update() {
-        int id=(int) tblGiamgia.getValueAt(row,0);
-        ENTITY_Promotion pro1=dao.findById(String.valueOf(id));
         ENTITY_Promotion pro = this.getform();
         try {
             dao.update(pro);
-            dao.khuyemmai(pro.getName(),pro1.getName());
             filltoTable();
             dialogHelper.alert(this, "OK");
             clearForm();
@@ -566,28 +562,32 @@ public class GUI_Promotions extends javax.swing.JPanel {
                 .addGroup(jpTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpTBLayout.createSequentialGroup()
-                        .addGroup(jpTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jpTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpTBLayout.createSequentialGroup()
-                                    .addComponent(jLabel10)
-                                    .addGap(41, 41, 41)
-                                    .addComponent(txtViTri))
-                                .addGroup(jpTBLayout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpTBLayout.createSequentialGroup()
+                        .addGroup(jpTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpTBLayout.createSequentialGroup()
+                                .addGroup(jpTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jpTBLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addGroup(jpTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpTBLayout.createSequentialGroup()
+                                                .addComponent(jLabel9)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(txtMaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jpTBLayout.createSequentialGroup()
+                                                .addComponent(jLabel11)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jpTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtViTri)
+                                                    .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))))))
+                                .addGap(110, 110, 110)
+                                .addGroup(jpTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnThem)
+                                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jpTBLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtMaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(110, 110, 110)
-                        .addGroup(jpTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnThem)
-                            .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel10)))
                         .addContainerGap(228, Short.MAX_VALUE))))
             .addGroup(jpTBLayout.createSequentialGroup()
                 .addGap(94, 94, 94)
@@ -665,7 +665,6 @@ public class GUI_Promotions extends javax.swing.JPanel {
         });
 
         jButton1.setBackground(new java.awt.Color(0, 102, 51));
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jButton1.setText("Thêm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -674,7 +673,6 @@ public class GUI_Promotions extends javax.swing.JPanel {
         });
 
         jButton2.setBackground(new java.awt.Color(0, 102, 51));
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jButton2.setText("Sửa");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -683,7 +681,6 @@ public class GUI_Promotions extends javax.swing.JPanel {
         });
 
         jButton3.setBackground(new java.awt.Color(0, 102, 51));
-        jButton3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jButton3.setText("Xóa");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -692,7 +689,6 @@ public class GUI_Promotions extends javax.swing.JPanel {
         });
 
         jButton4.setBackground(new java.awt.Color(0, 102, 51));
-        jButton4.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jButton4.setText("Clear");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -742,7 +738,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(424, Short.MAX_VALUE)
+                .addContainerGap(432, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -865,7 +861,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (Check.checkNullText(txtName)
                 && Check.checkNullText(txtChietKhau)) {
-            if (Check.checkso2(txtChietKhau)) {
+            if (Check.checkName(txtName)) {
                 insert();
             }
         }
@@ -875,7 +871,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (Check.checkNullText(txtName)
                 && Check.checkNullText(txtChietKhau)) {
-            if (Check.checkso2(txtChietKhau)) {
+            if (Check.checkName(txtName)) {
                 update();
             }
         }
@@ -926,9 +922,9 @@ public class GUI_Promotions extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         if (Check.checkNullText(txtViTri)) {
             if (Check.checkTable(txtViTri.getText())) {
-
+        ENTITY_Area tt = (ENTITY_Area) cbbKhu.getSelectedItem();
                 int vt = (Integer.parseInt(txtViTri.getText()));
-                List<ENTITY_Table> list = tbdao.select_viTri(vt);
+                List<ENTITY_Table> list = tbdao.select_viTri(vt,tt.getIDArea());
                 if (list.size() == 0) {
                     if (ThongBao.comfirm(this, "Bạn chắc chắn muốn thêm")) {
 
@@ -936,7 +932,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
                     }
                 } else {
                     List<ENTITY_Table> ct = tbdao.select_CheckTrung(vt);
-                    ENTITY_Area tt = (ENTITY_Area) cbbKhu.getSelectedItem();
+                 //   ENTITY_Area tt = (ENTITY_Area) cbbKhu.getSelectedItem();
                     if (ct.size() == 0) {
                         if (ThongBao.comfirm(this, "Bạn chắc chắn muốn thêm")) {
 
