@@ -674,6 +674,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         JDialog_ChupAnh ok=new JDialog_ChupAnh(null,true,lblAnh);
 //        ok.thongpro();
         ok.setVisible(true);
+        lblAnh.getToolTipText();
          ok.addWindowListener(new WindowAdapter()
     {
       public void windowClosed(WindowEvent e)

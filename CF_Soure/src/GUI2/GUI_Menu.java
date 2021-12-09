@@ -30,7 +30,7 @@ import javax.swing.JTextField;
  * @author phamd
  */
 public class GUI_Menu extends javax.swing.JPanel {
-
+    
     JPopupMenu menu = new JPopupMenu("Popup");
     int row = -1;
     JFileChooser fileChooser = new JFileChooser();
@@ -50,7 +50,7 @@ public class GUI_Menu extends javax.swing.JPanel {
         init();
 //        dao.taoIDType(lblType);
     }
-
+    
     void init() {
         dao.fillToTable(tblSanPham);
         dao.selectTypeName();
@@ -435,7 +435,7 @@ public class GUI_Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_lblHinhMouseClicked
 
     private void cboLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLoaiActionPerformed
-
+        
         if (cboLoai.getSelectedItem() != null) {
             if (!cboLoai.getSelectedItem().equals(cboLoai.getSelectedItem().toString())) {
                 ENTITY_ProductType sp = (ENTITY_ProductType) cboLoai.getSelectedItem();
@@ -451,7 +451,8 @@ public class GUI_Menu extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         if (Check.checkNullText(txtTen)
                 && Check.checkNullText(txtGia)) {
-            if (Check.checkName(txtTen)) {
+            if (Check.checkName(txtTen)
+                    && Check.checkso3(txtGia)) {
                 SanPham sp = this.getForm();
                 try {
                     int p = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn thêm sản phẩm này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
@@ -466,7 +467,7 @@ public class GUI_Menu extends javax.swing.JPanel {
                     dialogHelper.alert(this, "Lỗi Khi Thêm");
                     e.printStackTrace();
                 }
-
+                
             }
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -474,7 +475,8 @@ public class GUI_Menu extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         if (Check.checkNullText(txtTen)
                 && Check.checkNullText(txtGia)) {
-            if (Check.checkName(txtTen)) {
+            if (Check.checkName(txtTen)
+                    && Check.checkso3(txtGia)) {
                 SanPham sp = getForm();
                 try {
                     int p = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn Sửa sản phẩm này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
@@ -528,14 +530,14 @@ public class GUI_Menu extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimKiemKeyPressed
 
     private void cboSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSizeActionPerformed
-
+        
         if (cboSize.getSelectedItem() != null) {
             if (!cboSize.getSelectedItem().equals(cboSize.getSelectedItem().toString())) {
                 SanPham sp = (SanPham) cboSize.getSelectedItem();
                 lblType.setText("" + sp.getIDType());
             }
         }
-    }                                       
+    }    
 //GEN-LAST:event_cboSizeActionPerformed
 
     private void tblSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMousePressed
@@ -609,7 +611,7 @@ public class GUI_Menu extends javax.swing.JPanel {
         }
         Test();
     }//GEN-LAST:event_tblSanPhamMouseClicked
-
+    
     private void setForm(SanPham sp) {
         lblID.setText(sp.getIDProduct());
         txtTen.setText(sp.getProductName());
@@ -625,7 +627,7 @@ public class GUI_Menu extends javax.swing.JPanel {
         lblType.setText(String.valueOf(sp.getIDType()));
 //       cboLoai.setToolTipText(String.valueOf(sp.getIDType()));
     }
-
+    
     SanPham getForm() {
         SanPham sp = new SanPham();
         sp.setIDProduct(lblID.getText());
@@ -640,7 +642,7 @@ public class GUI_Menu extends javax.swing.JPanel {
         sp.setIDType(Integer.valueOf(lblType.getText()));
         return sp;
     }
-
+    
     public void Test() {
         menu.removeAll();
         JMenuItem item = new JMenuItem("Xem chi tiết");
@@ -658,7 +660,7 @@ public class GUI_Menu extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 khoiphuc();
             }
-
+            
         });
         menu.add(item1);
         item2.addActionListener(new ActionListener() {
@@ -669,7 +671,7 @@ public class GUI_Menu extends javax.swing.JPanel {
         });
         menu.add(item2);
     }
-
+    
     void edit() {
         try {
             cboSize.removeAllItems();
@@ -683,9 +685,9 @@ public class GUI_Menu extends javax.swing.JPanel {
             dialogHelper.alert(this, "Lỗi");
             e.printStackTrace();
         }
-
+        
     }
-
+    
     void clear() {
         SanPham sp = new SanPham();
         this.setForm(sp);
@@ -698,7 +700,7 @@ public class GUI_Menu extends javax.swing.JPanel {
         btnSua.setEnabled(false);
         btnXoa.setEnabled(false);
     }
-
+    
     void khoiphuc() {
         this.row = tblSanPham.getSelectedRow();
         if (this.row >= 0) {
@@ -719,7 +721,7 @@ public class GUI_Menu extends javax.swing.JPanel {
             }
         }
     }
-
+    
     void xoa() {
         this.row = tblSanPham.getSelectedRow();
         if (this.row >= 0) {
@@ -740,30 +742,30 @@ public class GUI_Menu extends javax.swing.JPanel {
             }
         }
     }
-
+    
     void first() {
         this.row = 0;
         this.edit();
     }
-
+    
     void next() {
         if (this.row < tblSanPham.getRowCount() - 1) {
             this.row++;
             this.edit();
         }
     }
-
+    
     void prev() {
         if (this.row > 0) {
             this.row--;
             this.edit();
         }
     }
-
+    
     void last() {
         this.row = tblSanPham.getRowCount() - 1;
         this.edit();
-
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn1;

@@ -22,7 +22,7 @@ import javax.swing.JTextField;
  * @author phamd
  */
 public class Check {
-    
+
     public static boolean checkNullText(JTextField txt) {
         txt.setBackground(white);
         if (txt.getText().trim().length() > 0) {
@@ -33,33 +33,34 @@ public class Check {
             return false;
         }
     }
-    
+
     public static boolean checkCode(String txt) {
-       // txt.setBackground(white);
-       // String id = txt.getText;
+        // txt.setBackground(white);
+        // String id = txt.getText;
         String rgx = "[0-9]{5,6}";
         if (txt.matches(rgx)) {
             return true;
         } else {
-           // txt.setBackground(pink);
+            // txt.setBackground(pink);
             ThongBao.alert(null, " phải là số");
             return false;
         }
     }
+
     public static boolean checkTable(String txt) {
-       // txt.setBackground(white);
-       // String id = txt.getText;
+        // txt.setBackground(white);
+        // String id = txt.getText;
         String rgx = "[0-9]{1,2}";
         if (txt.matches(rgx)) {
             return true;
         } else {
-           // txt.setBackground(pink);
+            // txt.setBackground(pink);
             ThongBao.alert(null, " phải là số");
             return false;
         }
     }
-    
-        public static boolean checkPass(JPasswordField txt) {
+
+    public static boolean checkPass(JPasswordField txt) {
         txt.setBackground(white);
         if (txt.getPassword().length > 2 && txt.getPassword().length < 17) {
             return true;
@@ -69,8 +70,7 @@ public class Check {
             return false;
         }
     }
-      
-        
+
     public static boolean checkNullPass(JPasswordField txt) {
         txt.setBackground(white);
         if (txt.getPassword().length > 0) {
@@ -81,8 +81,8 @@ public class Check {
             return false;
         }
     }
-        
-       public static boolean isValidDate(String inDate) {
+
+    public static boolean isValidDate(String inDate) {
 
         if (inDate == null) {
             return false;
@@ -115,10 +115,9 @@ public class Check {
             dialogHelper.alert(null, " không đúng định dạng Date.");
             return false;
         }
-    } 
-    
-    
-        public static boolean checkName(JTextField txt) {
+    }
+
+    public static boolean checkName(JTextField txt) {
         txt.setBackground(white);
         String id = txt.getText();
         String rgx = "^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ ]{3,25}$";
@@ -130,9 +129,8 @@ public class Check {
             return false;
         }
     }
-        
-        
-            //gồm 10 số 
+
+    //gồm 10 số 
     //các đầu 3 số của nhà mạng
     public static boolean checkSDT(JTextField txt) {
         txt.setBackground(white);
@@ -146,11 +144,11 @@ public class Check {
             return false;
         }
     }
-    
-     public static boolean checkEmail(JTextField txt) {
+
+    public static boolean checkEmail(JTextField txt) {
         txt.setBackground(white);
         String id = txt.getText();
-        String rgx =  "^[a-zA-Z0-9_+&*-]+(?:\\."
+        String rgx = "^[a-zA-Z0-9_+&*-]+(?:\\."
                 + "[a-zA-Z0-9_+&*-]+)*@"
                 + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
                 + "A-Z]{2,7}$";//Biểu Thúc chính quy;
@@ -162,17 +160,45 @@ public class Check {
             return false;
         }
     }
+
     public static boolean checkso(String txt) {
-       // txt.setBackground(white);
-       // String id = txt.getText;
+        // txt.setBackground(white);
+        // String id = txt.getText;
         String rgx = "\\d+";
         if (txt.matches(rgx)) {
             return true;
         } else {
-           // txt.setBackground(pink);
+            // txt.setBackground(pink);
             ThongBao.alert(null, " Số ngày gia hạn phải là số");
             return false;
         }
     }
-     
+
+    public static boolean checkso2(JTextField txt) {
+        // txt.setBackground(white);
+        // String id = txt.getText;
+        String rgx = "\\d+";
+        String id = txt.getText();
+        if (id.matches(rgx)) {
+            return true;
+        } else {
+            // txt.setBackground(pink);
+            ThongBao.alert(null, "Chiết Khấu Phải Là Số");
+            return false;
+        }
+    }
+
+    public static boolean checkso3(JTextField txt) {
+        // txt.setBackground(white);
+        // String id = txt.getText;
+        String rgx = "\\d+";
+        String id = txt.getText();
+        if (id.matches(rgx)) {
+            return true;
+        } else {
+            // txt.setBackground(pink);
+            ThongBao.alert(null, "Giá Phải Là Số");
+            return false;
+        }
+    }
 }

@@ -20,6 +20,7 @@ import Utils.dialogHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JMenuItem;
@@ -32,7 +33,7 @@ import javax.swing.table.DefaultTableModel;
  * @author PC
  */
 public class GUI_Promotions extends javax.swing.JPanel {
-
+    SimpleDateFormat fomat=new SimpleDateFormat("dd/MM/yyyy");
     Area_Service khu;
     Table_Service tbdao;
     IQLTable_Service daotb;
@@ -54,8 +55,8 @@ public class GUI_Promotions extends javax.swing.JPanel {
     }
 
     void init() {
-//        filltoTable();
-//        clearForm();
+        filltoTable();
+        clearForm();
         tbdao = new Table_Service();
         daotb = new QLTable_Service();
         khu = new Area_Service();
@@ -176,8 +177,8 @@ public class GUI_Promotions extends javax.swing.JPanel {
                     pro.getIDPro(),
                     pro.getName(),
                     pro.getDiscountPromo() + "%",
-                    dateHelper.dateToString(pro.getStartPromo(), "dd/MM/yyyy"),
-                    dateHelper.dateToString(pro.getEndPromo(), "dd/MM/yyyy"),
+                    fomat.format(pro.getStartPromo()),
+                    fomat.format(pro.getEndPromo()),
                     t};
                 model.addRow(row);
             }
@@ -246,9 +247,12 @@ public class GUI_Promotions extends javax.swing.JPanel {
     }
 
     void update() {
+        int id=(int) tblGiamgia.getValueAt(row,0);
+        ENTITY_Promotion pro1=dao.findById(String.valueOf(id));
         ENTITY_Promotion pro = this.getform();
         try {
             dao.update(pro);
+            dao.khuyemmai(pro.getName(),pro1.getName());
             filltoTable();
             dialogHelper.alert(this, "OK");
             clearForm();
@@ -861,7 +865,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (Check.checkNullText(txtName)
                 && Check.checkNullText(txtChietKhau)) {
-            if (Check.checkName(txtName)) {
+            if (Check.checkso2(txtChietKhau)) {
                 insert();
             }
         }
@@ -871,7 +875,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (Check.checkNullText(txtName)
                 && Check.checkNullText(txtChietKhau)) {
-            if (Check.checkName(txtName)) {
+            if (Check.checkso2(txtChietKhau)) {
                 update();
             }
         }

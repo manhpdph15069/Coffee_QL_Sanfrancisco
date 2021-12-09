@@ -165,7 +165,7 @@ public class JDialog_ChupAnh extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jButton1.setVisible(true);
+//        jButton1.setVisible(true);
         jButton2.setEnabled(false);
         myThread.runnable = false;
         String name;
@@ -178,6 +178,7 @@ public class JDialog_ChupAnh extends javax.swing.JDialog {
         webSource.release();
         dialogHelper.alert(this, "Lưu thành công");
         lblJLabel.setIcon(XImage.read(name + ".jpg"));
+        lblJLabel.setToolTipText(name+".jpg");
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 

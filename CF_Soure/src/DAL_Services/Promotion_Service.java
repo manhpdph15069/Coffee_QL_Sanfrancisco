@@ -26,7 +26,7 @@ public class Promotion_Service implements IPromotions {
     String DELETE_SQL = "UPDATE Promotions SET Status =2 WHERE [IDPromo] = ?";
     String SELECT_ALL_SQL = "Select * from Promotions where [Status]=1 OR [Status]=0";
     String SELECT_BY_ID_SQL = "Select * from Promotions where IDPromo=?";
-
+    String updateOrder="Update [Order] Set NamePromo=? where NamePromo=?";
     @Override
     public void insert(ENTITY_Promotion entity) {
         try {
@@ -106,6 +106,13 @@ public class Promotion_Service implements IPromotions {
         String sql = "UPDATE Promotions SET Status=1 WHERE IDPromo = ?";
         try {
             JDBC.update(sql, ID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+            public void khuyemmai(String name, String name2) {
+        try {
+            JDBC.update(updateOrder,name,name2);
         } catch (Exception e) {
             e.printStackTrace();
         }
