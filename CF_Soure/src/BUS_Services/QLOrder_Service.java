@@ -1146,16 +1146,24 @@ public class QLOrder_Service implements IQLOrder_Service {
                 lbl.setText("Mã thẻ không tồn tại!");
                 lbl.setForeground(Color.red);
                 txtdis1.setText("0");
-//                    ResetPnInfor();
             } else {
-                lbl.setText("Thành công.");
-                lbl.setForeground(Color.BLUE);
-                lbIDCus.setText(rs.getString(1));
-                lbNameCus.setText(rs.getString(2));
-                lbDateEndCus.setText(rs.getString(4));
-                lbDateCus.setText(rs.getString(3));
-                lbDisCus.setText(rs.getString(7) + "%");
-                txtdis1.setText(rs.getString(7));
+                if (rs.getInt(8) == 0) {
+                    lbl.setText("Thẻ hết hạn rồi .");
+                    lbl.setForeground(Color.RED);
+                    lbIDCus.setText(rs.getString(1));
+                    lbNameCus.setText(rs.getString(2));
+                    lbDateEndCus.setText(rs.getString(4));
+                    lbDateCus.setText(rs.getString(3));
+                } else {
+                    lbl.setText("Thành công.");
+                    lbl.setForeground(Color.BLUE);
+                    lbIDCus.setText(rs.getString(1));
+                    lbNameCus.setText(rs.getString(2));
+                    lbDateEndCus.setText(rs.getString(4));
+                    lbDateCus.setText(rs.getString(3));
+                    lbDisCus.setText(rs.getString(7) + "%");
+                    txtdis1.setText(rs.getString(7));
+                }
             }
         } catch (SQLException ex) {
             dialogHelper.alert(null, "Lỗi 101:: Không thể kết nối đến máy chủ");
@@ -1176,10 +1184,10 @@ public class QLOrder_Service implements IQLOrder_Service {
     }
 
     @Override
-    public void UpdateKM(String IDCust, String NamePromo, String IDOrder,String DiscountOrder) {
+    public void UpdateKM(String IDCust, String NamePromo, String IDOrder, String DiscountOrder) {
         String sql = "UPDATE [Order] SET IDCust = ?,NamePromo = ?,DiscountOrder = ?  WHERE IDOrder = ?";
         try {
-            JDBC.update(sql, IDCust, NamePromo,DiscountOrder, IDOrder);
+            JDBC.update(sql, IDCust, NamePromo, DiscountOrder, IDOrder);
         } catch (Exception e) {
             e.printStackTrace();
             dialogHelper.alert(null, "Lỗi 101:: Không thể kết nối đến máy chủ");
