@@ -1062,7 +1062,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                         txtMaKH.grabFocus();
                         return;
                     } else {
-                        qlod.UpdateKM(lbIDCus.getText(), null, txtmaHD.getText());
+                        qlod.UpdateKM(lbIDCus.getText(), null, txtmaHD.getText(),txtDis1.getText());
                         qlod.xoaNhom(lblBan.getToolTipText());
                         qlod.thanhToan(txtmaHD);
                         qlod.updatebnThanhToan(txtmaHD);
@@ -1080,7 +1080,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 goiTaoBan(khu);
                 card.show(PanCac, "card4");
             } else {
-                qlod.UpdateKM(null, cbbkm.getSelectedItem().toString(), txtmaHD.getText());
+                qlod.UpdateKM(null, cbbkm.getSelectedItem().toString(), txtmaHD.getText(),txtDis1.getText());
                 qlod.xoaNhom(lblBan.getToolTipText());
                 qlod.thanhToan(txtmaHD);
                 qlod.updatebnThanhToan(txtmaHD);

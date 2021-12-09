@@ -76,7 +76,7 @@ public interface IQLOrder_Service {
     
     public void UpdatetxtDis1(JTextField txtTong,JTextField txtDis1,JTextField txtDis2,JTextField txtPay);
     
-    public void UpdateKM(String IDCust,String NamePromo,String IDOrder);
+    public void UpdateKM(String IDCust,String NamePromo,String IDOrder,String DiscountOrder);
     
     public String ChuongTrinhKM (String IDOrder,JTextField txtMaKH);
 }

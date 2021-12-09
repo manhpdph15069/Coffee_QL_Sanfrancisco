@@ -24,6 +24,15 @@ public class ENTITY_Order {
     private String IDCust = null;
     private String NamePromo = null;
     private int Status = 1;
+    private int DiscountOrder = 0;
+
+    public int getDiscountOrder() {
+        return DiscountOrder;
+    }
+
+    public void setDiscountOrder(int DiscountOrder) {
+        this.DiscountOrder = DiscountOrder;
+    }
 
     public ENTITY_Order() {
     }

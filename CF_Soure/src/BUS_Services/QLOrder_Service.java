@@ -105,7 +105,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     private javax.swing.JMenuItem mnaddNhom;
     private DefaultTableModel model;
 
-    String sql_all = "SELECT [IDProduct],ProductName,Price,Image,Status,TypeName,Size FROM [Product] Join ProductType on Product.IDType = ProductType.IDType WHERE Product.Status =1";
+    String sql_all = "SELECT [IDProduct],ProductName,Price,Image,Product.Status,TypeName,Size FROM [Product] Join ProductType on Product.IDType = ProductType.IDType WHERE Product.Status =1";
     String SQL_liSu = "SELECT DISTINCT OrderDetail.IDOrder,TimeOder,EMP.NameEMP,Cus.CusName,OD.[Status] FROM OrderDetail  \n"
             + " JOIN [Order] OD ON OD.IDOrder = OrderDetail.IDOrder\n"
             + " LEFT JOIN Employee EMP ON EMP.UsernameEMP = OD.UsernameEMP\n"
@@ -1176,10 +1176,10 @@ public class QLOrder_Service implements IQLOrder_Service {
     }
 
     @Override
-    public void UpdateKM(String IDCust, String NamePromo, String IDOrder) {
-        String sql = "UPDATE [Order] SET IDCust = ?,NamePromo = ?  WHERE IDOrder = ?";
+    public void UpdateKM(String IDCust, String NamePromo, String IDOrder,String DiscountOrder) {
+        String sql = "UPDATE [Order] SET IDCust = ?,NamePromo = ?,DiscountOrder = ?  WHERE IDOrder = ?";
         try {
-            JDBC.update(sql, IDCust, NamePromo, IDOrder);
+            JDBC.update(sql, IDCust, NamePromo,DiscountOrder, IDOrder);
         } catch (Exception e) {
             e.printStackTrace();
             dialogHelper.alert(null, "Lỗi 101:: Không thể kết nối đến máy chủ");

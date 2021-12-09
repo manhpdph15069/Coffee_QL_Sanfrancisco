@@ -97,23 +97,26 @@ public class QLHoaDOn_Service {
         String tt = null;
         String doUong = "";
         String nv = "";
-        float tongTien = 0;
+        double tongTien = 0;
+        double Dis=0;
         List<Object[]> list = getListHoaDon();
         if (list != null) {
-            for (Object[] o : list) {
+            for (Object[] o : list) {                
                 List<ENTITY_Product> listdoUong = getListDoUong(String.valueOf(o[0]));
                 doUong = "";
+                tongTien = Float.parseFloat(String.valueOf(o[7]));
                 for (ENTITY_Product odu : listdoUong) {
                     doUong = doUong + odu.getProductName() + ",";
                 }
-
                 if (o[2] == null && o[3] == null) {
                     tongTien = Float.parseFloat(String.valueOf(o[7]));
                 } else {
-                    if (o[2]!=null) {
-                        tongTien = Float.parseFloat(String.valueOf(o[7])) - ((Float.parseFloat(String.valueOf(o[7])) * Float.parseFloat(String.valueOf(o[10]))) / 100);
-                    } else {
-                        tongTien = Float.parseFloat(String.valueOf(o[7])) - ((Float.parseFloat(String.valueOf(o[7])) * Float.parseFloat(String.valueOf(o[9]))) / 100);
+                    if (o[2]!=null) {                        
+                        Dis = (Double.valueOf(String.valueOf(o[7])) * Double.valueOf(String.valueOf(o[10]))) / 100;
+                        tongTien = tongTien-Dis;
+                    } else {                        
+                        Dis = (Double.valueOf(String.valueOf(o[7])) * Double.valueOf(String.valueOf(o[9]))) / 100;
+                        tongTien = tongTien-Dis;
                     }
                 }
 
