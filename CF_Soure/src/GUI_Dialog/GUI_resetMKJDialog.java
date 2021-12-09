@@ -54,7 +54,7 @@ public class GUI_resetMKJDialog extends javax.swing.JDialog {
         btnReset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Hện Thống Đặt Lại Mặt Khẩu");
+        setTitle("Hệ thống đặt lại mật khẩu");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));

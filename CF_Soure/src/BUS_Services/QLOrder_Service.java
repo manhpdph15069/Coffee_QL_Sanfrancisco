@@ -121,7 +121,7 @@ public class QLOrder_Service implements IQLOrder_Service {
             + " LEFT JOIN Employee EMP ON EMP.UsernameEMP = OD.UsernameEMP\n"
             + "JOIN ProductType on PR.IDType = ProductType.IDType\n"
             + "WHERE OrderDetail.IDOrder = ? ";
-    String thanhToan = "UPDATE [Order] SET [Status] = 2 WHERE IDOrder = ?";
+    String thanhToan = "UPDATE [Order] SET [Status] = 2,[Reason] = ?  WHERE IDOrder = ?";
     String chuenBan = "UPDATE OrderDetail SET IDTable = ?,Note = ? WHERE IDOrder = ?";
 
     public QLOrder_Service(JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
@@ -937,9 +937,16 @@ public class QLOrder_Service implements IQLOrder_Service {
 
     @Override
     public void thanhToan(JTextField txtMaHD) {
-
+        String s = "";
+        if (Auth.isAdmin()) {
+            System.out.println("----");
+            s= "Admin"+" thanh toán lúc : "+dateHelper.Time_FORMATER.format(dateHelper.timeNow())+" | "+dateHelper.DATE_FORMATER.format(dateHelper.now());;
+        }
+        if (Auth.isLogin()) {
+            s="Nhân viên : "+Auth.user.getNameEMP()+" thanh toán lúc : "+dateHelper.Time_FORMATER.format(dateHelper.timeNow())+" | "+dateHelper.DATE_FORMATER.format(dateHelper.now());
+        }
         try {
-            JDBC.update(thanhToan, txtMaHD.getText());
+            JDBC.update(thanhToan,s, txtMaHD.getText());
         } catch (Exception e) {
             e.printStackTrace();
         }

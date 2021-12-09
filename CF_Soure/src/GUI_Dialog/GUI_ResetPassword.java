@@ -59,6 +59,7 @@ public class GUI_ResetPassword extends javax.swing.JDialog {
         txtMKcu = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Hộ thống đổi mật khẩu");
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 

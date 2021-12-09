@@ -180,13 +180,12 @@ public class GUI_sendCodeJDialog extends javax.swing.JDialog {
         this.nhanVien = dao.findById(this.txtmaNV.getText());
         if (nhanVien != null) {
             this.txtEmail.setText(nhanVien.getEmail());
-        } else {
-            dialogHelper.alert(this, "Không tìm thấy mã nhân viên :" + this.txtmaNV.getText() + " trong CSDL");
-        }
-        if (txtmaNV.getText().equalsIgnoreCase("admin")) {
+        } else if (txtmaNV.getText().equalsIgnoreCase("admin")) {
             Admin a = new Admin();
             this.txtmaNV.setText(admin);
             this.txtEmail.setText(a.select().getEmail());
+        }else{
+            dialogHelper.alert(this, "Không tìm thấy mã nhân viên :" + this.txtmaNV.getText() + " trong CSDL");
         }
     }//GEN-LAST:event_txtmaNVActionPerformed
 
