@@ -451,8 +451,7 @@ public class GUI_Menu extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         if (Check.checkNullText(txtTen)
                 && Check.checkNullText(txtGia)) {
-            if (Check.checkName(txtTen)
-                    && Check.checkso3(txtGia)) {
+            if (Check.checkso3(txtGia)) {
                 SanPham sp = this.getForm();
                 try {
                     int p = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn thêm sản phẩm này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
@@ -475,8 +474,7 @@ public class GUI_Menu extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         if (Check.checkNullText(txtTen)
                 && Check.checkNullText(txtGia)) {
-            if (Check.checkName(txtTen)
-                    && Check.checkso3(txtGia)) {
+            if (Check.checkso3(txtGia)) {
                 SanPham sp = getForm();
                 try {
                     int p = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn Sửa sản phẩm này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
@@ -706,10 +704,11 @@ public class GUI_Menu extends javax.swing.JPanel {
         if (this.row >= 0) {
             String IDProduct = (String) tblSanPham.getValueAt(this.row, 0);
             SanPham sp = dao.findById(IDProduct);
-            dialogHelper.confirm(this, "Bạn muốn Khôi Phục Sản Phẩm này?");
+            int p = JOptionPane.showConfirmDialog(this, "Bạn muốn Khôi Phục Sản Phẩm này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
+            if (p == JOptionPane.YES_OPTION){
             if (sp.getStatus() == 1) {
                 dialogHelper.alert(this, "Sản Phẩm này vẫn đang được sử dụng");
-            } else {
+            } else if(sp.getStatus()==0)  {
                 try {
                     dao.khoiphuc(IDProduct);
                     dao.fillToTable(tblSanPham);
@@ -721,18 +720,20 @@ public class GUI_Menu extends javax.swing.JPanel {
             }
         }
     }
+    }
     
     void xoa() {
         this.row = tblSanPham.getSelectedRow();
         if (this.row >= 0) {
             String IDProduct = (String) tblSanPham.getValueAt(this.row, 0);
             SanPham sp = dao.findById(IDProduct);
-            dialogHelper.confirm(this, "Sản Phẩm Này Không Còn Sử Dụng?");
+            int p = JOptionPane.showConfirmDialog(this, "Sản Phẩm Này Không Còn Sử Dụng", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
+            if (p == JOptionPane.YES_OPTION){
             if (sp.getStatus() == 0) {
                 dialogHelper.alert(this, "Sản Phẩm Đang Không sử dụng mà");
-            } else {
+            } else if(sp.getStatus()==1) {
                 try {
-                    dao.delete(IDProduct);
+                    dao.ketthuc(IDProduct);
                     dao.fillToTable(tblSanPham);
                     dialogHelper.alert(this, "Cập Nhật Thành Công");
                 } catch (Exception e) {
@@ -741,6 +742,7 @@ public class GUI_Menu extends javax.swing.JPanel {
                 }
             }
         }
+    }
     }
     
     void first() {

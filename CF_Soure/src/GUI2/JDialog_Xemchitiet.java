@@ -217,9 +217,9 @@ public class JDialog_Xemchitiet extends javax.swing.JDialog {
         lblTensp.setText(sp.getProductName());
         lblGia.setText(String.valueOf(sp.getPrice()));
         if (sp.getStatus() == 1) {
-            lblTrangThai.setText("Dang Su Dung");
+            lblTrangThai.setText("Đang Sử Dụng");
         } else {
-            lblTrangThai.setText("Khong Su Dung");
+            lblTrangThai.setText("Không Sử Dụng");
         }
         lblDanhMuc.setText(sp.getTypeName());
         if (sp.getSize() == null) {

@@ -13,6 +13,7 @@ import Utils.dialogHelper;
 import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,11 +34,16 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        init();
         lblID.setVisible(false);
         tblType.getColumnModel().getColumn(0).setMinWidth(0);
         tblType.getColumnModel().getColumn(0).setMaxWidth(0);
-        init();
         this.cbb = cbo;
+    }
+        void init() {
+        filltoTable();
+        taoID();
+        this.clearForm();
     }
 
     /**
@@ -277,11 +283,6 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
 //            }
 //        });
 //    }
-    void init() {
-        filltoTable();
-        taoID();
-        this.clearForm();
-    }
 
     void filltoTable() {
         DefaultTableModel model = (DefaultTableModel) tblType.getModel();
@@ -316,6 +317,7 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
         ENTITY_ProductType sp = new ENTITY_ProductType();
         this.setForm(sp);
         this.row = -1;
+        taoID();
         jButton1.setEnabled(true);
         jButton2.setEnabled(false);
         jButton3.setEnabled(false);
@@ -340,45 +342,53 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
 
     private void insert() {
         ENTITY_ProductType type = this.getForm();
+        int p = JOptionPane.showConfirmDialog(this, "Bạn muốn Thêm Loại Sản Phẩm này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
+            if (p == JOptionPane.YES_OPTION){
         try {
             dao.insert(type);
             filltoTable();
             clearForm();
             taoID();
-            dialogHelper.alert(this, "A! Thành Công Rồi");
+            dialogHelper.alert(this, "Thêm Thành Công");
         } catch (Exception e) {
-            dialogHelper.alert(this, "Đã được đíu đâu mà thêm");
+            dialogHelper.alert(this, "Lỗi Khi Thêm");
             e.printStackTrace();
         }
+    }
     }
 
     private void update() {
         ENTITY_ProductType type = this.getForm();
+        int p = JOptionPane.showConfirmDialog(this, "Bạn muốn Sửa Sản Phẩm này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
+            if (p == JOptionPane.YES_OPTION){
         try {
             dao.update(type);
             filltoTable();
             clearForm();
             taoID();
-            dialogHelper.alert(this, "A! Thành Công Rồi");
+            dialogHelper.alert(this, "Thêm Thành Công");
         } catch (Exception e) {
-            dialogHelper.alert(this, "Đã được đíu đâu mà Sua");
+            dialogHelper.alert(this, "Lỗi Khi Thêm");
             e.printStackTrace();
         }
+            }
     }
 
     private void delete() {
         String ID = lblID.getText();
-        dialogHelper.confirm(this, "Mày Thích Xóa Không?");
+       int p = JOptionPane.showConfirmDialog(this, "Bạn muốn Khôi Phục Sản Phẩm này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
+            if (p == JOptionPane.YES_OPTION){
         try {
             dao.delete(ID);
             filltoTable();
             clearForm();
             taoID();
-            dialogHelper.alert(this, "Xoá CMM");
+            dialogHelper.alert(this, "Xoá Thành Công");
         } catch (Exception e) {
-            dialogHelper.alert(this, "Bố éo cho Xóa");
+            dialogHelper.alert(this, "Lỗi Khi Xóa");
             e.printStackTrace();
         }
+            }
     }
 
     void edit() {

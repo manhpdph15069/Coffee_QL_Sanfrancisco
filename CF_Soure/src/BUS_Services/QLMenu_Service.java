@@ -36,8 +36,8 @@ public class QLMenu_Service implements IQLMenu_Service {
 
     String sql_all = "SELECT [IDProduct],ProductName,Price,Image,Product.Status,TypeName,Size FROM [Product]"
             + "Join ProductType on Product.IDType = ProductType.IDType where Product.[Status]=1 OR Product.[Status]=0";
-    String SELECT_BY_TypeName = "Select DISTINCT TypeName from ProductType";
-    String SELECT_BY_Size = "SELECT IDType,Size FROM ProductType WHERE TypeName =?";
+    String SELECT_BY_TypeName = "Select DISTINCT TypeName from ProductType Where Status=1";
+    String SELECT_BY_Size = "SELECT IDType,Size FROM ProductType WHERE TypeName =? AND Status=1";
     String insert = "INSERT INTO [Product]([IDProduct], [ProductName], [Price], [Image],[Status],IDType) VALUES (?, ?, ?, ?,1,?)";
 
     @Override
@@ -85,6 +85,14 @@ public class QLMenu_Service implements IQLMenu_Service {
     @Override
     public void delete(String IDProduct) {
         String sql = "UPDATE [Product] SET [Status]=2 WHERE [IDProduct] = ?";
+        try {
+            JDBC.update(sql, IDProduct);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+        public void ketthuc(String IDProduct) {
+        String sql = "UPDATE [Product] SET [Status]=0 WHERE [IDProduct] = ?";
         try {
             JDBC.update(sql, IDProduct);
         } catch (Exception e) {
@@ -198,9 +206,9 @@ public class QLMenu_Service implements IQLMenu_Service {
             String t = "";
             for (SanPham pro : list) {
                 if (pro.getStatus() == 1) {
-                    t = "Dang su dung";
+                    t = "Đang Sử Dụng";
                 } else if (pro.getStatus() == 0) {
-                    t = "Khong su dung";
+                    t = "Không Sử Dụng";
                 } else if (pro.getStatus() == 2) {
                     t = "";
                 }

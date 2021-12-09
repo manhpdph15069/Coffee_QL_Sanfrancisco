@@ -25,7 +25,7 @@ public class ProductType_Service implements IProductType_Service {
     String INSERT_SQL = "Insert into ProductType(IDType,TypeName,Size,Status) Values(?,?,?,1)";
     String UPDATE_SQL = "Update ProductType Set TypeName=?,Size=? Where IDType=?";
     String DELETE_SQL = "Update ProductType set Status=0 where IDType=?";
-    String SELECT_ALL_SQL = "Select * from [ProductType] where Status=1";
+    String SELECT_ALL_SQL = "Select * from [ProductType] Where Status=1";
     String SELECT_BY_ID_SQL = "Select * from ProductType Where IDType=?";
 
     @Override
@@ -58,6 +58,7 @@ public class ProductType_Service implements IProductType_Service {
         try {
             JDBC.update(DELETE_SQL, IDType);
         } catch (SQLException ex) {
+            ex.printStackTrace();
             Logger.getLogger(ProductType_Service.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

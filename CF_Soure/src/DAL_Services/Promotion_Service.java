@@ -26,7 +26,9 @@ public class Promotion_Service implements IPromotions {
     String DELETE_SQL = "UPDATE Promotions SET Status =2 WHERE [IDPromo] = ?";
     String SELECT_ALL_SQL = "Select * from Promotions where [Status]=1 OR [Status]=0";
     String SELECT_BY_ID_SQL = "Select * from Promotions where IDPromo=?";
-    String updateOrder="Update [Order] Set NamePromo=? where NamePromo=?";
+    String updateOrder = "Update [Order] Set NamePromo=? where NamePromo=?";
+    String DELETE_SQL2 = "UPDATE Promotions SET Status =0 WHERE [IDPromo] = ?";
+
     @Override
     public void insert(ENTITY_Promotion entity) {
         try {
@@ -61,6 +63,13 @@ public class Promotion_Service implements IPromotions {
     public void delete(String ID) {
         try {
             JDBC.update(DELETE_SQL, ID);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductType_Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        public void delete2(String ID) {
+        try {
+            JDBC.update(DELETE_SQL2, ID);
         } catch (SQLException ex) {
             Logger.getLogger(ProductType_Service.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -102,7 +111,8 @@ public class Promotion_Service implements IPromotions {
             throw new RuntimeException(e);
         }
     }
-      public void khoiphuc(String ID) {
+
+    public void khoiphuc(String ID) {
         String sql = "UPDATE Promotions SET Status=1 WHERE IDPromo = ?";
         try {
             JDBC.update(sql, ID);
@@ -110,12 +120,23 @@ public class Promotion_Service implements IPromotions {
             e.printStackTrace();
         }
     }
-            public void khuyemmai(String name, String name2) {
+
+    public void khuyemmai(String name, String name2) {
         try {
-            JDBC.update(updateOrder,name,name2);
+            JDBC.update(updateOrder, name, name2);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void up(String DateEnd) throws SQLException {
+        String up = "Update [Promotions] Set Status=0 where EndPromo=?";
+        JDBC.update(up, DateEnd);
+    }
+
+    public void up1(String DateEnd) throws SQLException {
+        String sql = "Update [Promotions] Set Status=1 where EndPromo=?";
+        JDBC.update(sql, DateEnd);
     }
 
 }

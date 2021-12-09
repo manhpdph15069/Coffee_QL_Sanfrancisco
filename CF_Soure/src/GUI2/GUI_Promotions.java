@@ -16,10 +16,12 @@ import DAL_Services.Table_Service;
 import Utils.Check;
 import Utils.ThongBao;
 import Utils.dateHelper;
+import static Utils.dateHelper.now;
 import Utils.dialogHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JMenuItem;
@@ -33,12 +35,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GUI_Promotions extends javax.swing.JPanel {
 
+    SimpleDateFormat fomat = new SimpleDateFormat("dd/MM/yyyy");
     Area_Service khu;
     Table_Service tbdao;
     IQLTable_Service daotb;
 
     Table_Service ban = new Table_Service();
     JPopupMenu menu = new JPopupMenu("Popup");
+    JPopupMenu menu1 = new JPopupMenu("Popup2");
     Promotion_Service dao = new Promotion_Service();
     int row = -1;
 
@@ -50,12 +54,13 @@ public class GUI_Promotions extends javax.swing.JPanel {
         tblGiamgia.getColumnModel().getColumn(0).setMinWidth(0);
         tblGiamgia.getColumnModel().getColumn(0).setMaxWidth(0);
         init();
-//        lblID.setVisible(false);
+        lblID.setVisible(false);
     }
 
     void init() {
-//        filltoTable();
-//        clearForm();
+        date();
+        filltoTable();
+        clearForm();
         tbdao = new Table_Service();
         daotb = new QLTable_Service();
         khu = new Area_Service();
@@ -65,6 +70,27 @@ public class GUI_Promotions extends javax.swing.JPanel {
         daotb.fillTable(tblTable);
         lblID.setVisible(false);
         this.xoaform();
+    }
+
+    void date() {
+        try {
+            SimpleDateFormat fo = new SimpleDateFormat("yyyy-MM-dd");
+            List<ENTITY_Promotion> list = dao.select();
+            for (ENTITY_Promotion kh : list) {
+                String date1 = fo.format(dateHelper.now());
+                String date2 = fo.format(kh.getEndPromo());
+                System.out.println(date1);
+                System.out.println(date2 + "\n");
+                if (date1.compareTo(date2) > 0) { //neu DateEnd < Today
+                    dao.up(String.valueOf(kh.getEndPromo()));
+                } else {
+                    dao.up1(String.valueOf(kh.getEndPromo()));
+                }
+            }
+        } catch (Exception e) {
+            dialogHelper.alert(this, " Lỗi Date");
+            e.printStackTrace();
+        }
     }
 //--------------------------------------------------------------------------------------------
 
@@ -176,8 +202,8 @@ public class GUI_Promotions extends javax.swing.JPanel {
                     pro.getIDPro(),
                     pro.getName(),
                     pro.getDiscountPromo() + "%",
-                    dateHelper.dateToString(pro.getStartPromo(), "dd/MM/yyyy"),
-                    dateHelper.dateToString(pro.getEndPromo(), "dd/MM/yyyy"),
+                    fomat.format(pro.getStartPromo()),
+                    fomat.format(pro.getEndPromo()),
                     t};
                 model.addRow(row);
             }
@@ -234,43 +260,50 @@ public class GUI_Promotions extends javax.swing.JPanel {
 
     void insert() {
         ENTITY_Promotion pro = this.getform();
-        try {
-            dao.insert(pro);
-            filltoTable();
-            dialogHelper.alert(this, "A! Thành Công Rồi");
-            clearForm();
-        } catch (Exception e) {
-            dialogHelper.alert(this, "Thất Bại :D");
-            e.printStackTrace();
+        int p = JOptionPane.showConfirmDialog(this, "Bạn muốn Thêm Chương Trình này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
+        if (p == JOptionPane.YES_OPTION) {
+            try {
+                dao.insert(pro);
+                filltoTable();
+                dialogHelper.alert(this, "Thêm Thành Công");
+                clearForm();
+            } catch (Exception e) {
+                dialogHelper.alert(this, "Thêm Thất Bại");
+                e.printStackTrace();
+            }
         }
     }
 
     void update() {
         ENTITY_Promotion pro = this.getform();
-        try {
-            dao.update(pro);
-            filltoTable();
-            dialogHelper.alert(this, "OK");
-            clearForm();
-        } catch (Exception e) {
-            dialogHelper.alert(this, "Thất Bại :D");
-            e.printStackTrace();
+        int p = JOptionPane.showConfirmDialog(this, "Bạn muốn Sửa Chương Trình này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
+        if (p == JOptionPane.YES_OPTION) {
+            try {
+                dao.update(pro);
+                filltoTable();
+                dialogHelper.alert(this, "Sửa Thành Công");
+                clearForm();
+            } catch (Exception e) {
+                dialogHelper.alert(this, "Sửa Thất Bại");
+                e.printStackTrace();
+            }
         }
     }
 
     void delete() {
         String ID = lblID.getText();
-        dialogHelper.confirm(this, "Đừng xóa em mà");
-        try {
-            dao.delete(ID);
-            filltoTable();
-            dialogHelper.alert(this, "Xóa cc");
-            clearForm();
-        } catch (Exception e) {
-            dialogHelper.alert(this, "Thất Bại :D");
-            e.printStackTrace();
+        int p = JOptionPane.showConfirmDialog(this, "Bạn muốn Xóa Chương Trình này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
+        if (p == JOptionPane.YES_OPTION) {
+            try {
+                dao.delete(ID);
+                filltoTable();
+                dialogHelper.alert(this, "Xóa Thành Công");
+                clearForm();
+            } catch (Exception e) {
+                dialogHelper.alert(this, "Xóa Thất Bại");
+                e.printStackTrace();
+            }
         }
-
     }
 
     void khoiphuc() {
@@ -278,10 +311,12 @@ public class GUI_Promotions extends javax.swing.JPanel {
         if (this.row >= 0) {
             int ID = (int) tblGiamgia.getValueAt(this.row, 0);
             ENTITY_Promotion pro = dao.findById(String.valueOf(ID));
-            dialogHelper.confirm(this, "Mày Thích Khôi Phục Không?");
+            int p = JOptionPane.showConfirmDialog(this, "Bạn muốn Khôi Phục Chương Trình Giảm Giá này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
+            if (p == JOptionPane.YES_OPTION) {
+            }
             if (pro.getStatus() == 1) {
-                dialogHelper.alert(this, "Chương Trình đang diễn ra Khôi Phục cc");
-            } else {
+                dialogHelper.alert(this, "Chương Trình Này vẫn đang diễn ra");
+            } else if (pro.getStatus() == 0) {
                 try {
                     dao.khoiphuc(String.valueOf(ID));
                     filltoTable();
@@ -299,17 +334,19 @@ public class GUI_Promotions extends javax.swing.JPanel {
         if (this.row >= 0) {
             int ID = (int) tblGiamgia.getValueAt(this.row, 0);
             ENTITY_Promotion pro = dao.findById(String.valueOf(ID));
-            dialogHelper.confirm(this, "Bạn muốn Kết thúc Chương Trình Giảm Giá này?");
-            if (pro.getStatus() == 0) {
-                dialogHelper.alert(this, "Chương Trình đã kết thúc từ trước");
-            } else {
-                try {
-                    dao.delete(String.valueOf(ID));
-                    filltoTable();
-                    dialogHelper.alert(this, "Đã kết thúc");
-                } catch (Exception e) {
-                    dialogHelper.alert(this, "Thất Bại");
-                    e.printStackTrace();
+            int p = JOptionPane.showConfirmDialog(this, "Bạn muốn Kết Thúc Chương trình Khuyến Mại này?", "Hệ thống quản lý Ƹ̵̡Ӝ̵̨̄Ʒ☆", JOptionPane.YES_NO_OPTION);
+            if (p == JOptionPane.YES_OPTION) {
+                if (pro.getStatus() == 0) {
+                    dialogHelper.alert(this, "Chương Trình đã kết thúc từ trước");
+                } else if (pro.getStatus() == 1) {
+                    try {
+                        dao.delete2(String.valueOf(ID));
+                        filltoTable();
+                        dialogHelper.alert(this, "Đã kết thúc thành công");
+                    } catch (Exception e) {
+                        dialogHelper.alert(this, "Thất Bại");
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -669,6 +706,10 @@ public class GUI_Promotions extends javax.swing.JPanel {
         txtMoTa.setRows(5);
         jScrollPane1.setViewportView(txtMoTa);
 
+        txtNgayKetThuc.setDateFormatString("dd/MM/yyyy");
+
+        txtNgayBatdau.setDateFormatString("dd/MM/yyyy");
+
         lblID.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         lblID.setForeground(new java.awt.Color(255, 0, 51));
         lblID.setText("00");
@@ -822,7 +863,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
                 .addGap(13, 13, 13)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -963,12 +1004,12 @@ public class GUI_Promotions extends javax.swing.JPanel {
         List<ENTITY_Table> list = tbdao.select_viTri(vt, tt.getIDArea());
         if (Check.checkNullText(txtViTri)) {
             if (Check.checkTable(txtViTri.getText())) {
-                if (list.size()==0) {
-                    
-                if (ThongBao.comfirm(this, "Bạn chắc chắn muốn sửa")) {
-                    updatetb();
-                }
-                }else{
+                if (list.size() == 0) {
+
+                    if (ThongBao.comfirm(this, "Bạn chắc chắn muốn sửa")) {
+                        updatetb();
+                    }
+                } else {
                     ThongBao.alert(this, "Vị trí đã tồn tại");
                 }
             }
@@ -1030,7 +1071,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jPanel2MouseClicked
     public void xoaKhu() {
-        menu.removeAll();
+        menu1.removeAll();
         JMenuItem item = new JMenuItem("Xóa khu");
         item.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -1050,20 +1091,20 @@ public class GUI_Promotions extends javax.swing.JPanel {
 
             }
         });
-        menu.add(item);
+        menu1.add(item);
     }
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
         // TODO add your handling code here:
-        if (evt.isPopupTrigger()) {
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
-        }
+//        if (evt.isPopupTrigger()) {
+//            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+//        }
     }//GEN-LAST:event_jPanel2MousePressed
 
     private void jPanel2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseReleased
         // TODO add your handling code here:
-        if (evt.isPopupTrigger()) {
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
-        }
+//        if (evt.isPopupTrigger()) {
+//            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+//        }
     }//GEN-LAST:event_jPanel2MouseReleased
 
     private void jpTBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpTBMouseClicked
@@ -1072,7 +1113,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
 
     private void tblGiamgiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGiamgiaMouseClicked
         // TODO add your handling code here:
-         try {
+        try {
             if (evt.getClickCount() == 1) {
                 this.row = tblGiamgia.getSelectedRow();
                 if (this.row >= 0) {
@@ -1091,21 +1132,21 @@ public class GUI_Promotions extends javax.swing.JPanel {
 
     private void tblGiamgiaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGiamgiaMouseReleased
         // TODO add your handling code here:
-              if (evt.isPopupTrigger()) {
+        if (evt.isPopupTrigger()) {
             menu.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_tblGiamgiaMouseReleased
 
     private void tblGiamgiaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGiamgiaMousePressed
         // TODO add your handling code here:
-              if (evt.isPopupTrigger()) {
+        if (evt.isPopupTrigger()) {
             menu.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_tblGiamgiaMousePressed
 
     private void tblTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMouseClicked
         // TODO add your handling code here:
-         if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             this.row = tblTable.getSelectedRow();
             if (this.row >= 0) {
 //            ENTITY_Area dd = (ENTITY_Area) cbbKhu.getSelectedItem();
@@ -1118,20 +1159,20 @@ public class GUI_Promotions extends javax.swing.JPanel {
                 btnXoa.setEnabled(true);
             }
         }
-        //Test();
+        xoaKhu();
     }//GEN-LAST:event_tblTableMouseClicked
 
     private void tblTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMouseReleased
         // TODO add your handling code here:
-         if (evt.isPopupTrigger()) {
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if (evt.isPopupTrigger()) {
+            menu1.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_tblTableMouseReleased
 
     private void tblTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMousePressed
         // TODO add your handling code here:
-         if (evt.isPopupTrigger()) {
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        if (evt.isPopupTrigger()) {
+            menu1.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_tblTableMousePressed
 
