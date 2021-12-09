@@ -70,19 +70,19 @@ public class QLHoaDOn_Service {
 
     public List<Object[]> getListHoaDon() {
         String sql = "{CALL getListHoaDon}";
-        String[] cols = {"IDHD", "NameEMP", "CusName", "NamePromo", "DateOrder", "TimeOder", "Reason", "TongTien", "Status", "DiscountPromo", "Discount"};
+        String[] cols = {"IDHD", "NameEMP", "CusName", "NamePromo", "DateOrder", "TimeOder", "Reason", "TongTien", "Status", "DiscountOrder"};
         return this.getListOfArray(sql, cols);
     }
 
     public List<Object[]> getListHoaDonNgay(Date ngay) {
         String sql = "{CALL getListHoaDonNgay(?)}";
-        String[] cols = {"IDHD", "NameEMP", "CusName", "NamePromo", "DateOrder", "TimeOder", "Reason", "TongTien", "Status"};
+        String[] cols = {"IDHD", "NameEMP", "CusName", "NamePromo", "DateOrder", "TimeOder", "Reason", "TongTien", "Status", "DiscountOrder"};
         return this.getListOfArray(sql, cols, ngay);
     }
 
     public List<Object[]> getListHoaDonTHANG(int thang) {
         String sql = "{CALL getListHoaDonThang(?)}";
-        String[] cols = {"IDHD", "NameEMP", "CusName", "NamePromo", "DateOrder", "TimeOder", "Reason", "TongTien", "Status"};
+        String[] cols = {"IDHD", "NameEMP", "CusName", "NamePromo", "DateOrder", "TimeOder", "Reason", "TongTien", "Status", "DiscountOrder"};
         return this.getListOfArray(sql, cols, thang);
     }
 
@@ -91,32 +91,33 @@ public class QLHoaDOn_Service {
         return SelectBySQL(sql, idHD);
     }
 
-    public void fillTable(JTable tbl) {
+    public void fillTable(JTable tbl, JLabel lblTIen, JLabel lblHDHuy, JLabel lblTongBill, JLabel lblDTT, JLabel lblTOngDH) {
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
         String tt = null;
         String doUong = "";
         String nv = "";
-        double tongTien = 0;
-        double Dis=0;
+        float tongTien = 0;
+        float tien = 0;
+        float tienDTT = 0;
+        float tienDH = 0;
+        int billHUY = 0;
         List<Object[]> list = getListHoaDon();
         if (list != null) {
-            for (Object[] o : list) {                
+            for (Object[] o : list) {
                 List<ENTITY_Product> listdoUong = getListDoUong(String.valueOf(o[0]));
                 doUong = "";
                 tongTien = Float.parseFloat(String.valueOf(o[7]));
                 for (ENTITY_Product odu : listdoUong) {
                     doUong = doUong + odu.getProductName() + ",";
                 }
-                if (o[2] == null && o[3] == null) {
+                if (o[2] == "0" && o[3] == "0") {
                     tongTien = Float.parseFloat(String.valueOf(o[7]));
                 } else {
-                    if (o[2]!=null) {                        
-                        Dis = (Double.valueOf(String.valueOf(o[7])) * Double.valueOf(String.valueOf(o[10]))) / 100;
-                        tongTien = tongTien-Dis;
-                    } else {                        
-                        Dis = (Double.valueOf(String.valueOf(o[7])) * Double.valueOf(String.valueOf(o[9]))) / 100;
-                        tongTien = tongTien-Dis;
+                    if (o[2] != "0") {
+                        tongTien = Float.parseFloat(String.valueOf(o[7])) - (Float.parseFloat(String.valueOf(o[7])) * Float.parseFloat(String.valueOf(o[9]))) / 100;
+                    } else {
+                        tongTien = Float.parseFloat(String.valueOf(o[7])) - (Float.parseFloat(String.valueOf(o[7])) * Float.parseFloat(String.valueOf(o[9]))) / 100;
                     }
                 }
 
@@ -125,10 +126,13 @@ public class QLHoaDOn_Service {
                     tt = "Chưa thanh toán";
                 } else if (ma == 2) {
                     tt = "Đã thanh toán";
+                    tienDTT += tongTien;
                 } else if (ma == 3) {
                     tt = "Đã hủy";
+                    tienDH += tongTien;
+                    billHUY++;
                 }
-
+                tien += tongTien;
                 Object[] row = new Object[]{
                     o[0],
                     o[1] == null ? "ADMIN" : o[1],
@@ -138,22 +142,32 @@ public class QLHoaDOn_Service {
                     o[5],
                     o[6],
                     doUong,
-                    //                    n.format(o[7]) + " VNĐ",
-                    n.format(tongTien),
+                    n.format(tongTien) +"VNĐ",
                     tt
                 };
                 model.addRow(row);
-
             }
+
+            lblTongBill.setText(String.valueOf(list.size()));
+            lblTIen.setText(n.format(tien) + " VNĐ");
+            lblHDHuy.setText(String.valueOf(billHUY));
+            lblDTT.setText(String.valueOf(n.format(tienDTT) + " VNĐ"));
+            lblTOngDH.setText(String.valueOf(n.format(tienDH) + " VNĐ"));
+
         }
     }
 
-    public void fillTableNgay(JTable tbl, Date date) {
+    public void fillTableNgay(JTable tbl, Date date, JLabel lblTIen, JLabel lblHDHuy, JLabel lblTongBill, JLabel lblDTT, JLabel lblTOngDH) {
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
         String tt = null;
         String doUong = "";
         String nv = "";
+        float tongTien = 0;
+        float tien = 0;
+        int billHUY = 0;
+        float tienDTT = 0;
+        float tienDH = 0;
         List<Object[]> list = getListHoaDonNgay(date);
         if (list != null) {
             for (Object[] o : list) {
@@ -170,8 +184,18 @@ public class QLHoaDOn_Service {
                     tt = "Đã thanh toán";
                 } else if (ma == 3) {
                     tt = "Đã hủy";
+                    billHUY++;
                 }
-
+                if (o[2] == "0" && o[3] == "0") {
+                    tongTien = Float.parseFloat(String.valueOf(o[7]));
+                } else {
+                    if (o[2] != "0") {
+                        tongTien = Float.parseFloat(String.valueOf(o[7])) - (Float.parseFloat(String.valueOf(o[7])) * Float.parseFloat(String.valueOf(o[9]))) / 100;
+                    } else {
+                        tongTien = Float.parseFloat(String.valueOf(o[7])) - (Float.parseFloat(String.valueOf(o[7])) * Float.parseFloat(String.valueOf(o[9]))) / 100;
+                    }
+                }
+                tien += tongTien;
                 Object[] row = new Object[]{
                     o[0],
                     o[1] == null ? "ADMIN" : o[1],
@@ -181,21 +205,30 @@ public class QLHoaDOn_Service {
                     o[5],
                     o[6],
                     doUong,
-                    n.format(o[7]) + " VNĐ",
+                    n.format(tongTien) +"VNĐ",
                     tt
                 };
                 model.addRow(row);
-
+                lblTongBill.setText(String.valueOf(list.size()));
+                lblTIen.setText(n.format(tien) + " VNĐ");
+                lblHDHuy.setText(String.valueOf(billHUY));
+                lblDTT.setText(String.valueOf(n.format(tienDTT) + " VNĐ"));
+                lblTOngDH.setText(String.valueOf(n.format(tienDH) + " VNĐ"));
             }
         }
     }
 
-    public void fillTableTHANG2(JTable tbl, int thang) {
+    public void fillTableTHANG2(JTable tbl, int thang, JLabel lblTIen, JLabel lblHDHuy, JLabel lblTongBill, JLabel lblDTT, JLabel lblTOngDH) {
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
         String tt = null;
         String doUong = "";
         String nv = "";
+        float tongTien = 0;
+        float tien = 0;
+        int billHUY = 0;
+        float tienDTT = 0;
+        float tienDH = 0;
         List<Object[]> list = getListHoaDonTHANG(thang);
         if (list != null) {
             for (Object[] o : list) {
@@ -210,10 +243,22 @@ public class QLHoaDOn_Service {
                     tt = "Chưa thanh toán";
                 } else if (ma == 2) {
                     tt = "Đã thanh toán";
+                    tienDTT += tongTien;
                 } else if (ma == 3) {
                     tt = "Đã hủy";
+                    tienDH += tongTien;
+                    billHUY++;
                 }
-
+                if (o[2] == "0" && o[3] == "0") {
+                    tongTien = Float.parseFloat(String.valueOf(o[7]));
+                } else {
+                    if (o[2] != "0") {
+                        tongTien = Float.parseFloat(String.valueOf(o[7])) - (Float.parseFloat(String.valueOf(o[7])) * Float.parseFloat(String.valueOf(o[9]))) / 100;
+                    } else {
+                        tongTien = Float.parseFloat(String.valueOf(o[7])) - (Float.parseFloat(String.valueOf(o[7])) * Float.parseFloat(String.valueOf(o[9]))) / 100;
+                    }
+                }
+                tien += tongTien;
                 Object[] row = new Object[]{
                     o[0],
                     o[1] == null ? "ADMIN" : o[1],
@@ -223,11 +268,15 @@ public class QLHoaDOn_Service {
                     o[5],
                     o[6],
                     doUong,
-                    n.format(o[7]) + " VNĐ",
+                    n.format(tongTien) +"VNĐ",
                     tt
                 };
                 model.addRow(row);
-
+                lblTongBill.setText(String.valueOf(list.size()));
+                lblTIen.setText(n.format(tien) + " VNĐ");
+                lblHDHuy.setText(String.valueOf(billHUY));
+                lblDTT.setText(String.valueOf(n.format(tienDTT) + " VNĐ"));
+                lblTOngDH.setText(String.valueOf(n.format(tienDH) + " VNĐ"));
             }
         }
     }

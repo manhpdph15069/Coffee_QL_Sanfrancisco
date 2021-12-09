@@ -54,8 +54,8 @@ public class GUI_Promotions extends javax.swing.JPanel {
     }
 
     void init() {
-        filltoTable();
-        clearForm();
+//        filltoTable();
+//        clearForm();
         tbdao = new Table_Service();
         daotb = new QLTable_Service();
         khu = new Area_Service();

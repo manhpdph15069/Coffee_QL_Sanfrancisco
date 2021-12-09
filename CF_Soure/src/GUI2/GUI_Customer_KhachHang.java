@@ -52,8 +52,8 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
 
     void init() {
         date();
-        filltoTable();
-        this.clearForm();
+//        filltoTable();
+//        this.clearForm();
         taoID();
     }
 

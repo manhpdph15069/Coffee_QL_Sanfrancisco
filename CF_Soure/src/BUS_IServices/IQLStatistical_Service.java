@@ -21,7 +21,8 @@ public interface IQLStatistical_Service {
     List<Object[]> getListOfArray(String sql, String[] cols, Object... args);
 
     public List<Object[]> getListByTKNgay(Date ngayDate);
-
+    public void setDataTKTONG(JPanel pnlNgay,JLabel lbltien);
+public void setTongMonvaHDTC(JLabel lblTM, JLabel lblHD);
     public void setDataNgay(JPanel pnlNgay, Date jdateNgay);
 
     public List<Object[]> getListByTKThang(int thang,int nam);

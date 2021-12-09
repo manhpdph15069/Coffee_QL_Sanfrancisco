@@ -15,6 +15,16 @@ public class ThongKeSP {
     private float gia;
     private boolean status;
     private String lyDo;
+    private int discont;
+
+    public int getDiscont() {
+        return discont;
+    }
+
+    public void setDiscont(int discont) {
+        this.discont = discont;
+    }
+    
 
     public String getLyDo() {
         return lyDo;

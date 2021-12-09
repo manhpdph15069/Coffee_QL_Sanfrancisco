@@ -46,12 +46,17 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         lblTong.setText("0");
         lblHD.setText("0");
         lblTM.setText("0");
-        btnNgayActionPerformed(null);
-        rdoNgay.setSelected(true);
-        rdoNgayActionPerformed(null);
-
+       // btnNgayActionPerformed(null);
+//        rdoNgay.setSelected(true);
+//        rdoNgayActionPerformed(null);
+rdoTCActionPerformed(null);
+fillTKTC();
     }
-
+void fillTKTC(){
+        dao.setDataTKTONG(pnlNgay,lblTong);
+        dao.setTongMonvaHDTC(lblTM, lblHD);
+    
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -296,7 +301,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addComponent(btnThang)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnNam)
-                        .addGap(170, 170, 170)
+                        .addGap(49, 49, 49)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(lblTM)
@@ -307,7 +312,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                         .addGap(26, 26, 26)
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -347,7 +352,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(pnlNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 1648, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 31, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,13 +369,13 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
 
         tblSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Tên sản phẩm", "Số lượng", "Giá", "Thành tiền", "Trạng thái"
+                "Tên sản phẩm", "Số lượng", "Giá", "Thành tiền", "Giảm giá", "Trạng thái"
             }
         ));
         tblSP.setAlignmentX(1.0F);
@@ -380,11 +385,22 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         tblSP.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
         tblSP.setEditingColumn(1);
         tblSP.setEditingRow(1);
-        tblSP.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tblSP.setFillsViewportHeight(true);
+        tblSP.setFuenteFilas(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         tblSP.setFuenteFilasSelect(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tblSP.setFuenteHead(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         tblSP.setRowHeight(30);
         jScrollPane1.setViewportView(tblSP);
+        if (tblSP.getColumnModel().getColumnCount() > 0) {
+            tblSP.getColumnModel().getColumn(1).setMinWidth(100);
+            tblSP.getColumnModel().getColumn(1).setMaxWidth(150);
+            tblSP.getColumnModel().getColumn(2).setMinWidth(100);
+            tblSP.getColumnModel().getColumn(2).setMaxWidth(200);
+            tblSP.getColumnModel().getColumn(4).setMinWidth(100);
+            tblSP.getColumnModel().getColumn(4).setMaxWidth(150);
+            tblSP.getColumnModel().getColumn(5).setMinWidth(115);
+            tblSP.getColumnModel().getColumn(5).setMaxWidth(200);
+        }
 
         tblSP1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -402,7 +418,8 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
         tblSP1.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
         tblSP1.setColorFilasForeground1(new java.awt.Color(0, 0, 0));
         tblSP1.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
-        tblSP1.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tblSP1.setFillsViewportHeight(true);
+        tblSP1.setFuenteFilas(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         tblSP1.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         tblSP1.setFuenteHead(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         tblSP1.setRowHeight(30);
@@ -498,7 +515,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                 .addGap(107, 107, 107)
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -670,7 +687,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                     tong += Float.valueOf(String.valueOf(o[0]));;
                 }
                 setLbl(tong);
-                lblTong.setText(n.format(tong));
+                lblTong.setText(n.format(tong) +" VNĐ");
             } else {
                 ThongBao.alert(this, "Khoảng bạn chọn không có dữ liệu");
             }
@@ -682,7 +699,6 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
     private void btnNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgayActionPerformed
         List<Object[]> list = dao.getListByTKNgay(jDateNBD.getDate());
         try {
-//            if (list.size() != 0) {
 
             dao.setDataNgay(pnlNgay, jDateNBD.getDate());
             dao.setTongMonNgay(lblTM, lblHD, jDateNBD.getDate());
@@ -692,10 +708,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                 tong += Float.valueOf(String.valueOf(o[0]));
             }
             setLbl(tong);
-            lblTong.setText(n.format(tong));
-//            } else {
-//                ThongBao.alert(this, "Ngày bạn chọn không có dữ liệu");
-//            }
+            lblTong.setText(n.format(tong)+" VNĐ");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -718,7 +731,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                     tong += Float.valueOf(String.valueOf(o[0]));;
                 }
                 setLbl(tong);
-                lblTong.setText(n.format(tong));
+                lblTong.setText(n.format(tong)+" VNĐ");
             } else {
                 ThongBao.alert(this, "Tháng bạn chọn không có dữ liệu");
             }
@@ -743,7 +756,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
                     tong += Float.valueOf(String.valueOf(o[0]));;
                 }
                 setLbl(tong);
-                lblTong.setText(n.format(tong));
+                lblTong.setText(n.format(tong)+" VNĐ");
             } else {
                 ThongBao.alert(this, "Năm bạn chọn không có dữ liệu");
             }
