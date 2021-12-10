@@ -64,7 +64,7 @@ import javax.swing.table.TableColumnModel;
  * @author Tran Van Thanh
  */
 public class GUI_QL_Order extends javax.swing.JPanel {
-    
+
     private IQLOrder_Service qlod;
     private NumberFormat n = new DecimalFormat("#,###");
     private DefaultTableModel modell;
@@ -79,8 +79,12 @@ public class GUI_QL_Order extends javax.swing.JPanel {
     public GUI_QL_Order() {
         initComponents();
         init();
+        tblSanPham.getColumnModel().getColumn(0).setMinWidth(0);
+        tblSanPham.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblOrder.getColumnModel().getColumn(1).setMinWidth(0);
+        tblOrder.getColumnModel().getColumn(1).setMaxWidth(0);
     }
-    
+
     private void init() {
         this.setSize(1200, 700);
         this.qlod = (IQLOrder_Service) new QLOrder_Service(this, this.btnVaoBan, lblBan, tblOrder, tblLichSu, PanLichSu, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, txtTong, PanCac, txtPay, txtDis1, txtDis2);
@@ -281,7 +285,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             .addGroup(panChaoLayout.createSequentialGroup()
                 .addGap(172, 172, 172)
                 .addComponent(jLabel13)
-                .addContainerGap(540, Short.MAX_VALUE))
+                .addContainerGap(555, Short.MAX_VALUE))
         );
 
         PanCac.add(panChao, "card4");
@@ -529,7 +533,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Chương trình khuyến mãi");
 
         cbbkm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -552,31 +556,39 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         lbIDError.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbIDError.setToolTipText("");
 
-        jLabel32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel32.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(0, 0, 0));
         jLabel32.setText("Thông tin khách hàng:");
 
+        jLabel33.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(0, 0, 0));
         jLabel33.setText("Mã thẻ:");
 
+        jLabel34.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(0, 0, 0));
         jLabel34.setText("Họ và tên:");
 
+        jLabel36.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(0, 0, 0));
         jLabel36.setText("Được giảm:");
 
-        lbIDCus.setForeground(new java.awt.Color(51, 102, 255));
+        lbIDCus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbIDCus.setForeground(new java.awt.Color(255, 0, 51));
         lbIDCus.setText("...");
 
-        lbNameCus.setForeground(new java.awt.Color(51, 102, 255));
+        lbNameCus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbNameCus.setForeground(new java.awt.Color(255, 0, 51));
         lbNameCus.setText("...");
 
-        lbDisCus.setForeground(new java.awt.Color(51, 102, 255));
+        lbDisCus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbDisCus.setForeground(new java.awt.Color(255, 0, 51));
         lbDisCus.setText("...");
 
-        lbDateaddCus.setForeground(new java.awt.Color(51, 102, 255));
+        lbDateaddCus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbDateaddCus.setForeground(new java.awt.Color(255, 0, 51));
         lbDateaddCus.setText("...");
 
+        jLabel37.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(0, 0, 0));
         jLabel37.setText("Ngày đăng ký:");
 
@@ -586,22 +598,24 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             }
         });
 
-        lbNhap.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbNhap.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lbNhap.setForeground(new java.awt.Color(0, 0, 0));
         lbNhap.setText("Nhập mã thẻ:");
 
+        jLabel38.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel38.setText("Ngày hết hạn");
+        jLabel38.setText("Ngày hết hạn :");
 
-        lbDateEndCus.setForeground(new java.awt.Color(51, 102, 255));
+        lbDateEndCus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbDateEndCus.setForeground(new java.awt.Color(255, 0, 51));
         lbDateEndCus.setText("...");
 
         javax.swing.GroupLayout pnInformation2Layout = new javax.swing.GroupLayout(pnInformation2);
         pnInformation2.setLayout(pnInformation2Layout);
         pnInformation2Layout.setHorizontalGroup(
             pnInformation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnInformation2Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+            .addGroup(pnInformation2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(pnInformation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel32)
                     .addGroup(pnInformation2Layout.createSequentialGroup()
@@ -619,14 +633,14 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                     .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbNhap)
                     .addGroup(pnInformation2Layout.createSequentialGroup()
-                        .addGroup(pnInformation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnInformation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel37)
+                            .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnInformation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbDateEndCus)
                             .addComponent(lbDateaddCus))))
-                .addGap(26, 26, 26))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         pnInformation2Layout.setVerticalGroup(
             pnInformation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -665,8 +679,8 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnInformation2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pnInformation2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -718,7 +732,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 .addComponent(lbIDError, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         lbLoiGia.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
@@ -1030,7 +1044,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             Total();
             UpdatetxtDis1();
             qlod.dongC(tblOrder.getRowCount());
-            System.out.println("---"+tblOrder.getRowCount());
+            System.out.println("---" + tblOrder.getRowCount());
             if (tblLichSu.getValueAt(tblLichSu.getSelectedRow(), 4).toString().equals("Đã hủy")) {
                 btnThanhToan.setEnabled(false);
                 btnhuy.setEnabled(false);
@@ -1118,7 +1132,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnLuuVSInActionPerformed
-    
+
     public void XuatTxt() throws NumberFormatException {
         // TODO add your handling code here:        
         try {
@@ -1237,7 +1251,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         // TODO add your handling code here:
         qlod.taoHD(txtmaHD);
         if (Auth.isAdmin()) {
-            txtNameEMP.setText("Admin");            
+            txtNameEMP.setText("Admin");
         } else {
             txtNameEMP.setText(Auth.user.getNameEMP());
         }
@@ -1266,8 +1280,8 @@ public class GUI_QL_Order extends javax.swing.JPanel {
     private void btnhuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhuyActionPerformed
         // TODO add your handling code here:
         ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
-        JDialogHuyDon dl = new JDialogHuyDon(null, true, this, btnVaoBan, lblBan, tblOrder, tblLichSu, PanSanPham, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, txtTong, PanCac, khu.getIDArea(), txtPay, txtDis1, txtDis2,tblOrder.getRowCount());
-        dl.setVisible(true);        
+        JDialogHuyDon dl = new JDialogHuyDon(null, true, this, btnVaoBan, lblBan, tblOrder, tblLichSu, PanSanPham, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, txtTong, PanCac, khu.getIDArea(), txtPay, txtDis1, txtDis2, tblOrder.getRowCount());
+        dl.setVisible(true);
     }//GEN-LAST:event_btnhuyActionPerformed
 
     private void mnTachMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTachMonActionPerformed
@@ -1361,7 +1375,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         lbIDError.setVisible(b);
         pnInformation2.setVisible(b);
     }
-    
+
     public void UpdatetxtDis1() {
         double Dis;
         NumberFormat formatter = new DecimalFormat("#,###");
@@ -1374,7 +1388,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         txtPay.setText(formatter.format(total) + ".VNĐ");
         txtTienTraCaretUpdate(null);
     }
-    
+
     private void ResetPnInfor() {
         lbIDCus.setText(".......");
         lbNameCus.setText(".......");
@@ -1509,13 +1523,13 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         this.txtTong.setText(formatter.format(total) + ".VNĐ");
         return total;
     }
-    
+
     class ClientsTableButtonRenderer extends JButton implements TableCellRenderer {
-        
+
         public ClientsTableButtonRenderer() {
             setOpaque(true);
         }
-        
+
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             setForeground(Color.black);
             setBackground(UIManager.getColor("Button.background"));
@@ -1538,15 +1552,15 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             return this;
         }
     }
-    
+
     public class ClientsTableRenderer extends DefaultCellEditor {
-        
+
         private JButton button;
         private String label;
         private boolean clicked;
         private int row, col;
         private JTable table;
-        
+
         public ClientsTableRenderer(JCheckBox checkBox) {
             super(checkBox);
             button = new JButton();
@@ -1558,7 +1572,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 }
             });
         }
-        
+
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.table = table;
             this.row = row;
@@ -1584,7 +1598,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             }
             return button;
         }
-        
+
         public Object getCellEditorValue() {
             if (clicked) {
                 if (table.getName().equals("SP")) {
@@ -1616,23 +1630,23 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             clicked = false;
             return new String(label);
         }
-        
+
         public boolean stopCellEditing() {
             clicked = false;
             return super.stopCellEditing();
         }
-        
+
         protected void fireEditingStopped() {
             try {
                 super.fireEditingStopped();
             } catch (ArrayIndexOutOfBoundsException e) {
-                
+
             }
         }
     }
-    
+
     public static class SpinnerEditor extends DefaultCellEditor {
-        
+
         JSpinner spinner;
         JSpinner.DefaultEditor editor;
         JTextField textField;
@@ -1655,7 +1669,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                         }
                     });
                 }
-                
+
                 public void focusLost(FocusEvent fe) {
                 }
             });
@@ -1672,7 +1686,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         ) {
             if (!valueSet) {
                 spinner.setValue(value);
-                
+
             }
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
@@ -1681,7 +1695,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             });
             return spinner;
         }
-        
+
         public boolean isCellEditable(EventObject eo) {
             if (eo instanceof KeyEvent) {
                 KeyEvent ke = (KeyEvent) eo;
@@ -1697,7 +1711,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         public Object getCellEditorValue() {
             return spinner.getValue();
         }
-        
+
         public boolean stopCellEditing() {
 //            System.err.println("Stopping edit");
             try {
@@ -1710,7 +1724,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             return super.stopCellEditing();
         }
     }
-    
+
     void start() {
         JButton p = this.btnhuy;
         JTextField t = this.txtmaHD;
@@ -1804,36 +1818,36 @@ public class GUI_QL_Order extends javax.swing.JPanel {
 }
 
 class SpinnerEditor extends DefaultCellEditor {
-    
+
     private JSpinner spinner;
-    
+
     public SpinnerEditor() {
         super(new JTextField());
         spinner = new javax.swing.JSpinner();
         spinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 200, 1));
 //        spinner.setBorder( null );
     }
-    
+
     public Component getTableCellEditorComponent(
             JTable table, Object value, boolean isSelected, int row, int column) {
-        
+
         if (Integer.valueOf(value.toString()) < 0) {
             value = 0;
         }
         spinner.setValue(value);
         return spinner;
     }
-    
+
     public Object getCellEditorValue() {
         return spinner.getValue();
     }
 }
 
 class ImageRenderer extends DefaultTableCellRenderer {
-    
+
     JLabel lbl = new JLabel();
     ClassLoader classLoader = this.getClass().getClassLoader();
-    
+
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
             boolean hasFocus, int row, int column) {
         if (value != null) {

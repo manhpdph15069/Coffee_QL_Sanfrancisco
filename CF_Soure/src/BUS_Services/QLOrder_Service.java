@@ -106,6 +106,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     private javax.swing.JMenuItem mnaddNhom;
     private DefaultTableModel model;
 
+    String IDOrderCu;
     String sql_all = "SELECT [IDProduct],ProductName,Price,Image,Product.Status,TypeName,Size FROM [Product] Join ProductType on Product.IDType = ProductType.IDType WHERE Product.Status =1";
     String SQL_liSu = "SELECT DISTINCT OrderDetail.IDOrder,TimeOder,EMP.NameEMP,Cus.CusName,OD.[Status] FROM OrderDetail  \n"
             + " JOIN [Order] OD ON OD.IDOrder = OrderDetail.IDOrder\n"
@@ -168,15 +169,9 @@ public class QLOrder_Service implements IQLOrder_Service {
         mnGopBan.setToolTipText("");
         mnGopBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnGopBanActionPerformed(evt);
+                mnGopBanActionPerformed(evt, txtMaHD.getText());
             }
 
-            private void mnGopBanActionPerformed(ActionEvent evt) {
-                if (evt.getSource().getClass() == JMenuItem.class) {
-                    dialogHelper.alert(null, "Chọn bàn chuyển đến nhá Pro");
-                    ButtonGop = firstButton;
-                }
-            }
         });
         pmmBtn.add(mnGopBan);
         mnNhomBan.setBackground(new java.awt.Color(255, 204, 102));
@@ -542,8 +537,16 @@ public class QLOrder_Service implements IQLOrder_Service {
         }
     }
 
+    private void mnGopBanActionPerformed(ActionEvent evt, String maHDcu) {
+        if (evt.getSource().getClass() == JMenuItem.class) {
+            dialogHelper.alert(null, "Chọn bàn chuyển đến nhá Pro");
+            ButtonGop = firstButton;
+            this.IDOrderCu = maHDcu;
+        }
+    }
+
     private void TableSelectedHandler(ActionEvent e, JButton btnVaoBan, JLabel lblBan, JPanel that, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, int khu, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
-        String IDOrderCu = txtMaHD.getText();
+//        this.IDOrderCu = txtMaHD.getText();
         String bancu = lblBan.getText();
         String IDOrderMoi = "";
         if (e.getSource().getClass() == JButton.class) {
@@ -681,12 +684,12 @@ public class QLOrder_Service implements IQLOrder_Service {
                 }
                 BanButtons ban = banButtonList.get(ButtonGop);
                 if (dialogHelper.confirm(null, "Bạn có muốn gộp hóa đơn vào luôn không ?")) {
-                    chuenBan(banButton.getIDTalbe(), "Chuyển từ bàn số : " + ban.getTen() + " Đến bàn số : " + banButton.getTen(), IDOrderCu);
+                    System.out.println("cu " + IDOrderCu + "mới" + IDOrderMoi);
                     gopBanvsHD(banButton.getIDTalbe(), IDOrderCu, IDOrderMoi);
+                    chuenBan(banButton.getIDTalbe(), "Gộp từ bàn số : " + ban.getTen() + " Đến bàn số : " + banButton.getTen(), IDOrderCu);
                 } else {
-                    chuenBan(banButton.getIDTalbe(), "Chuyển từ bàn số : " + ban.getTen() + " Đến bàn số : " + banButton.getTen(), IDOrderCu);
+                    chuenBan(banButton.getIDTalbe(), "Gộp từ bàn số : " + ban.getTen() + " Đến bàn số : " + banButton.getTen(), IDOrderCu);
                 }
-
                 String sql = "UPDATE [Table] SET [Status] = 0 WHERE IDTable = ?";
                 try {
                     JDBC.update(sql, ban.getIDTalbe());
@@ -834,10 +837,9 @@ public class QLOrder_Service implements IQLOrder_Service {
     public void hienTableSP(JTable tbl) {
         this.model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
-        this.model.setColumnIdentifiers(new Object[]{"IDSP", "Hình", "Loại", "Tên SP", "Size", "Giá", ""});
+        this.model.setColumnIdentifiers(new Object[]{"IDSP", "", "Loại", "Tên SP", "Size", "Giá", ""});
         TableColumnModel columnModel = tbl.getColumnModel();
         columnModel.getColumn(4).setMaxWidth(40);
-        columnModel.getColumn(0).setMaxWidth(70);
         columnModel.getColumn(0).setMinWidth(50);
         columnModel.getColumn(1).setMaxWidth(80);
         columnModel.getColumn(6).setMaxWidth(70);
@@ -955,7 +957,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     @Override
     public void thanhToan(JTextField txtMaHD) {
         String s = "";
-        if (Auth.isAdmin()) {            
+        if (Auth.isAdmin()) {
             s = "Admin" + " thanh toán lúc : " + dateHelper.Time_FORMATER.format(dateHelper.timeNow()) + " | " + dateHelper.DATE_FORMATER.format(dateHelper.now());;
         }
         if (Auth.isLogin()) {
@@ -970,7 +972,7 @@ public class QLOrder_Service implements IQLOrder_Service {
 
     @Override
     public int dongC(int dong) {
-        if (dong != -1) {            
+        if (dong != -1) {
             this.dong = dong;
         }
         return this.dong;
@@ -1141,7 +1143,7 @@ public class QLOrder_Service implements IQLOrder_Service {
             };
             model.addRow(row);
         }
-        dong=model.getColumnCount();
+        dong = model.getColumnCount();
     }
 
     @Override
