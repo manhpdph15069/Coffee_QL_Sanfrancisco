@@ -8,6 +8,7 @@ package GUI2;
 import BUS_Services.QLMenu_Service;
 import DAL_Models.ENTITY_ProductType;
 import DAL_Services.ProductType_Service;
+import Utils.Check;
 import Utils.JDBC;
 import Utils.XImage;
 import Utils.dialogHelper;
@@ -210,13 +211,16 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (Check.checkNullText(txtLoai)) {
         insert();
         dao1.loadComboTypeName(cbb);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (Check.checkNullText(txtLoai)) {
         update();
         dao1.loadComboTypeName(cbb);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

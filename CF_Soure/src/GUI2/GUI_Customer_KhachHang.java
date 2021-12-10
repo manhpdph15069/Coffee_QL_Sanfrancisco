@@ -35,6 +35,7 @@ import javax.swing.table.TableRowSorter;
  * @author notak
  */
 public class GUI_Customer_KhachHang extends javax.swing.JPanel {
+
     SimpleDateFormat fomat = new SimpleDateFormat("dd/MM/yyyy");
     JPopupMenu menu = new JPopupMenu("Popup");
     Customer_Service dao = new Customer_Service();
@@ -49,6 +50,7 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
 //        tblKhachHang.getColumnModel().getColumn(0).setMaxWidth(0);
         init();
     }
+
     void init() {
         date();
         filltoTable();
@@ -88,7 +90,7 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
                 if (kh.getStatus() == 1) {
                     t = "Hoạt Động";
                 } else if (kh.getStatus() == 0) {
-                    t = "Hết Han";
+                    t = "Hết Hạn";
                 } else if (kh.getStatus() == 2) {
                     t = "";
                 }
@@ -249,6 +251,39 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
         TableRowSorter Sorter = new TableRowSorter(this.model);
         tblKhachHang.setRowSorter(Sorter);
         Sorter.setRowFilter(RowFilter.regexFilter(txtTimKiem.getText()));
+    }
+
+    boolean checktrungSua() {
+        row = tblKhachHang.getSelectedRow();
+        String id = (String) tblKhachHang.getValueAt(row, 0);
+        List<ENTITY_Customer> customer = dao.select();
+        ENTITY_Customer cus = dao.findById(id);
+        System.out.println("-----------------------------------" + cus.getCCCD());
+        for (ENTITY_Customer ok : customer) {
+            if (txtCCCD.getText().trim().equals(ok.getCCCD())) {
+                dialogHelper.alert(this, "Chứng Minh Nhân Dân này đã tồn tại");
+                return false;
+            } else if (txtCCCD.getText().trim().equals(cus.getCCCD())) {
+                return true;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    boolean checktrungThem() {
+        List<ENTITY_Customer> customer = dao.select();
+        for (ENTITY_Customer ok : customer) {
+            if (txtCCCD.getText().trim().equals(ok.getCCCD())) {
+                dialogHelper.alert(this, "Chứng Minh Nhân Dân này đã tồn tại");
+                return false;
+            } else {
+                insert();
+                return true;
+            }
+        }
+        return false;
     }
 
     public void Giahanthe() {
@@ -661,8 +696,9 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
             if (Check.checkEmail(txtEmail)
                     && Check.checkSDT(txtSDT)
                     && Check.checkso2(txtGiamGia)
-                    && Check.checkName(txtTenKH)) {
-                insert();
+                    && Check.checkName(txtTenKH)
+                    && Check.Checkso4(txtGiamGia)) {
+                checktrungThem();
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -676,8 +712,25 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
             if (Check.checkEmail(txtEmail)
                     && Check.checkSDT(txtSDT)
                     && Check.checkso2(txtGiamGia)
-                    && Check.checkName(txtTenKH)) {
-                update();
+                    && Check.checkName(txtTenKH)
+                    && Check.Checkso4(txtGiamGia)) {
+                row = tblKhachHang.getSelectedRow();
+                String id = (String) tblKhachHang.getValueAt(row, 0);
+                List<ENTITY_Customer> customer = dao.select();
+                ENTITY_Customer cus = dao.findById(id);
+                System.out.println("-----------------------------------" + cus.getCCCD());
+                for (ENTITY_Customer ok : customer) {
+                    if (txtCCCD.getText().trim().equals(ok.getCCCD())) {
+                        dialogHelper.alert(this, "Chứng Minh Nhân Dân này đã tồn tại");
+                        return;
+                    } else if (txtCCCD.getText().trim().equals(cus.getCCCD())) {
+                        update();
+                        return;
+                    } else {
+                        update();
+                        return;
+                    }
+                }
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed

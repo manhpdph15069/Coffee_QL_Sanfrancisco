@@ -134,9 +134,9 @@ public class Check {
     //gồm 10 số 
     //các đầu 3 số của nhà mạng
     public static boolean checkSDT(JTextField txt) {
-        txt.setBackground(white);
+        txt.setBackground(Color.WHITE);
         String id = txt.getText();
-        String rgx = "[0-9]{10}";
+        String rgx = "(086|096|097|098|032|033|034|035|036|037|038|039|089|090|093|070|079|077|078|076|088|091|094|083|084|085|081|082|092|056|058|099|059)[0-9]{7}";
         if (id.matches(rgx)) {
             return true;
         } else {
@@ -199,6 +199,17 @@ public class Check {
         } else {
             // txt.setBackground(pink);
             ThongBao.alert(null, "Giá Phải Là Số");
+            return false;
+        }
+    }
+        public static boolean Checkso4(JTextField txt) {
+        // txt.setBackground(white);
+        // String id = txt.getText;
+        if (Integer.parseInt(txt.getText())>0&&Integer.parseInt(txt.getText())<=100) {
+            return true;
+        } else {
+            // txt.setBackground(pink);
+            ThongBao.alert(null, "Chiết khấu phải >0 và <100");
             return false;
         }
     }
