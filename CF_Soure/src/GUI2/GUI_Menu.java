@@ -18,6 +18,8 @@ import static java.awt.Color.white;
 import java.awt.Menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -30,7 +32,7 @@ import javax.swing.JTextField;
  * @author phamd
  */
 public class GUI_Menu extends javax.swing.JPanel {
-    
+     private NumberFormat n = new DecimalFormat("#,###");
     JPopupMenu menu = new JPopupMenu("Popup");
     int row = -1;
     JFileChooser fileChooser = new JFileChooser();
@@ -613,7 +615,7 @@ public class GUI_Menu extends javax.swing.JPanel {
     private void setForm(SanPham sp) {
         lblID.setText(sp.getIDProduct());
         txtTen.setText(sp.getProductName());
-        txtGia.setText(String.valueOf(sp.getPrice()));
+        txtGia.setText(n.format(sp.getPrice()).replace(",",""));
         cboLoai.getModel().setSelectedItem(sp.getTypeName());
         cboSize.getModel().setSelectedItem(sp.getSize());
         if (sp.getImage() != null) {
@@ -689,7 +691,9 @@ public class GUI_Menu extends javax.swing.JPanel {
     void clear() {
         SanPham sp = new SanPham();
         this.setForm(sp);
-        cboLoai.setSelectedIndex(0);
+//        if (cboLoai.getSelectedItem()!=null) {
+            cboLoai.setSelectedIndex(0);
+//        }
         lblHinh.setToolTipText(sp.getImage());
         lblHinh.setIcon(XImage.read("no_image.jpg"));
         dao.taoID(lblID);

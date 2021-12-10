@@ -14,6 +14,8 @@ import Utils.JDBC;
 import Utils.XImage;
 import java.io.File;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -39,6 +41,7 @@ public class QLMenu_Service implements IQLMenu_Service {
     String SELECT_BY_TypeName = "Select DISTINCT TypeName from ProductType Where Status=1";
     String SELECT_BY_Size = "SELECT IDType,Size FROM ProductType WHERE TypeName =? AND Status=1";
     String insert = "INSERT INTO [Product]([IDProduct], [ProductName], [Price], [Image],[Status],IDType) VALUES (?, ?, ?, ?,1,?)";
+    private NumberFormat n = new DecimalFormat("#,###");
 
     @Override
     public void taoID(JLabel lbl) {
@@ -91,7 +94,8 @@ public class QLMenu_Service implements IQLMenu_Service {
             e.printStackTrace();
         }
     }
-        public void ketthuc(String IDProduct) {
+
+    public void ketthuc(String IDProduct) {
         String sql = "UPDATE [Product] SET [Status]=0 WHERE [IDProduct] = ?";
         try {
             JDBC.update(sql, IDProduct);
@@ -216,7 +220,7 @@ public class QLMenu_Service implements IQLMenu_Service {
                     pro.getIDProduct(),
                     pro.getProductName(),
                     pro.getSize(),
-                    pro.getPrice(),
+                    n.format(pro.getPrice())+"VNĐ",
                     t};
                 model.addRow(row);
             }
