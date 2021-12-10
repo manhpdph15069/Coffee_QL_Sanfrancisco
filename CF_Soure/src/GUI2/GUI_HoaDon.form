@@ -89,7 +89,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="58" max="32767" attributes="0"/>
+                  <EmptySpace pref="53" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -312,7 +312,7 @@
                               <Component id="lblTienDH" min="-2" pref="144" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -388,7 +388,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="66" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="T&#x1ed5;ng HD H&#x1ee7;y"/>
+                <Property name="text" type="java.lang.String" value="H&#xf3;a &#x110;&#x1a1;n B&#x1ecb; H&#x1ee7;y"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">

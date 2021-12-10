@@ -39,19 +39,19 @@ import org.opencv.videoio.VideoCapture;
  * @author notak
  */
 public class GUI_Employee_NhanVien extends javax.swing.JPanel {
-
+    
     IQLEmployee_Service dao;
     Employee_Service nv = new Employee_Service();
     int row = 0;
-      
+    
     public GUI_Employee_NhanVien() {
         initComponents();
         dao = (IQLEmployee_Service) new QLEmployee_Service();
         dao.fillTable(tblEmployee);
         resetForm();
-
+        
     }
-
+    
     ENTITY_Employee getModel() {
         ENTITY_Employee tbl = new ENTITY_Employee();
         tbl.setNameEMP(txtHoTen.getText());
@@ -65,7 +65,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         tbl.setImage(lblAnh.getToolTipText());
         return tbl;
     }
-
+    
     void resetForm() {
         this.txtHoTen.setText("");
         this.txtSDT.setText("");
@@ -82,22 +82,22 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
         btnSua.setEnabled(false);
         btnXoa.setEnabled(false);
     }
-
+    
     public Date now() {
         return new Date();
     }
-
+    
     void edit() {
         try {
             String maNV = (String) tblEmployee.getValueAt(row, 6);
             ENTITY_Employee nv = this.nv.findById(maNV);
-
+            
             this.setform(nv);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
     void setform(ENTITY_Employee nv) {
         try {
             String manv = (String) tblEmployee.getValueAt(this.row, 6);
@@ -114,16 +114,16 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
                 rdoNu.setSelected(true);
             }
             if (nv.getImage() != null) {
-            lblAnh.setToolTipText(nv.getImage()); //lay ra ten file trong tooltip 
-            lblAnh.setIcon(XImage.read(nv.getImage())); //doc file trong tooltip va hien thi len lable
-        } else {
-            lblAnh.setIcon(XImage.read("no_image.jpg"));
-        }
+                lblAnh.setToolTipText(nv.getImage()); //lay ra ten file trong tooltip 
+                lblAnh.setIcon(XImage.read(nv.getImage())); //doc file trong tooltip va hien thi len lable
+            } else {
+                lblAnh.setIcon(XImage.read("no_image.jpg"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -551,28 +551,28 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if (ThongBao.comfirm(this, "thêm nhân viên này ?")) {
+        if (ThongBao.comfirm(this, "Bạn chắc chắn muốn thêm nhân viên này ?")) {
             if (Check.checkNullText(txtSDT)
-                && Check.checkNullText(txtDiaChi)
-                && Check.checkNullText(txtEmail)
-                && Check.checkNullText(txtHoTen)
-                && Check.checkNullText(txtUserName)
-                && Check.checkNullPass(txtPassWord)) {
-            if (Check.checkName(txtHoTen)
-                    && Check.checkPass(txtPassWord)
-                    && Check.checkEmail(txtEmail)
-                    && Check.checkSDT(txtSDT)) {
-                try {
-                    if (themtrung(txtUserName) == 1) {
-                        return;
+                    && Check.checkNullText(txtDiaChi)
+                    && Check.checkNullText(txtEmail)
+                    && Check.checkNullText(txtHoTen)
+                    && Check.checkNullText(txtUserName)
+                    && Check.checkNullPass(txtPassWord)) {
+                if (Check.checkName(txtHoTen)
+                        && Check.checkPass(txtPassWord)
+                        && Check.checkEmail(txtEmail)
+                        && Check.checkSDT(txtSDT)) {
+                    try {
+                        if (themtrung(txtUserName) == 1) {
+                            return;
+                        }
+                        insert();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    insert();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    
                 }
-
             }
-        }
         }
     }//GEN-LAST:event_btnThemActionPerformed
     void insert() {
@@ -586,7 +586,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-
+    
     public int themtrung(JTextField t) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         if (nv.selectByID(t.getText()) != null) {
             ENTITY_Employee nv = getModel();
@@ -615,7 +615,7 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
 //        if (Auth.isAdmin()) {
-        if (ThongBao.comfirm(this,"bạn có chắc muốn xóa nhân viên này ?")) {
+        if (ThongBao.comfirm(this, "Bạn có chắc muốn xóa nhân viên này ?")) {
             delete();
         }
 //       }
@@ -634,13 +634,21 @@ public class GUI_Employee_NhanVien extends javax.swing.JPanel {
     }
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-if (ThongBao.comfirm(this,"sửa thông tin ?")) {
+        if (ThongBao.comfirm(this, "Bạn chắc chắn muốn sửa thông tin ?")) {
+            if (Check.checkNullText(txtSDT)
+                    && Check.checkNullText(txtDiaChi)
+                    && Check.checkNullText(txtEmail)
+                    && Check.checkNullText(txtHoTen)
+                    && Check.checkNullText(txtUserName)) {
+                
             if (Check.checkNullText(txtHoTen)
-                && Check.checkEmail(txtEmail)
-                && Check.checkNullText(txtEmail)
-                && Check.checkName(txtHoTen)) {
-            update();
-        }
+                    && Check.checkEmail(txtEmail)
+                    && Check.checkNullText(txtEmail)
+                    && Check.checkName(txtHoTen)
+                    && Check.checkSDT(txtSDT)) {
+                update();
+            }
+            }
         }
         
     }//GEN-LAST:event_btnSuaActionPerformed
@@ -673,21 +681,19 @@ if (ThongBao.comfirm(this,"sửa thông tin ?")) {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnChupAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChupAnhActionPerformed
-
+        
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        JDialog_ChupAnh ok=new JDialog_ChupAnh(null,true,lblAnh);
+        JDialog_ChupAnh ok = new JDialog_ChupAnh(null, true, lblAnh);
 //        ok.thongpro();
         ok.setVisible(true);
         lblAnh.getToolTipText();
-         ok.addWindowListener(new WindowAdapter()
-    {
-      public void windowClosed(WindowEvent e)
-      {
-        System.out.println("Tat webcam");
-        ok.webSource.release();
-        ok.dispose();
-      }
-    });
+        ok.addWindowListener(new WindowAdapter() {
+            public void windowClosed(WindowEvent e) {
+                System.out.println("Tat webcam");
+                ok.webSource.release();
+                ok.dispose();
+            }
+        });
     }//GEN-LAST:event_btnChupAnhActionPerformed
 
     private void btnChupAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChupAnhMouseClicked
@@ -701,7 +707,7 @@ if (ThongBao.comfirm(this,"sửa thông tin ?")) {
 
     private void tblEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmployeeMouseClicked
         // TODO add your handling code here:
-         if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             this.row = tblEmployee.getSelectedRow();
             if (this.row >= 0) {
                 this.edit();

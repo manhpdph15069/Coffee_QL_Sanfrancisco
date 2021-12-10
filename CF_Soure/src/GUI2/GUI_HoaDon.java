@@ -30,6 +30,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
 
     private NumberFormat n = new DecimalFormat("#,###");
     SimpleDateFormat fomat = new SimpleDateFormat("hh:mm | dd-MM-yyyy");
+    SimpleDateFormat fomatNAM = new SimpleDateFormat("yyyy");
     JPopupMenu menu = new JPopupMenu("Popup");
     QLHoaDOn_Service dao;
 
@@ -218,7 +219,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel3.setText("Tổng HD Hủy");
+        jLabel3.setText("Hóa Đơn Bị Hủy");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 0));
@@ -266,7 +267,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTienDH, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2))
@@ -365,7 +366,7 @@ public class GUI_HoaDon extends javax.swing.JPanel {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,13 +526,13 @@ public class GUI_HoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_rdoTCMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int nam = Integer.valueOf(String.valueOf(jdate.getDate()).substring(0, 4));
-        List<Object[]> list = dao.getListHoaDonTHANG(jdate.getDate().getMonth() + 1, nam);
+        
+        List<Object[]> list = dao.getListHoaDonTHANG(jdate.getDate().getMonth() + 1, Integer.parseInt(fomatNAM.format(jdate.getDate())));
 
         if (list.size() == 0) {
             ThongBao.alert(this, "Tháng này không có hóa đơn nào");
         } else {
-            dao.fillTableTHANG2(tbl, jdate.getDate().getMonth() + 1, nam, lblTien, lblTBillH, lblTBill, lblTienDTT, lblTienDH);
+            dao.fillTableTHANG2(tbl, jdate.getDate().getMonth() + 1, Integer.parseInt(fomatNAM.format(jdate.getDate())), lblTien, lblTBillH, lblTBill, lblTienDTT, lblTienDH);
 
         }
 

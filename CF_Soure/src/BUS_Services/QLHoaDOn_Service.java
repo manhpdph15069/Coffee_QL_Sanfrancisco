@@ -81,7 +81,7 @@ public class QLHoaDOn_Service {
     }
 
     public List<Object[]> getListHoaDonTHANG(int thang, int nam) {
-        String sql = "{CALL getListHoaDonThang(?)}";
+        String sql = "{CALL getListHoaDonThang(?,?)}";
         String[] cols = {"IDHD", "NameEMP", "CusName", "NamePromo", "DateOrder", "TimeOder", "Reason", "TongTien", "Status", "DiscountOrder"};
         return this.getListOfArray(sql, cols, thang, nam);
     }
@@ -187,8 +187,10 @@ public class QLHoaDOn_Service {
                     tt = "Chưa thanh toán";
                 } else if (ma == 2) {
                     tt = "Đã thanh toán";
+                    tienDTT += tongTien;
                 } else if (ma == 3) {
                     tt = "Đã hủy";
+                    tienDH += tongTien;
                     billHUY++;
                 }
                 if (o[2] == "0" && o[3] == "0") {

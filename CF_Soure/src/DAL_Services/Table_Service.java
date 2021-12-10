@@ -27,7 +27,7 @@ public class Table_Service implements ITable_Service {
     String DELETE_SQL = "UPDATE [Table] SET [Status]=2 WHERE [IDTable] = ?";
     String UPDATE_Trung = "UPDATE [Table] SET [IDArea]=?, [Status]=0 WHERE [Location] = ? and [Status]=2";
         String SELECT_ALL_SQL = "SELECT DISTINCT * FROM [Table] where [Status]=0";
-    String Select_IDArea ="SELECT [AreaName],IDArea FROM [Area]";
+    String Select_IDArea ="SELECT [AreaName],IDArea FROM [Area] where Status=1";
     String SELECT_BY_ID_SQL = "SELECT * FROM [Table] WHERE [IDTable] = ? and [Status]=0";
     String SQL = "SELECT * FROM [Table] WHERE [IDArea] = ? ORDER BY Location";
     String SELECT_BY_ID_Area = "SELECT * FROM [Table] WHERE [IDArea] = ? and [Status]=0";

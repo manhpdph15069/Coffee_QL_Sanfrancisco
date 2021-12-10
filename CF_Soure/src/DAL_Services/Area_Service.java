@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Area_Service implements IArea_Service {
-    String INSERT_SQL = "INSERT INTO [Area]([AreaName]) VALUES(?);";
+    String INSERT_SQL = "INSERT INTO [Area]([AreaName],Status) VALUES(?,1);";
     String UPDATE_SQL = "UPDATE [Area] Set [AreaName]=?,[MaxTable]=?, WHERE [IDArea]=?";
-    String DELETE_SQL = "DELETE [Area] WHERE [IDArea]=?";
-    String SELECT_ALL_SQL = "SELECT * FROM [Area]";
+    String DELETE_SQL = "Update [Area] set Status=0 WHERE [IDArea]=?";
+    String SELECT_ALL_SQL = "SELECT * FROM [Area] where Status=1";
     String SELECT_BY_ID_SQL = "SELECT * FROM [Area] WHERE [AreaName]=?";
-    String select = "SELECT * FROM [Area] WHERE [IDArea]=?";
+    String select = "SELECT * FROM [Area] WHERE [IDArea]=? and Status =1";
 
     @Override
     public void insert(String khu) {

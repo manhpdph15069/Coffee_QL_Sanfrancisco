@@ -134,9 +134,9 @@ public class Check {
     //gồm 10 số 
     //các đầu 3 số của nhà mạng
     public static boolean checkSDT(JTextField txt) {
-        txt.setBackground(Color.RED);
+        txt.setBackground(white);
         String id = txt.getText();
-        String rgx = "(086|096|097|098|032|033|034|035|036|037|038|039|089|090|093|070|079|077|078|076|088|091|094|083|084|085|081|082|092|056|058|099|059)[0-9]{7}";
+        String rgx = "[0-9]{10}";
         if (id.matches(rgx)) {
             return true;
         } else {

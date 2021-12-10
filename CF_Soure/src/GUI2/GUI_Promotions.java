@@ -79,8 +79,8 @@ public class GUI_Promotions extends javax.swing.JPanel {
             for (ENTITY_Promotion kh : list) {
                 String date1 = fo.format(dateHelper.now());
                 String date2 = fo.format(kh.getEndPromo());
-                System.out.println(date1);
-                System.out.println(date2 + "\n");
+//                System.out.println(date1);
+//                System.out.println(date2 + "\n");
                 if (date1.compareTo(date2) > 0) { //neu DateEnd < Today
                     dao.up(String.valueOf(kh.getEndPromo()));
                 } else {
@@ -143,7 +143,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
         ENTITY_Area tt = (ENTITY_Area) cbbKhu.getSelectedItem();
         tbl.setLocation(Integer.valueOf(txtViTri.getText()));
         tbl.setIDArea(tt.getIDArea());
-        System.out.println("" + tt.getIDArea());
+//        System.out.println("" + tt.getIDArea());
         tbl.setIDTable(txtMaBan.getText());
         return tbl;
     }
@@ -397,6 +397,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
         cbbKhu = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         rSButtonIconD1 = new rojerusan.RSButtonIconD();
+        xoa = new rojerusan.RSButtonIconD();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblTable = new rojeru_san.complementos.RSTableMetro();
         jPanel1 = new javax.swing.JPanel();
@@ -530,10 +531,17 @@ public class GUI_Promotions extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel13.setText("Khu");
 
-        rSButtonIconD1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/add-cart.png"))); // NOI18N
+        rSButtonIconD1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/add-item.png"))); // NOI18N
         rSButtonIconD1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonIconD1ActionPerformed(evt);
+            }
+        });
+
+        xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/delete_item.png"))); // NOI18N
+        xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xoaActionPerformed(evt);
             }
         });
 
@@ -544,16 +552,20 @@ public class GUI_Promotions extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(cbbKhu, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(rSButtonIconD1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(cbbKhu, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rSButtonIconD1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rSButtonIconD1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel13)
@@ -580,6 +592,14 @@ public class GUI_Promotions extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblTable.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
+        tblTable.setColorFilasForeground1(new java.awt.Color(0, 0, 0));
+        tblTable.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
+        tblTable.setFillsViewportHeight(true);
+        tblTable.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tblTable.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tblTable.setFuenteHead(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        tblTable.setRowHeight(30);
         tblTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblTableMouseClicked(evt);
@@ -592,12 +612,6 @@ public class GUI_Promotions extends javax.swing.JPanel {
             }
         });
         jScrollPane5.setViewportView(tblTable);
-        if (tblTable.getColumnModel().getColumnCount() > 0) {
-            tblTable.getColumnModel().getColumn(0).setMinWidth(100);
-            tblTable.getColumnModel().getColumn(0).setMaxWidth(150);
-            tblTable.getColumnModel().getColumn(2).setMinWidth(100);
-            tblTable.getColumnModel().getColumn(2).setMaxWidth(200);
-        }
 
         javax.swing.GroupLayout jpTBLayout = new javax.swing.GroupLayout(jpTB);
         jpTB.setLayout(jpTBLayout);
@@ -618,6 +632,9 @@ public class GUI_Promotions extends javax.swing.JPanel {
                     .addGroup(jpTBLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jpTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpTBLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel10))
                             .addGroup(jpTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jpTBLayout.createSequentialGroup()
@@ -629,10 +646,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
                                             .addComponent(txtMaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jpTBLayout.createSequentialGroup()
                                             .addGap(0, 0, Short.MAX_VALUE)
-                                            .addComponent(txtViTri, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(jpTBLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel10)))
+                                            .addComponent(txtViTri, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGap(110, 110, 110)
                         .addGroup(jpTBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -676,7 +690,7 @@ public class GUI_Promotions extends javax.swing.JPanel {
                     .addComponent(jLabel11)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -775,6 +789,13 @@ public class GUI_Promotions extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblGiamgia.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
+        tblGiamgia.setColorFilasForeground1(new java.awt.Color(0, 0, 0));
+        tblGiamgia.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
+        tblGiamgia.setFillsViewportHeight(true);
+        tblGiamgia.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tblGiamgia.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tblGiamgia.setRowHeight(30);
         tblGiamgia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblGiamgiaMouseClicked(evt);
@@ -1066,33 +1087,32 @@ public class GUI_Promotions extends javax.swing.JPanel {
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         // TODO add your handling code here:
-        if (ThongBao.comfirm(this, "Bạn chắc chắn muốn xóa khu này")) {
-            xoaKhu();
-        }
+//        if (ThongBao.comfirm(this, "Bạn chắc chắn muốn xóa khu này")) {
+//            xoaKhu();
+//        }
     }//GEN-LAST:event_jPanel2MouseClicked
-    public void xoaKhu() {
-        menu1.removeAll();
-        JMenuItem item = new JMenuItem("Xóa khu");
-        item.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                ENTITY_Area tt = (ENTITY_Area) cbbKhu.getSelectedItem();
-                if (tt != null) {
-                    try {
-                        khu.delete(String.valueOf(tt.getIDArea()));
-                        System.out.println("" + tt.getIDArea());
-                        fillComboBoxKhu();
-                        ThongBao.alert(null, "Xóa thành công");
-                    } catch (SQLException ex) {
-                        ThongBao.alert(null, "Chưa cho chưa xóa những khu đã có hóa đơn, đợi bản cập nhập sau =]]");
-                        // Logger.getLogger(GUI_Table.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-
-            }
-        });
-        menu1.add(item);
-    }
+//    public void xoaKhu() {
+//        menu1.removeAll();
+//        JMenuItem item = new JMenuItem("Xóa khu");
+//        item.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//
+//                ENTITY_Area tt = (ENTITY_Area) cbbKhu.getSelectedItem();
+//                if (tt != null) {
+//                    try {
+//                        khu.delete(String.valueOf(tt.getIDArea()));
+//                        fillComboBoxKhu();
+//                        ThongBao.alert(null, "Xóa thành công");
+//                    } catch (SQLException ex) {
+//                        ThongBao.alert(null, "Chưa cho chưa xóa những khu đã có hóa đơn, đợi bản cập nhập sau =]]");
+//                        // Logger.getLogger(GUI_Table.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                }
+//
+//            }
+//        });
+//        menu1.add(item);
+//    }
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
         // TODO add your handling code here:
 //        if (evt.isPopupTrigger()) {
@@ -1159,7 +1179,6 @@ public class GUI_Promotions extends javax.swing.JPanel {
                 btnXoa.setEnabled(true);
             }
         }
-        xoaKhu();
     }//GEN-LAST:event_tblTableMouseClicked
 
     private void tblTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMouseReleased
@@ -1175,6 +1194,25 @@ public class GUI_Promotions extends javax.swing.JPanel {
             menu1.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_tblTableMousePressed
+
+    private void xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaActionPerformed
+        // TODO add your handling code here:
+        ENTITY_Area tt = (ENTITY_Area) cbbKhu.getSelectedItem();
+        if (tt != null) {
+            if (ThongBao.comfirm(this, "Bạn chắc chắn muốn xóa khu "+tt.getAreaName())) {
+                
+                try {
+                    khu.delete(String.valueOf(tt.getIDArea()));
+                    fillComboBoxKhu();
+                    ThongBao.alert(null, "Xóa thành công");
+                } catch (SQLException ex) {
+                    ThongBao.alert(null, "Chưa cho chưa xóa những khu đã có hóa đơn, đợi bản cập nhập sau =]]");
+                    // Logger.getLogger(GUI_Table.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_xoaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1217,5 +1255,6 @@ public class GUI_Promotions extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser txtNgayKetThuc;
     private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtViTri;
+    private rojerusan.RSButtonIconD xoa;
     // End of variables declaration//GEN-END:variables
 }

@@ -116,7 +116,7 @@ public class GUI_Hello extends javax.swing.JDialog {
         });
     }
     private void init() {
-       new Timer(30,new  ActionListener() {
+       new Timer(9,new  ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
                int value = prg.getValue();
