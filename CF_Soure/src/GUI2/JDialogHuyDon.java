@@ -8,6 +8,7 @@ package GUI2;
 import BUS_IServices.IQLOrder_Service;
 import BUS_Services.QLOrder_Service;
 import Utils.JDBC;
+import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,11 +43,12 @@ public class JDialogHuyDon extends javax.swing.JDialog {
     private JTextField txtDis2;
     private String lydo = "Nhân viên Order ngu ";
     private int khu;
+    private int dong;
 
     /**
      * Creates new form JDialogHuyDon
      */
-    public JDialogHuyDon(JPanel parent, boolean modal, JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, int khu, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
+    public JDialogHuyDon(JPanel parent, boolean modal, JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, int khu, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2, int dong) {
 //        super(parent, modal);
         initComponents();
         this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
@@ -67,6 +69,7 @@ public class JDialogHuyDon extends javax.swing.JDialog {
         this.txtThanhTien = txtThanhTien;
         this.txtDis1 = txtDis1;
         this.txtDis2 = txtDis2;
+        this.dong = dong;
         this.lblKhac.setVisible(false);
         this.txtKhac.setVisible(false);
         this.lblHD.setText(lblHD.getText() + txtMaHD.getText());
@@ -245,6 +248,9 @@ public class JDialogHuyDon extends javax.swing.JDialog {
             Logger.getLogger(QLOrder_Service.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.ql.taoTable(that, khu, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
+        this.ql.dongC(dong);
+        CardLayout card = (CardLayout) PanCac.getLayout();
+        card.show(PanCac, "card4");
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

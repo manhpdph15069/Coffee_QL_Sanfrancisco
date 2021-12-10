@@ -180,6 +180,7 @@ public class GUI_TaoNhom extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.ql.taoNhom(this.cbbTenNhom.getSelectedItem().toString(),ban.getIDTable());        
         this.ql.taoTable(that,ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
+        this.ql.dongC(tblOder.getRowCount());
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -25,7 +25,7 @@ public class XImage {
         //CÁCH TẢI ẢNH TỪ TRONG PROJECT
         //icon là thư mục con của src
         //Logo cho ứng dụng
-        String file = "/ICON/logo.png";      //icon là thư mục con của src
+        String file = "/ICON/logo1.png";      //icon là thư mục con của src
         APP_ICON = new ImageIcon(XImage.class.getResource(file)).getImage();        
     }
     public static Image getAppIcon(){ //Lấy ảnh làm icon 
@@ -48,7 +48,7 @@ public class XImage {
     }
     public static ImageIcon read(String fileName){
         File path = new File("logos",fileName);
-        return new ImageIcon(new ImageIcon(path.getAbsolutePath()).getImage().getScaledInstance(180, 180,Image.SCALE_DEFAULT));
+        return new ImageIcon(new ImageIcon(path.getAbsolutePath()).getImage().getScaledInstance(200, 200,Image.SCALE_DEFAULT));
     }
     public static ImageIcon read1(String fileName){
         File path = new File("logos",fileName);

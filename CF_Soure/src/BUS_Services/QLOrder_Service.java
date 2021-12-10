@@ -89,6 +89,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     private JPanel pnlMain;
     private ArrayList<ENTITY_Table> listBan;
     private JButton firstButton;
+    private JButton firstButton1;
     private JButton ButtonChuyen;
     private JButton ButtonGop;
 
@@ -543,17 +544,24 @@ public class QLOrder_Service implements IQLOrder_Service {
 
     private void TableSelectedHandler(ActionEvent e, JButton btnVaoBan, JLabel lblBan, JPanel that, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, int khu, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
         String IDOrderCu = txtMaHD.getText();
+        String bancu = lblBan.getText();
         String IDOrderMoi = "";
         if (e.getSource().getClass() == JButton.class) {
+
             JButton selectedButton = (JButton) e.getSource();
             this.firstButton = selectedButton;
+            if (firstButton1 == null) {
+                this.firstButton1 = selectedButton;
+            } else {
+                BanButtons banButton1 = banButtonList.get(firstButton1);
+            }
             BanButtons banButton = banButtonList.get(selectedButton);
             this.GroupBan = banButton.getTableGroup();
             lblBan.setToolTipText(banButton.getTableGroup());
             lblBan.setText(String.valueOf(banButton.getIDTalbe()));
             model = (DefaultTableModel) tblOder.getModel();
             if (banButton.getStatus() == 0) {//------------------------------Bàn không có khách
-//                    System.out.println("Mới "+tblOder.getRowCount()+"Cũ "+dongC(dong));
+//                System.out.println("Mới " + tblOder.getRowCount() + "Cũ " + dongC(dong));
                 if (tblOder.getRowCount() > dongC(dong)) {
                     if (dialogHelper.confirm(null, "Hóa đơn chưa được gưởi !\n Bạn có chắc muốn thoát không ?")) {
                         btnVaoBan.setEnabled(true);
@@ -570,6 +578,9 @@ public class QLOrder_Service implements IQLOrder_Service {
                             card.show(PanCac, "card4");
                             this.dong = 0;
                         }
+                    } else {
+                        lblBan.setToolTipText(banButton.getTableGroup());
+                        lblBan.setText(String.valueOf(bancu));
                     }
                 } else {
                     btnVaoBan.setEnabled(true);
@@ -605,6 +616,9 @@ public class QLOrder_Service implements IQLOrder_Service {
                         card.show(PanCac, "card3");
                         this.tongTien(txtTong, tblOder, txtThanhTien);
                         this.UpdatetxtDis1(txtTong, txtDis1, txtDis2, txtThanhTien);
+                    } else {
+                        lblBan.setToolTipText(banButton.getTableGroup());
+                        lblBan.setText(String.valueOf(bancu));
                     }
                 } else {
                     model = (DefaultTableModel) tblOder.getModel();
@@ -627,6 +641,9 @@ public class QLOrder_Service implements IQLOrder_Service {
                         btnVaoBan.setEnabled(false);
                         CardLayout card = (CardLayout) PanCac.getLayout();
                         card.show(PanCac, "card4");
+                    } else {
+                        lblBan.setToolTipText(banButton.getTableGroup());
+                        lblBan.setText(String.valueOf(bancu));
                     }
                 } else {
                     btnVaoBan.setEnabled(false);
@@ -938,15 +955,14 @@ public class QLOrder_Service implements IQLOrder_Service {
     @Override
     public void thanhToan(JTextField txtMaHD) {
         String s = "";
-        if (Auth.isAdmin()) {
-            System.out.println("----");
-            s= "Admin"+" thanh toán lúc : "+dateHelper.Time_FORMATER.format(dateHelper.timeNow())+" | "+dateHelper.DATE_FORMATER.format(dateHelper.now());;
+        if (Auth.isAdmin()) {            
+            s = "Admin" + " thanh toán lúc : " + dateHelper.Time_FORMATER.format(dateHelper.timeNow()) + " | " + dateHelper.DATE_FORMATER.format(dateHelper.now());;
         }
         if (Auth.isLogin()) {
-            s="Nhân viên : "+Auth.user.getNameEMP()+" thanh toán lúc : "+dateHelper.Time_FORMATER.format(dateHelper.timeNow())+" | "+dateHelper.DATE_FORMATER.format(dateHelper.now());
+            s = "Nhân viên : " + Auth.user.getNameEMP() + " thanh toán lúc : " + dateHelper.Time_FORMATER.format(dateHelper.timeNow()) + " | " + dateHelper.DATE_FORMATER.format(dateHelper.now());
         }
         try {
-            JDBC.update(thanhToan,s, txtMaHD.getText());
+            JDBC.update(thanhToan, s, txtMaHD.getText());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -955,6 +971,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     @Override
     public int dongC(int dong) {
         if (dong != -1) {
+            System.out.println("----");
             this.dong = dong;
         }
         return this.dong;

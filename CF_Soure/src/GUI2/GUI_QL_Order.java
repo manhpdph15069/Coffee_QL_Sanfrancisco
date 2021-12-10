@@ -1245,7 +1245,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
         this.PanLichSu.setVisible(false);
         qlod.insertOr(txtmaHD);
         this.row = -1;
-        this.qlod.dongC(0);
+        this.qlod.dongC(tblOrder.getRowCount());
     }//GEN-LAST:event_btnVaoBanActionPerformed
 
     private void btnxemlichsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxemlichsuActionPerformed
@@ -1265,9 +1265,8 @@ public class GUI_QL_Order extends javax.swing.JPanel {
     private void btnhuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhuyActionPerformed
         // TODO add your handling code here:
         ENTITY_Area khu = (ENTITY_Area) cbbKhu.getSelectedItem();
-        JDialogHuyDon dl = new JDialogHuyDon(null, true, this, btnVaoBan, lblBan, tblOrder, tblLichSu, PanSanPham, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, txtTong, PanCac, khu.getIDArea(), txtPay, txtDis1, txtDis2);
-        dl.setVisible(true);
-
+        JDialogHuyDon dl = new JDialogHuyDon(null, true, this, btnVaoBan, lblBan, tblOrder, tblLichSu, PanSanPham, PanOrder, txtmaHD, txtMaKH, txtNameEMP, lblTime, txtTong, PanCac, khu.getIDArea(), txtPay, txtDis1, txtDis2,tblOrder.getRowCount());
+        dl.setVisible(true);        
     }//GEN-LAST:event_btnhuyActionPerformed
 
     private void mnTachMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTachMonActionPerformed

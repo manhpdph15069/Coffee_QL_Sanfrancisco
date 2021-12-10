@@ -7,6 +7,7 @@ package GUI2;
 
 import BUS_IServices.IQLStatistical_Service;
 import BUS_Services.QLStatistical_Service;
+import GUI_Dialog.GUI_Hello;
 import GUI_Dialog.GUI_Login;
 import GUI_Dialog.GUI_ResetPassword;
 import GUI_Dialog.GUI_SendMail;
@@ -53,6 +54,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
     void init() {
         setIconImage(XImage.APP_ICON); //đặt icon góc trên trái
         startDongHo();
+        new GUI_Hello(this, rootPaneCheckingEnabled).setVisible(true);
         new GUI_Login(this, true).setVisible(true);
         if (Auth.isLogin()) {
             lblUsser.setText(Auth.user.getNameEMP());
@@ -388,6 +390,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
 
         jMenu1.setText("Tài Khoản");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/man-icon.png"))); // NOI18N
         jMenuItem1.setText("Thông tin tài khoản");
         jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -403,6 +406,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
         jMenu1.add(jSeparator6);
 
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Key-icon.png"))); // NOI18N
         jMenuItem5.setText("Đăng nhập");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -413,6 +417,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
         jMenu1.add(jMenuItem5);
         jMenu1.add(jSeparator8);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/doimk-icon.png"))); // NOI18N
         jMenuItem2.setText("Đổi Mật Khẩu");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -423,6 +428,7 @@ public class GUI_MAIN extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
         jMenu1.add(jSeparator7);
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Log-Out-icon.png"))); // NOI18N
         jMenuItem3.setText("Đăng Xuất");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
