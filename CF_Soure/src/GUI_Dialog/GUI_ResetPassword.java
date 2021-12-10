@@ -10,6 +10,7 @@ import DAL_Models.ENTITY_Employee;
 import DAL_Services.Admin;
 import DAL_Services.Employee_Service;
 import Utils.Auth;
+import Utils.XImage;
 import Utils.dialogHelper;
 import java.awt.Color;
 
@@ -26,6 +27,7 @@ public class GUI_ResetPassword extends javax.swing.JDialog {
     public GUI_ResetPassword(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(XImage.APP_ICON); //đặt icon góc trên trái
         this.setLocationRelativeTo(null);
         txtTenDangNhap.setEditable(false);
         if (Auth.isAdmin()) {

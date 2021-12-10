@@ -9,6 +9,7 @@ import BUS_IServices.IQLOrder_Service;
 import BUS_Services.QLOrder_Service;
 import DAL_Models.ENTITY_Table;
 import Utils.JDBC;
+import Utils.XImage;
 import java.sql.ResultSet;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -46,6 +47,7 @@ public class GUI_AddNhom extends javax.swing.JDialog {
      */
     public GUI_AddNhom(JPanel parent, boolean moda, ENTITY_Table tbl, JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
         initComponents();
+        setIconImage(XImage.APP_ICON); //đặt icon góc trên trái
         finCbbNhom();
         this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
         this.ban = tbl;

@@ -8,6 +8,7 @@ package GUI2;
 import BUS_IServices.IQLOrder_Service;
 import BUS_Services.QLOrder_Service;
 import Utils.JDBC;
+import Utils.XImage;
 import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -51,6 +52,7 @@ public class JDialogHuyDon extends javax.swing.JDialog {
     public JDialogHuyDon(JPanel parent, boolean modal, JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, int khu, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2, int dong) {
 //        super(parent, modal);
         initComponents();
+        setIconImage(XImage.APP_ICON); //đặt icon góc trên trái
         this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
         this.that = that;
         this.btnVaoBan = btnVaoBan;

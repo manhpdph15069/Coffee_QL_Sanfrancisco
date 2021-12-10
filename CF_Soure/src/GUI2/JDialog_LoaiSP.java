@@ -9,6 +9,7 @@ import BUS_Services.QLMenu_Service;
 import DAL_Models.ENTITY_ProductType;
 import DAL_Services.ProductType_Service;
 import Utils.JDBC;
+import Utils.XImage;
 import Utils.dialogHelper;
 import java.sql.ResultSet;
 import java.util.List;
@@ -34,6 +35,7 @@ public class JDialog_LoaiSP extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setIconImage(XImage.APP_ICON); //đặt icon góc trên trái
         init();
         lblID.setVisible(false);
         tblType.getColumnModel().getColumn(0).setMinWidth(0);

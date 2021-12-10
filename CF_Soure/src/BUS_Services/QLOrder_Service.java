@@ -970,8 +970,7 @@ public class QLOrder_Service implements IQLOrder_Service {
 
     @Override
     public int dongC(int dong) {
-        if (dong != -1) {
-            System.out.println("----");
+        if (dong != -1) {            
             this.dong = dong;
         }
         return this.dong;

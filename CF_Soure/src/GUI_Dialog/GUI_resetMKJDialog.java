@@ -10,6 +10,7 @@ import DAL_Models.ENTITY_ADMIN;
 import DAL_Models.ENTITY_Employee;
 import DAL_Services.Admin;
 import DAL_Services.Employee_Service;
+import Utils.XImage;
 import Utils.dialogHelper;
 import Utils.utilityHelper;
 import java.awt.Color;
@@ -31,6 +32,7 @@ public class GUI_resetMKJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setIconImage(XImage.APP_ICON); //đặt icon góc trên trái
         this.admin = admin;
         this.nhanVien = nv;
         this.NVDao = new Employee_Service();

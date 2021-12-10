@@ -8,6 +8,7 @@ package GUI_Dialog;
 import BUS_IServices.IQLStatistical_Service;
 import BUS_Services.QLStatistical_Service;
 import Utils.ThongBao;
+import Utils.XImage;
 import Utils.dateHelper;
 import java.text.SimpleDateFormat;
 
@@ -25,6 +26,7 @@ public class GUI_SendMail extends javax.swing.JDialog {
     public GUI_SendMail(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(XImage.APP_ICON); //đặt icon góc trên trái
         date.setDate(dateHelper.now());
         dao = new QLStatistical_Service();
         setLocationRelativeTo(null);

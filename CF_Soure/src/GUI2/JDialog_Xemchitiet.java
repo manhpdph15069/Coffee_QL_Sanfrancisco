@@ -28,6 +28,7 @@ public class JDialog_Xemchitiet extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setIconImage(XImage.APP_ICON); //đặt icon góc trên trái
         this.row = tbl.getSelectedRow();
         System.out.println(row);
         if (this.row >= 0) {

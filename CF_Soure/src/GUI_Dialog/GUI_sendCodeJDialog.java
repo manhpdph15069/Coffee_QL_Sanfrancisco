@@ -8,6 +8,7 @@ package GUI_Dialog;
 import DAL_Models.ENTITY_Employee;
 import DAL_Services.Admin;
 import DAL_Services.Employee_Service;
+import Utils.XImage;
 import Utils.dialogHelper;
 import Utils.mailHelper;
 
@@ -27,6 +28,7 @@ public class GUI_sendCodeJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setIconImage(XImage.APP_ICON); //đặt icon góc trên trái
         this.nhanVien = nv;
         this.admin = admin;
         macDinh();

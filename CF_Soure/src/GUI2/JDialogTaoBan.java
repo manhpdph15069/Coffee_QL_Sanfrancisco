@@ -10,6 +10,7 @@ import BUS_IServices.IQLTable_Service;
 import BUS_Services.QLOrder_Service;
 import BUS_Services.QLTable_Service;
 import DAL_Models.ENTITY_Table;
+import Utils.XImage;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,7 +24,7 @@ import javax.swing.JTextField;
 public class JDialogTaoBan extends javax.swing.JDialog {
 
     private ENTITY_Table ban;
-    private IQLTable_Service daoban;    
+    private IQLTable_Service daoban;
     private IQLOrder_Service ql;
     private JPanel that;
     private JButton btnVaoBan;
@@ -41,14 +42,16 @@ public class JDialogTaoBan extends javax.swing.JDialog {
     private JTextField txtThanhTien;
     private JTextField txtDis1;
     private JTextField txtDis2;
+
     /**
      * Creates new form JDialogTaoBan
      */
-    public JDialogTaoBan(JPanel parent, boolean moda, ENTITY_Table tbl,JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
+    public JDialogTaoBan(JPanel parent, boolean moda, ENTITY_Table tbl, JPanel that, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
 //        super(parent, modal);
         initComponents();
+        setIconImage(XImage.APP_ICON); //đặt icon góc trên trái
         this.daoban = new QLTable_Service();
-        this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
+        this.ql = new QLOrder_Service(that, btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
         this.ban = tbl;
         this.that = that;
         this.btnVaoBan = btnVaoBan;
@@ -62,14 +65,12 @@ public class JDialogTaoBan extends javax.swing.JDialog {
         this.txtNameEMP = txtNameEMP;
         this.TimeOrder = TimeOrder;
         this.txtTong = txtTong;
-        this.PanCac = PanCac;                
+        this.PanCac = PanCac;
         this.txtThanhTien = txtThanhTien;
-        this.txtDis1=txtDis1;
-        this.txtDis2=txtDis2;
+        this.txtDis1 = txtDis1;
+        this.txtDis2 = txtDis2;
         this.setLocationRelativeTo(null);
     }
-
- 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,13 +156,20 @@ public class JDialogTaoBan extends javax.swing.JDialog {
         ban.setLocation(Integer.valueOf(txtviTri.getText()));
         daoban.insertMATABLE(ban);
 //        public void taoTable(JPanel that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
-        ql.taoTable(that, ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac,txtThanhTien,txtDis1,txtDis2);
-        this.dispose();        
-        
+        ql.taoTable(that, ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
+        this.dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtviTriKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtviTriKeyTyped
         // TODO add your handling code here:
+        if (evt.getKeyChar() == '\n') {
+            ban.setLocation(Integer.valueOf(txtviTri.getText()));
+            daoban.insertMATABLE(ban);
+//        public void taoTable(JPanel that, int cbbkhu, JButton btnVaoBan, JLabel lblBan, JTable tblOder, JTable tblLichSu, JPanel PanlPanelLS, JPanel Oder, JTextField txtMaHD, JTextField txtMaKH, JTextField txtNameEMP, JLabel TimeOrder, JTextField txtTong, JPanel PanCac, JTextField txtThanhTien, JTextField txtDis1, JTextField txtDis2) {
+            ql.taoTable(that, ban.getIDArea(), btnVaoBan, lblBan, tblOder, tblLichSu, PanlPanelLS, Oder, txtMaHD, txtMaKH, txtNameEMP, TimeOrder, txtTong, PanCac, txtThanhTien, txtDis1, txtDis2);
+            this.dispose();
+        }
     }//GEN-LAST:event_txtviTriKeyTyped
 
     /**
