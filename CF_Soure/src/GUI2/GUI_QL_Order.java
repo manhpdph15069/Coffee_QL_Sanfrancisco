@@ -1030,6 +1030,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             Total();
             UpdatetxtDis1();
             qlod.dongC(tblOrder.getRowCount());
+            System.out.println("---"+tblOrder.getRowCount());
             if (tblLichSu.getValueAt(tblLichSu.getSelectedRow(), 4).toString().equals("Đã hủy")) {
                 btnThanhToan.setEnabled(false);
                 btnhuy.setEnabled(false);
@@ -1325,6 +1326,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             }
             this.qlod.billTable(txtmaHD, txtNameEMP, txtMaKH, lblTime, tblOrder, lblBan.getText());
             dialogHelper.alert(this, "Tách hóa đơn thành công ");
+            qlod.dongC(-1);
         }
     }//GEN-LAST:event_btnTachHDActionPerformed
 

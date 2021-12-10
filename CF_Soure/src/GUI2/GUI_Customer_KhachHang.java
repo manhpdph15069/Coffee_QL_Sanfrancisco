@@ -66,8 +66,8 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
             for (ENTITY_Customer kh : list) {
                 String date1 = fo.format(dateHelper.now());
                 String date2 = fo.format(kh.getDateEnd());
-                System.out.println(date1);
-                System.out.println(date2 + "\n");
+//                System.out.println(date1);
+//                System.out.println(date2 + "\n");
                 if (date1.compareTo(date2) > 0) { //neu DateEnd < Today
                     dao.up(String.valueOf(kh.getDateEnd()));
                 } else {
@@ -299,7 +299,7 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
                     ENTITY_Customer pro = dao.findById(ID);
                     Date date1 = dateHelper.now();
                     Date date2 = pro.getDateEnd();
-                    System.out.println(pro.getDateEnd());
+//                    System.out.println(pro.getDateEnd());
                     String songay = dialogHelper.prompt(null, "Nhập số ngày muốn gia hạn thẻ");
                     if (songay == null) {
                     } else {
@@ -325,8 +325,8 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
                                 dialogHelper.alert(null, "Gia Hạn Thất Bại");
                                 Logger.getLogger(GUI_Customer_KhachHang.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            System.out.println(fo.format(pro.getDateEnd()));
-                            System.out.println(songay);
+//                            System.out.println(fo.format(pro.getDateEnd()));
+//                            System.out.println(songay);
                         }
                     }
                 }
@@ -718,18 +718,23 @@ public class GUI_Customer_KhachHang extends javax.swing.JPanel {
                 String id = (String) tblKhachHang.getValueAt(row, 0);
                 List<ENTITY_Customer> customer = dao.select();
                 ENTITY_Customer cus = dao.findById(id);
-                System.out.println("-----------------------------------" + cus.getCCCD());
-                for (ENTITY_Customer ok : customer) {
-                    if (txtCCCD.getText().trim().equals(ok.getCCCD())) {
-                        dialogHelper.alert(this, "Chứng Minh Nhân Dân này đã tồn tại");
-                        return;
-                    } else if (txtCCCD.getText().trim().equals(cus.getCCCD())) {
-                        update();
-                        return;
-                    } else {
-                        update();
-                        return;
+                int n = 0;                
+                if (txtCCCD.getText().trim().equals(cus.getCCCD())) {                    
+                    update();
+                    return;
+                }
+                for (ENTITY_Customer ok : customer) {                    
+                    if (txtCCCD.getText().trim().equals(ok.getCCCD())) {                        
+                        n=0;
+                        break;
+                    }else{                        
+                        n++;
                     }
+                }
+                if (n > 0) {
+                    update();
+                } else {
+                    dialogHelper.alert(this, "Chứng Minh Nhân Dân này đã tồn tại");
                 }
             }
         }

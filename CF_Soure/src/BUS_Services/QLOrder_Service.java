@@ -1141,6 +1141,7 @@ public class QLOrder_Service implements IQLOrder_Service {
             };
             model.addRow(row);
         }
+        dong=model.getColumnCount();
     }
 
     @Override
