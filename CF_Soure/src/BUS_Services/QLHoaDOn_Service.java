@@ -85,7 +85,8 @@ public class QLHoaDOn_Service {
         String[] cols = {"IDHD", "NameEMP", "CusName", "NamePromo", "DateOrder", "TimeOder", "Reason", "TongTien", "Status", "DiscountOrder"};
         return this.getListOfArray(sql, cols, thang, nam);
     }
-    public List<Object[]> getListHoaDonNAM( int nam) {
+
+    public List<Object[]> getListHoaDonNAM(int nam) {
         String sql = "{CALL getListHoaDonNAM(?)}";
         String[] cols = {"IDHD", "NameEMP", "CusName", "NamePromo", "DateOrder", "TimeOder", "Reason", "TongTien", "Status", "DiscountOrder"};
         return this.getListOfArray(sql, cols, nam);
@@ -96,7 +97,7 @@ public class QLHoaDOn_Service {
         return SelectBySQL(sql, idHD);
     }
 
-    public void fillTable(JTable tbl, JLabel lblTIen, JLabel lblHDHuy, JLabel lblTongBill, JLabel lblDTT, JLabel lblTOngDH) {
+    public void fillTable(JTable tbl, JLabel lblTIen, JLabel lblHDHuy, JLabel lblTongBill, JLabel lblDTT, JLabel lblTOngDH,JLabel lblCTT) {
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
         String tt = null;
@@ -107,6 +108,7 @@ public class QLHoaDOn_Service {
         float tienDTT = 0;
         float tienDH = 0;
         int billHUY = 0;
+        int billCTT = 0;
         List<Object[]> list = getListHoaDon();
         if (list != null) {
             for (Object[] o : list) {
@@ -129,6 +131,7 @@ public class QLHoaDOn_Service {
                 int ma = Integer.valueOf(String.valueOf(o[8]));
                 if (ma == 1) {
                     tt = "Chưa thanh toán";
+                    billCTT++;
                 } else if (ma == 2) {
                     tt = "Đã thanh toán";
                     tienDTT += tongTien;
@@ -156,13 +159,14 @@ public class QLHoaDOn_Service {
             lblTongBill.setText(String.valueOf(list.size()));
             lblTIen.setText(n.format(tien) + " VNĐ");
             lblHDHuy.setText(String.valueOf(billHUY));
+            lblCTT.setText(String.valueOf(billCTT));
             lblDTT.setText(String.valueOf(n.format(tienDTT) + " VNĐ"));
             lblTOngDH.setText(String.valueOf(n.format(tienDH) + " VNĐ"));
 
         }
     }
 
-    public void fillTableNgay(JTable tbl, Date date, JLabel lblTIen, JLabel lblHDHuy, JLabel lblTongBill, JLabel lblDTT, JLabel lblTOngDH) {
+    public void fillTableNgay(JTable tbl, Date date, JLabel lblTIen, JLabel lblHDHuy, JLabel lblTongBill, JLabel lblDTT, JLabel lblTOngDH,JLabel lblCTT) {
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
         String tt = null;
@@ -171,6 +175,7 @@ public class QLHoaDOn_Service {
         float tongTien = 0;
         float tien = 0;
         int billHUY = 0;
+        int billCTT = 0;
         float tienDTT = 0;
         float tienDH = 0;
         List<Object[]> list = getListHoaDonNgay(date);
@@ -182,17 +187,6 @@ public class QLHoaDOn_Service {
                     doUong = doUong + odu.getProductName() + ",";
                 }
 
-                int ma = Integer.valueOf(String.valueOf(o[8]));
-                if (ma == 1) {
-                    tt = "Chưa thanh toán";
-                } else if (ma == 2) {
-                    tt = "Đã thanh toán";
-                    tienDTT += tongTien;
-                } else if (ma == 3) {
-                    tt = "Đã hủy";
-                    tienDH += tongTien;
-                    billHUY++;
-                }
                 if (o[2] == "0" && o[3] == "0") {
                     tongTien = Float.parseFloat(String.valueOf(o[7]));
                 } else {
@@ -203,6 +197,18 @@ public class QLHoaDOn_Service {
                     }
                 }
                 tien += tongTien;
+                int ma = Integer.valueOf(String.valueOf(o[8]));
+                if (ma == 1) {
+                    tt = "Chưa thanh toán";
+                    billCTT++;
+                } else if (ma == 2) {
+                    tt = "Đã thanh toán";
+                    tienDTT += tongTien;
+                } else if (ma == 3) {
+                    tt = "Đã hủy";
+                    tienDH += tongTien;
+                    billHUY++;
+                }
                 Object[] row = new Object[]{
                     o[0],
                     o[1] == null ? "ADMIN" : o[1],
@@ -219,13 +225,14 @@ public class QLHoaDOn_Service {
                 lblTongBill.setText(String.valueOf(list.size()));
                 lblTIen.setText(n.format(tien) + " VNĐ");
                 lblHDHuy.setText(String.valueOf(billHUY));
+                lblCTT.setText(String.valueOf(billCTT));
                 lblDTT.setText(String.valueOf(n.format(tienDTT) + " VNĐ"));
                 lblTOngDH.setText(String.valueOf(n.format(tienDH) + " VNĐ"));
             }
         }
     }
 
-    public void fillTableTHANG2(JTable tbl, int thang, int nam, JLabel lblTIen, JLabel lblHDHuy, JLabel lblTongBill, JLabel lblDTT, JLabel lblTOngDH) {
+    public void fillTableTHANG2(JTable tbl, int thang, int nam, JLabel lblTIen, JLabel lblHDHuy, JLabel lblTongBill, JLabel lblDTT, JLabel lblTOngDH,JLabel lblCTT) {
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
         String tt = null;
@@ -234,6 +241,7 @@ public class QLHoaDOn_Service {
         float tongTien = 0;
         float tien = 0;
         int billHUY = 0;
+        int billCTT = 0;
         float tienDTT = 0;
         float tienDH = 0;
         List<Object[]> list = getListHoaDonTHANG(thang, nam);
@@ -245,17 +253,7 @@ public class QLHoaDOn_Service {
                     doUong = doUong + odu.getProductName() + ",";
                 }
 
-                int ma = Integer.valueOf(String.valueOf(o[8]));
-                if (ma == 1) {
-                    tt = "Chưa thanh toán";
-                } else if (ma == 2) {
-                    tt = "Đã thanh toán";
-                    tienDTT += tongTien;
-                } else if (ma == 3) {
-                    tt = "Đã hủy";
-                    tienDH += tongTien;
-                    billHUY++;
-                }
+
                 if (o[2] == "0" && o[3] == "0") {
                     tongTien = Float.parseFloat(String.valueOf(o[7]));
                 } else {
@@ -266,6 +264,18 @@ public class QLHoaDOn_Service {
                     }
                 }
                 tien += tongTien;
+                                int ma = Integer.valueOf(String.valueOf(o[8]));
+                if (ma == 1) {
+                    tt = "Chưa thanh toán";
+                    billCTT++;
+                } else if (ma == 2) {
+                    tt = "Đã thanh toán";
+                    tienDTT += tongTien;
+                } else if (ma == 3) {
+                    tt = "Đã hủy";
+                    tienDH += tongTien;
+                    billHUY++;
+                }
                 Object[] row = new Object[]{
                     o[0],
                     o[1] == null ? "ADMIN" : o[1],
@@ -282,12 +292,14 @@ public class QLHoaDOn_Service {
                 lblTongBill.setText(String.valueOf(list.size()));
                 lblTIen.setText(n.format(tien) + " VNĐ");
                 lblHDHuy.setText(String.valueOf(billHUY));
+                lblCTT.setText(String.valueOf(billCTT));
                 lblDTT.setText(String.valueOf(n.format(tienDTT) + " VNĐ"));
                 lblTOngDH.setText(String.valueOf(n.format(tienDH) + " VNĐ"));
             }
         }
     }
-    public void fillTableNAM(JTable tbl,int nam, JLabel lblTIen, JLabel lblHDHuy, JLabel lblTongBill, JLabel lblDTT, JLabel lblTOngDH) {
+
+    public void fillTableNAM(JTable tbl, int nam, JLabel lblTIen, JLabel lblHDHuy, JLabel lblTongBill, JLabel lblDTT, JLabel lblTOngDH,JLabel lblCTT) {
         DefaultTableModel model = (DefaultTableModel) tbl.getModel();
         model.setRowCount(0);
         String tt = null;
@@ -296,6 +308,7 @@ public class QLHoaDOn_Service {
         float tongTien = 0;
         float tien = 0;
         int billHUY = 0;
+        int billCTT = 0;
         float tienDTT = 0;
         float tienDH = 0;
         List<Object[]> list = getListHoaDonNAM(nam);
@@ -307,17 +320,7 @@ public class QLHoaDOn_Service {
                     doUong = doUong + odu.getProductName() + ",";
                 }
 
-                int ma = Integer.valueOf(String.valueOf(o[8]));
-                if (ma == 1) {
-                    tt = "Chưa thanh toán";
-                } else if (ma == 2) {
-                    tt = "Đã thanh toán";
-                    tienDTT += tongTien;
-                } else if (ma == 3) {
-                    tt = "Đã hủy";
-                    tienDH += tongTien;
-                    billHUY++;
-                }
+
                 if (o[2] == "0" && o[3] == "0") {
                     tongTien = Float.parseFloat(String.valueOf(o[7]));
                 } else {
@@ -328,6 +331,18 @@ public class QLHoaDOn_Service {
                     }
                 }
                 tien += tongTien;
+                                int ma = Integer.valueOf(String.valueOf(o[8]));
+                if (ma == 1) {
+                    tt = "Chưa thanh toán";
+                    billCTT++;
+                } else if (ma == 2) {
+                    tt = "Đã thanh toán";
+                    tienDTT += tongTien;
+                } else if (ma == 3) {
+                    tt = "Đã hủy";
+                    tienDH += tongTien;
+                    billHUY++;
+                }
                 Object[] row = new Object[]{
                     o[0],
                     o[1] == null ? "ADMIN" : o[1],
@@ -346,6 +361,7 @@ public class QLHoaDOn_Service {
                 lblHDHuy.setText(String.valueOf(billHUY));
                 lblDTT.setText(String.valueOf(n.format(tienDTT) + " VNĐ"));
                 lblTOngDH.setText(String.valueOf(n.format(tienDH) + " VNĐ"));
+                lblCTT.setText(String.valueOf(billCTT));
             }
         }
     }
