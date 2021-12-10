@@ -155,7 +155,7 @@ public class QLOrder_Service implements IQLOrder_Service {
         mnChuyenBan.setIcon(iconBan5);
         mnChuyenBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnChuyenBanActionPerformed(evt);
+                mnChuyenBanActionPerformed(evt, txtMaHD.getText());
             }
         });
         pmmBtn.add(mnChuyenBan);
@@ -530,9 +530,10 @@ public class QLOrder_Service implements IQLOrder_Service {
         that.repaint();
     }
 
-    private void mnChuyenBanActionPerformed(ActionEvent evt) {
+    private void mnChuyenBanActionPerformed(ActionEvent evt, String idCu) {
         if (evt.getSource().getClass() == JMenuItem.class) {
             dialogHelper.alert(null, "Chọn bàn chuyển đến nhá Pro.");
+            this.IDOrderCu = idCu;
             this.ButtonChuyen = firstButton;
         }
     }
