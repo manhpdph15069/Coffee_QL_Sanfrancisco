@@ -9,6 +9,7 @@ import BUS_IServices.IQLOrder_Service;
 import BUS_Services.QLOrder_Service;
 import Utils.JDBC;
 import Utils.XImage;
+import Utils.dialogHelper;
 import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -76,6 +77,7 @@ public class JDialogHuyDon extends javax.swing.JDialog {
         this.txtKhac.setVisible(false);
         this.lblHD.setText(lblHD.getText() + txtMaHD.getText());
         this.setLocationRelativeTo(null);
+        this.ql.dongC(dong);
     }
 
     /**
@@ -254,6 +256,7 @@ public class JDialogHuyDon extends javax.swing.JDialog {
         CardLayout card = (CardLayout) PanCac.getLayout();
         card.show(PanCac, "card4");
         this.dispose();
+        dialogHelper.alert(null, "Hủy đơn thành công !");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

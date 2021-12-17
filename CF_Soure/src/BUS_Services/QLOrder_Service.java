@@ -28,6 +28,7 @@ import Utils.Auth;
 import Utils.JDBC;
 import Utils.dateHelper;
 import Utils.dialogHelper;
+import Utils.utilityHelper;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -81,6 +82,7 @@ public class QLOrder_Service implements IQLOrder_Service {
     private IQLTable_Service daoban;
 
     private int dong;
+    private int check;
     private int listBa;
     private int khu;
     private String GroupBan;
@@ -999,6 +1001,7 @@ public class QLOrder_Service implements IQLOrder_Service {
             };
             model.addRow(row);
         }
+        this.dongC(model.getRowCount());
     }
 
     @Override

@@ -10,6 +10,7 @@ import static java.awt.Color.white;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
 /**
  *
  * @author Tran Van Thanh
@@ -45,6 +46,7 @@ public class utilityHelper {
             return false;
         }
     }
+
     public static boolean checkMaNH(JTextField txt) {//Check mã người học đúng 7 kí tự a-z, A-Z, 0-9
         txt.setBackground(white);
         String id = txt.getText();
@@ -57,6 +59,7 @@ public class utilityHelper {
             return false;
         }
     }
+
     public static boolean checkMaCD(JTextField txt) {//Check mã chuên đề     đúng 5 kí tự  a-z, A-Z, 0-9
         txt.setBackground(white);
         String id = txt.getText();
@@ -69,6 +72,7 @@ public class utilityHelper {
             return false;
         }
     }
+
     public static boolean checkPass(JPasswordField txt) {//pass từ 3-16 kí tự
         txt.setBackground(white);
         if (txt.getPassword().length > 2 && txt.getPassword().length < 17) {
@@ -79,6 +83,7 @@ public class utilityHelper {
             return false;
         }
     }
+
     public static boolean checkDate(JTextField txt) {//Check định dạng ngày
         txt.setBackground(white);
         String id = txt.getText();
@@ -91,6 +96,7 @@ public class utilityHelper {
             return false;
         }
     }
+
     //gồm các ký tự chữ đấu cách
     //từ 3-25 kí tự
     public static boolean checkName(JTextField txt) {
@@ -104,7 +110,8 @@ public class utilityHelper {
             dialogHelper.alert(txt.getRootPane(), txt.getName() + " phải là tên tiếng việt hoặc không đấu\ntừ 3-25 kí tự");
             return false;
         }
-    }    
+    }
+
     public static boolean checkTenCD(JTextField txt) {//Check Tên Chuyên Đề bất kì kí tự nào từ 3-50 kí tự
         txt.setBackground(white);
         String id = txt.getText();
@@ -117,6 +124,7 @@ public class utilityHelper {
             return false;
         }
     }
+
     public static boolean checkMoTaCD(JTextArea txt) {//Check Mô tả chuyên đề từ 3-255 kí tự
         txt.setBackground(white);
         String id = txt.getText();
@@ -129,10 +137,11 @@ public class utilityHelper {
             return false;
         }
     }
+
     public static boolean checkSDT(JTextField txt) {//Check SĐT Số 0 đứng đầu và 10 đến 11 số
         txt.setBackground(white);
         String id = txt.getText();
-        String rgx ="0\\d{9,10}";
+        String rgx = "0\\d{9,10}";
         if (id.matches(rgx)) {
             return true;
         } else {
@@ -146,9 +155,9 @@ public class utilityHelper {
         txt.setBackground(white);
         String id = txt.getText();
         String rgx = "^[a-zA-Z0-9_+&*-]+(?:\\."
-                    + "[a-zA-Z0-9_+&*-]+)*@"
-                    + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
-                    + "A-Z]{2,7}$";
+                + "[a-zA-Z0-9_+&*-]+)*@"
+                + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
+                + "A-Z]{2,7}$";
         if (id.matches(rgx)) {
             return true;
         } else {
@@ -157,6 +166,7 @@ public class utilityHelper {
             return false;
         }
     }
+
     public static boolean checkThoiLuong(JTextField txt) {    //Check thời lượng giờ là int >0
         txt.setBackground(white);
         try {
@@ -174,6 +184,7 @@ public class utilityHelper {
             return false;
         }
     }
+
     public static boolean checkHocPhi(JTextField txt) {//Check học phí là float >0
         txt.setBackground(white);
         try {
@@ -191,24 +202,26 @@ public class utilityHelper {
             return false;
         }
     }
+
     public static boolean checkDiem(JTextField txt) {//Check điểm nằm trong khoảng 0-10 nếu là để trống thì là chưa nhập
         txt.setBackground(white);
         if (txt.getText().equals("")) {
             return true;
-        }else
-        try {
-            float hp = Float.parseFloat(txt.getText());
-            if ((hp >= 0 && hp <= 10)||txt.getText().equals("")) {
-                return true;
-            } else {
+        } else {
+            try {
+                float hp = Float.parseFloat(txt.getText());
+                if ((hp >= 0 && hp <= 10) || txt.getText().equals("")) {
+                    return true;
+                } else {
+                    txt.setBackground(pink);
+                    dialogHelper.alert(txt.getRootPane(), txt.getName() + " phải là trong khoảng 0-10 hoặc chưa nhập.");
+                    return false;
+                }
+            } catch (NumberFormatException e) {
                 txt.setBackground(pink);
-                dialogHelper.alert(txt.getRootPane(), txt.getName() + " phải là trong khoảng 0-10 hoặc chưa nhập.");
+                dialogHelper.alert(txt.getRootPane(), txt.getName() + " phải là số thực.");
                 return false;
             }
-        } catch (NumberFormatException e) {
-            txt.setBackground(pink);
-            dialogHelper.alert(txt.getRootPane(), txt.getName() + " phải là số thực.");
-            return false;
         }
     }
 
@@ -222,6 +235,7 @@ public class utilityHelper {
             return false;
         }
     }
+
     public static boolean checkNullText(JTextArea txt) {
         txt.setBackground(white);
         if (txt.getText().trim().length() > 0) {
@@ -232,6 +246,7 @@ public class utilityHelper {
             return false;
         }
     }
+
     public static boolean checkNullPass(JPasswordField txt) {
         txt.setBackground(white);
         if (txt.getPassword().length > 0) {

@@ -1042,9 +1042,8 @@ public class GUI_QL_Order extends javax.swing.JPanel {
             CardLayout card = (CardLayout) PanCac.getLayout();
             card.show(PanCac, "card3");
             Total();
-            UpdatetxtDis1();
-            qlod.dongC(tblOrder.getRowCount());
-            System.out.println("---" + tblOrder.getRowCount());
+            UpdatetxtDis1();            
+            qlod.dongC(tblOrder.getRowCount());            
             if (tblLichSu.getValueAt(tblLichSu.getSelectedRow(), 4).toString().equals("Đã hủy")) {
                 btnThanhToan.setEnabled(false);
                 btnhuy.setEnabled(false);
@@ -1171,7 +1170,7 @@ public class GUI_QL_Order extends javax.swing.JPanel {
                 b.write("\t\tThành tiền:\t\t\t" + txtPay.getText() + "\r\n");
                 b.write("\t\t--------------------------------------------\r\n");
                 b.write("\t\tTiền khách đưa:\t\t\t" + txtTienTra.getText() + "\r\n");
-                b.write("\t\tTiền trả lại:\t\t\t" + txtTienTra.getText() + "\r\n");
+                b.write("\t\tTiền trả lại:\t\t\t" + txtTienThua.getText() + "\r\n");
                 b.write("\t------------------------------------------------------------\r\n");
                 b.write("\tChương trình khuyến mãi: ");
                 if (cbbkm.getSelectedItem().equals("Không có")) {

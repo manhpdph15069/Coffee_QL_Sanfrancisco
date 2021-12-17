@@ -41,7 +41,7 @@ public class GUI_Statistical_ThongKe extends javax.swing.JPanel {
     void init() {
         dao = new QLStatistical_Service();
         jDateNBD.setDate(dateHelper.now());
-        JDateNKT.setDate(dateHelper.now());
+//        JDateNKT.setDate(dateHelper.now());
         jdateSanPham.setDate(dateHelper.now());
         lblTong.setText("0");
         lblHD.setText("0");
